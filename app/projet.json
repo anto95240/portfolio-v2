@@ -1,0 +1,239 @@
+{
+    "themes": {
+      "ydays": {
+        "projects": [
+          {
+            "id": "1",
+            "title": "DevWeb",
+            "description": "Réalisation d'un portfolio",
+            "technologies": ["HTML 5", "CSS 3", "Bootstrap"],
+            "annee": "Octobre 2022 - Juillet 2024",
+            "equipe": ["Antoine Richard"],
+            "links": [
+              {
+                "type": "github",
+                "url": "https://github.com/anto95240/Portfolio"
+              }
+            ],
+            "images": [
+              "https://antoine-richard.fr/images/collection-app-screenshot1.png",
+              "https://antoine-richard.fr/images/collection-app-screenshot2.png",
+              "https://antoine-richard.fr/images/collection-app-screenshot3.png"
+            ]
+          },
+          {
+            "id": "2",
+            "title": "Initialisation électronique",
+            "description": "Création d'une manette de jeu",
+            "technologies": ["C++"],
+            "annee": "Octobre 2022 - Mai 2023",
+            "equipe": ["Antoine Richard"],
+            "links": [
+              ""
+            ],
+            "images": [
+              "https://antoine-richard.fr/images/collection-app-screenshot1.png",
+              "https://antoine-richard.fr/images/collection-app-screenshot2.png",
+              "https://antoine-richard.fr/images/collection-app-screenshot3.png"
+            ]
+          },
+          {
+            "id": "3",
+            "title": "ITESOFT JSON",
+            "description": "Création d'une application de voyage",
+            "technologies": ["Angular"],
+            "annee": "Janvier 2023 - Mai 2024",
+            "equipe": ["Antoine Richard"],
+            "links": [
+              {
+                "type": "github",
+                "url": "https://github.com/Oumou-Awa-Ndiaye/MyTRavel"
+              }              
+            ],
+            "images": [
+              "https://antoine-richard.fr/images/collection-app-screenshot1.png",
+              "https://antoine-richard.fr/images/collection-app-screenshot2.png",
+              "https://antoine-richard.fr/images/collection-app-screenshot3.png"
+            ]
+          },
+          {
+            "id": "4",
+            "title": "Junior Entreprise (Paris Ynov Campus Agnecy)",
+            "description": "Réalisation du site vitrine de la junior entreprise de Paris Ynov Campus grâce a un template déjà crée",
+            "technologies": ["HTML 5", "CSS 3", "Bootstrap"],
+            "annee": "2023 - 2024",
+            "equipe": ["Antoine Richard"],
+            "links": [
+              ""
+            ],
+            "images": [
+              "https://antoine-richard.fr/images/collection-app-screenshot1.png",
+              "https://antoine-richard.fr/images/collection-app-screenshot2.png",
+              "https://antoine-richard.fr/images/collection-app-screenshot3.png"
+            ]
+          },{
+            "id": "5",
+            "title": "Jeux vidéo UNITY",
+            "description": "Création d'un RPG sur le thème de Code Lyoko",
+            "technologies": ["C#"],
+            "annee": "Octobre 2024 - Mai 2024",
+            "equipe": ["Antoine Richard"],
+            "links": [
+              ""
+            ],
+            "images": [
+              "https://antoine-richard.fr/images/collection-app-screenshot1.png",
+              "https://antoine-richard.fr/images/collection-app-screenshot2.png",
+              "https://antoine-richard.fr/images/collection-app-screenshot3.png"
+            ]
+          }
+        ]
+      },
+      "web": {
+        "projects": [
+          {
+            "id": "1",
+            "title": "CPU-CI",
+            "description": "Un site web qui explique en résumant ce que sont les CPU (processeur) et un CI (circuit intégré).",
+            "technologies": ["HTML 5", "CSS 3"],
+            "annee": "2022",
+            "equipe": ["Antoine Richard"],
+            "links": [
+              {
+                "type": "github",
+                "url": "https://github.com/anto95240/CPU-CI"
+              },
+              {
+                "type": "site",
+                "url": "https://anto95240.github.io/CPU-CI/"
+              }
+            ],
+            "images": [
+              "",
+              ""
+            ]
+          },
+          {
+            "id": "2",
+            "title": "e-commerce",
+            "description": "Un site e-commerce proposant une multitude de produit diverses.",
+            "technologies": ["HTML 5", "CSS 3", "SQL", "PHP"],
+            "annee": "Mars 2023",
+            "equipe": ["Antoine Richard"],
+            "links": [
+              {
+                "type": "github",
+                "url": "https://github.com/anto95240/Projet-PHP"
+              }  
+              
+            ],
+            "images": [
+              "",
+              ""
+            ]
+          },
+          {
+            "id": "3",
+            "title": "EduCool",
+            "description": "Une plateforme pédagogique pour étudiant et professeur",
+            "technologies": ["Vue.JS", "Django"],
+            "annee": "Juillet 2024 - Aout 2024",
+            "equipe": ["Antoine Richard"],
+            "links": [
+              {
+                "type": "github",
+                "url": "https://github.com/anto95240/stage_alt_2023-2024_RICHARD_Antoine"
+              }  
+              
+            ],
+            "images": [
+              "",
+              ""
+            ]
+          }
+        ]
+      },
+      "jeux": {
+        "projects": [
+          {
+            "id": "1",
+            "title": "Hangman",
+            "description": "Un jeu qui permet de jouer au hangman. Réalisé pour jouer en ligne de commande.",
+            "technologies": ["Golang"],
+            "annee": "Octobre 2022 - Novembre 2022",
+            "equipe": ["Antoine Richard"],
+            "links": [
+              {
+                "type": "github",
+                "url": "https://github.com/anto95240/Hangman"
+              }
+            ],
+            "images": [
+              "",
+              ""
+            ]
+          },
+          {
+            "id": "2",
+            "title": "Hangman web",
+            "description": "Un jeu qui permet de jouer au hangman sur le web avec un ordinateur.",
+            "technologies": ["HTML 5", "CSS 3", "Golang"],
+            "annee": "Novembre 2022 - Décembre 2023",
+            "equipe": ["Antoine Richard", "Collaborateur"],
+            "links": [
+              {
+                "type": "github",
+                "url": "https://github.com/anto95240/Hangman-web"
+              }
+            ],
+            "images": [
+              "",
+              ""
+            ]
+          },
+          {
+            "id": "3",
+            "title": "Arkanoid",
+            "description": "Un jeu qui permet de jouer au casse briques sur le web avec un ordinateur.",
+            "technologies": ["HTML 5", "CSS 3", "JavaScript"],
+            "annee": "Mars 20233 - Avril 2023",
+            "equipe": ["Antoine Richard"],
+            "links": [
+              {
+                "type": "github",
+                "url": "https://github.com/anto95240/Hangman-web"
+              },
+              {
+                "type": "site",
+                "url": "https://arichard-arkanoid.fr/"
+              }  
+              
+            ],
+            "images": [
+              "",
+              ""
+            ]
+          },
+          {
+            "id": "4",
+            "title": "Tamgotchi",
+            "description": "Un jeu qui permet de faire grandir un tamagotchi, de faire des combats contre d’autres tamagotchis.",
+            "technologies": ["Java"],
+            "annee": "Novembre 2022 - Décembre 2022",
+            "equipe": ["Antoine Richard", "Collaborateur"],
+            "links": [
+              {
+                "type": "github",
+                "url": "https://github.com/anto95240/Tamagotchi"
+              }  
+            ],
+            "images": [
+              "",
+              ""
+            ]
+          }
+        ]
+      }
+    }
+  }
+  
