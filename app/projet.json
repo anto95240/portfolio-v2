@@ -16,9 +16,22 @@
               }
             ],
             "images": [
-              "https://antoine-richard.fr/images/collection-app-screenshot1.png",
-              "https://antoine-richard.fr/images/collection-app-screenshot2.png",
-              "https://antoine-richard.fr/images/collection-app-screenshot3.png"
+              {
+                "type": "main",
+                "url": "/images/.svg"
+              },
+              {
+                "type": "gallery",
+                "url": "/images/.svg"
+              },
+              {
+                "type": "gallery",
+                "url": "/images/.svg"
+              },
+              {
+                "type": "gallery",
+                "url": "/images/.svg"
+              }
             ]
           },
           {
@@ -43,7 +56,7 @@
             "description": "Création d'une application de voyage",
             "technologies": ["Angular"],
             "annee": "Janvier 2023 - Mai 2024",
-            "equipe": ["Antoine Richard"],
+            "equipe": ["Antoine Richard", "Collaborateur"],
             "links": [
               {
                 "type": "github",
@@ -62,7 +75,7 @@
             "description": "Réalisation du site vitrine de la junior entreprise de Paris Ynov Campus grâce a un template déjà crée",
             "technologies": ["HTML 5", "CSS 3", "Bootstrap"],
             "annee": "2023 - 2024",
-            "equipe": ["Antoine Richard"],
+            "equipe": ["Antoine Richard", "Collaborateur"],
             "links": [
               ""
             ],
@@ -77,7 +90,7 @@
             "description": "Création d'un RPG sur le thème de Code Lyoko",
             "technologies": ["C#"],
             "annee": "Octobre 2024 - Mai 2024",
-            "equipe": ["Antoine Richard"],
+            "equipe": ["Antoine Richard", "Collaborateur"],
             "links": [
               ""
             ],
@@ -118,8 +131,8 @@
             "title": "e-commerce",
             "description": "Un site e-commerce proposant une multitude de produit diverses.",
             "technologies": ["HTML 5", "CSS 3", "SQL", "PHP"],
-            "annee": "Mars 2023",
-            "equipe": ["Antoine Richard"],
+            "annee": "Janvier 2024 - Février 2024",
+            "equipe": ["Antoine Richard", "Collaborateur"],
             "links": [
               {
                 "type": "github",
