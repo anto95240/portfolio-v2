@@ -4,7 +4,7 @@
       "projects": [
         {
           "id": "1",
-          "title": "DevWeb",
+          "title": "Labo Dev'Web",
           "description": "Réalisation d'un portfolio",
           "technologies": ["HTML 5", "CSS 3", "Bootstrap"],
           "date": "Octobre 2022 - Juillet 2024",
@@ -16,13 +16,17 @@
             },
             {
               "type": "site",
-              "url": "https://antoine-richard.fr"
+              "url": "https://antoine-richard.fr"  
+            },
+            {
+              "type": "site",
+              "url": "https://anto95240.github.io/Portfolio-v1/"
             }
           ],
           "images": [
             {
               "type": "main",
-              "url": "/images/ydays/devWeb/.svg"
+              "url": "/images/ydays/devWeb/logo_ydays_devWeb.svg"
             },
             {
               "type": "gallery",
@@ -51,7 +55,7 @@
           "images": [
             {
               "type": "main",
-              "url": "/images/ydays/electronique/.svg"
+              "url": "/images/ydays/electronique/logo_ydays_electronique.svg"
             },
             {
               "type": "gallery",
@@ -83,7 +87,7 @@
           "images": [
             {
               "type": "main",
-              "url": "/images/ydays/itesoft_JSON/.svg"
+              "url": "/images/ydays/itesoft_JSON/logo_ydays_itesoft.svg"
             },
             {
               "type": "gallery",
@@ -107,12 +111,15 @@
           "date": "2023 - 2024",
           "equipe": ["Antoine Richard", "Collaborateur"],
           "links": [
-            "https://github.com/Yvenlee/JunioEntrepriseSite"
+            {
+               "type": "github",
+               "url": "https://github.com/Yvenlee/JunioEntrepriseSite"
+            }
           ],
           "images": [
             {
               "type": "main",
-              "url": "/images/ydays/JE/.svg"
+              "url": "/images/ydays/JE/logo_ydays_je.svg"
             },
             {
               "type": "gallery",
@@ -141,7 +148,7 @@
           "images": [
             {
               "type": "main",
-              "url": "/images/ydays/unity/.svg"
+              "url": "/images/ydays/unity/logo_ydays_unity.svg"
             },
             {
               "type": "gallery",
