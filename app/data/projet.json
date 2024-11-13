@@ -22,19 +22,19 @@
           "images": [
             {
               "type": "main",
-              "url": "/images/.svg"
+              "url": "/images/ydays/devWeb/.svg"
             },
             {
               "type": "gallery",
-              "url": "/images/.svg"
+              "url": "/images/ydays/devWeb/.svg"
             },
             {
               "type": "gallery",
-              "url": "/images/.svg"
+              "url": "/images/ydays/devWeb/.svg"
             },
             {
               "type": "gallery",
-              "url": "/images/.svg"
+              "url": "/images/ydays/devWeb/.svg"
             }
           ]
         },
@@ -49,9 +49,22 @@
             ""
           ],
           "images": [
-            "https://antoine-richard.fr/images/collection-app-screenshot1.png",
-            "https://antoine-richard.fr/images/collection-app-screenshot2.png",
-            "https://antoine-richard.fr/images/collection-app-screenshot3.png"
+            {
+              "type": "main",
+              "url": "/images/ydays/electronique/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/ydays/electronique/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/ydays/electronique/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/ydays/electronique/.svg"
+            }
           ]
         },
         {
@@ -68,9 +81,22 @@
             }              
           ],
           "images": [
-            "https://antoine-richard.fr/images/collection-app-screenshot1.png",
-            "https://antoine-richard.fr/images/collection-app-screenshot2.png",
-            "https://antoine-richard.fr/images/collection-app-screenshot3.png"
+            {
+              "type": "main",
+              "url": "/images/ydays/itesoft_JSON/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/ydays/itesoft_JSON/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/ydays/itesoft_JSON/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/ydays/itesoft_JSON/.svg"
+            }
           ]
         },
         {
@@ -84,11 +110,25 @@
             "https://github.com/Yvenlee/JunioEntrepriseSite"
           ],
           "images": [
-            "https://antoine-richard.fr/images/collection-app-screenshot1.png",
-            "https://antoine-richard.fr/images/collection-app-screenshot2.png",
-            "https://antoine-richard.fr/images/collection-app-screenshot3.png"
+            {
+              "type": "main",
+              "url": "/images/ydays/JE/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/ydays/JE/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/ydays/JE/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/ydays/JE/.svg"
+            }
           ]
-        },{
+        },
+        {
           "id": "5",
           "title": "Jeux vidéo UNITY",
           "description": "Création d'un RPG sur le thème de Code Lyoko",
@@ -99,9 +139,22 @@
             ""
           ],
           "images": [
-            "https://antoine-richard.fr/images/collection-app-screenshot1.png",
-            "https://antoine-richard.fr/images/collection-app-screenshot2.png",
-            "https://antoine-richard.fr/images/collection-app-screenshot3.png"
+            {
+              "type": "main",
+              "url": "/images/ydays/unity/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/ydays/unity/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/ydays/unity/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/ydays/unity/.svg"
+            }
           ]
         }
       ]
@@ -126,8 +179,22 @@
             }
           ],
           "images": [
-            "",
-            ""
+            {
+              "type": "main",
+              "url": "/images/web/cpu_ci/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/cpu_ci/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/cpu_ci/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/cpu_ci/.svg"
+            }
           ]
         },
         {
@@ -145,8 +212,22 @@
             
           ],
           "images": [
-            "",
-            ""
+            {
+              "type": "main",
+              "url": "/images/web/e_commerce/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/e_commerce/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/e_commerce/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/e_commerce/.svg"
+            }
           ]
         },
         {
@@ -164,8 +245,22 @@
             
           ],
           "images": [
-            "",
-            ""
+            {
+              "type": "main",
+              "url": "/images/web/eduCool/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/eduCool/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/eduCool/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/eduCool/.svg"
+            }
           ]
         }
       ]
@@ -186,8 +281,22 @@
             }
           ],
           "images": [
-            "",
-            ""
+            {
+              "type": "main",
+              "url": "/images/jeux/hangman/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/jeux/hangman/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/jeux/hangman/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/jeux/hangman/.svg"
+            }
           ]
         },
         {
@@ -204,8 +313,22 @@
             }
           ],
           "images": [
-            "",
-            ""
+            {
+              "type": "main",
+              "url": "/images/jeux/hangman_web/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/jeux/hangman_web/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/jeux/hangman_web/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/jeux/hangman_web/.svg"
+            }
           ]
         },
         {
@@ -226,8 +349,22 @@
             }
           ],
           "images": [
-            "",
-            ""
+            {
+              "type": "main",
+              "url": "/images/jeux/arkanoid/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/jeux/arkanoid/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/jeux/arkanoid/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/jeux/arkanoid/.svg"
+            }
           ]
         },
         {
@@ -244,9 +381,23 @@
             }  
           ],
           "images": [
-            "",
-            ""
-          ]
+            {
+              "type": "main",
+              "url": "/images/jeux/tamagotchi/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/jeux/tamagotchi/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/jeux/tamagotchi/.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/jeux/tamagotchi/.svg"
+            }
+          ]      
         }
       ]
     } 
