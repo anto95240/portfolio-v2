@@ -188,7 +188,7 @@
           "images": [
             {
               "type": "main",
-              "url": "/images/web/cpu_ci/.svg"
+              "url": "/images/web/cpu_ci/logo_cpu-ci.svg"
             },
             {
               "type": "gallery",
@@ -221,7 +221,7 @@
           "images": [
             {
               "type": "main",
-              "url": "/images/web/e_commerce/.svg"
+              "url": "/images/web/e_commerce/logo_e-commerce.svg"
             },
             {
               "type": "gallery",
@@ -254,7 +254,7 @@
           "images": [
             {
               "type": "main",
-              "url": "/images/web/eduCool/.svg"
+              "url": "/images/web/eduCool/logo_eduCool.svg"
             },
             {
               "type": "gallery",
@@ -290,7 +290,7 @@
           "images": [
             {
               "type": "main",
-              "url": "/images/jeux/hangman/.svg"
+              "url": "/images/jeux/hangman/logo_hangman.svg"
             },
             {
               "type": "gallery",
@@ -322,7 +322,7 @@
           "images": [
             {
               "type": "main",
-              "url": "/images/jeux/hangman_web/.svg"
+              "url": "/images/jeux/hangman_web/logo_hangman-web.svg"
             },
             {
               "type": "gallery",
@@ -358,7 +358,7 @@
           "images": [
             {
               "type": "main",
-              "url": "/images/jeux/arkanoid/.svg"
+              "url": "/images/jeux/arkanoid/logo_arkanoid.svg"
             },
             {
               "type": "gallery",
@@ -390,7 +390,7 @@
           "images": [
             {
               "type": "main",
-              "url": "/images/jeux/tamagotchi/.svg"
+              "url": "/images/jeux/tamagotchi/logo_tamagotchi.svg"
             },
             {
               "type": "gallery",
