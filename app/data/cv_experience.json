@@ -1,0 +1,22 @@
+{
+  "cvpage": {
+    "experience": [
+      {
+        "id": "1",
+        "title": "Junior Entreprise, Paris Ynov Campus Agency (PYCA)",
+        "lieux": "Paris Ynov Campus (Nanterre, 92)",
+        "domaine": "Développeur",
+        "realisation": "Création du site vitrine",
+        "date": "Octobre 2023 - 2024"
+      },
+      {
+        "id": "2",
+        "title": "Stage",
+        "lieux": "Paris Ynov Campus (Nanterre, 92)",
+        "domaine": "Développeur",
+        "realisation": "Création d'une plateforme pédagogique",
+        "date": "Juillet 2024 - Aout 2024"
+      }
+    ]
+  }
+}

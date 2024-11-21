@@ -1,0 +1,30 @@
+{
+    "cvpage": {
+        "formation": [
+        {
+            "id": "1",
+            "title": "ECOLE INGESUP",
+            "lieux": "Paris Ynov Campus (Nanterre, 92)",
+            "diplome": "DIPLÔME d'Expert Informatique et Systèmes d'information",
+            "specialite": "Développement Web",
+            "date": "2022 - 2027 (en cours B3)"
+        },
+        {
+            "id": "2",
+            "title": "FORMATION EN LIGNE",
+            "lieux": ["Open Class Room","Linkedin Learning"],
+            "diplome": "DIPLÔME d'Expert Informatique et Systèmes d'information",
+            "specialite": ["HTML", "CSS","REACT"],
+            "date": "2019 - "
+        },
+        {
+            "id": "3",
+            "title": "LYCEE",
+            "lieux": "LYCÉE MONTESQUIEU (Herblay, 95)",
+            "diplome": "BAC Générale",
+            "specialite": ["Mathématiques", "Numérique et Science Informatique"],
+            "date": "2019 - 2022"
+        }
+        ]
+    }
+}

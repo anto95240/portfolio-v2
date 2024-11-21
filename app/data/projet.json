@@ -1,5 +1,5 @@
 {
-  "themes": {
+  "projectPage": {
     "ydays": {
       "projects": [
         {
@@ -13,10 +13,6 @@
             {
               "type": "github",
               "url": "https://github.com/anto95240/Portfolio-v1"
-            },
-            {
-              "type": "site",
-              "url": "https://antoine-richard.fr"  
             },
             {
               "type": "site",
@@ -75,7 +71,7 @@
           "id": "3",
           "title": "ITESOFT JSON",
           "description": "Création d'une application de voyage",
-          "technologies": ["Angular"],
+          "technologies": ["ANGULAR"],
           "date": "Janvier 2023 - Mai 2024",
           "equipe": ["Antoine Richard", "Collaborateur"],
           "links": [
@@ -108,7 +104,7 @@
           "title": "Junior Entreprise (Paris Ynov Campus Agnecy)",
           "description": "Réalisation du site vitrine de la junior entreprise de Paris Ynov Campus grâce a un template déjà crée",
           "technologies": ["HTML 5", "CSS 3", "Bootstrap"],
-          "date": "2023 - 2024",
+          "date": "Octobre 2023 - 2024",
           "equipe": ["Antoine Richard", "Collaborateur"],
           "links": [
             {
@@ -241,7 +237,7 @@
           "id": "3",
           "title": "EduCool",
           "description": "Une plateforme pédagogique pour étudiant et professeur",
-          "technologies": ["Vue.JS", "Django"],
+          "technologies": ["VUE.JS", "DJANGO"],
           "date": "Juillet 2024 - Aout 2024",
           "equipe": ["Antoine Richard"],
           "links": [
@@ -278,7 +274,7 @@
           "id": "1",
           "title": "Hangman",
           "description": "Un jeu qui permet de jouer au hangman. Réalisé pour jouer en ligne de commande.",
-          "technologies": ["Golang"],
+          "technologies": ["GOLANG"],
           "date": "Octobre 2022 - Novembre 2022",
           "equipe": ["Antoine Richard", "Collaborateur"],
           "links": [
@@ -310,7 +306,7 @@
           "id": "2",
           "title": "Hangman web",
           "description": "Un jeu qui permet de jouer au hangman sur le web avec un ordinateur.",
-          "technologies": ["HTML 5", "CSS 3", "Golang"],
+          "technologies": ["HTML 5", "CSS 3", "GOLANG"],
           "date": "Novembre 2022 - Décembre 2023",
           "equipe": ["Antoine Richard", "Collaborateur"],
           "links": [
@@ -342,8 +338,8 @@
           "id": "3",
           "title": "Arkanoid",
           "description": "Un jeu qui permet de jouer au casse briques sur le web avec un ordinateur.",
-          "technologies": ["HTML 5", "CSS 3", "JavaScript"],
-          "date": "Mars 20233 - Avril 2023",
+          "technologies": ["HTML 5", "CSS 3", "JAVASCRIPT"],
+          "date": "Mars 2023 - Avril 2023",
           "equipe": ["Antoine Richard"],
           "links": [
             {
@@ -378,7 +374,7 @@
           "id": "4",
           "title": "Tamgotchi",
           "description": "Un jeu qui permet de faire grandir un tamagotchi, de faire des combats contre d’autres tamagotchis.",
-          "technologies": ["Java"],
+          "technologies": ["JAVA"],
           "date": "Novembre 2022 - Décembre 2022",
           "equipe": ["Antoine Richard", "Collaborateur"],
           "links": [
@@ -408,5 +404,150 @@
         }
       ]
     } 
+  },
+  "homePage": {
+    "projects": [
+      {
+        "id": "1",
+        "title": "CPU-CI",
+        "description": "Un site web qui explique en résumant ce que sont les CPU (processeur) et un CI (circuit intégré).",
+        "technologies": ["HTML 5", "CSS 3"],
+        "date": "2022",
+        "equipe": ["Antoine Richard"],
+        "links": [
+          {
+            "type": "github",
+            "url": "https://github.com/anto95240/CPU-CI"
+          },
+          {
+            "type": "site",
+            "url": "https://anto95240.github.io/CPU-CI/"
+          }
+        ],
+        "images": [
+          {
+            "type": "main",
+            "url": "/images/web/cpu_ci/logo_cpu-ci.svg"
+          },
+          {
+            "type": "gallery",
+            "url": "/images/web/cpu_ci/.svg"
+          },
+          {
+            "type": "gallery",
+            "url": "/images/web/cpu_ci/.svg"
+          },
+          {
+            "type": "gallery",
+            "url": "/images/web/cpu_ci/.svg"
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "title": "Labo Dev'Web",
+        "description": "Réalisation d'un portfolio",
+        "technologies": ["HTML 5", "CSS 3", "BOOTSTRAP"],
+        "date": "Octobre 2022 - Juillet 2024",
+        "equipe": ["Antoine Richard"],
+        "links": [
+          {
+            "type": "github",
+            "url": "https://github.com/anto95240/Portfolio-v1"
+          },
+          {
+            "type": "site",
+            "url": "https://anto95240.github.io/Portfolio-v1/"
+          }
+        ],
+        "images": [
+          {
+            "type": "main",
+            "url": "/images/ydays/devWeb/logo_ydays_devWeb.svg"
+          },
+          {
+            "type": "gallery",
+            "url": "/images/ydays/devWeb/.svg"
+          },
+          {
+            "type": "gallery",
+            "url": "/images/ydays/devWeb/.svg"
+          },
+          {
+            "type": "gallery",
+            "url": "/images/ydays/devWeb/.svg"
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "title": "EduCool",
+        "description": "Une plateforme pédagogique pour étudiant et professeur",
+        "technologies": ["VUE.JS", "DJANGO"],
+        "date": "Juillet 2024 - Aout 2024",
+        "equipe": ["Antoine Richard"],
+        "links": [
+          {
+            "type": "github",
+            "url": "https://github.com/anto95240/stage_alt_2023-2024_RICHARD_Antoine"
+          }  
+          
+        ],
+        "images": [
+          {
+            "type": "main",
+            "url": "/images/web/eduCool/logo_eduCool.svg"
+          },
+          {
+            "type": "gallery",
+            "url": "/images/web/eduCool/.svg"
+          },
+          {
+            "type": "gallery",
+            "url": "/images/web/eduCool/.svg"
+          },
+          {
+            "type": "gallery",
+            "url": "/images/web/eduCool/.svg"
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "title": "Arkanoid",
+        "description": "Un jeu qui permet de jouer au casse briques sur le web avec un ordinateur.",
+        "technologies": ["HTML 5", "CSS 3", "JAVASCRIPT"],
+        "date": "Mars 2023 - Avril 2023",
+        "equipe": ["Antoine Richard"],
+        "links": [
+          {
+            "type": "github",
+            "url": "https://github.com/anto95240/Break-Brick"
+          },
+          {
+            "type": "site",
+            "url": "https://arichard-arkanoid.fr/"
+          }
+        ],
+        "images": [
+          {
+            "type": "main",
+            "url": "/images/jeux/arkanoid/logo_arkanoid.svg"
+          },
+          {
+            "type": "gallery",
+            "url": "/images/jeux/arkanoid/.svg"
+          },
+          {
+            "type": "gallery",
+            "url": "/images/jeux/arkanoid/.svg"
+          },
+          {
+            "type": "gallery",
+            "url": "/images/jeux/arkanoid/.svg"
+          }
+        ]
+      }
+    ]
   }
 }

@@ -1,0 +1,127 @@
+{
+  "cvpage": {
+    "skills": {
+      "frontend": [
+        {
+          "id": "1",
+          "categories": ["Front-end"],
+          "title": "HTML",
+          "images": "/images/logo/html.svg"
+        },
+        {
+          "id": "2",
+          "categories": ["Front-end"],
+          "title": "CSS",
+          "images": "/images/logo/css.svg"
+        },
+        {
+          "id": "3",
+          "categories": ["Front-end"],
+          "title": "Vue.JS",
+          "images": "/images/logo/vueJs.svg"
+        },
+        {
+          "id": "4",
+          "categories": ["Front-end"],
+          "title": "Bootstrap",
+          "images": "/images/logo/bootstrap.svg"
+        },
+        {
+          "id": "5",
+          "categories": ["Front-end"],
+          "title": "JavaScript",
+          "images": "/images/logo/js.svg"
+        }
+      ],
+      "backend": [
+        {
+          "id": "1",
+          "categories": ["Back-end"],
+          "title": "Golang",
+          "images": "/images/logo/golang.svg"
+        },
+        {
+          "id": "2",
+          "categories": ["Back-end"],
+          "title": "Python",
+          "images": "/images/logo/python.svg"
+        }
+      ],
+      "database": [
+        {
+          "id": "1",
+          "categories": ["Base de donnée"],
+          "title": "MySQL",
+          "images": "/images/logo/mysql.svg"
+        },
+        {
+          "id": "2",
+          "categories": ["Base de donnée"],
+          "title": "SQLite",
+          "images": "/images/logo/sqlite.svg"
+        },
+        {
+          "id": "3",
+          "categories": ["Base de donnée"],
+          "title": "SQL",
+          "images": "/images/logo/sql.svg"
+        }
+      ],
+      "logiciel": [
+        {
+          "id": "1",
+          "categories": ["Logiciel"],
+          "title": "Figma",
+          "images": "/images/logo/figma.svg"
+        },
+        {
+          "id": "2",
+          "categories": ["Logiciel"],
+          "title": "VSCode",
+          "images": "/images/logo/vscode.svg"
+        }
+      ]
+    }
+  },
+  "homepage": {
+    "skills": [
+      {
+        "id": "1",
+        "categories": ["Front-end"],
+        "title": "Vue.JS",
+        "images": "/images/logo/vueJs.svg"
+      },
+      {
+        "id": "2",
+        "categories": ["Front-end"],
+        "title": "Bootstrap",
+        "images": "/images/logo/bootstrap.svg"
+      },
+      {
+        "id": "3",
+        "categories": ["Back-end"],
+        "title": "Python",
+        "images": "/images/logo/python.svg"
+      },
+      {
+        "id": "4",
+        "categories": ["Base de donnée"],
+        "title": "MySQL",
+        "images": "/images/logo/mysql.svg"
+      },
+      {
+        "id": "5",
+        "categories": ["Logiciel"],
+        "title": "Figma",
+        "images": "/images/logo/figma.svg"
+      },
+      {
+        "id": "6",
+        "categories": ["Logiciel"],
+        "title": "VSCode",
+        "images": "/images/logo/vscode.svg"
+      }
+    ]
+  }
+}
+  
