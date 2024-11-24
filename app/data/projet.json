@@ -26,15 +26,15 @@
             },
             {
               "type": "gallery",
-              "url": "/images/ydays/devWeb/.svg"
+              "url": "/images/ydays/devWeb/accueil_responsive.svg"
             },
             {
               "type": "gallery",
-              "url": "/images/ydays/devWeb/.svg"
+              "url": "/images/ydays/devWeb/portfolio.svg"
             },
             {
               "type": "gallery",
-              "url": "/images/ydays/devWeb/.svg"
+              "url": "/images/ydays/devWeb/all_pages.svg"
             }
           ]
         },
@@ -55,15 +55,7 @@
             },
             {
               "type": "gallery",
-              "url": "/images/ydays/electronique/.svg"
-            },
-            {
-              "type": "gallery",
-              "url": "/images/ydays/electronique/.svg"
-            },
-            {
-              "type": "gallery",
-              "url": "/images/ydays/electronique/.svg"
+              "url": "/images/ydays/electronique/manette.svg"
             }
           ]
         },
@@ -87,15 +79,11 @@
             },
             {
               "type": "gallery",
-              "url": "/images/ydays/JE/.svg"
+              "url": "/images/ydays/JE/accueil.svg"
             },
             {
               "type": "gallery",
-              "url": "/images/ydays/JE/.svg"
-            },
-            {
-              "type": "gallery",
-              "url": "/images/ydays/JE/.svg"
+              "url": "/images/ydays/JE/main_page.svg"
             }
           ]
         },
@@ -113,18 +101,6 @@
             {
               "type": "main",
               "url": "/images/ydays/unity/logo_ydays_unity.svg"
-            },
-            {
-              "type": "gallery",
-              "url": "/images/ydays/unity/.svg"
-            },
-            {
-              "type": "gallery",
-              "url": "/images/ydays/unity/.svg"
-            },
-            {
-              "type": "gallery",
-              "url": "/images/ydays/unity/.svg"
             }
           ]
         }
@@ -156,15 +132,11 @@
             },
             {
               "type": "gallery",
-              "url": "/images/web/cpu_ci/.svg"
+              "url": "/images/web/cpu_ci/cpu_ci.svg"
             },
             {
               "type": "gallery",
-              "url": "/images/web/cpu_ci/.svg"
-            },
-            {
-              "type": "gallery",
-              "url": "/images/web/cpu_ci/.svg"
+              "url": "/images/web/cpu_ci/all_pages.svg"
             }
           ]
         },
@@ -189,15 +161,15 @@
             },
             {
               "type": "gallery",
-              "url": "/images/web/e_commerce/.svg"
+              "url": "/images/web/e_commerce/accueil.svg"
             },
             {
               "type": "gallery",
-              "url": "/images/web/e_commerce/.svg"
+              "url": "/images/web/e_commerce/main_pages.svg"
             },
             {
               "type": "gallery",
-              "url": "/images/web/e_commerce/.svg"
+              "url": "/images/web/e_commerce/all_pages_admin.svg"
             }
           ]
         },
@@ -222,15 +194,15 @@
             },
             {
               "type": "gallery",
-              "url": "/images/web/eduCool/.svg"
+              "url": "/images/web/eduCool/all_pages.svg"
             },
             {
               "type": "gallery",
-              "url": "/images/web/eduCool/.svg"
+              "url": "/images/web/eduCool/accueil.svg"
             },
             {
               "type": "gallery",
-              "url": "/images/web/eduCool/.svg"
+              "url": "/images/web/eduCool/admin.svg"
             }
           ]
         }
@@ -258,15 +230,19 @@
             },
             {
               "type": "gallery",
-              "url": "/images/jeux/hangman/.svg"
+              "url": "/images/jeux/hangman/hangman.svg"
             },
             {
               "type": "gallery",
-              "url": "/images/jeux/hangman/.svg"
+              "url": "/images/jeux/hangman/choi2.svg"
             },
             {
               "type": "gallery",
-              "url": "/images/jeux/hangman/.svg"
+              "url": "/images/jeux/hangman/win.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/jeux/hangman/loose.svg"
             }
           ]
         },
@@ -290,15 +266,11 @@
             },
             {
               "type": "gallery",
-              "url": "/images/jeux/hangman_web/.svg"
+              "url": "/images/jeux/hangman_web/accueil.svg"
             },
             {
               "type": "gallery",
-              "url": "/images/jeux/hangman_web/.svg"
-            },
-            {
-              "type": "gallery",
-              "url": "/images/jeux/hangman_web/.svg"
+              "url": "/images/jeux/hangman_web/all_pages.svg"
             }
           ]
         },
@@ -326,15 +298,11 @@
             },
             {
               "type": "gallery",
-              "url": "/images/jeux/arkanoid/.svg"
+              "url": "/images/jeux/arkanoid/arkanoid.svg"
             },
             {
               "type": "gallery",
-              "url": "/images/jeux/arkanoid/.svg"
-            },
-            {
-              "type": "gallery",
-              "url": "/images/jeux/arkanoid/.svg"
+              "url": "/images/jeux/arkanoid/gameplay.svg"
             }
           ]
         },
@@ -358,15 +326,19 @@
             },
             {
               "type": "gallery",
-              "url": "/images/jeux/tamagotchi/.svg"
+              "url": "/images/jeux/tamagotchi/tama.svg"
             },
             {
               "type": "gallery",
-              "url": "/images/jeux/tamagotchi/.svg"
+              "url": "/images/jeux/tamagotchi/choix.svg"
             },
             {
               "type": "gallery",
-              "url": "/images/jeux/tamagotchi/.svg"
+              "url": "/images/jeux/tamagotchi/stat.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/jeux/tamagotchi/combat.svg"
             }
           ]      
         }
@@ -399,15 +371,11 @@
           },
           {
             "type": "gallery",
-            "url": "/images/web/cpu_ci/.svg"
+            "url": "/images/web/cpu_ci/cpu_ci.svg"
           },
           {
             "type": "gallery",
-            "url": "/images/web/cpu_ci/.svg"
-          },
-          {
-            "type": "gallery",
-            "url": "/images/web/cpu_ci/.svg"
+            "url": "/images/web/cpu_ci/all_pages.svg"
           }
         ]
       },
@@ -435,15 +403,15 @@
           },
           {
             "type": "gallery",
-            "url": "/images/ydays/devWeb/.svg"
+            "url": "/images/ydays/devWeb/accueil_responsive.svg"
           },
           {
             "type": "gallery",
-            "url": "/images/ydays/devWeb/.svg"
+            "url": "/images/ydays/devWeb/portfolio.svg"
           },
           {
             "type": "gallery",
-            "url": "/images/ydays/devWeb/.svg"
+            "url": "/images/ydays/devWeb/all_pages.svg"
           }
         ]
       },
@@ -468,15 +436,15 @@
           },
           {
             "type": "gallery",
-            "url": "/images/web/eduCool/.svg"
+            "url": "/images/web/eduCool/all_pages.svg"
           },
           {
             "type": "gallery",
-            "url": "/images/web/eduCool/.svg"
+            "url": "/images/web/eduCool/accueil.svg"
           },
           {
             "type": "gallery",
-            "url": "/images/web/eduCool/.svg"
+            "url": "/images/web/eduCool/admin.svg"
           }
         ]
       },
@@ -504,15 +472,11 @@
           },
           {
             "type": "gallery",
-            "url": "/images/jeux/arkanoid/.svg"
+            "url": "/images/jeux/arkanoid/arkanoid.svg"
           },
           {
             "type": "gallery",
-            "url": "/images/jeux/arkanoid/.svg"
-          },
-          {
-            "type": "gallery",
-            "url": "/images/jeux/arkanoid/.svg"
+            "url": "/images/jeux/arkanoid/gameplay.svg"
           }
         ]
       }
