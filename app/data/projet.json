@@ -69,38 +69,6 @@
         },
         {
           "id": "3",
-          "title": "ITESOFT JSON",
-          "description": "Création d'une application de voyage",
-          "technologies": ["ANGULAR"],
-          "date": "Janvier 2023 - Mai 2024",
-          "equipe": ["Antoine Richard", "Collaborateur"],
-          "links": [
-            {
-              "type": "github",
-              "url": "https://github.com/Oumou-Awa-Ndiaye/MyTRavel"
-            }              
-          ],
-          "images": [
-            {
-              "type": "main",
-              "url": "/images/ydays/itesoft_JSON/logo_ydays_itesoft.svg"
-            },
-            {
-              "type": "gallery",
-              "url": "/images/ydays/itesoft_JSON/.svg"
-            },
-            {
-              "type": "gallery",
-              "url": "/images/ydays/itesoft_JSON/.svg"
-            },
-            {
-              "type": "gallery",
-              "url": "/images/ydays/itesoft_JSON/.svg"
-            }
-          ]
-        },
-        {
-          "id": "4",
           "title": "Junior Entreprise (Paris Ynov Campus Agnecy)",
           "description": "Réalisation du site vitrine de la junior entreprise de Paris Ynov Campus grâce a un template déjà crée",
           "technologies": ["HTML 5", "CSS 3", "Bootstrap"],
@@ -132,7 +100,7 @@
           ]
         },
         {
-          "id": "5",
+          "id": "4",
           "title": "Jeux vidéo UNITY",
           "description": "Création d'un RPG sur le thème de Code Lyoko",
           "technologies": ["C#"],
