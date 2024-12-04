@@ -21,6 +21,8 @@ export default {
         'green-blue': '#96ECE1',
         'blue-darkBlue': '#36A7F8',
         'dark-blue': '#1D2B64',
+        'green-outil': '#2ECC71',
+        'blue-outil': '#10589F',
       },
     },
   },
