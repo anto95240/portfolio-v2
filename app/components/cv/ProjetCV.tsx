@@ -25,6 +25,9 @@ export default function Home() {
         // Récupérer l'image principale (type: "main")
         const mainImage = project.images.find((image) => image.type === 'main')?.url;
 
+        // Nombre de technologies
+        const techCount = project.technologies.length;
+
         return (
           <div
             key={project.id}
@@ -48,7 +51,7 @@ export default function Home() {
               >
                 <h1 className="text-lg font-title mb-2">{project.title}</h1>
                 <p className="text-sm font-text mb-3 h-10">{project.description}</p>
-                <div className="grid grid-cols-2 gap-2">
+                <div className={`grid grid-cols-${techCount} gap-2`}>
                   {project.technologies.map((tech, index) => (
                     <div
                       key={index}
