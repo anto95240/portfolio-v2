@@ -23,6 +23,8 @@ export default {
         'dark-blue': '#1D2B64',
         'green-outil': '#2ECC71',
         'blue-outil': '#10589F',
+        'green-projet': '#26C460',
+        'blue-projet': '#2181CC',
       },
     },
   },
