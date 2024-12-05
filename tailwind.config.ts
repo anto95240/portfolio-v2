@@ -1,4 +1,3 @@
-import { title } from "process";
 import type { Config } from "tailwindcss";
 
 export default {
@@ -25,6 +24,7 @@ export default {
         'blue-outil': '#10589F',
         'green-projet': '#26C460',
         'blue-projet': '#2181CC',
+        'blue-footer': '#1B3A5F',
       },
     },
   },
