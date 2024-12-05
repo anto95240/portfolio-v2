@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import projectsData from '../../data/projet.json'; // Chemin vers votre fichier JSON
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
 export default function Home() {
   const projects = projectsData.homePage.projects;
@@ -46,7 +48,7 @@ export default function Home() {
               >
                 <h1 className="text-lg font-title mb-2">{project.title}</h1>
                 <p className="text-sm font-text mb-3 h-10">{project.description}</p>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-2 gap-2">
                   {project.technologies.map((tech, index) => (
                     <div
                       key={index}
@@ -59,10 +61,11 @@ export default function Home() {
 
                 {/* Bouton */}
                 <button
-                  className="mt-4 bg-green-projet w-full h-10 shadow-[0_-4px_4px_0_rgba(0,0,0,0.25)] rounded-md text-white font-title hover:bg-green-600 transition"
-                  onClick={() => window.open(project.links[0]?.url, '_blank')}
+                  className="mt-4 bg-green-projet w-full h-10 shadow-[0_-4px_4px_0_rgba(0,0,0,0.25)] flex gap-2 items-center justify-center rounded-md text-black font-title hover:bg-green-600 transition"
+                  // onClick={() => window.open(project.links[0]?.url, '_blank')}
                 >
                   Plus de détail
+                  <FontAwesomeIcon icon={faArrowUpRightFromSquare}  className="text-l" />
                 </button>
               </div>
             </div>
