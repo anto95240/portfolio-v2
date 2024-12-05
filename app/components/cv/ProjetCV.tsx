@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import projectsData from '../data/projet.json'; // Chemin vers votre fichier JSON
+import projectsData from '../../data/projet.json'; // Chemin vers votre fichier JSON
 
 export default function Home() {
   const projects = projectsData.homePage.projects;
