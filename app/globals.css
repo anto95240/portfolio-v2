@@ -9,9 +9,12 @@
   --font-title: "Montserrat Alternates", sans-serif;
 }
 
-body {
+body{
   color: var(--foreground);
   background: var(--background);
+}
+
+p {
   font-family: var(--font-text);
 }
 
