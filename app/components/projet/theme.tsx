@@ -1,10 +1,17 @@
 'use client';
 
-import Image from "next/image";
-import { useState } from "react";
+import Image from 'next/image';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation'; // Pour gérer les redirections
 
-export default function Home() {
+export default function ProjectsPage() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const router = useRouter();
+
+  // Fonction pour gérer la navigation vers les pages de catégorie
+  const handleNavigate = (category: string) => {
+    router.push(`/projects/${category}`); // Redirige vers la page de la catégorie
+  };
 
   const handleToggle = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -20,11 +27,14 @@ export default function Home() {
         <h1 className="pt-5">YDAYS</h1>
         <div
           className={`absolute inset-0 flex flex-col gap-5 items-center pt-20 bg-black bg-opacity-25 transition-all duration-300 ease-in-out ${
-            activeIndex === 0 ? "opacity-100 visible" : "opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible"
+            activeIndex === 0 ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
           }`}
           onClick={(e) => e.stopPropagation()}
         >
-          <button className="bg-[#d9d9d97b] w-2/4 rounded-xl h-9 border border-solid border-black">
+          <button
+            className="bg-[#d9d9d97b] w-2/4 rounded-xl h-9 border border-solid border-black hover:border-white hover:bg-[#007BFF] hover:text-white"
+            onClick={() => handleNavigate('ydays')} // Redirection vers la catégorie YDAYS
+          >
             VOIR PLUS
           </button>
           <p className="text-justify w-3/4 mx-auto text-white">
@@ -50,11 +60,14 @@ export default function Home() {
         <h1 className="pt-5">WEB</h1>
         <div
           className={`absolute inset-0 flex flex-col gap-5 items-center pt-20 bg-black bg-opacity-25 transition-all duration-300 ease-in-out ${
-            activeIndex === 1 ? "opacity-100 visible" : "opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible"
+            activeIndex === 1 ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
           }`}
           onClick={(e) => e.stopPropagation()}
         >
-          <button className="bg-[#d9d9d97b] w-2/4 rounded-xl h-9 border border-solid border-black">
+          <button
+            className="bg-[#d9d9d97b] w-2/4 rounded-xl h-9 border border-solid border-black hover:border-white hover:bg-[#007BFF] hover:text-white"
+            onClick={() => handleNavigate('web')} // Redirection vers la catégorie WEB
+          >
             VOIR PLUS
           </button>
           <p className="text-justify w-3/4 mx-auto text-white">
@@ -78,11 +91,14 @@ export default function Home() {
         <h1 className="pt-5">JEUX</h1>
         <div
           className={`absolute inset-0 flex flex-col gap-5 items-center pt-20 bg-black bg-opacity-25 transition-all duration-300 ease-in-out ${
-            activeIndex === 2 ? "opacity-100 visible" : "opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible"
+            activeIndex === 2 ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'
           }`}
           onClick={(e) => e.stopPropagation()}
         >
-          <button className="bg-[#d9d9d97b] w-2/4 text-black rounded-xl h-9 border border-solid border-black">
+          <button
+            className="bg-[#d9d9d97b] w-2/4 rounded-xl h-9 border border-solid border-black text-black hover:border-white hover:bg-[#007BFF] hover:text-white"
+            onClick={() => handleNavigate('jeux')} // Redirection vers la catégorie JEUX
+          >
             VOIR PLUS
           </button>
           <p className="text-justify w-3/4 mx-auto text-white">
