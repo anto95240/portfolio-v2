@@ -12,11 +12,7 @@ export default function Home() {
   const [activeProject, setActiveProject] = useState<string | null>(null);
 
   const toggleInfo = (projectId: string) => {
-    if (activeProject === projectId) {
-      setActiveProject(null); // Réinitialiser si on clique à nouveau
-    } else {
-      setActiveProject(projectId);
-    }
+    setActiveProject(activeProject === projectId ? null : projectId)
   };
 
   return (
@@ -41,13 +37,13 @@ export default function Home() {
               <img
                 src={mainImage} // Affichage de l'image principale
                 alt={project.title}
-                className="w-full h-56 object-cover rounded-lg group-hover:opacity-0 transition-opacity duration-300"
+                className="w-full h-56 object-cover rounded-lg lg:group-hover:opacity-0 transition-opacity duration-300"
               />
               {/* Informations affichées au survol ou au clic */}
               <div
-                className={`absolute inset-0 bg-blue-projet pt-1 gap-4 bg-opacity-75 flex flex-col items-center justify-center text-white transition-opacity duration-300 ${
-                  activeProject === project.id ? 'opacity-100' : 'opacity-0'
-                } group-hover:opacity-100 md:group-hover:opacity-100`}
+                className={`absolute inset-0 bg-blue-projet pt-1 gap-4 bg-opacity-100 flex flex-col items-center justify-center text-white transition-opacity duration-300 ${
+                  activeProject === project.id ? 'opacity-100 visible' : 'opacity-0 invisible'
+                } lg:group-hover:opacity-100 lg:group-hover:visible`}
                 onClick={(e) => e.stopPropagation()}
               >
                 <h1 className="text-lg font-title mb-2">{project.title}</h1>
