@@ -35,7 +35,7 @@ export default function Home() {
           >
             {/* Image principale */}
             <div
-              className="relative cursor-pointer"
+              className="relative"
               onClick={() => toggleInfo(project.id)} // Gérer l'affichage au clic (mobile/tablette)
             >
               <img
@@ -48,14 +48,15 @@ export default function Home() {
                 className={`absolute inset-0 bg-blue-projet pt-1 gap-4 bg-opacity-75 flex flex-col items-center justify-center text-white transition-opacity duration-300 ${
                   activeProject === project.id ? 'opacity-100' : 'opacity-0'
                 } group-hover:opacity-100 md:group-hover:opacity-100`}
+                onClick={(e) => e.stopPropagation()}
               >
-                <h1 className="text-lg mb-2">{project.title}</h1>
-                <p className="text-sm mb-3 h-10">{project.description}</p>
+                <h1 className="text-lg font-title mb-2">{project.title}</h1>
+                <p className="text-sm font-text mb-3 h-10">{project.description}</p>
                 <div className={`grid grid-cols-${techCount} gap-2`}>
                   {project.technologies.map((tech, index) => (
                     <div
                       key={index}
-                      className="bg-white text-black rounded-sm shadow-[4px_4px_10px_0_rgba(0,0,0,0.35)] text-sm flex justify-center items-center p-1"
+                      className="bg-white text-black rounded-sm shadow-[4px_4px_10px_0_rgba(0,0,0,0.35)] text-sm flex justify-center items-center font-title p-1"
                     >
                       {tech}
                     </div>
@@ -64,7 +65,7 @@ export default function Home() {
 
                 {/* Bouton */}
                 <button
-                  className="mt-4 bg-green-projet w-full h-10 shadow-[0_-4px_4px_0_rgba(0,0,0,0.25)] flex gap-2 items-center justify-center rounded-md text-black hover:bg-green-600 transition"
+                  className="mt-4 bg-green-projet w-full h-10 shadow-[0_-4px_4px_0_rgba(0,0,0,0.25)] flex gap-2 items-center justify-center rounded-md text-black font-title hover:bg-green-600 transition"
                   // onClick={() => window.open(project.links[0]?.url, '_blank')}
                 >
                   Plus de détail
