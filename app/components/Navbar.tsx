@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faCircleInfo, faFile, faFileCircleCheck, faChevronDown, faChevronUp, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-export default function Home() {
+export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Gère l'ouverture/fermeture du menu
   const [isProjectOpen, setIsProjectOpen] = useState(false); // Gère l'ouverture/fermeture de la sous-liste des projets
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import skillsData from "../data/cv_skill.json"; // Chemin du fichier JSON
 
-export default function Home() {
+export default function OutilHome() {
   // Récupération des données depuis `homepage.skills`
   const tools = skillsData.homepage.skills;
 

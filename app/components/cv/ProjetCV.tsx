@@ -5,7 +5,7 @@ import projectsData from '../../data/projet.json'; // Chemin vers votre fichier 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
-export default function Home() {
+export default function ProjectCV() {
   const projects = projectsData.homePage.projects;
 
   // Gère l'affichage au clic (pour mobile/tablette)
@@ -61,7 +61,7 @@ export default function Home() {
 
                 {/* Bouton */}
                 <button
-                  className="mt-4 bg-green-projet w-full h-10 shadow-[0_-4px_4px_0_rgba(0,0,0,0.25)] flex gap-2 items-center justify-center rounded-md text-black font-title hover:bg-green-600 transition"
+                  className="mt-4 bg-green-projet w-full h-10 shadow-[0_-4px_4px_0_rgba(0,0,0,0.25)] flex gap-2  text-black font-title hover:bg-green-600 transition"
                   // onClick={() => window.open(project.links[0]?.url, '_blank')}
                 >
                   Plus de détail
