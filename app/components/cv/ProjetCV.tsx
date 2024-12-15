@@ -61,7 +61,7 @@ export default function ProjectCV() {
 
                 {/* Bouton */}
                 <button
-                  className="mt-4 bg-green-projet w-full h-10 shadow-[0_-4px_4px_0_rgba(0,0,0,0.25)] flex gap-2  text-black font-title hover:bg-green-600 transition"
+                  className="mt-4 bg-green-projet w-full h-10 shadow-[0_-4px_4px_0_rgba(0,0,0,0.25)] flex justify-center items-center gap-2 text-black font-title hover:bg-green-600 transition"
                   // onClick={() => window.open(project.links[0]?.url, '_blank')}
                 >
                   Plus de détail
