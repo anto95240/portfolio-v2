@@ -5,12 +5,12 @@ import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 export default function Footer() {
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 w-8/12 max-w-l text-center mx-auto text-white justify-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-16 w-10/12 max-w-l text-center mx-auto text-white justify-center">
         <a
           href="#"
           className="bg-blue-footer flex flex-col items-center h-24 mx-auto justify-center gap-2 rounded-md shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] aspect-square"
         >
-          <FontAwesomeIcon icon={faFileCircleCheck} className="text-l" />
+          <FontAwesomeIcon icon={faFileCircleCheck} className="text-xl" />
           Mes projets
         </a>
 
@@ -20,7 +20,7 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FontAwesomeIcon icon={faFile} className="text-l" />
+          <FontAwesomeIcon icon={faFile} className="text-xl" />
           Mon CV
         </a>
 
@@ -28,7 +28,7 @@ export default function Footer() {
           href="mailto:antoine.richard@ynov.com"
           className="bg-blue-footer flex flex-col items-center h-24 mx-auto justify-center gap-2 rounded-md shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] aspect-square"
         >
-          <FontAwesomeIcon icon={faEnvelope} className="text-l" />
+          <FontAwesomeIcon icon={faEnvelope} className="text-xl" />
           Mon Email
         </a>
 
@@ -38,7 +38,7 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FontAwesomeIcon icon={faLinkedin} className="text-l" />
+          <FontAwesomeIcon icon={faLinkedin} className="text-xl" />
           Mon Linkedin
         </a>
 
@@ -48,7 +48,7 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FontAwesomeIcon icon={faGithub} className="text-l" />
+          <FontAwesomeIcon icon={faGithub} className="text-xl" />
           Mon Github
         </a>
       </div>

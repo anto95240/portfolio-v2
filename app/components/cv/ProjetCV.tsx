@@ -15,8 +15,8 @@ export default function ProjectCV() {
     setActiveProject(activeProject === projectId ? null : projectId)
   };
 
-  return (
-    <div className="grid grid-cols-1 gap-5 w-10/12 max-w-3xl mx-auto md:grid-cols-2 text-center">
+  return (      
+    <div className="grid grid-cols-1 gap-5 max-w-3xl mx-auto md:grid-cols-2 text-center">
       {projects.map((project) => {
         // Récupérer l'image principale (type: "main")
         const mainImage = project.images.find((image) => image.type === 'main')?.url;
@@ -72,6 +72,13 @@ export default function ProjectCV() {
           </div>
         );
       })}
+
+      {/* Bouton VOIR PLUS en bas et au centre de la grille */}
+      <div className="col-span-full mt-6 flex justify-center items-center">
+        <button className="bg-gradient-to-r from-light-blue via-light-green to-light-blue text-black md:text-lg py-1 px-10 text-base rounded-2xl shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform hover:scale-105">
+          TOUS VOIR
+        </button>
+      </div>
     </div>
   );
 }

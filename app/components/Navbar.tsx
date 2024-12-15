@@ -13,7 +13,7 @@ export default function Navbar() {
   const toggleProjectList = () => setIsProjectOpen(!isProjectOpen); // Toggle pour la liste des projets
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative h-screen">
       {/* Burger Menu (en dehors de nav) */}
       {!isMenuOpen && (
         <button
@@ -28,7 +28,7 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 left-0 h-screen bg-gradient-to-r from-light-blue to-light-green p-5 transition-transform duration-300 flex flex-col items-center ${
           isMenuOpen ? 'translate-x-0' : '-translate-x-full'
-        } lg:translate-x-0 lg:relative lg:w-1/5 w-2/5 sm:w-2/6`}
+        } lg:translate-x-0 lg:relative lg:w-4/5 w-2/5 sm:w-2/6 z-10`}
       >
         {/* Crois pour fermer le menu */}
         <button
