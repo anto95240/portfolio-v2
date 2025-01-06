@@ -52,7 +52,7 @@ export default function Footer() {
           Mon Github
         </a>
       </div>
-      <p className='text-center pt-10'>© 2024 créé par Antoine Richard tous droits réservés.</p>
+      <p className='text-center pt-10 pb-10'>© 2024 créé par Antoine Richard tous droits réservés.</p>
     </div>
   );
 }
