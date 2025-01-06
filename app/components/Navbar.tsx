@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link'; // Importation du composant Link de Next.js
 
 import { useState } from 'react';
 import Image from "next/image";
@@ -51,7 +52,7 @@ export default function Navbar() {
         <ol className="flex flex-col gap-8">
           <li className="flex items-center gap-4">
             <FontAwesomeIcon icon={faHouse} className="text-2xl" />
-            <a href="#">Accueil</a>
+            <Link href="/">Accueil</Link> {/* Utilisation de Link au lieu de <a> */}
           </li>
 
           <li>
@@ -59,7 +60,7 @@ export default function Navbar() {
               className="flex items-center gap-4 cursor-pointer"
             >
               <FontAwesomeIcon icon={faFileCircleCheck} className="text-2xl" />
-              <a href="#">Projets</a>              
+              <Link href="#">Projets</Link>  {/* Utilisation de Link au lieu de <a> */}
               <FontAwesomeIcon
                 icon={isProjectOpen ? faChevronUp : faChevronDown}
                 className="text-xl"
@@ -68,21 +69,21 @@ export default function Navbar() {
             </div>
             {isProjectOpen && (
               <ol className="flex flex-col gap-2 ml-8 mt-3">
-                <li><a href="#">Ydays</a></li>
-                <li><a href="#">Web</a></li>
-                <li><a href="#">Jeux</a></li>
+                <li><Link href="#">Ydays</Link></li>  {/* Utilisation de Link */}
+                <li><Link href="#">Web</Link></li>    {/* Utilisation de Link */}
+                <li><Link href="#">Jeux</Link></li>   {/* Utilisation de Link */}
               </ol>
             )}
           </li>
 
           <li className="flex items-center gap-4">
             <FontAwesomeIcon icon={faFile} className="text-2xl" />
-            <a href="#">CV</a>            
+            <Link href="/cv">CV</Link>  {/* Utilisation de Link au lieu de <a> */}
           </li>
 
           <li className="flex items-center gap-4">
             <FontAwesomeIcon icon={faCircleInfo} className="text-2xl" />
-            <a href="#">A propos</a>            
+            <Link href="/about" className="hover:underline">A propos</Link> {/* Utilisation de Link */}
           </li>
         </ol>
       </nav>
