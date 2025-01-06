@@ -60,7 +60,7 @@ export default function Navbar() {
               className="flex items-center gap-4 cursor-pointer"
             >
               <FontAwesomeIcon icon={faFileCircleCheck} className="text-2xl" />
-              <Link href="#">Projets</Link>  {/* Utilisation de Link au lieu de <a> */}
+              <Link href="/projet">Projets</Link>  {/* Utilisation de Link au lieu de <a> */}
               <FontAwesomeIcon
                 icon={isProjectOpen ? faChevronUp : faChevronDown}
                 className="text-xl"
@@ -69,9 +69,9 @@ export default function Navbar() {
             </div>
             {isProjectOpen && (
               <ol className="flex flex-col gap-2 ml-8 mt-3">
-                <li><Link href="#">Ydays</Link></li>  {/* Utilisation de Link */}
-                <li><Link href="#">Web</Link></li>    {/* Utilisation de Link */}
-                <li><Link href="#">Jeux</Link></li>   {/* Utilisation de Link */}
+                <li><Link href="/projet/ydays">Ydays</Link></li>  {/* Utilisation de Link */}
+                <li><Link href="/projet/web">Web</Link></li>    {/* Utilisation de Link */}
+                <li><Link href="/projet/jeux">Jeux</Link></li>   {/* Utilisation de Link */}
               </ol>
             )}
           </li>
