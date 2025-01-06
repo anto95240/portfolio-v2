@@ -6,7 +6,7 @@ export default function OutilHome() {
   const tools = skillsData.homepage.skills;
 
   return (
-    <div>
+    <div className="w-8/12 flex flex-col">
       <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
       <h1 className="mb-5 text-center">Mes outils</h1>
     <div className="bg-green-outil w-full max-w-2xl mx-auto p-3 rounded-xl">
