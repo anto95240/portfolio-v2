@@ -44,8 +44,7 @@ export default function Projet() {
         <Index /> */}
 
         <Test />
-
-        <hr className="bg-black w-10/12 my-10" />
+        
         <Footer />
       </div>
     </div>

@@ -27,7 +27,7 @@ export default function Navbar() {
 
       {/* Menu latéral */}
       <nav
-        className={`fixed z-50 top-0 left-0 h-screen bg-gradient-to-r from-light-blue to-light-green p-5 transition-transform duration-300 flex flex-col items-center ${
+        className={`fixed z-50 top-0 left-0 h-screen bg-gradient-to-r from-light-blue to-light-green shadow-[0_10px_10px_0_rgba(0,0,0,0.75)] p-5 transition-transform duration-300 flex flex-col items-center ${
           isMenuOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0 lg:relative lg:w-4/5 w-2/5 sm:w-2/6`}
       >

@@ -6,14 +6,14 @@ import Image from "next/image";
 
 export default function ProjetYdays() {
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-gradient-to-r from-light-green to-green-blue">
       {/* Composant Nav */}
       <div className="w-1/4 fixed z-50 h-full">
         <Nav />
       </div>
 
       {/* Contenu principal */}
-      <div className="flex-1 flex flex-col items-center mt-16 lg:mt-10 mx-auto px-5 lg:pl-56 w-full lg:w-3/4 lg:max-w-9xl">
+      <div className="flex-1 flex flex-col items-center mt-16 lg:mt-10 mx-auto px-5 lg:pl-56 w-full lg:w-3/4 lg:max-w-9xl ">
         {/* <div className="flex flex-col lg:flex-row gap-10 lg:gap-20 items-center">
           <div className="flex flex-col justify-center text-center lg:text-left">
             <p className="text-center">
@@ -42,7 +42,6 @@ export default function ProjetYdays() {
         <hr className="bg-black w-10/12 my-10" />
         <h1 className="mb-5">Mes projets</h1>
         <Index /> */}
-        <hr className="bg-black w-10/12 my-10" />
         <Footer />
       </div>
     </div>

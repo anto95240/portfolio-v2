@@ -42,7 +42,6 @@ export default function About() {
         <hr className="bg-black w-10/12 my-10" />
         <h1 className="mb-5">Mes projets</h1>
         <Index /> */}
-        <hr className="bg-black w-10/12 my-10" />
         <Footer />
       </div>
     </div>

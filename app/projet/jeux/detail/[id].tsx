@@ -8,7 +8,7 @@ export default function ProjetJeuxDetail() {
   return (
     <div className="flex h-screen">
       {/* Composant Nav */}
-      <div className="w-1/4 fixed z-50 h-full">
+    <div className="flex h-screen bg-gradient-to-r from-blue-darkBlue to-dark-blue">
         <Nav />
       </div>
 
@@ -42,7 +42,6 @@ export default function ProjetJeuxDetail() {
         <hr className="bg-black w-10/12 my-10" />
         <h1 className="mb-5">Mes projets</h1>
         <Index /> */}
-        <hr className="bg-black w-10/12 my-10" />
         <Footer />
       </div>
     </div>

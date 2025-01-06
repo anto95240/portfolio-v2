@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function ProjetYdaysDetail() {
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-gradient-to-r from-light-green to-green-blue">
       {/* Composant Nav */}
       <div className="w-1/4 fixed z-50 h-full">
         <Nav />
@@ -42,7 +42,6 @@ export default function ProjetYdaysDetail() {
         <hr className="bg-black w-10/12 my-10" />
         <h1 className="mb-5">Mes projets</h1>
         <Index /> */}
-        <hr className="bg-black w-10/12 my-10" />
         <Footer />
       </div>
     </div>

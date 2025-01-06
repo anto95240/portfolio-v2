@@ -6,7 +6,10 @@ export default function OutilHome() {
   const tools = skillsData.homepage.skills;
 
   return (
-    <div className="bg-green-outil w-10/12 max-w-2xl mx-auto p-3 rounded-xl">
+    <div>
+      <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
+      <h1 className="mb-5 text-center">Mes outils</h1>
+    <div className="bg-green-outil w-full max-w-2xl mx-auto p-3 rounded-xl">
       {/* Conteneur principal */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between">
         {/* Grille des outils */}
@@ -34,6 +37,7 @@ export default function OutilHome() {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 }
