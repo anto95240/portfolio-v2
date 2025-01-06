@@ -13,7 +13,8 @@ export default function Projet() {
       </div>
 
       {/* Contenu principal */}
-      <div className="flex-1 flex flex-col items-center mt-16 lg:mt-10 mx-auto px-5 lg:pl-56 w-full lg:w-3/4 lg:max-w-9xl">
+      <div className="flex-1 flex flex-col items-center mt-5 mx-auto px-5 lg:pl-56 w-full lg:w-3/4 lg:max-w-9xl">
+        <h1 className="text-3xl mb-10">PROJETS</h1>
         {/* <div className="flex flex-col lg:flex-row gap-10 lg:gap-20 items-center">
           <div className="flex flex-col justify-center text-center lg:text-left">
             <p className="text-center">

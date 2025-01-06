@@ -13,19 +13,9 @@ export default function About() {
       </div>
 
       {/* Contenu principal */}
-      <div className="flex-1 flex flex-col items-center mt-16 lg:mt-10 mx-auto px-5 lg:pl-56 w-full lg:w-3/4 lg:max-w-9xl">
-        {/* <div className="flex flex-col lg:flex-row gap-10 lg:gap-20 items-center">
-          <div className="flex flex-col justify-center text-center lg:text-left">
-            <p className="text-center">
-              Hello, moi c’est <b>Antoine</b> ! <br /> <br />
-            </p>
-            <p className="text-center">
-              <b>Etudiant</b> en <br /> <b>informatique</b>. <br /> <br />
-            </p>
-            <p className="text-center">
-              Je suis actuellement un cursus de 5 ans en <br /> informatique et me passionne de plus en plus pour <br /> le <b>domaine du web</b> et plus précisément pour le <br /> <b>développement web front-end</b>.
-            </p>
-          </div>
+      <div className="flex-1 flex flex-col items-center mt-5 mx-auto px-5 lg:pl-56 w-full lg:w-3/4 lg:max-w-5xl">
+        <h1 className="text-3xl mb-10">ABOUT</h1>
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10 lg:gap-20 w-full">
           <div>
             <Image
               className="mb-10"
@@ -35,13 +25,33 @@ export default function About() {
               height={310}
             />
           </div>
+          <div className="flex flex-col">
+            <div className="flex flex-col justify-center text-center lg:text-left max-w-lg">
+              <p className="text-base leading-relaxed">
+                Hello, moi c’est <b>Antoine</b> ! <b>Etudiant</b> en <b>informatique</b>. Je suis actuellement un cursus de 5 ans en informatique et me passionne de plus en plus pour le <b>domaine du web</b>.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-3 gap-6 mt-10">
+              <div className="w-24 h-24 bg-blue-300 rounded-full flex items-center justify-center text-lg text-black shadow-md">
+                Loisir 1
+              </div>
+              <div className="w-24 h-24 bg-blue-300 rounded-full flex items-center justify-center text-lg text-black shadow-md">
+                Loisir 2
+              </div>
+              <div className="w-24 h-24 bg-blue-300 rounded-full flex items-center justify-center text-lg text-black shadow-md">
+                Loisir 3
+              </div>
+              <div className="w-24 h-24 bg-blue-300 rounded-full flex items-center justify-center text-lg text-black shadow-md">
+                Loisir 4
+              </div>
+              <div className="w-24 h-24 bg-blue-300 rounded-full flex items-center justify-center text-lg text-black shadow-md">
+                Loisir 5
+              </div>
+            </div>
+          </div>          
         </div>
-        <hr className="bg-black w-10/12 my-10" />
-        <h1 className="mb-5">Mes outils</h1>
-        <Outil />
-        <hr className="bg-black w-10/12 my-10" />
-        <h1 className="mb-5">Mes projets</h1>
-        <Index /> */}
+
         <Footer />
       </div>
     </div>
