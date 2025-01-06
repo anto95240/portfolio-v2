@@ -1,13 +1,16 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import projectsData from '../../data/projet.json'; // Chemin vers votre fichier JSON
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
 export default function ProjectCV() {
+  const pathname = usePathname()
   const projects = projectsData.homePage.projects;
-
+  
+  
   // Gère l'affichage au clic (pour mobile/tablette)
   const [activeProject, setActiveProject] = useState<string | null>(null);
 
@@ -15,10 +18,16 @@ export default function ProjectCV() {
     setActiveProject(activeProject === projectId ? null : projectId)
   };
 
+  const headerText = pathname === '/cv' ? 'PROJETS' : 'Mes projets';
+  const headerStyle =
+    pathname === '/cv'
+      ? 'text-3xl mb-10 text-center'
+      : 'mb-5 text-center';
+
   return (      
-    <div>
+    <div className="w-8/12 flex flex-col">
       <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
-      <h1 className="mb-5 text-center">Mes projets</h1>
+      <h1 className={`${headerStyle}`}>{headerText}</h1>
     <div className="grid grid-cols-1 gap-5 max-w-3xl mx-auto md:grid-cols-2 text-center">
       {projects.map((project) => {
         // Récupérer l'image principale (type: "main")
