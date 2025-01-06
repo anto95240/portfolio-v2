@@ -10,7 +10,7 @@ export default function ProjectsPage() {
 
   // Fonction pour gérer la navigation vers les pages de catégorie
   const handleNavigate = (category: string) => {
-    router.push(`/projects/${category}`); // Redirige vers la page de la catégorie
+    router.push(`/projet/${category}`); // Redirige vers la page de la catégorie
   };
 
   const handleToggle = (index: number) => {

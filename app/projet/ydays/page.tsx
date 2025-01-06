@@ -8,7 +8,7 @@ export default function ProjetYdays() {
   return (
     <div className="flex h-screen">
       {/* Composant Nav */}
-      <div className="w-1/4 fixed h-full">
+      <div className="w-1/4 fixed z-50 h-full">
         <Nav />
       </div>
 

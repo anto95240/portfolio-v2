@@ -27,11 +27,10 @@ export default function ProjectCV() {
         return (
           <div
             key={project.id}
-            className="relative group bg-blue-projet rounded-lg shadow-md overflow-hidden"
+            className="relative z-10 group bg-blue-projet rounded-lg shadow-md overflow-hidden"
           >
             {/* Image principale */}
-            <div
-              className="relative"
+            <div className='relative z-10'
               onClick={() => toggleInfo(project.id)} // Gérer l'affichage au clic (mobile/tablette)
             >
               <img

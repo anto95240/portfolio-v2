@@ -1,5 +1,5 @@
 import Nav from "../components/Navbar";
-import Index from "../components/cv/ProjetCV";
+import Test from "../components/projet/theme";
 import Outil from "../components/OutilsHome";
 import Footer from "../components/Footer";
 import Image from "next/image";
@@ -8,7 +8,7 @@ export default function Projet() {
   return (
     <div className="flex h-screen">
       {/* Composant Nav */}
-      <div className="w-1/4 fixed h-full">
+      <div className="w-1/4 fixed z-50 h-full">
         <Nav />
       </div>
 
@@ -42,6 +42,9 @@ export default function Projet() {
         <hr className="bg-black w-10/12 my-10" />
         <h1 className="mb-5">Mes projets</h1>
         <Index /> */}
+
+        <Test />
+
         <hr className="bg-black w-10/12 my-10" />
         <Footer />
       </div>
