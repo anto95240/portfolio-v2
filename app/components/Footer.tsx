@@ -6,7 +6,7 @@ import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 
 export default function Footer() {
   return (
-    <div className="w-8/12 flex flex-col">
+    <div className="flex flex-col">
       <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-16 w-10/12 max-w-l text-center mx-auto text-white justify-center">
