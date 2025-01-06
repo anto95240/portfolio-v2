@@ -1,6 +1,8 @@
 import Nav from "../components/Navbar";
 import ProjetCV from "../components/cv/ProjetCV";
 import Skill from "../components/cv/Skills";
+import Experience from "../components/cv/Experience";
+import Formation from "../components/cv/Formation";
 import Footer from "../components/Footer";
 import Image from "next/image";
 
@@ -26,7 +28,10 @@ export default function Cv() {
             />
           </div>
         </div>*/}
+
         <Skill/>
+        <Experience/>
+        <Formation/>
         <ProjetCV />
         <Footer />
       </div>

@@ -21,7 +21,7 @@ export default function ProjectCV() {
   const headerText = pathname === '/cv' ? 'PROJETS' : 'Mes projets';
   const headerStyle =
     pathname === '/cv'
-      ? 'text-3xl mb-10 text-center'
+      ? 'text-2xl mb-10 text-center'
       : 'mb-5 text-center';
 
   return (      
