@@ -1,5 +1,5 @@
 import Nav from "./components/Navbar";
-import Index from "./components/cv/ProjetCV";
+import ProjetCV from "./components/cv/ProjetCV";
 import Outil from "./components/OutilsHome";
 import Footer from "./components/Footer";
 import Image from "next/image";
@@ -37,7 +37,7 @@ export default function Home() {
           </div>
         </div>
         <Outil />
-        <Index />
+        <ProjetCV />
         <Footer />
       </div>
     </div>
