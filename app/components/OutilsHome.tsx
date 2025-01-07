@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import Image from "next/image";
 import skillsData from "../data/cv_skill.json"; // Chemin du fichier JSON
 
@@ -32,9 +34,9 @@ export default function OutilHome() {
 
         {/* Bouton VOIR PLUS */}
         <div className="mt-6 md:mt-0 md:ml-6 text-center">
-          <button className="bg-gradient-to-r from-light-blue via-light-green to-light-blue text-black md:text-lg py-3 px-4 text-base rounded-md shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform hover:scale-105">
+          <Link href="/cv" className="bg-gradient-to-r from-light-blue via-light-green to-light-blue text-black md:text-lg py-3 px-4 text-base rounded-md shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform hover:scale-105">
             VOIR PLUS
-          </button>
+          </Link>
         </div>
       </div>
     </div>
