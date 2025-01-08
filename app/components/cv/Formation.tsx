@@ -43,7 +43,7 @@ export default function Formation() {
                 // Titre cliquable
                 <button
                   onClick={() => toggleInfo(formation.id)}
-                  className="text-lg font-title"
+                  className="text-lg font-text"
                 >
                   {formation.title}
                 </button>

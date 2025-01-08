@@ -27,7 +27,7 @@ export default function Experience() {
             className="relative flex items-center mb-10 w-full"
           >
             {/* Date à droite */}
-            <div className="w-1/5 md:w-1/4 text-sm font-title text-black">
+            <div className="w-1/5 md:w-1/4 text-sm font-text text-black">
               {experience.date}
             </div>
 
@@ -60,7 +60,7 @@ export default function Experience() {
                 // Titre cliquable
                 <button
                   onClick={() => toggleInfo(experience.id)}
-                  className="text-lg font-title"
+                  className="text-lg font-text"
                 >
                   {experience.title}
                 </button>

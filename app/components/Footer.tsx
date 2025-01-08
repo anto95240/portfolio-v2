@@ -10,7 +10,7 @@ import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 export default function Footer() {  
   const pathname = usePathname()
 
-  const footerText = '© 2024 créé par Antoine Richard tous droits réservés.';
+  const footerText = '© 2024 créé par Antoine Richard tous droits réservés.';
   const footerStyle =
       pathname.startsWith('/projet/jeux')
       ? 'text-center pt-10 pb-10 text-white'

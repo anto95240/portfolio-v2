@@ -3,7 +3,7 @@
     "formation": [
       {
         "id": "1",
-        "title": "ECOLE INGESUP",
+        "title": "Ecole Ingésup",
         "lieux": "Paris Ynov Campus (Nanterre, 92)",
         "diplome": "DIPLÔME d'Expert Informatique et Systèmes d'information",
         "specialite": "Développement Web",
@@ -11,7 +11,7 @@
       },
       {
         "id": "2",
-        "title": "FORMATION EN LIGNE",
+        "title": "Formation en ligne",
         "lieux": ["Open Class Room","Linkedin Learning"],
         "diplome": "DIPLÔME d'Expert Informatique et Systèmes d'information",
         "specialite": ["HTML", "CSS","REACT"],
@@ -19,7 +19,7 @@
       },
       {
         "id": "3",
-        "title": "LYCEE",
+        "title": "Lycée",
         "lieux": "LYCÉE MONTESQUIEU (Herblay, 95)",
         "diplome": "BAC Générale",
         "specialite": ["Mathématiques", "Numérique et Science Informatique"],
