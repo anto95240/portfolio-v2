@@ -1,10 +1,21 @@
+'use client';
+
 import Link from 'next/link';
 
+import { usePathname } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileCircleCheck, faFile, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 
-export default function Footer() {
+export default function Footer() {  
+  const pathname = usePathname()
+
+  const footerText = '© 2024 créé par Antoine Richard tous droits réservés.';
+  const footerStyle =
+      pathname.startsWith('/projet/jeux')
+      ? 'text-center pt-10 pb-10 text-white'
+      : 'text-center pt-10 pb-10';
+
   return (
     <div className="flex flex-col">
       <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
@@ -57,7 +68,7 @@ export default function Footer() {
           Mon Github
         </a>
       </div>
-      <p className='text-center pt-10 pb-10'>© 2024 créé par Antoine Richard tous droits réservés.</p>
+      <p className={`${footerStyle}`}>{footerText}</p>
     </div>
   );
 }

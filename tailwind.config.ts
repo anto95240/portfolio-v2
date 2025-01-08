@@ -25,6 +25,7 @@ export default {
         'green-projet': '#26C460',
         'blue-projet': '#2181CC',
         'blue-footer': '#1B3A5F',
+        'blue-popup': '#274B6D',
       },
     },
   },
