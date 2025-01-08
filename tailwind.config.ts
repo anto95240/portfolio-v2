@@ -26,6 +26,8 @@ export default {
         'blue-projet': '#2181CC',
         'blue-footer': '#1B3A5F',
         'blue-popup': '#274B6D',
+        'menu-cv': '#13339A',
+        'menuCV-lightBlue': '#1596C1',
       },
     },
   },

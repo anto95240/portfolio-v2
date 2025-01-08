@@ -26,7 +26,7 @@ export default function ProjectCV() {
       : 'mb-5 text-center';
 
   return (      
-    <div className="w-8/12 flex flex-col">
+    <div className="w-8/12 flex flex-col mx-auto">
       <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
       <h1 className={`${headerStyle}`}>{headerText}</h1>
     <div className="grid grid-cols-1 gap-5 max-w-3xl mx-auto md:grid-cols-2 text-center">

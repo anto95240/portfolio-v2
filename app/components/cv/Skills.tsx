@@ -7,7 +7,7 @@ export default function Skill() {
   if (!skills) return <p>Chargement des compétences...</p>;
 
   return (
-    <div className="w-8/12 flex flex-col">
+    <div className="w-8/12 flex flex-col mx-auto">
       <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
       <h1 className="text-2xl mb-10 text-center">COMPETENCE</h1>
 
