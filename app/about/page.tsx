@@ -18,10 +18,10 @@ export default function About() {
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10 lg:gap-20 w-full">
           <div>
             <Image
-              className="mb-10 lg:w-[450px] w-[230px]"
+              className="mb-10"
               src="/images/photo.svg"
               alt="Photo"
-              width={450}
+              width={230}
               height={310}
             />
           </div>
@@ -31,28 +31,17 @@ export default function About() {
                 Hello, moi c’est <b>Antoine</b> ! <b>Etudiant</b> en <b>informatique</b>. Je suis actuellement un cursus de 5 ans en informatique et me passionne de plus en plus pour le <b>domaine du web</b>.
               </p>
             </div>
-            <div className="w-full">
-            <div className="grid grid-cols-3 gap-2 mt-5 justify-items-center lg:justify-items-start">
-              <div className="w-24 h-24 bg-blue-300 rounded-full flex items-center justify-center text-lg text-black shadow-md">
-                Loisir 1
+              <div className="grid grid-cols-3 gap-2 mt-5 justify-items-center lg:justify-items-start">
+                <div className="w-24 h-24 bg-blue-300 rounded-full flex items-center justify-center text-lg text-black shadow-md">
+                  Football
+                </div>
+                <div className="w-24 h-24 bg-blue-300 rounded-full flex items-center justify-center text-lg text-black shadow-md">
+                  Cinéma
+                </div>
+                <div className="w-24 h-24 bg-blue-300 rounded-full flex items-center justify-center text-lg text-black shadow-md">
+                  Lecture
+                </div>
               </div>
-              <div className="w-24 h-24 bg-blue-300 rounded-full flex items-center justify-center text-lg text-black shadow-md">
-                Loisir 2
-              </div>
-              <div className="w-24 h-24 bg-blue-300 rounded-full flex items-center justify-center text-lg text-black shadow-md">
-                Loisir 3
-              </div>
-            </div>
-
-            <div className="grid grid-cols-7 mt-5 gap-2 justify-items-center lg:justify-items-start">
-              <div className="w-24 h-24 bg-blue-300 rounded-full flex items-center justify-center text-lg text-black shadow-md col-start-3 lg:col-start-2">
-                Loisir 4
-              </div>
-              <div className="w-24 h-24 bg-blue-300 rounded-full flex items-center justify-center text-lg text-black shadow-md col-start-5 lg:col-end-4 lg:ml-10">
-                Loisir 5
-              </div>
-            </div>
-            </div>
             
 
           </div>          
