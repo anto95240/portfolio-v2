@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import projectsData from '../../data/projet.json'; // Chemin vers votre fichier JSON
@@ -87,7 +88,9 @@ export default function ProjectCV() {
       {/* Bouton VOIR PLUS en bas et au centre de la grille */}
       <div className="col-span-full mt-6 flex justify-center items-center">
         <button className="bg-gradient-to-r from-light-blue via-light-green to-light-blue text-black md:text-lg py-1 px-10 text-base rounded-2xl shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform hover:scale-105">
-          TOUS VOIR
+          <Link href="/projet">
+            TOUS VOIR
+          </Link>
         </button>
       </div>
     </div>

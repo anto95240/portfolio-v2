@@ -17,17 +17,30 @@ export default function Cv() {
       {/* Contenu principal */}
       <div className="flex-1 flex flex-col items-center mt-5 mx-auto px-5 lg:pl-56 w-full lg:w-3/4 lg:max-w-9xl">
         <h1 className="text-3xl mb-10">CV</h1>
-        {/* <div className="flex flex-col lg:flex-row gap-10 lg:gap-20 items-center">
+        <div className="flex flex-col gap-10 items-center">
           <div>
             <Image
-              className="mb-10"
               src="/images/photo.svg"
               alt="Photo"
               width={230}
               height={310}
             />
           </div>
-        </div>*/}
+          <div className="flex flex-col gap-5 items-center">
+            <p>ANTOINE RICHARD</p>
+
+            <p>Etudiant</p>
+          </div>
+          <div className="mt-6 md:mt-0 text-center">
+            <button className="bg-blue-footer text-white md:text-base py-2 px-20 text-base rounded-full shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform hover:scale-105">
+              <a href="/doc/CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer">
+              Télécharger mon CV
+              </a>
+            </button>
+          </div>
+        </div>
 
         <Skill/>
         <Experience/>
