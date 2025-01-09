@@ -76,7 +76,7 @@ export default function ProjetDetail() {
               className="rounded-b-3xl h-auto w-4/5"
             />
 
-            <div className="flex flex-col w-12/12 gap-x-12">
+            <div className="flex flex-col w-full gap-x-12">
               <div className={`mb-8 relative ${isMenuOpen ? "z-10" : "z-50"}`}>
                 <Link href={`/projet/${category}/`}>
                   <button>
@@ -86,7 +86,7 @@ export default function ProjetDetail() {
               </div>
               <div className="flex flex-col text-left gap-6">
                 <h3 className="text-xl font-bold mb-4 uppercase">{project.title}</h3>
-                <hr className="bg-black w-12/12 h-[2px] border-none rounded" />
+                <hr className="bg-black w-full h-[2px] border-none rounded" />
                 <div className="flex flex-col gap-5 md:flex-row">
                   <div className='flex flex-col gap-5 pl-10'>
                     <p className="text-md uppercase">{category}</p>

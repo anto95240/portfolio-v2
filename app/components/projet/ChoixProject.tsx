@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import projetData from "../../data/projet.json"; // Chemin vers votre fichier JSON
 
 export default function ProjectChoice() {
   const { id, category } = useParams();
+  const router = useRouter(); // Utilisation de useRouter pour rediriger l'utilisateur
   const [isPopupVisible, setIsPopupVisible] = useState(false); // État pour afficher/masquer la popup
-  const [selectedProject, setSelectedProject] = useState<string | null>(null); // État pour savoir quel projet a été choisi
 
   const categoryData = projetData.projectPage[category as keyof typeof projetData.projectPage];
   
@@ -31,9 +31,10 @@ export default function ProjectChoice() {
     setIsPopupVisible(false); // Masque la popup
   };
 
-  const handleProjectSelect = (projectName: string) => {
-    setSelectedProject(projectName); // Met à jour le projet sélectionné
-    setIsPopupVisible(false); // Ferme la popup après sélection
+  const handleProjectSelect = (projectId: string) => {
+    // Redirige l'utilisateur vers la page du projet sélectionné
+    router.push(`/projet/${category}/${projectId}`);
+    setIsPopupVisible(false); // Ferme la popup après la sélection
   };
 
   return (
@@ -58,7 +59,7 @@ export default function ProjectChoice() {
                 <li
                   key={project.id}
                   className="cursor-pointer hover:bg-gray-200 p-2 rounded-md"
-                  onClick={() => handleProjectSelect(project.title)}
+                  onClick={() => handleProjectSelect(project.id)} // Rediriger avec l'ID du projet
                 >
                   {project.title}
                 </li>
@@ -71,13 +72,6 @@ export default function ProjectChoice() {
               Fermer
             </button>
           </div>
-        </div>
-      )}
-
-      {/* Affichage du projet sélectionné */}
-      {selectedProject && (
-        <div className="mt-4">
-          <h2 className="text-xl font-semibold">Projet choisi : {selectedProject}</h2>
         </div>
       )}
     </div>
