@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Nav from "./components/Navbar";
 import ProjetCV from "./components/cv/ProjetCV";
 import Outil from "./components/OutilsHome";
@@ -5,11 +8,12 @@ import Footer from "./components/Footer";
 import Image from "next/image";
 
 export default function Home() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Contrôle de l'ouverture du menu
   return (
     <div className="flex h-screen">
       {/* Composant Nav */}
       <div className="w-1/4 fixed z-50 h-full">
-        <Nav />
+        <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} /> {/* Passage de l'état */}
       </div>
 
       {/* Contenu principal */}

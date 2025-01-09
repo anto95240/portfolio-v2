@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faChartSimple, faBriefcase, faGraduationCap, faFileCircleCheck } from '@fortawesome/free-solid-svg-icons';
 
 export default function Cv() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Contrôle de l'ouverture du menu
   const [activeSection, setActiveSection] = useState('profil');
 
   // Références pour chaque section
@@ -38,7 +39,7 @@ export default function Cv() {
     <div className="flex h-screen">
       {/* Composant Nav */}
       <div className="w-1/4 fixed z-50 h-full">
-        <Nav />
+        <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} /> {/* Passage de l'état */}
       </div>
 
       {/* Contenu principal */}
