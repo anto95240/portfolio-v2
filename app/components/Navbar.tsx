@@ -1,15 +1,14 @@
 'use client';
 import Link from 'next/link';
-
 import { useState } from 'react';
 import Image from "next/image";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faCircleInfo, faFile, faFileCircleCheck, faChevronDown, faChevronUp, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boolean; setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>> }) {
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen); // Gère l'ouverture/fermeture du menu
   const [isProjectOpen, setIsProjectOpen] = useState(false); // Gère l'ouverture/fermeture de la sous-liste des projets
 
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen); // Gère l'ouverture/fermeture du menu
   const toggleProjectList = () => setIsProjectOpen(!isProjectOpen); // Toggle pour la liste des projets
 
   return (
@@ -27,7 +26,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
       {/* Menu latéral */}
       <nav
         className={`fixed z-40 top-0 left-0 h-screen bg-gradient-to-r from-light-blue to-light-green shadow-[0_10px_10px_0_rgba(0,0,0,0.75)] p-5 transition-transform duration-300 flex flex-col items-center 
-          ${isMenuOpen ? "translate-x-0 pointer-events-auto" : "-translate-x-full pointer-events-none"} 
+          ${isMenuOpen ? "translate-x-0 lg:pointer-events-none pointer-events-auto" : "-translate-x-full lg:pointer-events-auto pointer-events-none"} 
           lg:translate-x-0 lg:relative lg:w-4/5 w-2/5 sm:w-2/6`}
       >
         {/* Crois pour fermer le menu */}
@@ -52,9 +51,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
           </li>
 
           <li>
-            <div
-              className="flex items-center gap-4 cursor-pointer"
-            >
+            <div className="flex items-center gap-4 cursor-pointer">
               <FontAwesomeIcon icon={faFileCircleCheck} className="text-2xl" />
               <Link href="/projet">Projets</Link>
               <FontAwesomeIcon
