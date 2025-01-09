@@ -1,6 +1,4 @@
 import Nav from "../components/Navbar";
-import Index from "../components/cv/ProjetCV";
-import Outil from "../components/OutilsHome";
 import Footer from "../components/Footer";
 import Image from "next/image";
 
