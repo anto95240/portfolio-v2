@@ -2,14 +2,14 @@
 
 import Link from 'next/link';
 import { useParams } from 'next/navigation'; // Importation de useParams
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import projetData from "../../../data/projet.json"; // Chemin vers votre fichier JSON
 import Image from 'next/image';
 import Nav from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import ProjetChoice from "../../../components/projet/ChoixProject";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeftLong, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeftLong, faArrowUpRightFromSquare, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 type CategoryStyles = {
   jeux: { bg: string; text: string };
@@ -20,7 +20,7 @@ type CategoryStyles = {
 export default function ProjetDetail() {
   const { id, category } = useParams<{ id: string; category: keyof CategoryStyles }>(); // Typage explicite de useParams
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Contrôle de l'ouverture du menu
-
+  const [showScrollToTopButton, setShowScrollToTopButton] = useState(false); // État pour afficher/masquer le bouton Retour en haut
 
   const categoryStyles: CategoryStyles = {
     ydays: { bg: 'bg-gradient-to-r from-light-green to-green-blue', text: 'text-black' },
@@ -36,11 +36,32 @@ export default function ProjetDetail() {
     return <p>Le projet n'a pas été trouvé.</p>;
   }
 
+  // Gérer l'affichage du bouton Retour en haut en fonction de la position de défilement
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setShowScrollToTopButton(true); // Afficher le bouton après 200px de défilement
+      } else {
+        setShowScrollToTopButton(false); // Masquer le bouton
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll); // Nettoyage de l'événement lors de la destruction du composant
+    };
+  }, []);
+
+  // Fonction pour revenir en haut de la page
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className={`flex h-full ${categoryStyles[category]?.bg}`}>
       <div className="w-1/4 fixed z-50 h-full">
         <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} /> {/* Passage de l'état */}
-
       </div>
 
       <div className={`flex-1 flex flex-col items-center mx-auto px-5 lg:pl-56 ${categoryStyles[category]?.text} w-full lg:w-3/4 lg:max-w-9xl`}>
@@ -94,9 +115,7 @@ export default function ProjetDetail() {
                       })}
                     </div>
                   </div>
-                  
                 </div>
-                
                 <div className="flex flex-col gap-9 pl-10 mt-10">
                   {project.images
                     .filter((img) => img.type === "gallery") // Filtre les images de type 'gallery'
@@ -108,16 +127,23 @@ export default function ProjetDetail() {
                       </div>
                     ))}
                 </div>
-
-
-
               </div>
             </div>
           </div>
         </div>
-        <ProjetChoice/>
+        <ProjetChoice />
         <Footer />
       </div>
+
+      {/* Bouton Retour en haut */}
+      {showScrollToTopButton && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-10 right-10 bg-blue-500 text-white p-3 rounded-full shadow-lg"
+        >
+          <FontAwesomeIcon icon={faArrowUp} className="text-xl" />
+        </button>
+      )}
     </div>
   );
 }
