@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faReply, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
-// Types
 type Link = { type: string; url: string } | string;
 type Project = {
   id: string;
@@ -18,36 +17,29 @@ type Project = {
   images: { type: string; url: string }[];
 };
 
-type ProjectsCategory = {
-  projects: Project[];
-};
-
-type ProjectsData = {
-  [key: string]: ProjectsCategory;
-};
-
 interface PopupProps {
   project: Project;
+  category: string;
   onClose: () => void;
 }
 
-export default function PopUp({ project, onClose }: PopupProps) {
+export default function PopUp({ project, category, onClose }: PopupProps) {
   const router = useRouter();
 
+  const handleMoreDetails = () => {
+    router.push(`/projet/${category}/${project.id}`);
+  };
+
   return (
-    <div className="fixed top-0 right-0 w-3/12 bottom-0 bg-[#274B6D] text-white overflow-y-auto flex flex-col gap-6 rounded-b-md pt-5 z-50">
-      {/* Bouton pour revenir en arrière */}
+    <div className="fixed top-0 right-0 w-8/12 lg:w-3/12 bottom-0 bg-[#274B6D] text-white overflow-y-auto flex flex-col gap-6 rounded-b-md pt-5 z-50">
       <button onClick={onClose} className="absolute top-5 left-5">
         <FontAwesomeIcon icon={faReply} />
       </button>
 
-      {/* Titre de la catégorie */}
       <h1 className="text-center text-xl font-bold">{project.title}</h1>
       <hr className="w-10/12 mx-auto" />
 
-      {/* Contenu du projet */}
       <div className="flex flex-col gap-8 flex-grow">
-        {/* Image principale */}
         <Image
           src={project.images.find((image) => image.type === 'main')?.url || '/placeholder.jpg'}
           alt={project.title}
@@ -56,10 +48,8 @@ export default function PopUp({ project, onClose }: PopupProps) {
           className="h-48 w-10/12 mx-auto object-cover rounded-lg"
         />
 
-        {/* Description */}
         <p className="pl-10 h-12">{project.description}</p>
 
-        {/* Technologies */}
         <div className="flex flex-col gap-3">
           <p className="pl-10">Technologies</p>
           <div className="flex flex-wrap gap-3 justify-center">
@@ -71,7 +61,6 @@ export default function PopUp({ project, onClose }: PopupProps) {
           </div>
         </div>
 
-        {/* Liens */}
         <div className="flex flex-col gap-3 pl-10">
           {project.links.map((link, linkIndex) => {
             const isObjectLink = typeof link !== 'string';
@@ -93,9 +82,8 @@ export default function PopUp({ project, onClose }: PopupProps) {
         </div>
       </div>
 
-      {/* Bouton pour plus de détails */}
       <button
-        onClick={onClose}
+        onClick={handleMoreDetails}
         className="bg-green-projet mx-auto w-full flex gap-3 justify-center items-center text-white font-bold py-3 rounded-md mt-auto transition-all duration-300"
       >
         Plus de détails
