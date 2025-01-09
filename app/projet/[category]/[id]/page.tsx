@@ -1,0 +1,122 @@
+'use client';
+
+import Link from 'next/link';
+import { useParams } from 'next/navigation'; // Importation de useParams
+import { useState } from 'react';
+import projetData from "../../../data/projet.json"; // Chemin vers votre fichier JSON
+import Image from 'next/image';
+import Nav from "../../../components/Navbar";
+import Footer from "../../../components/Footer";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeftLong, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+
+type CategoryStyles = {
+  jeux: { bg: string; text: string };
+  ydays: { bg: string; text: string };
+  web: { bg: string; text: string };
+};
+
+export default function ProjetDetail() {
+  const { id, category } = useParams<{ id: string; category: keyof CategoryStyles }>(); // Typage explicite de useParams
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Contrôle de l'ouverture du menu
+
+
+  const categoryStyles: CategoryStyles = {
+    ydays: { bg: 'bg-gradient-to-r from-light-green to-green-blue', text: 'text-black' },
+    web: { bg: 'bg-gradient-to-r from-green-blue to-blue-darkBlue', text: 'text-black' },
+    jeux: { bg: 'bg-gradient-to-r from-blue-darkBlue to-dark-blue', text: 'text-white' },
+  };
+
+  const project = projetData.projectPage[category as keyof typeof projetData.projectPage]?.projects.find(
+    (proj) => proj.id === id
+  );
+
+  if (!project) {
+    return <p>Le projet n'a pas été trouvé.</p>;
+  }
+
+  return (
+    <div className={`flex h-full ${categoryStyles[category]?.bg}`}>
+      <div className="w-1/4 fixed z-50 h-full">
+        <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} /> {/* Passage de l'état */}
+
+      </div>
+
+      <div className={`flex-1 flex flex-col items-center mx-auto px-5 lg:pl-56 ${categoryStyles[category]?.text} w-full lg:w-3/4 lg:max-w-9xl`}>
+        <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center gap-8 w-full max-w-xl">
+            <Image
+              src={project.images.find((img: { type: string; url: string }) => img.type === "main")?.url || "/default-image.jpg"}
+              alt={`${project.title} Image`}
+              layout="intrinsic"
+              width={500}
+              height={345}
+              className="rounded-b-3xl h-auto w-4/5"
+            />
+
+            <div className="flex flex-col w-12/12 gap-x-12">
+              <div className={`mb-8 relative ${isMenuOpen ? "z-10" : "z-50"}`}>
+                <Link href={`/projet/${category}/`}>
+                  <button>
+                    <FontAwesomeIcon icon={faArrowLeftLong} className="mr-2 text-4xl" />
+                  </button>
+                </Link>
+              </div>
+              <div className="flex flex-col text-left gap-6">
+                <h3 className="text-xl font-bold mb-4 uppercase">{project.title}</h3>
+                <hr className="bg-black w-12/12 h-[2px] border-none rounded" />
+                <div className="flex flex-col gap-5 md:flex-row">
+                  <div className='flex flex-col gap-5 pl-10'>
+                    <p className="text-md uppercase">{category}</p>
+                    <p className="text-md uppercase">{project.date}</p>
+                    <p className="text-md uppercase">{project.equipe}</p>
+                    <p className="text-md uppercase">{Array.isArray(project.technologies) ? project.technologies.join(' / ') : project.technologies}</p>
+                  </div>
+                  <div className="flex flex-col gap-5 pl-10 md:mx-auto">
+                    <p className="text-md text-left md:text-center md:h-32">{project.description}</p>
+                    <div className="flex flex-col md:flex-row gap-3">
+                      {project.links.map((link, linkIndex) => {
+                        const isObjectLink = typeof link !== 'string';
+                        const url = isObjectLink ? link.url : link;
+                        const label = isObjectLink ? (link.type === 'site' ? 'Accéder au site' : 'Accéder au code') : 'Site web';
+            
+                        return (
+                          <div key={linkIndex} className="flex gap-3">
+                            <div className="flex ml-3">
+                              <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="mr-2" />
+                              <a href={url} className="underline" target="_blank" rel="noopener noreferrer">
+                                {label}
+                              </a>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  
+                </div>
+                
+                <div className="flex flex-col gap-9 pl-10 mt-10">
+                  {project.images
+                    .filter((img) => img.type === "gallery") // Filtre les images de type 'gallery'
+                    .map((img, linkIndex) => (
+                      <div key={linkIndex} className="flex flex-col gap-3">
+                        <div className="flex ml-3">
+                          <img src={img.url} className="rounded-md" />
+                        </div>
+                      </div>
+                    ))}
+                </div>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <Footer />
+      </div>
+    </div>
+  );
+}
