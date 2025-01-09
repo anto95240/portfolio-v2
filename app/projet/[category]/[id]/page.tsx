@@ -7,6 +7,7 @@ import projetData from "../../../data/projet.json"; // Chemin vers votre fichier
 import Image from 'next/image';
 import Nav from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
+import ProjetChoice from "../../../components/projet/ChoixProject";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 
@@ -69,7 +70,7 @@ export default function ProjetDetail() {
                   <div className='flex flex-col gap-5 pl-10'>
                     <p className="text-md uppercase">{category}</p>
                     <p className="text-md uppercase">{project.date}</p>
-                    <p className="text-md uppercase">{project.equipe}</p>
+                    <p className="text-md uppercase">{Array.isArray(project.equipe) ? project.equipe.join(' - ') : project.equipe}</p>
                     <p className="text-md uppercase">{Array.isArray(project.technologies) ? project.technologies.join(' / ') : project.technologies}</p>
                   </div>
                   <div className="flex flex-col gap-5 pl-10 md:mx-auto">
@@ -114,7 +115,7 @@ export default function ProjetDetail() {
             </div>
           </div>
         </div>
-
+        <ProjetChoice/>
         <Footer />
       </div>
     </div>
