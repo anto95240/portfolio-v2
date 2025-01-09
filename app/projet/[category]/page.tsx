@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation'; // Utilisation de useRouter pour la navigation
 import Nav from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -9,7 +9,7 @@ import Popup from "../../components/projet/Popup";
 import Image from 'next/image';
 import projetData from "../../data/projet.json"; // Chemin du fichier JSON
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeftLong, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 type LinkType = { type: string; url: string } | string;
 type Project = {
@@ -43,6 +43,7 @@ export default function ProjetCategory() {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Contrôle de l'ouverture du menu
   const [showPopup, setShowPopup] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [showScrollToTopButton, setShowScrollToTopButton] = useState(false); // État pour afficher/masquer le bouton Retour en haut
 
   const categories = ['jeux', 'ydays', 'web'];
   const isValidCategory = categories.includes(String(category));
@@ -67,6 +68,28 @@ export default function ProjetCategory() {
   const handleClosePopup = () => {
     setShowPopup(false);
     setSelectedProject(null);
+  };
+
+  // Gérer l'affichage du bouton Retour en haut en fonction de la position de défilement
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setShowScrollToTopButton(true); // Afficher le bouton après 200px de défilement
+      } else {
+        setShowScrollToTopButton(false); // Masquer le bouton
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll); // Nettoyage de l'événement lors de la destruction du composant
+    };
+  }, []);
+
+  // Fonction pour revenir en haut de la page
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -121,6 +144,16 @@ export default function ProjetCategory() {
 
         <Footer />
       </div>
+
+      {/* Bouton Retour en haut */}
+      {showScrollToTopButton && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-10 right-10 bg-blue-500 text-white p-3 rounded-full shadow-lg"
+        >
+          <FontAwesomeIcon icon={faArrowUp} className="text-xl" />
+        </button>
+      )}
     </div>
   );
 }
