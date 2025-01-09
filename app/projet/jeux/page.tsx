@@ -1,47 +1,99 @@
-import Nav from "../../components/Navbar";
-import Index from "../../components/cv/ProjetCV";
-import Outil from "../../components/OutilsHome";
-import Footer from "../../components/Footer";
-import Image from "next/image";
+'use client';
 
-export default function ProjetJeux() {
+import { useState } from 'react';
+import Nav from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import Popup from "../../components/projet/Popup";
+import Image from 'next/image';
+import projetData from "../../data/projet.json"; // Chemin du fichier JSON
+
+// Types
+type Link = { type: string; url: string } | string;
+type Project = {
+  id: string;
+  title: string;
+  description: string;
+  technologies: string[];
+  date: string;
+  equipe: string[];
+  links: Link[];
+  images: { type: string; url: string }[];
+};
+
+type ProjectsCategory = {
+  projects: Project[];
+};
+
+type ProjectsData = {
+  [key: string]: ProjectsCategory;
+};
+
+export default function ProjetYdays() {
+  const [showPopup, setShowPopup] = useState(false); // État pour afficher/masquer la popup
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null); // Projet actuellement sélectionné
+
+  const projects = projetData.projectPage.jeux.projects; // Liste des projets
+
+  // Fonction pour ouvrir la popup
+  const handleShowPopup = (project: Project) => {
+    setSelectedProject(project);
+    setShowPopup(true);
+  };
+
+  // Fonction pour fermer la popup
+  const handleClosePopup = () => {
+    setShowPopup(false);
+    setSelectedProject(null);
+  };
+
   return (
-    <div className="flex h-screen bg-gradient-to-r from-blue-darkBlue to-dark-blue">
+    <div className="flex h-full bg-gradient-to-r from-blue-darkBlue to-dark-blue">
       {/* Composant Nav */}
       <div className="w-1/4 fixed z-50 h-full">
         <Nav />
       </div>
 
       {/* Contenu principal */}
-      <div className="flex-1 flex flex-col items-center mt-16 lg:mt-10 mx-auto px-5 lg:pl-56 w-full lg:w-3/4 lg:max-w-9xl">
-        {/* <div className="flex flex-col lg:flex-row gap-10 lg:gap-20 items-center">
-          <div className="flex flex-col justify-center text-center lg:text-left">
-            <p className="text-center">
-              Hello, moi c’est <b>Antoine</b> ! <br /> <br />
-            </p>
-            <p className="text-center">
-              <b>Etudiant</b> en <br /> <b>informatique</b>. <br /> <br />
-            </p>
-            <p className="text-center">
-              Je suis actuellement un cursus de 5 ans en <br /> informatique et me passionne de plus en plus pour <br /> le <b>domaine du web</b> et plus précisément pour le <br /> <b>développement web front-end</b>.
-            </p>
-          </div>
-          <div>
-            <Image
-              className="mb-10"
-              src="/images/photo.svg"
-              alt="Photo"
-              width={230}
-              height={310}
-            />
+      <div className="flex-1 flex flex-col items-center mt-10 mx-auto px-5 lg:pl-56 text-white w-full lg:w-3/4 lg:max-w-9xl">
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-3xl mb-20">Jeux</h1>
+          {/* Liste des projets */}
+          <div className="flex flex-col gap-8  w-full">
+            {projects.map((project, index) => (
+              <div
+                key={project.id}
+                className={`flex flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} items-center text-center mx-auto w-10/12 gap-x-12`}
+              >
+                {/* Afficher l'image principale */}
+                <Image
+                  src={project.images.find((img) => img.type === "main")?.url || "/default-image.jpg"}
+                  alt={`${project.title} Image`}
+                  width={500}
+                  height={345}
+                  className="rounded-md mb-4"
+                />
+                {/* Section des informations */}
+                <div className="flex flex-col text-center mx-auto gap-6">
+                  <h3 className="text-xl font-bold mb-4">{project.title}</h3>
+                  <p className="text-md">{project.description}</p>
+                  {/* Bouton pour voir plus de détails */}
+                  <button
+                    onClick={() => handleShowPopup(project)}
+                    className="bg-[rgb(1,37,125,0.7)] mx-auto border-black border w-fit text-white font-bold py-2 px-4 rounded-md mt-2 transition-all duration-300"
+                  >
+                    Voir plus de détails
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-        <hr className="bg-black w-10/12 my-10" />
-        <h1 className="mb-5">Mes outils</h1>
-        <Outil />
-        <hr className="bg-black w-10/12 my-10" />
-        <h1 className="mb-5">Mes projets</h1>
-        <Index /> */}
+
+        {/* Composant Popup */}
+        {showPopup && selectedProject && (
+          <Popup project={selectedProject} onClose={handleClosePopup} />
+        )}
+
         <Footer />
       </div>
     </div>
