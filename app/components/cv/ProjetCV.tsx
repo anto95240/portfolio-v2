@@ -23,7 +23,7 @@ export default function ProjectCV() {
   const router = useRouter();
   
   // Définition des catégories
-  const categories: Array<keyof typeof projectsData.homePage> = ['jeux', 'web', 'ydays'];
+  const categories: Array<keyof typeof projectsData.homePage> = ['ydays', 'web', 'jeux'];
 
   // Utilisation de useMemo pour éviter de recalculer les projets à chaque re-rendu
   const allProjects = useMemo(() => {
