@@ -59,11 +59,9 @@ export default function Cv() {
             <p>Etudiant</p>
           </div>
           <div className="mt-6 md:mt-0 text-center">
-            <button className="bg-blue-footer text-white md:text-base py-2 px-20 text-base rounded-full shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform hover:scale-105">
-              <a href="/doc/CV.pdf" target="_blank" rel="noopener noreferrer">
-                Télécharger mon CV
-              </a>
-            </button>
+            <a href="/doc/CV.pdf" target="_blank" rel="noopener noreferrer" className="bg-blue-footer text-white md:text-base py-2 px-20 text-base rounded-full shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform hover:scale-105">
+              Télécharger mon CV
+            </a>
           </div>
         </div>
 

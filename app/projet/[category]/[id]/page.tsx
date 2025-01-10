@@ -79,7 +79,7 @@ export default function ProjetDetail() {
             <div className="flex flex-col w-full gap-x-12">
               <div className={`mb-8 relative ${isMenuOpen ? "z-10" : "z-50"}`}>
                 <Link href={`/projet/${category}/`}>
-                  <button>
+                  <button aria-label="revenir au thème">
                     <FontAwesomeIcon icon={faArrowLeftLong} className="mr-2 text-4xl" />
                   </button>
                 </Link>
@@ -122,7 +122,7 @@ export default function ProjetDetail() {
                     .map((img, linkIndex) => (
                       <div key={linkIndex} className="flex flex-col gap-3">
                         <div className="flex ml-3">
-                          <img src={img.url} className="rounded-md" />
+                          <img alt='' src={img.url} className="rounded-md" />
                         </div>
                       </div>
                     ))}
@@ -137,7 +137,7 @@ export default function ProjetDetail() {
 
       {/* Bouton Retour en haut */}
       {showScrollToTopButton && (
-        <button
+        <button aria-label="retour en haut"
           onClick={scrollToTop}
           className="fixed bottom-10 right-10 bg-blue-500 text-white p-3 rounded-full shadow-lg"
         >

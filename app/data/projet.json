@@ -346,140 +346,150 @@
     } 
   },
   "homePage": {
-    "projects": [
-      {
-        "id": "1",
-        "title": "CPU-CI",
-        "description": "Un site web qui explique en résumant ce que sont les CPU (processeur) et un CI (circuit intégré).",
-        "technologies": ["HTML 5", "CSS 3"],
-        "date": "2022",
-        "equipe": ["Antoine Richard"],
-        "links": [
-          {
-            "type": "github",
-            "url": "https://github.com/anto95240/CPU-CI"
-          },
-          {
-            "type": "site",
-            "url": "https://anto95240.github.io/CPU-CI/"
-          }
-        ],
-        "images": [
-          {
-            "type": "main",
-            "url": "/images/web/cpu_ci/logo_cpu-ci.svg"
-          },
-          {
-            "type": "gallery",
-            "url": "/images/web/cpu_ci/cpu_ci.svg"
-          },
-          {
-            "type": "gallery",
-            "url": "/images/web/cpu_ci/all_pages.svg"
-          }
-        ]
-      },
-      {
-        "id": "2",
-        "title": "Labo Dev'Web",
-        "description": "Réalisation d'un portfolio",
-        "technologies": ["HTML 5", "CSS 3", "BOOTSTRAP"],
-        "date": "Octobre 2022 - Juillet 2024",
-        "equipe": ["Antoine Richard"],
-        "links": [
-          {
-            "type": "github",
-            "url": "https://github.com/anto95240/Portfolio-v1"
-          },
-          {
-            "type": "site",
-            "url": "https://anto95240.github.io/Portfolio-v1/"
-          }
-        ],
-        "images": [
-          {
-            "type": "main",
-            "url": "/images/ydays/devWeb/logo_ydays_devWeb.svg"
-          },
-          {
-            "type": "gallery",
-            "url": "/images/ydays/devWeb/accueil_responsive.svg"
-          },
-          {
-            "type": "gallery",
-            "url": "/images/ydays/devWeb/portfolio.svg"
-          },
-          {
-            "type": "gallery",
-            "url": "/images/ydays/devWeb/all_pages.svg"
-          }
-        ]
-      },
-      {
-        "id": "3",
-        "title": "EduCool",
-        "description": "Une plateforme pédagogique pour étudiant et professeur",
-        "technologies": ["VUE.JS", "DJANGO"],
-        "date": "Juillet 2024 - Aout 2024",
-        "equipe": ["Antoine Richard"],
-        "links": [
-          {
-            "type": "github",
-            "url": "https://github.com/anto95240/stage_alt_2023-2024_RICHARD_Antoine"
-          }  
-          
-        ],
-        "images": [
-          {
-            "type": "main",
-            "url": "/images/web/eduCool/logo_eduCool.svg"
-          },
-          {
-            "type": "gallery",
-            "url": "/images/web/eduCool/all_pages.svg"
-          },
-          {
-            "type": "gallery",
-            "url": "/images/web/eduCool/accueil.svg"
-          },
-          {
-            "type": "gallery",
-            "url": "/images/web/eduCool/admin.svg"
-          }
-        ]
-      },
-      {
-        "id": "4",
-        "title": "Arkanoid",
-        "description": "Un jeu qui permet de jouer au casse briques sur le web avec un ordinateur.",
-        "technologies": ["HTML 5", "CSS 3", "JAVASCRIPT"],
-        "date": "Mars 2023 - Avril 2023",
-        "equipe": ["Antoine Richard"],
-        "links": [
-          {
-            "type": "github",
-            "url": "https://github.com/anto95240/Break-Brick"
-          },
-          {
-            "type": "site",
-            "url": "https://arichard-arkanoid.fr/"
-          }
-        ],
-        "images": [
-          {
-            "type": "main",
-            "url": "/images/jeux/arkanoid/logo_arkanoid.svg"
-          },
-          {
-            "type": "gallery",
-            "url": "/images/jeux/arkanoid/arkanoid.svg"
-          },
-          {
-            "type": "gallery",
-            "url": "/images/jeux/arkanoid/gameplay.svg"
-          }
-        ]
-      }
-    ]
+    "ydays":{
+      "projects":[
+        {
+          "id": "1",
+          "title": "Labo Dev'Web",
+          "description": "Réalisation d'un portfolio",
+          "technologies": ["HTML 5", "CSS 3", "BOOTSTRAP"],
+          "date": "Octobre 2022 - Juillet 2024",
+          "equipe": ["Antoine Richard"],
+          "links": [
+            {
+              "type": "github",
+              "url": "https://github.com/anto95240/Portfolio-v1"
+            },
+            {
+              "type": "site",
+              "url": "https://anto95240.github.io/Portfolio-v1/"
+            }
+          ],
+          "images": [
+            {
+              "type": "main",
+              "url": "/images/ydays/devWeb/logo_ydays_devWeb.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/ydays/devWeb/accueil_responsive.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/ydays/devWeb/portfolio.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/ydays/devWeb/all_pages.svg"
+            }
+          ]
+        }
+      ]
+    },
+    "web":{
+      "projects":[
+        {
+          "id": "1",
+          "title": "CPU-CI",
+          "description": "Un site web qui explique en résumant ce que sont les CPU (processeur) et un CI (circuit intégré).",
+          "technologies": ["HTML 5", "CSS 3"],
+          "date": "2022",
+          "equipe": ["Antoine Richard"],
+          "links": [
+            {
+              "type": "github",
+              "url": "https://github.com/anto95240/CPU-CI"
+            },
+            {
+              "type": "site",
+              "url": "https://anto95240.github.io/CPU-CI/"
+            }
+          ],
+          "images": [
+            {
+              "type": "main",
+              "url": "/images/web/cpu_ci/logo_cpu-ci.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/cpu_ci/cpu_ci.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/cpu_ci/all_pages.svg"
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "title": "EduCool",
+          "description": "Une plateforme pédagogique pour étudiant et professeur",
+          "technologies": ["VUE.JS", "DJANGO"],
+          "date": "Juillet 2024 - Aout 2024",
+          "equipe": ["Antoine Richard"],
+          "links": [
+            {
+              "type": "github",
+              "url": "https://github.com/anto95240/stage_alt_2023-2024_RICHARD_Antoine"
+            }  
+            
+          ],
+          "images": [
+            {
+              "type": "main",
+              "url": "/images/web/eduCool/logo_eduCool.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/eduCool/all_pages.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/eduCool/accueil.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/eduCool/admin.svg"
+            }
+          ]
+        }
+      ]
+    },
+    "jeux":{
+      "projects":[
+        {
+          "id": "3",
+          "title": "Arkanoid",
+          "description": "Un jeu qui permet de jouer au casse briques sur le web avec un ordinateur.",
+          "technologies": ["HTML 5", "CSS 3", "JAVASCRIPT"],
+          "date": "Mars 2023 - Avril 2023",
+          "equipe": ["Antoine Richard"],
+          "links": [
+            {
+              "type": "github",
+              "url": "https://github.com/anto95240/Break-Brick"
+            },
+            {
+              "type": "site",
+              "url": "https://arichard-arkanoid.fr/"
+            }
+          ],
+          "images": [
+            {
+              "type": "main",
+              "url": "/images/jeux/arkanoid/logo_arkanoid.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/jeux/arkanoid/arkanoid.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/jeux/arkanoid/gameplay.svg"
+            }
+          ]
+        }
+      ]
+    }
   }
 }

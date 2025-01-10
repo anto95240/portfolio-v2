@@ -32,7 +32,7 @@ export default function PopUp({ project, category, onClose }: PopupProps) {
 
   return (
     <div className="fixed top-0 right-0 w-8/12 lg:w-3/12 bottom-0 bg-[#274B6D] text-white overflow-y-auto flex flex-col gap-6 rounded-b-md pt-5 z-50">
-      <button onClick={onClose} className="absolute top-5 left-5">
+      <button aria-label="fermé la popup"onClick={onClose} className="absolute top-5 left-5">
         <FontAwesomeIcon icon={faReply} />
       </button>
 

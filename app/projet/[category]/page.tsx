@@ -102,7 +102,7 @@ export default function ProjetCategory() {
         <h1 className="text-3xl mb-20">{category}</h1>
         
         <div className={`absolute right-3/4 lg:left-1/4 ${isMenuOpen ? "z-10" : "z-50"}`}>
-          <button>
+          <button aria-label="revenir au thème">
             <Link href="/projet">
               <FontAwesomeIcon icon={faArrowLeftLong} className="mr-2 mt-5 text-4xl" />
             </Link>
@@ -147,7 +147,7 @@ export default function ProjetCategory() {
 
       {/* Bouton Retour en haut */}
       {showScrollToTopButton && (
-        <button
+        <button aria-label="retour en haut"
           onClick={scrollToTop}
           className="fixed bottom-10 right-10 bg-blue-500 text-white p-3 rounded-full shadow-lg"
         >

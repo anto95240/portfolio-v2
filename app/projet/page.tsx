@@ -1,13 +1,17 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Nav from "../components/Navbar";
 import Theme from "../components/projet/theme";
 import Footer from "../components/Footer";
 
 export default function Projet() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <div className="flex h-screen">
       {/* Composant Nav */}
       <div className="w-1/4 fixed z-50 h-full">
-        <Nav />
+        <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
       {/* Contenu principal */}
