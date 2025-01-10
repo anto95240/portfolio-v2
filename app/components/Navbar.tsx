@@ -1,4 +1,5 @@
 'use client';
+
 import Link from 'next/link';
 import { useState } from 'react';
 import Image from "next/image";
@@ -16,7 +17,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
       {/* Burger Menu (en dehors de nav) */}
       <button
         aria-label="Ouvrir le menu"
-        className="absolute top-5 left-5 text-2xl z-50 lg:hidden"
+        className={`absolute top-5 left-5 text-2xl z-50 lg:hidden ${isMenuOpen ? 'hidden' : 'block'}`} // Afficher que si le menu est fermé
         onClick={toggleMenu}
       >
         <FontAwesomeIcon icon={faBars} />
@@ -31,7 +32,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
         {/* Crois pour fermer le menu */}
         <button
           aria-label="Fermer le menu"
-          className="absolute top-5 right-5 text-2xl lg:hidden"
+          className={`absolute top-5 right-5 text-2xl lg:hidden ${isMenuOpen ? 'block' : 'hidden'}`} // Afficher que si le menu est ouvert
           onClick={toggleMenu}
         >
           <FontAwesomeIcon icon={faTimes} />
