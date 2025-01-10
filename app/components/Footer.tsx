@@ -1,74 +1,57 @@
 'use client';
 
 import Link from 'next/link';
-
 import { usePathname } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileCircleCheck, faFile, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 
+const FooterLink = ({ href, icon, label, children }: { href: string; icon: any; label: string; children: React.ReactNode }) => (
+  <Link
+    href={href}
+    className="bg-blue-footer flex flex-col items-center h-24 mx-auto justify-center gap-2 rounded-md shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] aspect-square"
+    target={href.startsWith('http') ? '_blank' : '_self'}
+    rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+    aria-label={label}
+  >
+    <FontAwesomeIcon icon={icon} className="text-xl" />
+    {children}
+  </Link>
+);
+
 export default function Footer() {  
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   const footerText = '© 2024 créé par Antoine Richard tous droits réservés.';
-  const footerStyle =
-      pathname.startsWith('/projet/jeux')
-      ? 'text-center pt-10 pb-10 text-white'
-      : 'text-center pt-10 pb-10';
+  const footerStyle = pathname.startsWith('/projet/jeux') ? 'text-center pt-10 pb-10 text-white' : 'text-center pt-10 pb-10';
 
   return (
     <div className="flex flex-col">
       <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-16 w-10/12 max-w-l text-center mx-auto text-white justify-center">
-        
-        <Link
-          href="/projet"
-          className="bg-blue-footer flex flex-col items-center h-24 mx-auto justify-center gap-2 rounded-md shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] aspect-square"
-        >
-          <FontAwesomeIcon icon={faFileCircleCheck} className="text-xl" />
+        <FooterLink href="/projet" icon={faFileCircleCheck} label="Mes projets">
           Mes projets
-        </Link>
+        </FooterLink>
 
-        <a
-          href="/doc/CV.pdf"
-          className="bg-blue-footer flex flex-col items-center h-24 mx-auto justify-center gap-2 rounded-md shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] aspect-square"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FontAwesomeIcon icon={faFile} className="text-xl" />
+        <FooterLink href="/doc/CV.pdf" icon={faFile} label="Mon CV">
           Mon CV
-        </a>
+        </FooterLink>
 
-        <a
-          href="mailto:antoine.richard@ynov.com"
-          className="bg-blue-footer flex flex-col items-center h-24 mx-auto justify-center gap-2 rounded-md shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] aspect-square"
-        >
-          <FontAwesomeIcon icon={faEnvelope} className="text-xl" />
+        <FooterLink href="mailto:antoine.richard@ynov.com" icon={faEnvelope} label="Mon Email">
           Mon Email
-        </a>
+        </FooterLink>
 
-        <a
-          href="https://www.linkedin.com/in/ton-profile/"
-          className="bg-blue-footer flex flex-col items-center h-24 mx-auto justify-center gap-2 rounded-md shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] aspect-square"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FontAwesomeIcon icon={faLinkedin} className="text-xl" />
+        <FooterLink href="https://www.linkedin.com/in/ton-profile/" icon={faLinkedin} label="Mon Linkedin">
           Mon Linkedin
-        </a>
+        </FooterLink>
 
-        <a
-          href="https://github.com/anto95240"
-          className="bg-blue-footer flex flex-col items-center h-24 mx-auto justify-center gap-2 rounded-md shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] aspect-square"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FontAwesomeIcon icon={faGithub} className="text-xl" />
+        <FooterLink href="https://github.com/anto95240" icon={faGithub} label="Mon Github">
           Mon Github
-        </a>
+        </FooterLink>
       </div>
-      <p className={`${footerStyle}`}>{footerText}</p>
+
+      <p className={footerStyle}>{footerText}</p>
     </div>
   );
 }

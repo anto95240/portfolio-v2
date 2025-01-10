@@ -2,12 +2,12 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation'; // Utilisation de useRouter pour la navigation
+import { usePathname } from 'next/navigation'; 
 import Nav from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Popup from "../../components/projet/Popup";
 import Image from 'next/image';
-import projetData from "../../data/projet.json"; // Chemin du fichier JSON
+import projetData from "../../data/projet.json";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
@@ -27,10 +27,6 @@ type ProjectsCategory = {
   projects: Project[];
 };
 
-type ProjectsData = {
-  [key: string]: ProjectsCategory;
-};
-
 type CategoryStyles = {
   jeux: { bg: string; text: string };
   ydays: { bg: string; text: string };
@@ -38,12 +34,12 @@ type CategoryStyles = {
 };
 
 export default function ProjetCategory() {
-  const pathname = usePathname(); // Utilisation de usePathname pour récupérer le chemin de l'URL
-  const category = pathname?.split('/')[2] as keyof CategoryStyles; // Cast pour garantir que 'category' est une des clés de CategoryStyles
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Contrôle de l'ouverture du menu
+  const pathname = usePathname();
+  const category = pathname?.split('/')[2] as keyof CategoryStyles;
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [showScrollToTopButton, setShowScrollToTopButton] = useState(false); // État pour afficher/masquer le bouton Retour en haut
+  const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
 
   const categories = ['jeux', 'ydays', 'web'];
   const isValidCategory = categories.includes(String(category));
@@ -70,24 +66,18 @@ export default function ProjetCategory() {
     setSelectedProject(null);
   };
 
-  // Gérer l'affichage du bouton Retour en haut en fonction de la position de défilement
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 200) {
-        setShowScrollToTopButton(true); // Afficher le bouton après 200px de défilement
-      } else {
-        setShowScrollToTopButton(false); // Masquer le bouton
-      }
+      setShowScrollToTopButton(window.scrollY > 200);
     };
 
     window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll); // Nettoyage de l'événement lors de la destruction du composant
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
-  // Fonction pour revenir en haut de la page
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -95,14 +85,14 @@ export default function ProjetCategory() {
   return (
     <div className={`flex h-full ${categoryStyles[category]?.bg}`}>
       <div className="w-1/4 fixed z-50 h-full">
-        <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} /> {/* Passage de l'état */}
+        <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
       <div className={`flex-1 flex flex-col items-center mt-10 mx-auto px-5 lg:pl-56 ${categoryStyles[category]?.text} w-full lg:w-3/4 lg:max-w-9xl`}>
         <h1 className="text-3xl mb-20">{category}</h1>
-        
+
         <div className={`absolute right-3/4 lg:left-1/4 ${isMenuOpen ? "z-10" : "z-50"}`}>
-          <button aria-label="revenir au thème">
+          <button aria-label="Revenir au thème">
             <Link href="/projet">
               <FontAwesomeIcon icon={faArrowLeftLong} className="mr-2 mt-5 text-4xl" />
             </Link>
@@ -112,12 +102,9 @@ export default function ProjetCategory() {
         <div className="flex flex-col items-center justify-center">
           <div className="flex flex-col gap-8 w-full">
             {projects.map((project: Project, index: number) => (
-              <div
-                key={project.id}
-                className={`flex flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} items-center text-center mx-auto w-10/12 gap-x-12`}
-              >
+              <div key={project.id} className={`flex flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} items-center text-center mx-auto w-10/12 gap-x-12`}>
                 <Image
-                  src={project.images.find((img: { type: string; url: string }) => img.type === "main")?.url || "/default-image.jpg"}
+                  src={project.images.find((img) => img.type === "main")?.url || "/default-image.jpg"}
                   alt={`${project.title} Image`}
                   width={500}
                   height={345}
@@ -145,9 +132,9 @@ export default function ProjetCategory() {
         <Footer />
       </div>
 
-      {/* Bouton Retour en haut */}
       {showScrollToTopButton && (
-        <button aria-label="retour en haut"
+        <button
+          aria-label="Retour en haut"
           onClick={scrollToTop}
           className="fixed bottom-10 right-10 bg-blue-500 text-white p-3 rounded-full shadow-lg"
         >

@@ -26,15 +26,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout(
-  {
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="fr">
-      <body className={`${Lato.className} ${MontserratAlternates.className} "font-sans"`}>{children}</body>
+      <body className={`${Lato.className} ${MontserratAlternates.className}`}>{children}</body>
     </html>
   );
 }

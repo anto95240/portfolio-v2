@@ -2,7 +2,14 @@
 
 import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import projetData from "../../data/projet.json"; // Chemin vers votre fichier JSON
+import projetData from "../../data/projet.json";
+
+type Project = {
+  id: string;
+  title: string;
+  description: string;
+  // Ajoute d'autres champs de projet si nécessaire
+};
 
 type CategoryStyles = {
   jeux: { bg: string; text: string };
@@ -24,7 +31,7 @@ export default function ProjectChoice() {
   const categoryData = projetData.projectPage[category as keyof typeof projetData.projectPage];
   
   if (!categoryData) {
-    return <p>Catégorie non trouvée.</p>;
+    return <p className="text-center text-lg font-semibold text-red-600">Catégorie non trouvée.</p>;
   }
 
   // Trouver le projet par ID
@@ -32,7 +39,7 @@ export default function ProjectChoice() {
   const selectedProjectData = projects.find((proj) => proj.id === id);
 
   if (!selectedProjectData) {
-    return <p>Le projet n'a pas été trouvé.</p>;
+    return <p className="text-center text-lg font-semibold text-red-600">Le projet n'a pas été trouvé.</p>;
   }
 
   const handleShowPopup = () => {
@@ -60,8 +67,8 @@ export default function ProjectChoice() {
       </button>
 
       {isPopupVisible && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className={`p-6 rounded-md w-80 ${categoryStyles[category]?.bg}`}>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-opacity duration-300 opacity-100">
+          <div className={`p-6 rounded-md w-80 ${categoryStyles[category]?.bg} transition-all duration-300`}>
             <h3 className={`text-xl font-semibold mb-4 ${categoryStyles[category]?.text}`}>Choisir un projet</h3>
             <ul className="space-y-4">
               {projects.map((project, index) => (

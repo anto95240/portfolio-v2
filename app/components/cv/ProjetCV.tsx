@@ -1,12 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import projectsData from '../../data/projet.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 
+// Types des données des projets
 type Project = {
   id: string;
   title: string;
@@ -23,27 +24,27 @@ export default function ProjectCV() {
   
   // Définition des catégories
   const categories: Array<keyof typeof projectsData.homePage> = ['jeux', 'web', 'ydays'];
-  const [projects, setProjects] = useState<Project[]>([]);
 
-  useEffect(() => {
-    // Récupérer les projets de toutes les catégories
-    const allProjects = categories.reduce<Project[]>((acc, category) => {
+  // Utilisation de useMemo pour éviter de recalculer les projets à chaque re-rendu
+  const allProjects = useMemo(() => {
+    return categories.reduce<Project[]>((acc, category) => {
       return acc.concat(projectsData.homePage[category]?.projects || []);
     }, []);
-    setProjects(allProjects);
   }, []);
+
+  const [projects, setProjects] = useState<Project[]>(allProjects);
 
   // Gérer l'affichage des informations au clic
   const [activeProject, setActiveProject] = useState<string | null>(null);
 
-  const toggleInfo = (projectId: string) => {
-    setActiveProject(activeProject === projectId ? null : projectId);
-  };
+  const toggleInfo = useCallback((projectId: string) => {
+    setActiveProject(prevId => (prevId === projectId ? null : projectId));
+  }, []);
 
-  const handleProjectClick = (projectId: string, category: keyof typeof projectsData.homePage) => {
+  const handleProjectClick = useCallback((projectId: string, category: keyof typeof projectsData.homePage) => {
     // Redirige vers la page du projet avec l'ID et la catégorie
     router.push(`/projet/${category}/${projectId}`);
-  };
+  }, [router]);
 
   return (
     <div className="w-8/12 flex flex-col mx-auto">
@@ -52,14 +53,14 @@ export default function ProjectCV() {
       <div className="grid grid-cols-1 gap-5 max-w-3xl mx-auto md:grid-cols-2 text-center">
         {projects.map((project, index) => {
           // Récupérer l'image principale (type: "main")
-          const mainImage = project.images.find((image: any) => image.type === 'main')?.url;
+          const mainImage = project.images.find(image => image.type === 'main')?.url;
 
           // Nombre de technologies
           const techCount = project.technologies.length;
 
           return (
             <div
-            key={`${project.id}-${index}`}
+              key={`${project.id}-${index}`}
               className="relative z-10 group bg-blue-projet rounded-lg shadow-md overflow-hidden"
             >
               {/* Image principale */}
@@ -77,7 +78,7 @@ export default function ProjectCV() {
                   <h1 className="text-lg font-title mb-2">{project.title}</h1>
                   <p className="text-sm font-text mb-3 h-10">{project.description}</p>
                   <div className={`grid grid-cols-${techCount} gap-2`}>
-                    {project.technologies.map((tech: string, index: number) => (
+                    {project.technologies.map((tech, index) => (
                       <div
                         key={index}
                         className="bg-white text-black rounded-sm shadow-[4px_4px_10px_0_rgba(0,0,0,0.35)] text-sm flex justify-center items-center font-title p-1"

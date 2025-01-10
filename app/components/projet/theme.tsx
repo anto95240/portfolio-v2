@@ -75,6 +75,7 @@ export default function ProjectsPage() {
                 handleNavigate(category.categorySlug);
                 setClickedIndex(index); // Change l'état du bouton pour qu'il devienne bleu
               }}
+              aria-label={`Voir plus de détails sur ${category.name}`}
             >
               VOIR PLUS
             </button>

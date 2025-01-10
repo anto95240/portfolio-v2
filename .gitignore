@@ -38,12 +38,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-
-# autre
-
-/public/image v1/
-/app/data/bloc-note.txt
-
-/app/components/Test.tsx
-/app/test.tsx

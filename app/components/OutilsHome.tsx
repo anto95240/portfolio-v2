@@ -1,5 +1,4 @@
 import Link from 'next/link';
-
 import Image from "next/image";
 import skillsData from "../data/cv_skill.json"; // Chemin du fichier JSON
 
@@ -23,9 +22,10 @@ export default function OutilHome() {
               >
                 <Image
                   src={tool.images}
-                  alt={`${tool.title} Logo`}
+                  alt={`Logo de ${tool.title}`}
                   width={30}
                   height={30}
+                  className="rounded-md"
                 />
                 <p className="md:text-lg text-base text-white ml-2 font-text">{tool.title}</p>
               </div>

@@ -14,14 +14,13 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
   return (
     <div className="relative h-screen">
       {/* Burger Menu (en dehors de nav) */}
-      {!isMenuOpen && (
-        <button aria-label="ouvrir le menu"
-          className="absolute top-5 left-5 text-2xl z-50 lg:hidden"
-          onClick={toggleMenu}
-        >
-          <FontAwesomeIcon icon={faBars} />
-        </button>
-      )}
+      <button
+        aria-label="Ouvrir le menu"
+        className="absolute top-5 left-5 text-2xl z-50 lg:hidden"
+        onClick={toggleMenu}
+      >
+        <FontAwesomeIcon icon={faBars} />
+      </button>
 
       {/* Menu latéral */}
       <nav
@@ -30,7 +29,11 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
           lg:translate-x-0 lg:relative lg:w-4/5 w-2/5 sm:w-2/6`}
       >
         {/* Crois pour fermer le menu */}
-        <button aria-label="fermer le menu" className="absolute top-5 right-5 text-2xl lg:hidden" onClick={toggleMenu}>
+        <button
+          aria-label="Fermer le menu"
+          className="absolute top-5 right-5 text-2xl lg:hidden"
+          onClick={toggleMenu}
+        >
           <FontAwesomeIcon icon={faTimes} />
         </button>
 

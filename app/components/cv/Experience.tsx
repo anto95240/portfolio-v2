@@ -1,14 +1,46 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import experienceData from '../../data/cv_experience.json';
 
-export default function Experience() {
-  const experiences = experienceData.cvpage.experience;
-  const [activeId, setActiveId] = useState<string | null>(experiences[0]?.id || null); // Active la première date par défaut
+// Définition du type pour l'expérience
+interface Experience {
+  id: string;
+  date: string;
+  title: string;
+  lieux: string;
+  domaine: string;
+  realisation: string;
+}
 
-  const toggleInfo = (id: string) => {
-    setActiveId(activeId === id ? null : id);
+export default function Experience() {
+  const experiences = useMemo<Experience[]>(() => experienceData.cvpage.experience, []);  // Mémorisation des données d'expérience
+  const [activeId, setActiveId] = useState<string | null>(experiences.length ? experiences[0].id : null);  // Active la première date par défaut
+
+  // Mémorisation de la fonction pour éviter les recréations inutiles
+  const toggleInfo = useCallback((id: string) => {
+    setActiveId(prevId => (prevId === id ? null : id));
+  }, []);
+
+  const renderExperienceDetails = (experience: Experience) => {
+    return activeId === experience.id ? (
+      <div className="bg-white shadow-[-2px_2px_5px_0_rgba(0,0,0,0.25)] rounded-lg p-6 border-black">
+        <h2 className="text-lg font-text mb-2">{experience.title}</h2>
+        <p className="text-sm font-text mb-1">
+          <strong>Lieu:</strong> {experience.lieux}
+        </p>
+        <p className="text-sm font-text">
+          <strong>Spécialisation:</strong> {experience.domaine}
+        </p>
+        <p className="text-sm font-text">
+          <strong>Réalisation:</strong> {experience.realisation}
+        </p>
+      </div>
+    ) : (
+      <button onClick={() => toggleInfo(experience.id)} className="text-lg font-text">
+        {experience.title}
+      </button>
+    );
   };
 
   return (
@@ -22,53 +54,19 @@ export default function Experience() {
 
         {/* Éléments de la timeline */}
         {experiences.map((experience) => (
-          <div
-            key={experience.id}
-            className="relative flex items-center mb-10 w-full"
-          >
+          <div key={experience.id} className="relative flex items-center mb-10 w-full">
             {/* Date à droite */}
             <div className="w-1/5 md:w-1/4 text-sm font-text text-black">
               {experience.date}
             </div>
 
-            <div className="relative z-10 w-6 h-5 bg-white rounded-full border-2 border-black flex items-center justify-center mx-6">
-              {/* Placeholder pour un logo */}
-              {/* <img
-                src="{formation.logo}" // Ajouter un champ "logo" dans le JSON si nécessaire
-                alt={`${formation.title} logo`}
-                className="w-4 h-4"
-              /> */}
-            </div>
+            <div className="relative z-10 w-6 h-5 bg-white rounded-full border-2 border-black flex items-center justify-center mx-6"></div>
 
             {/* Informations principales à gauche */}
             <div className="w-10/12 text-left">
-              {activeId === experience.id ? (
-                // Informations détaillées affichées
-                <div className="bg-white shadow-[-2px_2px_5px_0_rgba(0,0,0,0.25)] rounded-lg p-6 border-black">
-                  <h2 className="text-lg font-text mb-2">{experience.title}</h2>
-                  <p className="text-sm font-text mb-1">
-                    <strong>Lieu:</strong> {experience.lieux}
-                  </p>
-                  <p className="text-sm font-text">
-                    <strong>Spécialisation:</strong> {experience.domaine}
-                  </p>
-                  <p className="text-sm font-text">
-                    <strong>Réalisation:</strong> {experience.realisation}
-                  </p>
-                </div>
-              ) : (
-                // Titre cliquable
-                <button
-                  onClick={() => toggleInfo(experience.id)}
-                  className="text-lg font-text"
-                >
-                  {experience.title}
-                </button>
-              )}
+              {renderExperienceDetails(experience)}
             </div>
-
           </div>
-          
         ))}
       </div>
     </div>

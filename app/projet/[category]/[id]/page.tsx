@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useParams } from 'next/navigation'; // Importation de useParams
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import projetData from "../../../data/projet.json"; // Chemin vers votre fichier JSON
 import Image from 'next/image';
 import Nav from "../../../components/Navbar";
@@ -22,18 +22,22 @@ export default function ProjetDetail() {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Contrôle de l'ouverture du menu
   const [showScrollToTopButton, setShowScrollToTopButton] = useState(false); // État pour afficher/masquer le bouton Retour en haut
 
-  const categoryStyles: CategoryStyles = {
+  const categoryStyles: CategoryStyles = useMemo(() => ({
     ydays: { bg: 'bg-gradient-to-r from-light-green to-green-blue', text: 'text-black' },
     web: { bg: 'bg-gradient-to-r from-green-blue to-blue-darkBlue', text: 'text-black' },
     jeux: { bg: 'bg-gradient-to-r from-blue-darkBlue to-dark-blue', text: 'text-white' },
-  };
+  }), []);
 
   const project = projetData.projectPage[category as keyof typeof projetData.projectPage]?.projects.find(
     (proj) => proj.id === id
   );
 
   if (!project) {
-    return <p>Le projet n'a pas été trouvé.</p>;
+    return (
+      <div className="flex items-center justify-center h-full">
+        <p className="text-xl">Le projet n'a pas été trouvé.</p>
+      </div>
+    );
   }
 
   // Gérer l'affichage du bouton Retour en haut en fonction de la position de défilement
@@ -74,12 +78,13 @@ export default function ProjetDetail() {
               width={500}
               height={345}
               className="rounded-b-3xl h-auto w-4/5"
+              loading="lazy" // Lazy loading ajouté
             />
 
             <div className="flex flex-col w-full gap-x-12">
               <div className={`mb-8 relative ${isMenuOpen ? "z-10" : "z-50"}`}>
                 <Link href={`/projet/${category}/`}>
-                  <button aria-label="revenir au thème">
+                  <button aria-label="Revenir au thème">
                     <FontAwesomeIcon icon={faArrowLeftLong} className="mr-2 text-4xl" />
                   </button>
                 </Link>
@@ -122,7 +127,7 @@ export default function ProjetDetail() {
                     .map((img, linkIndex) => (
                       <div key={linkIndex} className="flex flex-col gap-3">
                         <div className="flex ml-3">
-                          <img alt='' src={img.url} className="rounded-md" />
+                          <img alt='' src={img.url} className="rounded-md" loading="lazy" />
                         </div>
                       </div>
                     ))}
@@ -137,7 +142,7 @@ export default function ProjetDetail() {
 
       {/* Bouton Retour en haut */}
       {showScrollToTopButton && (
-        <button aria-label="retour en haut"
+        <button aria-label="Retour en haut"
           onClick={scrollToTop}
           className="fixed bottom-10 right-10 bg-blue-500 text-white p-3 rounded-full shadow-lg"
         >

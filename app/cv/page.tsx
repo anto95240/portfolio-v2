@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Nav from "../components/Navbar";
 import ProjetCV from "../components/cv/ProjetCV";
 import Skill from "../components/cv/Skills";
@@ -9,11 +9,12 @@ import Formation from "../components/cv/Formation";
 import Footer from "../components/Footer";
 import Image from "next/image";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faChartSimple, faBriefcase, faGraduationCap, faFileCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faChartSimple, faBriefcase, faGraduationCap, faFileCircleCheck, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 export default function Cv() {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Contrôle de l'ouverture du menu
   const [activeSection, setActiveSection] = useState('profil');
+  const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
 
   // Références pour chaque section
   const profilRef = useRef<HTMLDivElement>(null);
@@ -30,9 +31,26 @@ export default function Cv() {
     { id: 'formation', icon:<FontAwesomeIcon icon={faGraduationCap} />, label: 'Formations', ref: formationRef },
     { id: 'projet', icon: <FontAwesomeIcon icon={faFileCircleCheck} />, label: 'Projets', ref: projetRef },
   ];
-  // Fonction pour défiler vers une section
-  const scrollToSection = (ref: React.RefObject<HTMLElement>) => {
+
+  // Fonction pour défiler vers une section (mémorisée avec useCallback)
+  const scrollToSection = useCallback((ref: React.RefObject<HTMLElement>) => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollToTopButton(window.scrollY > 200);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -49,9 +67,10 @@ export default function Cv() {
           <div>
             <Image
               src="/images/photo.svg"
-              alt="Photo"
+              alt="Photo de Antoine Richard"
               width={230}
               height={310}
+              loading="lazy"
             />
           </div>
           <div className="flex flex-col gap-5 items-center">
@@ -70,6 +89,17 @@ export default function Cv() {
         <div ref={formationRef} className='w-full'><Formation /></div>
         <div ref={projetRef} className='w-full'><ProjetCV /></div>
         <Footer />
+
+        {showScrollToTopButton && (
+        <button
+          aria-label="Retour en haut"
+          onClick={scrollToTop}
+          className="fixed bottom-10 right-10 bg-blue-500 text-white p-3 rounded-full shadow-lg"
+        >
+          <FontAwesomeIcon icon={faArrowUp} className="text-xl" />
+        </button>
+      )}
+
       </div>
 
       {/* Fixed Right Sidebar Menu */}
@@ -94,11 +124,7 @@ export default function Cv() {
 
               {/* Icône */}
               <div
-                className={`text-xl text-white flex justify-center items-center rounded-full w-11 h-11 transition-all duration-300 ${
-                  activeSection === section.id
-                    ? "border-4 border-menuCV-lightBlue"
-                    : "bg-transparent hover:bg-menuCV-lightBlue"
-                }`}
+                className={`text-xl text-white flex justify-center items-center rounded-full w-11 h-11 transition-all duration-300 ${activeSection === section.id ? "border-4 border-menuCV-lightBlue" : "bg-transparent hover:bg-menuCV-lightBlue"}`}
               >
                 {section.icon}
               </div>

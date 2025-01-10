@@ -1,17 +1,29 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Nav from "../components/Navbar";
 import Footer from "../components/Footer";
 import Image from "next/image";
 
 export default function About() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Contrôle de l'ouverture du menu
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Utilisation de useCallback pour ne pas recréer la fonction à chaque rendu
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen(prev => !prev);
+  }, []);
+
+  const hobbies = [
+    { name: "Football", bgColor: "bg-blue-300" },
+    { name: "Cinéma", bgColor: "bg-blue-300" },
+    { name: "Lecture", bgColor: "bg-blue-300" }
+  ];
+
   return (
     <div className="flex h-screen">
       {/* Composant Nav */}
       <div className="w-1/4 fixed z-50 h-full">
-        <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} /> {/* Passage de l'état */}
+        <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={toggleMenu} />
       </div>
 
       {/* Contenu principal */}
@@ -33,20 +45,17 @@ export default function About() {
                 Hello, moi c’est <b>Antoine</b> ! <b>Etudiant</b> en <b>informatique</b>. Je suis actuellement un cursus de 5 ans en informatique et me passionne de plus en plus pour le <b>domaine du web</b>.
               </p>
             </div>
-              <div className="grid grid-cols-3 gap-2 mt-5 justify-items-center lg:justify-items-start">
-                <div className="w-24 h-24 bg-blue-300 rounded-full flex items-center justify-center text-lg text-black shadow-md">
-                  Football
+            <div className="grid grid-cols-3 gap-2 mt-5 justify-items-center lg:justify-items-start">
+              {hobbies.map((hobby) => (
+                <div
+                  key={hobby.name}
+                  className={`${hobby.bgColor} w-24 h-24 rounded-full flex items-center justify-center text-lg text-black shadow-md`}
+                >
+                  {hobby.name}
                 </div>
-                <div className="w-24 h-24 bg-blue-300 rounded-full flex items-center justify-center text-lg text-black shadow-md">
-                  Cinéma
-                </div>
-                <div className="w-24 h-24 bg-blue-300 rounded-full flex items-center justify-center text-lg text-black shadow-md">
-                  Lecture
-                </div>
-              </div>
-            
-
-          </div>          
+              ))}
+            </div>
+          </div>
         </div>
 
         <Footer />
