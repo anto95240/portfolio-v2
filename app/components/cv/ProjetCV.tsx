@@ -61,7 +61,7 @@ export default function ProjectCV() {
           return (
             <div
               key={`${project.id}-${index}`}
-              className="relative z-10 group bg-blue-projet rounded-lg shadow-md overflow-hidden"
+              className="relative z-10 group bg-blue-projet rounded-lg shadow-[5px_5px_5px_0_rgba(0,0,0,0.25)] overflow-hidden"
             >
               {/* Image principale */}
               <div className="relative z-10" onClick={() => toggleInfo(project.id)}>
