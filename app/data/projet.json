@@ -4,6 +4,7 @@
       "projects": [
         {
           "id": "1",
+          "category": "ydays",
           "title": "Labo Dev'Web",
           "description": "Réalisation d'un portfolio",
           "technologies": ["HTML 5", "CSS 3", "Bootstrap"],
@@ -40,6 +41,7 @@
         },
         {
           "id": "2",
+          "category": "ydays",
           "title": "Initialisation électronique",
           "description": "Création d'une manette de jeu",
           "technologies": ["C++"],
@@ -61,6 +63,7 @@
         },
         {
           "id": "3",
+          "category": "ydays",
           "title": "Junior Entreprise (Paris Ynov Campus Agency)",
           "description": "Réalisation du site vitrine de la junior entreprise de Paris Ynov Campus grâce a un template déjà crée",
           "technologies": ["HTML 5", "CSS 3", "Bootstrap"],
@@ -89,6 +92,7 @@
         },
         {
           "id": "4",
+          "category": "ydays",
           "title": "Jeux vidéo UNITY",
           "description": "Création d'un RPG sur le thème de Code Lyoko",
           "technologies": ["C#"],
@@ -110,6 +114,7 @@
       "projects": [
         {
           "id": "1",
+          "category": "web",
           "title": "CPU-CI",
           "description": "Un site web qui explique en résumant ce que sont les CPU (processeur) et un CI (circuit intégré).",
           "technologies": ["HTML 5", "CSS 3"],
@@ -142,6 +147,7 @@
         },
         {
           "id": "2",
+          "category": "web",
           "title": "e-commerce",
           "description": "Un site e-commerce proposant une multitude de produit diverses.",
           "technologies": ["HTML 5", "CSS 3", "SQL", "PHP"],
@@ -175,6 +181,7 @@
         },
         {
           "id": "3",
+          "category": "web",
           "title": "EduCool",
           "description": "Une plateforme pédagogique pour étudiant et professeur",
           "technologies": ["VUE.JS", "DJANGO"],
@@ -212,6 +219,7 @@
       "projects": [
         {
           "id": "1",
+          "category": "jeux",
           "title": "Hangman",
           "description": "Un jeu qui permet de jouer au hangman. Réalisé pour jouer en ligne de commande.",
           "technologies": ["GOLANG"],
@@ -248,6 +256,7 @@
         },
         {
           "id": "2",
+          "category": "jeux",
           "title": "Hangman web",
           "description": "Un jeu qui permet de jouer au hangman sur le web avec un ordinateur.",
           "technologies": ["HTML 5", "CSS 3", "GOLANG"],
@@ -276,6 +285,7 @@
         },
         {
           "id": "3",
+          "category": "jeux",
           "title": "Arkanoid",
           "description": "Un jeu qui permet de jouer au casse briques sur le web avec un ordinateur.",
           "technologies": ["HTML 5", "CSS 3", "JAVASCRIPT"],
@@ -308,6 +318,7 @@
         },
         {
           "id": "4",
+          "category": "jeux",
           "title": "Tamgotchi",
           "description": "Un jeu qui permet de faire grandir un tamagotchi, de faire des combats contre d’autres tamagotchis.",
           "technologies": ["JAVA"],
@@ -350,6 +361,7 @@
       "projects":[
         {
           "id": "1",
+          "category": "ydays",
           "title": "Labo Dev'Web",
           "description": "Réalisation d'un portfolio",
           "technologies": ["HTML 5", "CSS 3", "BOOTSTRAP"],
@@ -390,6 +402,7 @@
       "projects":[
         {
           "id": "1",
+          "category": "web",
           "title": "CPU-CI",
           "description": "Un site web qui explique en résumant ce que sont les CPU (processeur) et un CI (circuit intégré).",
           "technologies": ["HTML 5", "CSS 3"],
@@ -422,6 +435,7 @@
         },
         {
           "id": "3",
+          "category": "web",
           "title": "EduCool",
           "description": "Une plateforme pédagogique pour étudiant et professeur",
           "technologies": ["VUE.JS", "DJANGO"],
@@ -459,6 +473,7 @@
       "projects":[
         {
           "id": "3",
+          "category": "jeux",
           "title": "Arkanoid",
           "description": "Un jeu qui permet de jouer au casse briques sur le web avec un ordinateur.",
           "technologies": ["HTML 5", "CSS 3", "JAVASCRIPT"],

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import projectsData from '../../data/projet.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,6 +10,7 @@ import Link from 'next/link';
 // Types des données des projets
 type Project = {
   id: string;
+  category: string;
   title: string;
   description: string;
   technologies: string[];
@@ -17,62 +18,71 @@ type Project = {
   equipe: string[];
   links: { type: string; url: string }[];
   images: { type: string; url: string }[];
+  uniqueId?: string; // Ajout de la propriété `uniqueId`
 };
 
 export default function ProjectCV() {
   const router = useRouter();
-  
-  // Définition des catégories
-  const categories: Array<keyof typeof projectsData.homePage> = ['ydays', 'web', 'jeux'];
 
-  // Utilisation de useMemo pour éviter de recalculer les projets à chaque re-rendu
+  // Récupérer dynamiquement les catégories depuis le JSON
+  const categories = useMemo(() => Object.keys(projectsData.homePage) as Array<keyof typeof projectsData.homePage>, []);
+
+  // Construire la liste de tous les projets
   const allProjects = useMemo(() => {
     return categories.reduce<Project[]>((acc, category) => {
-      return acc.concat(projectsData.homePage[category]?.projects || []);
+      const categoryProjects = projectsData.homePage[category]?.projects || [];
+      return acc.concat(
+        categoryProjects.map((project) => ({
+          ...project,
+          uniqueId: `${category}-${project.id}`, // Ajout d'un identifiant unique
+        }))
+      );
     }, []);
-  }, []);
+  }, [categories]);
 
-  const [projects, setProjects] = useState<Project[]>(allProjects);
-
-  // Gérer l'affichage des informations au clic
   const [activeProject, setActiveProject] = useState<string | null>(null);
 
-  const toggleInfo = useCallback((projectId: string) => {
-    setActiveProject(prevId => (prevId === projectId ? null : projectId));
+  const toggleInfo = useCallback((uniqueId: string) => {
+    setActiveProject((prevId) => (prevId === uniqueId ? null : uniqueId));
   }, []);
 
-  const handleProjectClick = useCallback((projectId: string, category: keyof typeof projectsData.homePage) => {
-    // Redirige vers la page du projet avec l'ID et la catégorie
-    router.push(`/projet/${category}/${projectId}`);
-  }, [router]);
+  const handleProjectClick = useCallback(
+    (projectId: string, category: keyof typeof projectsData.homePage) => {
+      router.push(`/projet/${category}/${projectId}`);
+    },
+    [router]
+  );
+
+  if (allProjects.length === 0) {
+    return <p className="text-center">Chargement des projets...</p>;
+  }
 
   return (
     <div className="w-8/12 flex flex-col mx-auto">
       <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
       <h1 className="text-2xl mb-10 text-center">Mes projets</h1>
       <div className="grid grid-cols-1 gap-5 max-w-3xl mx-auto md:grid-cols-2 text-center">
-        {projects.map((project, index) => {
-          // Récupérer l'image principale (type: "main")
-          const mainImage = project.images.find(image => image.type === 'main')?.url;
-
-          // Nombre de technologies
+        {allProjects.map((project, index) => {
+          const mainImage = project.images.find((image) => image.type === 'main')?.url || '/default-image.jpg';
           const techCount = project.technologies.length;
 
           return (
             <div
-              key={`${project.id}-${index}`}
+              key={`${project.uniqueId}-${index}`}
               className="relative z-10 group bg-blue-projet rounded-lg shadow-[5px_5px_5px_0_rgba(0,0,0,0.25)] overflow-hidden"
             >
               {/* Image principale */}
-              <div className="relative z-10" onClick={() => toggleInfo(project.id)}>
+              <div className="relative z-10" onClick={() => toggleInfo(project.uniqueId as string)}>
                 <img
-                  src={mainImage} // Affichage de l'image principale
-                  alt={project.title}
+                  src={mainImage}
+                  alt={`Image de ${project.title}`}
                   className="w-full h-56 object-cover rounded-lg lg:group-hover:opacity-0 transition-opacity duration-300"
                 />
-                {/* Informations affichées au survol ou au clic */}
+                {/* Informations affichées */}
                 <div
-                  className={`absolute inset-0 bg-blue-projet pt-1 gap-4 bg-opacity-100 flex flex-col items-center justify-center text-white transition-opacity duration-300 ${activeProject === project.id ? 'opacity-100 visible' : 'opacity-0 invisible'} lg:group-hover:opacity-100 lg:group-hover:visible`}
+                  className={`absolute inset-0 bg-blue-projet pt-1 gap-4 bg-opacity-100 flex flex-col items-center justify-center text-white transition-opacity duration-300 ${
+                    activeProject === project.uniqueId ? 'opacity-100 visible' : 'opacity-0 invisible'
+                  } lg:group-hover:opacity-100 lg:group-hover:visible`}
                   onClick={(e) => e.stopPropagation()}
                 >
                   <h1 className="text-lg font-title mb-2">{project.title}</h1>
@@ -91,7 +101,7 @@ export default function ProjectCV() {
                   {/* Bouton pour voir plus de détails */}
                   <button
                     className="mt-4 bg-green-projet w-full h-10 shadow-[0_-4px_4px_0_rgba(0,0,0,0.25)] flex justify-center items-center gap-2 text-black font-title hover:bg-green-600 transition"
-                    onClick={() => handleProjectClick(project.id, 'jeux')} // Ajustez ici avec la bonne catégorie
+                    onClick={() => handleProjectClick(project.id, project.category as keyof typeof projectsData.homePage)}
                   >
                     Plus de détail
                     <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-l" />
@@ -103,7 +113,10 @@ export default function ProjectCV() {
         })}
         {/* Bouton VOIR PLUS */}
         <div className="col-span-full mt-6 flex justify-center items-center">
-          <Link href="/projet" className="bg-gradient-to-r from-light-blue via-light-green to-light-blue text-black md:text-lg py-1 px-10 text-base rounded-2xl shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform hover:scale-105">
+          <Link
+            href="/projet"
+            className="bg-gradient-to-r from-light-blue via-light-green to-light-blue text-black md:text-lg py-1 px-10 text-base rounded-2xl shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform hover:scale-105"
+          >
             TOUS VOIR
           </Link>
         </div>
