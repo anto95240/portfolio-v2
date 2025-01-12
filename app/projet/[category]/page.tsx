@@ -105,7 +105,7 @@ export default function ProjetCategory() {
           stagger: 0.1,
           scrollTrigger: {
             trigger: `.project-${index}`,
-            start: 'top 70%',
+            start: 'top 60%',
             end: 'top 30%',
             scrub: true,
           },

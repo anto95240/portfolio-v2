@@ -12,25 +12,25 @@ export default function ProjectsPage() {
 
   const categories = [
     {
-      name: 'YDAYS',
-      categorySlug: 'ydays',
-      gradient: 'from-light-green to-green-blue',
-      imageSrc: '/images/ydays.svg',
-      description: 'Les YDAYS c\'est quoi ? C’est une spécificité d’Ynov campus !...',
+      name: "YDAYS",
+      categorySlug: "ydays",
+      gradient: "from-light-green to-green-blue",
+      imageSrc: "/images/ydays.svg",
+      description: "Les YDAYS c'est quoi ?\n\nC'est une spécificité d'Ynov campus ! Toute l'année, les étudiants de différentes filières se réunissent un mercredi pour travailler en projet collaboratif et donner vie à leur idée",
     },
     {
-      name: 'WEB',
-      categorySlug: 'web',
-      gradient: 'from-green-blue to-blue-darkBlue',
-      imageSrc: '/images/web.svg',
-      description: 'Il s’agit de site web, d’application web réalisés...',
+      name: "WEB",
+      categorySlug: "web",
+      gradient: "from-green-blue to-blue-darkBlue",
+      imageSrc: "/images/web.svg",
+      description: "Il s'agit de site web, d'application web réalisés à l'école ou en stage",
     },
     {
-      name: 'JEUX',
-      categorySlug: 'jeux',
-      gradient: 'from-blue-darkBlue to-dark-blue',
-      imageSrc: '/images/jeux.svg',
-      description: 'Il s’agit des jeux locaux sur le web ou en ligne...',
+      name: "JEUX",
+      categorySlug: "jeux",
+      gradient: "from-blue-darkBlue to-dark-blue",
+      imageSrc: "/images/jeux.svg",
+      description: "Il s'agit des jeux locaux sur le web ou en ligne de commande réalisés à l'école ou en stage ",
     }
   ];
 
@@ -56,6 +56,15 @@ export default function ProjectsPage() {
     };
   }, []);
 
+  const formatDescription = (description: string) => {
+    return description.split("\n").map((line, index) => (
+      <span key={index}>
+        {line}
+        <br />
+      </span>
+    ));
+  };
+  
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 w-10/12 lg:w-8/12 max-w-l text-center mx-auto text-white justify-center">
       {categories.map((category, index) => (
@@ -80,7 +89,7 @@ export default function ProjectsPage() {
               VOIR PLUS
             </button>
             <p className="text-justify w-3/4 mx-auto text-white">
-              {category.description}
+              {formatDescription(category.description)}
             </p>
           </div>
           <Image

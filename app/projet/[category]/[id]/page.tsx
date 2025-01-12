@@ -90,8 +90,6 @@ export default function ProjetDetail() {
     }
   }, []);   
 
-  
-
   return (
     <div className={`flex h-full ${categoryStyles[category]?.bg}`}>
       <div className="w-1/4 fixed z-50 h-full">
