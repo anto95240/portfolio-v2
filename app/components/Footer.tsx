@@ -43,11 +43,11 @@ export default function Footer() {
           Mon Email
         </FooterLink>
 
-        <FooterLink href="https://www.linkedin.com/in/ton-profile/" icon={faLinkedin} label="Mon Linkedin">
+        <FooterLink href="https://www.linkedin.com/in/ton-profile/" icon={faLinkedin} label="Mon Linkedin" target="_blank">
           Mon Linkedin
         </FooterLink>
 
-        <FooterLink href="https://github.com/anto95240" icon={faGithub} label="Mon Github">
+        <FooterLink href="https://github.com/anto95240" icon={faGithub} label="Mon Github" target="_blank">
           Mon Github
         </FooterLink>
       </div>
