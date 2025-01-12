@@ -34,7 +34,11 @@ export default function Cv() {
 
   // Fonction pour défiler vers une section (mémorisée avec useCallback)
   const scrollToSection = useCallback((ref: React.RefObject<HTMLElement>) => {
-    ref.current?.scrollIntoView({ behavior: 'smooth' });
+    ref.current?.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start', // aligne le début de la section
+      inline: 'nearest',
+    });
   }, []);
 
   useEffect(() => {

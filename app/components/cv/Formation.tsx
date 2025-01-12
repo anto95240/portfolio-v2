@@ -57,13 +57,13 @@ export default function Formation() {
         {
           x: 0, // Arrive à sa position finale
           opacity: 1,
-          duration: 1.5,
+          duration: 2,
           ease: 'power3.out',
           stagger: 0.2, // Intervalle entre chaque élément
           scrollTrigger: {
             trigger: '.fade-right',
             start: 'top 90%', // L'animation commence quand l'élément atteint 90% du haut
-            end: 'top 0%', // Terminé quand l'élément atteint 30%
+            end: 'top 20%', // Terminé quand l'élément atteint 30%
             scrub: true,
           },
         }

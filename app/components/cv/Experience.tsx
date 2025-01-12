@@ -56,7 +56,7 @@ export default function Experience() {
         {
           x: 0, // Arrive à sa position finale
           opacity: 1,
-          duration: 1.5,
+          duration: 2,
           ease: 'power3.out',
           stagger: 0.2, // Intervalle entre chaque élément
           scrollTrigger: {
