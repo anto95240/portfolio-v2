@@ -28,7 +28,7 @@ export default function OutilHome() {
           scrollTrigger: {
             trigger: '.fade-left',
             start: 'top 70%', // L'animation commence quand l'élément atteint 90% du haut
-            end: 'top 10%', // Terminé quand l'élément atteint 30%
+            end: 'top 50%', // Terminé quand l'élément atteint 30%
             scrub: true,
           },
         }
