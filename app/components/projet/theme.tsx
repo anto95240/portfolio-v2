@@ -69,7 +69,7 @@ export default function ProjectsPage() {
             className={`absolute inset-0 flex flex-col gap-5 items-center pt-20 bg-black bg-opacity-25 transition-all duration-300 ease-in-out ${activeIndex === index ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'}`}
           >
             <button
-              className={`w-2/4 rounded-xl h-9 border border-solid border-black transition-all duration-300 ${clickedIndex === index ? 'bg-[#007BFF] text-white' : 'bg-[#d9d9d97b] hover:border-white hover:bg-[#007BFF] hover:text-white'}`}
+              className={`w-2/4 rounded-xl h-9 border border-solid border-black transition-all duration-300 transform active:scale-90 ${clickedIndex === index ? 'bg-[#007BFF] text-white' : 'bg-[#d9d9d97b] hover:border-white hover:bg-[#007BFF] hover:text-white'}`}
               onClick={(e) => {
                 e.stopPropagation(); // Empêche la propagation du clic si on clique sur le bouton
                 handleNavigate(category.categorySlug);

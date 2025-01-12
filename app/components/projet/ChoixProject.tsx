@@ -61,7 +61,7 @@ export default function ProjectChoice() {
 
       <button
         onClick={handleShowPopup}
-        className="bg-[rgb(1,37,125,0.7)] border-black border text-white py-2 px-4 rounded-full"
+        className="bg-[rgb(1,37,125,0.7)] border-black border text-white py-2 px-4 rounded-full transition-transform transform active:scale-90"
       >
         Explorer les projets
       </button>
@@ -74,7 +74,7 @@ export default function ProjectChoice() {
               {projects.map((project, index) => (
                 <li key={project.id}>
                   <div
-                    className={`cursor-pointer hover:bg-gray-200 p-2 ms-4 rounded-md ${categoryStyles[category]?.text}`}
+                    className={`cursor-pointer hover:bg-gray-200 p-2 ms-4 rounded-md transition-transform transform active:scale-95 ${categoryStyles[category]?.text}`}
                     onClick={() => handleProjectSelect(project.id)}
                   >
                     {project.title}
@@ -88,7 +88,7 @@ export default function ProjectChoice() {
             </ul>
             <button
               onClick={handleClosePopup}
-              className="mt-4 bg-red-500 text-white py-2 px-4 rounded-md"
+              className="mt-4 bg-red-500 text-white py-2 px-4 rounded-md transition-transform transform active:scale-90"
             >
               Fermer
             </button>

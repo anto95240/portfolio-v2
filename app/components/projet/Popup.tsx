@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation'; // Utiliser useParams pour récupé
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faReply, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 type Link = { type: string; url: string } | string;
 type Project = {
@@ -96,7 +98,7 @@ export default function PopUp({ project, category, onClose }: PopupProps) {
       {/* Bouton "Plus de détails" */}
       <button
         onClick={handleMoreDetails}
-        className="bg-green-projet mx-auto w-full flex gap-3 justify-center items-center text-white font-bold py-3 rounded-md mt-auto transition-all duration-300"
+        className="bg-green-projet mx-auto w-full flex gap-3 justify-center items-center text-white font-bold py-3 rounded-md mt-auto transition-all duration-300 transform active:scale-95"
       >
         Plus de détails
         <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="mr-2" />

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Nav from "./components/Navbar";
 import ProjetCV from "./components/cv/ProjetCV";
 import Outil from "./components/OutilsHome";
@@ -21,13 +21,13 @@ export default function Home() {
       <div className="flex-1 flex flex-col items-center mt-10 mx-auto px-5 lg:pl-56 w-full lg:w-3/4 lg:max-w-9xl">
         <section className="flex flex-col lg:flex-row gap-10 lg:gap-20 items-center">
           <div className="flex flex-col justify-center text-center lg:text-left">
-            <p className="text-center">
+            <p className="text-center fade-in">
               Hello, moi c’est <b>Antoine</b> ! <br /><br />
             </p>
-            <p className="text-center">
+            <p className="text-center fade-in">
               <b>Etudiant</b> en <br /> <b>informatique</b>. <br /><br />
             </p>
-            <p className="text-center">
+            <p className="text-center fade-in">
               Je suis actuellement un cursus de 5 ans en <br /> informatique et me passionne de plus en plus pour <br /> le <b>domaine du web</b> et plus précisément pour le <br /> <b>développement web front-end</b>.
             </p>
           </div>

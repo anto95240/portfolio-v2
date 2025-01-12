@@ -1,11 +1,13 @@
 'use client';
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import projectsData from '../../data/projet.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Types des données des projets
 type Project = {
@@ -57,6 +59,33 @@ export default function ProjectCV() {
     return <p className="text-center">Chargement des projets...</p>;
   }
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+  
+      // Sélectionne tous les éléments avec la classe 'fade-down' et applique l'animation
+      gsap.utils.toArray<HTMLElement>('.fade-down').forEach((elem) => {
+        gsap.fromTo(
+          elem,
+          { y: 80, opacity: 0 }, // Position initiale
+          {
+            y: 0, // Position finale
+            opacity: 1,
+            duration: 2,
+            ease: 'power3.out',
+            // stagger: 0.1,
+            scrollTrigger: {
+              trigger: elem, // Chaque élément déclenche son animation
+              start: 'top 90%',
+              end: 'top 20%',
+              scrub: true,
+            },
+          }
+        );
+      });
+    }
+  }, []);   
+
   return (
     <div className="w-8/12 flex flex-col mx-auto">
       <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
@@ -69,7 +98,7 @@ export default function ProjectCV() {
           return (
             <div
               key={`${project.uniqueId}-${index}`}
-              className="relative z-10 group bg-blue-projet rounded-lg shadow-[5px_5px_5px_0_rgba(0,0,0,0.25)] overflow-hidden"
+              className="relative fade-down z-10 group bg-blue-projet rounded-lg shadow-[5px_5px_5px_0_rgba(0,0,0,0.25)] overflow-hidden"
             >
               {/* Image principale */}
               <div className="relative z-10" onClick={() => toggleInfo(project.uniqueId as string)}>
@@ -100,7 +129,7 @@ export default function ProjectCV() {
 
                   {/* Bouton pour voir plus de détails */}
                   <button
-                    className="mt-4 bg-green-projet w-full h-10 shadow-[0_-4px_4px_0_rgba(0,0,0,0.25)] flex justify-center items-center gap-2 text-black font-title hover:bg-green-600 transition"
+                    className="mt-4 bg-green-projet w-full h-10 shadow-[0_-4px_4px_0_rgba(0,0,0,0.25)] flex justify-center items-center gap-2 text-black font-title hover:bg-green-600 transition-transform transform active:scale-95"
                     onClick={() => handleProjectClick(project.id, project.category as keyof typeof projectsData.homePage)}
                   >
                     Plus de détail
@@ -115,7 +144,7 @@ export default function ProjectCV() {
         <div className="col-span-full mt-6 flex justify-center items-center">
           <Link
             href="/projet"
-            className="bg-gradient-to-r from-light-blue via-light-green to-light-blue text-black md:text-lg py-1 px-10 text-base rounded-2xl shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform hover:scale-105"
+            className="bg-gradient-to-r from-light-blue via-light-green to-light-blue text-black md:text-lg py-1 px-10 text-base rounded-2xl shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform active:scale-90"
           >
             TOUS VOIR
           </Link>

@@ -6,12 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileCircleCheck, faFile, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 
-const FooterLink = ({ href, icon, label, children }: { href: string; icon: any; label: string; children: React.ReactNode }) => (
+const FooterLink = ({ href, icon, label, children, target }: { href: string; icon: any; label: string; children: React.ReactNode, target?: string }) => (
   <Link
     href={href}
-    className="bg-blue-footer flex flex-col items-center h-24 mx-auto justify-center gap-2 rounded-md shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] aspect-square"
-    target={href.startsWith('http') ? '_blank' : '_self'}
-    rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+    className="bg-blue-footer flex flex-col items-center h-28 p-2 mx-auto justify-center gap-2 rounded-md shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] aspect-square transition-transform transform active:scale-90"
+    target={target}
+    rel={target === '_blank' ? 'noopener noreferrer' : undefined}
     aria-label={label}
   >
     <FontAwesomeIcon icon={icon} className="text-xl" />
@@ -19,7 +19,7 @@ const FooterLink = ({ href, icon, label, children }: { href: string; icon: any; 
   </Link>
 );
 
-export default function Footer() {  
+export default function Footer() {
   const pathname = usePathname();
 
   const footerText = '© 2024 créé par Antoine Richard tous droits réservés.';
@@ -29,12 +29,13 @@ export default function Footer() {
     <div className="flex flex-col">
       <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-16 w-10/12 max-w-l text-center mx-auto text-white justify-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-16 w-11/12 max-w-l text-center mx-auto text-white justify-center">
         <FooterLink href="/projet" icon={faFileCircleCheck} label="Mes projets">
           Mes projets
         </FooterLink>
 
-        <FooterLink href="/doc/CV.pdf" icon={faFile} label="Mon CV">
+        {/* Lien spécifique avec target="_blank" */}
+        <FooterLink href="/doc/CV.pdf" icon={faFile} label="Mon CV" target="_blank">
           Mon CV
         </FooterLink>
 

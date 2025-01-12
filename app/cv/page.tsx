@@ -39,7 +39,23 @@ export default function Cv() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowScrollToTopButton(window.scrollY > 200);
+      setShowScrollToTopButton(window.scrollY > 100);
+
+      // Calcul du centre de la fenêtre
+      const windowCenter = window.innerHeight / 2;
+
+      // Détecter la section visible au centre
+      sections.forEach((section) => {
+        const rect = section.ref.current?.getBoundingClientRect();
+        if (rect) {
+          const sectionCenter = rect.top + rect.height / 2;
+
+          // Vérifier si le centre de la section est dans la fenêtre
+          if (sectionCenter <= windowCenter && sectionCenter >= 0) {
+            setActiveSection(section.id); // Mettre à jour la section active
+          }
+        }
+      });
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -78,7 +94,7 @@ export default function Cv() {
             <p>Etudiant</p>
           </div>
           <div className="mt-6 md:mt-0 text-center">
-            <a href="/doc/CV.pdf" target="_blank" rel="noopener noreferrer" className="bg-blue-footer text-white md:text-base py-2 px-20 text-base rounded-full shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform hover:scale-105">
+            <a href="/doc/CV.pdf" target="_blank" rel="noopener noreferrer" className="bg-blue-footer text-white md:text-base py-2 px-20 text-base rounded-full shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform active:scale-90">
               Télécharger mon CV
             </a>
           </div>

@@ -10,6 +10,8 @@ import Footer from "../../../components/Footer";
 import ProjetChoice from "../../../components/projet/ChoixProject";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong, faArrowUpRightFromSquare, faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 type CategoryStyles = {
   jeux: { bg: string; text: string };
@@ -61,6 +63,34 @@ export default function ProjetDetail() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+  
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+  
+      // Typage explicite de chaque élément comme HTMLElement
+      gsap.utils.toArray<HTMLElement>('.fade-down').forEach((elem) => {
+        gsap.fromTo(
+          elem,
+          { y: 80, opacity: 0 }, // Position initiale
+          {
+            y: 0, // Position finale
+            opacity: 1,
+            duration: 1.5,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: elem, // Chaque élément déclenche son animation
+              start: 'top 90%',
+              end: 'top 10%',
+              scrub: true,
+            },
+          }
+        );
+      });
+    }
+  }, []);   
+
+  
 
   return (
     <div className={`flex h-full ${categoryStyles[category]?.bg}`}>
@@ -127,7 +157,7 @@ export default function ProjetDetail() {
                     .map((img, linkIndex) => (
                       <div key={linkIndex} className="flex flex-col gap-3">
                         <div className="flex ml-3">
-                          <img alt='' src={img.url} className="rounded-md" loading="lazy" />
+                          <img alt={`Image ${linkIndex + 1}`} src={img.url} className="rounded-md fade-down" loading="lazy" />
                         </div>
                       </div>
                     ))}
