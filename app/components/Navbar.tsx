@@ -214,7 +214,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
         <ol className="flex flex-col gap-8">
           <li className="flex items-center gap-4">
             <FontAwesomeIcon icon={faHouse} className="text-2xl" />
-            <Link href="/" className="relative group">
+            <Link href="/" className="relative group z-50">
               Accueil
               <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
             </Link>
@@ -223,7 +223,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
           <li>
             <div className="flex items-center gap-4 cursor-pointer">
               <FontAwesomeIcon icon={faFileCircleCheck} className="text-2xl" />
-              <Link href="/projet" className="relative group">
+              <Link href="/projet" className="relative group z-50">
                 Projets
                 <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
               </Link>
@@ -232,19 +232,19 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
             {isProjectOpen && (
               <ol className="flex flex-col gap-2 ml-8 mt-3">
                 <li>
-                  <Link href="/projet/ydays" className="group relative">
+                  <Link href="/projet/ydays" className="group relative z-50">
                     Ydays
                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/projet/web" className="group relative">
+                  <Link href="/projet/web" className="group relative z-50">
                     Web
                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/projet/jeux" className="group relative">
+                  <Link href="/projet/jeux" className="group relative z-50">
                     Jeux
                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
                   </Link>
@@ -255,7 +255,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
 
           <li className="flex items-center gap-4">
             <FontAwesomeIcon icon={faFile} className="text-2xl" />
-            <Link href="/cv" className="relative group">
+            <Link href="/cv" className="relative group z-50">
               CV
               <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
             </Link>
@@ -263,7 +263,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
 
           <li className="flex items-center gap-4">
             <FontAwesomeIcon icon={faCircleInfo} className="text-2xl" />
-            <Link href="/about" className="relative group">
+            <Link href="/about" className="relative group z-50">
               A propos
               <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
             </Link>
