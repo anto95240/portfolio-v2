@@ -38,9 +38,8 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
   }, [isClient]);
 
   // Animation des flocons de neige ou des feuilles tombantes
-  // Animation des flocons de neige ou des feuilles tombantes
   useEffect(() => {
-    if (season === 'spring' && navRef.current) {
+    if (season === 'winter' && navRef.current) {
       const navbarHeight = navRef.current.offsetHeight;
       const numFlakes = 20; // Nombre de flocons
   
@@ -106,7 +105,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
           },
         });
       }
-    } else if (season === 'winter' && navRef.current) {
+    } else if (season === 'spring' && navRef.current) {
       const navbarHeight = navRef.current.offsetHeight;
       const numFlowers = 15; // Nombre de fleurs
     
