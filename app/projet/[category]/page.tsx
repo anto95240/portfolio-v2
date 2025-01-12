@@ -112,6 +112,19 @@ export default function ProjetCategory() {
         }
       );
     });
+    projects.forEach((_, index) => {
+      gsap.fromTo(
+        `.project-${index} .btn`, // Sélectionne le bouton par classe
+        { opacity: 0, y: 30 }, // Commence avec une opacité 0 et légèrement décalé
+        {
+          opacity: 1,            // Devient complètement visible
+          y: 0,                  // Remonte à sa position d'origine
+          duration: 1,           // Durée de l'animation
+          delay: 0,            // Délai avant de commencer l'animation pour la synchroniser
+          ease: 'power3.out',    // Utilise une easing douce pour un mouvement fluide
+        }
+      );
+    });
   }, [projects]);
 
   const scrollToTop = () => {
@@ -161,7 +174,7 @@ export default function ProjetCategory() {
                   <p className={`flex flex-col text-center mx-auto gap-6 ${index % 2 === 0 ? 'fade-left' : 'fade-right'}text-md`}>{project.description}</p>
                   <button
                     onClick={() => handleShowPopup(project)}
-                    className={`flex flex-col text-center mx-auto gap-6 ${index % 2 === 0 ? 'fade-left' : 'fade-right'} bg-[rgb(1,37,125,0.7)] mx-auto border-black border w-fit text-white font-bold py-2 px-4 rounded-md mt-2 transition-all duration-300 transform active:scale-90`}
+                    className={`flex flex-col text-center mx-auto gap-6 ${index % 2 === 0 ? 'fade-left' : 'fade-right'} bg-[rgb(1,37,125,0.7)] mx-auto border-black border w-fit text-white font-bold py-2 px-4 rounded-md mt-2 transition-transform duration-300 transform active:scale-90`}
                   >
                     En savoir plus
                   </button>

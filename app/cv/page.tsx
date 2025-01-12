@@ -70,7 +70,7 @@ export default function Cv() {
   };
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-white">
       {/* Composant Nav */}
       <div className="w-1/4 fixed z-50 h-full">
         <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} /> {/* Passage de l'état */}
