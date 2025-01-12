@@ -29,10 +29,19 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
 
   useEffect(() => {
     if (isClient) {
-      const currentMonth = new Date().getMonth();
-      if (currentMonth >= 3 && currentMonth <= 5) setSeason('spring');
-      else if (currentMonth >= 6 && currentMonth <= 8) setSeason('summer');
-      else if (currentMonth >= 9 && currentMonth <= 11) setSeason('fall');
+      const now = new Date();
+      const year = now.getFullYear();
+
+      // Dates des équinoxes et solstices pour l'hémisphère nord
+      const springEquinox = new Date(year, 2, 20); // 20 mars
+      const summerSolstice = new Date(year, 5, 21); // 21 juin
+      const fallEquinox = new Date(year, 8, 22); // 22 septembre
+      const winterSolstice = new Date(year, 11, 21); // 21 décembre
+
+      // Logique de changement de saison
+      if (now >= springEquinox && now < summerSolstice) setSeason('spring');
+      else if (now >= summerSolstice && now < fallEquinox) setSeason('summer');
+      else if (now >= fallEquinox && now < winterSolstice) setSeason('fall');
       else setSeason('winter');
     }
   }, [isClient]);
