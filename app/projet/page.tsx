@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import Nav from "../components/Navbar";
 import Theme from "../components/projet/theme";
 import Footer from "../components/Footer";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 export default function Projet() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,16 +21,16 @@ export default function Projet() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll); // Nettoyage de l'événement lors de la destruction du composant
+      window.removeEventListener("scroll", handleScroll); // Nettoyage de l'événement lors de la destruction du composant
     };
   }, []);
 
   // Fonction pour revenir en haut de la page
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (

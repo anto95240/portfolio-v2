@@ -1,17 +1,18 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileCircleCheck, faFile, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core"; // Importez ce type de FontAwesome
+import { faFileCircleCheck, faFile, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 
-const FooterLink = ({ href, icon, label, children, target }: { href: string; icon: any; label: string; children: React.ReactNode, target?: string }) => (
+const FooterLink = ({ href, icon, label, children, target }: { href: string; icon: IconDefinition; label: string; children: React.ReactNode, target?: string }) => (
   <Link
     href={href}
     className="bg-blue-footer flex flex-col items-center h-28 p-2 mx-auto justify-center gap-2 rounded-md shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] aspect-square transition-transform transform active:scale-90"
     target={target}
-    rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+    rel={target === "_blank" ? "noopener noreferrer" : undefined}
     aria-label={label}
   >
     <FontAwesomeIcon icon={icon} className="text-xl" />
@@ -22,8 +23,8 @@ const FooterLink = ({ href, icon, label, children, target }: { href: string; ico
 export default function Footer() {
   const pathname = usePathname();
 
-  const footerText = '© 2024 créé par Antoine Richard tous droits réservés.';
-  const footerStyle = pathname.startsWith('/projet/jeux') ? 'text-center pt-10 pb-10 text-white' : 'text-center pt-10 pb-10';
+  const footerText = "© 2024 créé par Antoine Richard tous droits réservés.";
+  const footerStyle = pathname.startsWith("/projet/jeux") ? "text-center pt-10 pb-10 text-white" : "text-center pt-10 pb-10";
 
   return (
     <div className="flex flex-col">

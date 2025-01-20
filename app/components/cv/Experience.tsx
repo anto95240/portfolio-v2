@@ -1,9 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import experienceData from '../../data/cv_experience.json';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useState, useEffect, useCallback } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Définition du type pour l'expérience
 interface Experience {
@@ -16,8 +15,25 @@ interface Experience {
 }
 
 export default function Experience() {
-  const experiences = useMemo<Experience[]>(() => experienceData.cvpage.experience, []); // Mémorisation des données d'expérience
-  const [activeId, setActiveId] = useState<string | null>(experiences.length ? experiences[0].id : null); // Active la première date par défaut
+  const [experiences, setExperiences] = useState<Experience[]>([]); // State pour les données d'expérience
+  const [activeId, setActiveId] = useState<string | null>(null);
+
+  // Fonction pour récupérer les expériences depuis l'API interne
+  const fetchExperiences = async () => {
+    try {
+      const response = await fetch("/api/experience");
+      if (!response.ok) {
+        throw new Error("Erreur lors de la récupération des expériences");
+      }
+      const data = await response.json();
+      setExperiences(data.cvpage.experience); // Mettre à jour le state avec les données d'expérience
+      if (data.cvpage.experience.length > 0) {
+        setActiveId(data.cvpage.experience[0].id); // Active la première expérience par défaut
+      }
+    } catch (error) {
+      console.error("Erreur API:", error);
+    }
+  };
 
   // Mémorisation de la fonction pour éviter les recréations inutiles
   const toggleInfo = useCallback((id: string) => {
@@ -46,29 +62,35 @@ export default function Experience() {
   };
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    fetchExperiences();
+  }, []);
+
+  useEffect(() => {
+    if (experiences) {
       gsap.registerPlugin(ScrollTrigger);
 
       // Animation fade-left2 avec stagger
       gsap.fromTo(
-        '.fade-left2',
+        ".fade-left2",
         { x: -50, opacity: 0 }, // Début de l'animation
         {
           x: 0, // Arrive à sa position finale
           opacity: 1,
           duration: 2,
-          ease: 'power3.out',
+          ease: "power3.out",
           stagger: 0.2, // Intervalle entre chaque élément
           scrollTrigger: {
-            trigger: '.fade-left2',
-            start: 'top 90%', // L'animation commence quand l'élément atteint 90% du haut
-            end: 'top 10%', // Terminé quand l'élément atteint 30%
+            trigger: ".fade-left2",
+            start: "top 90%", // L'animation commence quand l'élément atteint 90% du haut
+            end: "top 10%", // Terminé quand l'élément atteint 30%
             scrub: true,
           },
         }
       );
     }
-  }, []);
+  }, [experiences]);
+
+  if (!experiences.length) return <p>Chargement des expériences...</p>;
 
   return (
     <div className="w-10/12 lg:w-8/12 mx-auto">

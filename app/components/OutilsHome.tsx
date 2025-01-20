@@ -1,40 +1,55 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import Link from 'next/link';
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
-import skillsData from "../data/cv_skill.json"; // Chemin du fichier JSON
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function OutilHome() {
-  // Récupération des données depuis `homepage.skills`
-  const tools = skillsData.homepage.skills;
+  const [tools, setTools] = useState<any[]>([]); // State pour les outils
+
+  // Fonction pour récupérer les outils depuis l'API
+  const fetchTools = async () => {
+    try {
+      const response = await fetch("/api/cv_skill");
+      if (!response.ok) {
+        throw new Error("Erreur lors de la récupération des outils");
+      }
+      const data = await response.json();
+      setTools(data.homepage.skills); // Mettre à jour les outils avec les données de l'API
+    } catch (error) {
+      console.error("Erreur API:", error);
+    }
+  };
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    fetchTools(); // Appel de la fonction pour récupérer les données des outils
+    if (tools) {
       gsap.registerPlugin(ScrollTrigger);
 
       // Animation fade-left2 avec stagger
       gsap.fromTo(
-        '.fade-left',
+        ".fade-left",
         { x: -50, opacity: 0 }, // Début de l'animation
         {
           x: 0, // Arrive à sa position finale
           opacity: 1,
           duration: 1.5,
-          ease: 'power3.out',
+          ease: "power3.out",
           stagger: 0.1, // Intervalle entre chaque élément
           scrollTrigger: {
-            trigger: '.fade-left',
-            start: 'top 70%', // L'animation commence quand l'élément atteint 90% du haut
-            end: 'top 50%', // Terminé quand l'élément atteint 30%
+            trigger: ".fade-left",
+            start: "top 70%", // L'animation commence quand l"élément atteint 90% du haut
+            end: "top 50%", // Terminé quand l'élément atteint 30%
             scrub: true,
           },
         }
       );
     }
-  }, []);
+  }, [tools]);
+
+  if (!tools.length) return <p>Chargement des outils...</p>;
 
   return (
     <div className="w-8/12 flex flex-col">

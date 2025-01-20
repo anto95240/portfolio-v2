@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Nav from "./components/Navbar";
 import ProjetCV from "./components/cv/ProjetCV";
 import Outil from "./components/OutilsHome";

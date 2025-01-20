@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
-import projectsData from '../../data/projet.json';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
-import Link from 'next/link';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useState, useEffect, useMemo, useCallback } from "react"; // Ajoutez ici tous les hooks
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import gsap from "gsap";
+import Image from "next/image";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Types des données des projets
 type Project = {
   id: string;
   category: string;
@@ -20,29 +20,31 @@ type Project = {
   equipe: string[];
   links: { type: string; url: string }[];
   images: { type: string; url: string }[];
-  uniqueId?: string; // Ajout de la propriété `uniqueId`
+  uniqueId?: string;
 };
 
 export default function ProjectCV() {
   const router = useRouter();
+  const pathname = usePathname();
+  const [projectsData, setProjectsData] = useState<any>(null); // Nouveau state pour les données de projets
+  const [activeProject, setActiveProject] = useState<string | null>(null);
 
-  // Récupérer dynamiquement les catégories depuis le JSON
-  const categories = useMemo(() => Object.keys(projectsData.homePage) as Array<keyof typeof projectsData.homePage>, []);
+  const categories = useMemo(() => (projectsData ? Object.keys(projectsData.homePage) : []), [projectsData]);
 
   // Construire la liste de tous les projets
   const allProjects = useMemo(() => {
+    if (!projectsData) return [];
     return categories.reduce<Project[]>((acc, category) => {
-      const categoryProjects = projectsData.homePage[category]?.projects || [];
+      const categoryKey = String(category);
+      const categoryProjects = projectsData.homePage[categoryKey]?.projects || [];  
       return acc.concat(
-        categoryProjects.map((project) => ({
+        categoryProjects.map((project: Project) => ({
           ...project,
-          uniqueId: `${category}-${project.id}`, // Ajout d'un identifiant unique
+          uniqueId: `${category}-${project.id}`,
         }))
       );
     }, []);
-  }, [categories]);
-
-  const [activeProject, setActiveProject] = useState<string | null>(null);
+  }, [categories, projectsData]);  
 
   const toggleInfo = useCallback((uniqueId: string) => {
     setActiveProject((prevId) => (prevId === uniqueId ? null : uniqueId));
@@ -50,49 +52,60 @@ export default function ProjectCV() {
 
   const handleProjectClick = useCallback(
     (projectId: string, category: keyof typeof projectsData.homePage) => {
-      router.push(`/projet/${category}/${projectId}`);
+      router.push(`/projet/${String(category)}/${projectId}`);
     },
     [router]
   );
-
-  if (allProjects.length === 0) {
-    return <p className="text-center">Chargement des projets...</p>;
-  }
+  
+  const ProjetText = "Mes projets";
+  const ProjetStyle = pathname.startsWith("/projet/cv") ? "text-2xl mb-10 text-center" : "mb-5 text-center";
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    // Récupérer les données des projets depuis l'API interne
+    fetch("/api/projets")
+      .then((response) => response.json())
+      .then((data) => {
+        setProjectsData(data); // Mettez à jour les données de projets
+      });
+  }, []);
+
+  useEffect(() => {
+    if (projectsData) {
       gsap.registerPlugin(ScrollTrigger);
   
-      // Sélectionne tous les éléments avec la classe 'fade-down' et applique l'animation
-      gsap.utils.toArray<HTMLElement>('.fade-down').forEach((elem) => {
+      gsap.utils.toArray<HTMLElement>(".fade-down").forEach((elem) => {
         gsap.fromTo(
           elem,
-          { y: 80, opacity: 0 }, // Position initiale
+          { y: 80, opacity: 0 },
           {
-            y: 0, // Position finale
+            y: 0,
             opacity: 1,
             duration: 2,
-            ease: 'power3.out',
-            // stagger: 0.1,
+            ease: "power3.out",
             scrollTrigger: {
-              trigger: elem, // Chaque élément déclenche son animation
-              start: 'top 90%',
-              end: 'top 20%',
+              trigger: elem,
+              start: "top 90%",
+              end: "top 20%",
               scrub: true,
             },
           }
         );
       });
     }
-  }, []);   
+  }, [projectsData]); // Ajoutez une dépendance sur `projectsData` pour s'assurer que l'animation se lance après le chargement des projets
+  
+
+  if (!projectsData) {
+    return <p className="text-center">Chargement des projets...</p>;
+  }
 
   return (
     <div className="w-8/12 flex flex-col mx-auto">
       <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
-      <h1 className="text-2xl mb-10 text-center">Mes projets</h1>
+      <h1 className={ProjetStyle}>{ProjetText}</h1>
       <div className="grid grid-cols-1 gap-5 max-w-3xl mx-auto md:grid-cols-2 text-center">
         {allProjects.map((project, index) => {
-          const mainImage = project.images.find((image) => image.type === 'main')?.url || '/default-image.jpg';
+          const mainImage = project.images.find((image) => image.type === "main")?.url || "/default-image.jpg";
           const techCount = project.technologies.length;
 
           return (
@@ -102,15 +115,17 @@ export default function ProjectCV() {
             >
               {/* Image principale */}
               <div className="relative z-10" onClick={() => toggleInfo(project.uniqueId as string)}>
-                <img
+                <Image
                   src={mainImage}
                   alt={`Image de ${project.title}`}
+                  width={250}
+                  height={250}
                   className="w-full h-56 object-cover rounded-lg lg:group-hover:opacity-0 transition-opacity duration-300"
                 />
                 {/* Informations affichées */}
                 <div
                   className={`absolute inset-0 bg-blue-projet pt-1 gap-4 bg-opacity-100 flex flex-col items-center justify-center text-white transition-opacity duration-300 ${
-                    activeProject === project.uniqueId ? 'opacity-100 visible' : 'opacity-0 invisible'
+                    activeProject === project.uniqueId ? "opacity-100 visible" : "opacity-0 invisible"
                   } lg:group-hover:opacity-100 lg:group-hover:visible`}
                   onClick={(e) => e.stopPropagation()}
                 >

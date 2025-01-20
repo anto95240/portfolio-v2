@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 import Nav from "../components/Navbar";
 import Footer from "../components/Footer";
 import Image from "next/image";

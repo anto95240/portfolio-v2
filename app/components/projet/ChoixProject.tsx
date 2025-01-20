@@ -1,15 +1,7 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import projetData from "../../data/projet.json";
-
-type Project = {
-  id: string;
-  title: string;
-  description: string;
-  // Ajoute d'autres champs de projet si nécessaire
-};
+import { useState, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
 
 type CategoryStyles = {
   jeux: { bg: string; text: string };
@@ -21,25 +13,45 @@ export default function ProjectChoice() {
   const { id, category } = useParams<{ id: string; category: keyof CategoryStyles }>();
   const router = useRouter();
   const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [projects, setProjects] = useState<any[]>([]); // State pour les projets
+  const [projectsData, setProjectsData] = useState<any>({}); // State pour stocker les données de tous les projets
 
   const categoryStyles: CategoryStyles = {
-    ydays: { bg: 'bg-[#77D8FF]', text: 'text-black' },
-    web: { bg: 'bg-[#10DFB9]', text: 'text-black' },
-    jeux: { bg: 'bg-[#10DFB9]', text: 'text-black' },
+    ydays: { bg: "bg-[#77D8FF]", text: "text-black" },
+    web: { bg: "bg-[#10DFB9]", text: "text-black" },
+    jeux: { bg: "bg-[#10DFB9]", text: "text-black" },
   };
 
-  const categoryData = projetData.projectPage[category as keyof typeof projetData.projectPage];
+  // Fonction pour récupérer les projets depuis l'API
+  const fetchProjects = async () => {
+    try {
+      const response = await fetch(`/api/projets`);
+      if (!response.ok) {
+        throw new Error("Erreur lors de la récupération des projets");
+      }
+      const data = await response.json();
   
-  if (!categoryData) {
-    return <p className="text-center text-lg font-semibold text-red-600">Catégorie non trouvée.</p>;
-  }
+      // Assurez-vous de prendre la propriété ProjectPage avant les catégories
+      setProjectsData(data.projectPage || {}); // Enregistrer la structure de ProjectPage
+    } catch (error) {
+      console.error("Erreur API:", error);
+    }
+  };
+  
 
-  // Trouver le projet par ID
-  const projects = categoryData.projects;
-  const selectedProjectData = projects.find((proj) => proj.id === id);
+  useEffect(() => {
+    fetchProjects(); // Appel de la fonction pour récupérer les projets à chaque changement de catégorie
+  }, []);
+  
+  useEffect(() => {
+    if (projectsData && projectsData[category]) {
+      setProjects(projectsData[category].projects || []);
+    }
+  }, [projectsData, category]);  
 
-  if (!selectedProjectData) {
-    return <p className="text-center text-lg font-semibold text-red-600">Le projet n'a pas été trouvé.</p>;
+  // Vérification si les projets sont présents et valides
+  if (!Array.isArray(projects)) {
+    return <p className="text-center text-lg font-semibold text-red-600">Chargement des projets...</p>;
   }
 
   const handleShowPopup = () => {
@@ -71,20 +83,24 @@ export default function ProjectChoice() {
           <div className={`p-6 rounded-md w-80 ${categoryStyles[category]?.bg} transition-all duration-300`}>
             <h3 className={`text-xl font-semibold mb-4 ${categoryStyles[category]?.text}`}>Choisir un projet</h3>
             <ul className="space-y-4">
-              {projects.map((project, index) => (
-                <li key={project.id}>
-                  <div
-                    className={`cursor-pointer hover:bg-gray-200 p-2 ms-4 rounded-md transition-transform transform active:scale-95 ${categoryStyles[category]?.text}`}
-                    onClick={() => handleProjectSelect(project.id)}
-                  >
-                    {project.title}
-                  </div>
-                  {/* Ajouter un hr après chaque projet sauf le dernier */}
-                  {index < projects.length - 1 && (
-                    <hr className="my-4 border-t-2 border-black" />
-                  )}
-                </li>
-              ))}
+              {projects.length > 0 ? (
+                projects.map((project, index) => (
+                  <li key={project.id}>
+                    <div
+                      className={`cursor-pointer hover:bg-gray-200 p-2 ms-4 rounded-md transition-transform transform active:scale-95 ${categoryStyles[category]?.text}`}
+                      onClick={() => handleProjectSelect(project.id)}
+                    >
+                      {project.title}
+                    </div>
+                    {/* Ajouter un hr après chaque projet sauf le dernier */}
+                    {index < projects.length - 1 && (
+                      <hr className="my-4 border-t-2 border-black" />
+                    )}
+                  </li>
+                ))
+              ) : (
+                <p>Aucun projet trouvé pour cette catégorie.</p>
+              )}
             </ul>
             <button
               onClick={handleClosePopup}

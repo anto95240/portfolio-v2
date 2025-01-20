@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback,useMemo } from "react";
 import Nav from "../components/Navbar";
 import ProjetCV from "../components/cv/ProjetCV";
 import Skill from "../components/cv/Skills";
@@ -8,12 +8,12 @@ import Experience from "../components/cv/Experience";
 import Formation from "../components/cv/Formation";
 import Footer from "../components/Footer";
 import Image from "next/image";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faChartSimple, faBriefcase, faGraduationCap, faFileCircleCheck, faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faChartSimple, faBriefcase, faGraduationCap, faFileCircleCheck, faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 export default function Cv() {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Contrôle de l'ouverture du menu
-  const [activeSection, setActiveSection] = useState('profil');
+  const [activeSection, setActiveSection] = useState("profil");
   const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
 
   // Références pour chaque section
@@ -24,20 +24,20 @@ export default function Cv() {
   const projetRef = useRef<HTMLDivElement>(null);
 
   // Liste des sections
-  const sections = [
-    { id: 'profil', icon: <FontAwesomeIcon icon={faUser} />, label: 'Profil', ref: profilRef },
-    { id: 'skill', icon: <FontAwesomeIcon icon={faChartSimple} />, label: 'Compétences', ref: skillRef },
-    { id: 'experience', icon: <FontAwesomeIcon icon={faBriefcase} />, label: 'Experiences', ref: experienceRef },
-    { id: 'formation', icon:<FontAwesomeIcon icon={faGraduationCap} />, label: 'Formations', ref: formationRef },
-    { id: 'projet', icon: <FontAwesomeIcon icon={faFileCircleCheck} />, label: 'Projets', ref: projetRef },
-  ];
+  const sections = useMemo(() => [
+    { id: "profil", icon: <FontAwesomeIcon icon={faUser} />, label: "Profil", ref: profilRef },
+    { id: "skill", icon: <FontAwesomeIcon icon={faChartSimple} />, label: "Compétences", ref: skillRef },
+    { id: "experience", icon: <FontAwesomeIcon icon={faBriefcase} />, label: "Experiences", ref: experienceRef },
+    { id: "formation", icon: <FontAwesomeIcon icon={faGraduationCap} />, label: "Formations", ref: formationRef },
+    { id: "projet", icon: <FontAwesomeIcon icon={faFileCircleCheck} />, label: "Projets", ref: projetRef },
+  ], []);
 
   // Fonction pour défiler vers une section (mémorisée avec useCallback)
   const scrollToSection = useCallback((ref: React.RefObject<HTMLElement>) => {
     ref.current?.scrollIntoView({ 
-      behavior: 'smooth',
-      block: 'start', // aligne le début de la section
-      inline: 'nearest',
+      behavior: "smooth",
+      block: "start", // aligne le début de la section
+      inline: "nearest",
     });
   }, []);
 
@@ -62,15 +62,15 @@ export default function Cv() {
       });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [sections]);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -104,10 +104,10 @@ export default function Cv() {
           </div>
         </div>
 
-        <div ref={skillRef} className='w-full'><Skill /></div>
-        <div ref={experienceRef} className='w-full'><Experience /></div>
-        <div ref={formationRef} className='w-full'><Formation /></div>
-        <div ref={projetRef} className='w-full'><ProjetCV /></div>
+        <div ref={skillRef} className="w-full"><Skill /></div>
+        <div ref={experienceRef} className="w-full"><Experience /></div>
+        <div ref={formationRef} className="w-full"><Formation /></div>
+        <div ref={projetRef} className="w-full"><ProjetCV /></div>
         <Footer />
 
         {showScrollToTopButton && (

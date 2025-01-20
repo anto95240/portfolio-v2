@@ -1,11 +1,9 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation'; // Utiliser useParams pour récupérer la catégorie
-import Image from 'next/image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faReply, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRouter } from "next/navigation"; // Utiliser useParams pour récupérer la catégorie
+import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faReply, faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 type Link = { type: string; url: string } | string;
 type Project = {
@@ -33,7 +31,7 @@ export default function PopUp({ project, category, onClose }: PopupProps) {
   };
 
   // Trouver l'image principale ou utiliser une image de remplacement
-  const mainImage = project.images.find((image) => image.type === 'main')?.url || '/placeholder.jpg';
+  const mainImage = project.images.find((image) => image.type === "main")?.url || "/placeholder.jpg";
 
   return (
     <div className="fixed top-0 right-0 w-8/12 lg:w-3/12 bottom-0 bg-[#274B6D] text-white overflow-y-auto flex flex-col gap-6 rounded-b-md pt-5 z-50">
@@ -76,9 +74,9 @@ export default function PopUp({ project, category, onClose }: PopupProps) {
         {/* Liens */}
         <div className="flex flex-col gap-3 pl-10">
           {project.links.map((link, linkIndex) => {
-            const isObjectLink = typeof link !== 'string';
+            const isObjectLink = typeof link !== "string";
             const url = isObjectLink ? link.url : link;
-            const label = isObjectLink ? (link.type === 'site' ? 'Site web' : 'GitHub') : 'Site web';
+            const label = isObjectLink ? (link.type === "site" ? "Site web" : "GitHub") : "Site web";
 
             return (
               <div key={linkIndex} className="flex flex-col gap-3">

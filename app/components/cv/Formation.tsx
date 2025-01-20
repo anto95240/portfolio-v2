@@ -1,9 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
-import formationData from '../../data/cv_formation.json';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useState, useEffect, useCallback } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Définition du type pour la formation
 interface Formation {
@@ -15,8 +14,25 @@ interface Formation {
 }
 
 export default function Formation() {
-  const formations = useMemo<Formation[]>(() => formationData.cvpage.formation, []); // Mémorisation des données de formations
-  const [activeId, setActiveId] = useState<string | null>(formations.length ? formations[0].id : null); // Active la première formation par défaut
+  const [formations, setFormations] = useState<Formation[]>([]); // State pour les données de formation
+  const [activeId, setActiveId] = useState<string | null>(null);
+
+  // Fonction pour récupérer les formations depuis l'API interne
+  const fetchFormations = async () => {
+    try {
+      const response = await fetch("/api/formation");
+      if (!response.ok) {
+        throw new Error("Erreur lors de la récupération des formations");
+      }
+      const data = await response.json();
+      setFormations(data.cvpage.formation); // Mettre à jour le state avec les données de formations
+      if (data.cvpage.formation.length > 0) {
+        setActiveId(data.cvpage.formation[0].id); // Active la première formation par défaut
+      }
+    } catch (error) {
+      console.error("Erreur API:", error);
+    }
+  };
 
   // Mémorisation de la fonction pour éviter les recréations inutiles
   const toggleInfo = useCallback((id: string) => {
@@ -25,8 +41,40 @@ export default function Formation() {
 
   // Fonction utilitaire pour afficher les lieux et spécialités
   const renderList = (data: string | string[]) => {
-    return Array.isArray(data) ? data.join(' / ') : data;
+    return Array.isArray(data) ? data.join(" / ") : data;
   };
+
+  // Récupérer les formations au chargement du composant
+  useEffect(() => {
+    fetchFormations();
+  }, []);
+
+  useEffect(() => {
+    if (formations) {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Animation fade-right avec stagger
+      gsap.fromTo(
+        ".fade-right",
+        { x: 50, opacity: 0 }, // Début de l'animation
+        {
+          x: 0, // Arrive à sa position finale
+          opacity: 1,
+          duration: 2,
+          ease: "power3.out",
+          stagger: 0.2, // Intervalle entre chaque élément
+          scrollTrigger: {
+            trigger: ".fade-right",
+            start: "top 90%", // L'animation commence quand l'élément atteint 90% du haut
+            end: "top 20%", // Terminé quand l'élément atteint 30%
+            scrub: true,
+          },
+        }
+      );
+    }
+  }, [formations]);
+
+  if (!formations.length) return <p>Chargement des formations...</p>;
 
   const renderFormationDetails = (formation: Formation) => {
     return activeId === formation.id ? (
@@ -40,36 +88,11 @@ export default function Formation() {
         </p>
       </div>
     ) : (
-      <button onClick={() => toggleInfo(formation.id)} className="text-lg font-text" >
+      <button onClick={() => toggleInfo(formation.id)} className="text-lg font-text">
         {formation.title}
       </button>
     );
   };
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      gsap.registerPlugin(ScrollTrigger);
-
-      // Animation fade-left2 avec stagger
-      gsap.fromTo(
-        '.fade-right',
-        { x: 50, opacity: 0 }, // Début de l'animation
-        {
-          x: 0, // Arrive à sa position finale
-          opacity: 1,
-          duration: 2,
-          ease: 'power3.out',
-          stagger: 0.2, // Intervalle entre chaque élément
-          scrollTrigger: {
-            trigger: '.fade-right',
-            start: 'top 90%', // L'animation commence quand l'élément atteint 90% du haut
-            end: 'top 20%', // Terminé quand l'élément atteint 30%
-            scrub: true,
-          },
-        }
-      );
-    }
-  }, []);
 
   return (
     <div className="w-10/12 lg:w-8/12 mx-auto">
@@ -85,7 +108,7 @@ export default function Formation() {
           <div key={formation.id} className="relative flex items-center mb-10 w-full">
             {/* Informations principales à gauche */}
             <div className="w-10/12 text-right fade-right">
-            {renderFormationDetails(formation)}
+              {renderFormationDetails(formation)}
             </div>
 
             {/* Cercle */}

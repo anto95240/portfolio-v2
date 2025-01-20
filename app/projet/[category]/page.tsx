@@ -1,17 +1,16 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import Link from "next/link";
+import { useState, useEffect, useMemo } from "react";
+import { usePathname } from "next/navigation";
 import Nav from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Popup from "../../components/projet/Popup";
-import Image from 'next/image';
-import projetData from "../../data/projet.json";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeftLong, faArrowUp } from '@fortawesome/free-solid-svg-icons';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeftLong, faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 type LinkType = { type: string; url: string } | string;
 type Project = {
@@ -25,10 +24,6 @@ type Project = {
   images: { type: string; url: string }[];
 };
 
-type ProjectsCategory = {
-  projects: Project[];
-};
-
 type CategoryStyles = {
   jeux: { bg: string; text: string };
   ydays: { bg: string; text: string };
@@ -37,26 +32,40 @@ type CategoryStyles = {
 
 export default function ProjetCategory() {
   const pathname = usePathname();
-  const category = pathname?.split('/')[2] as keyof CategoryStyles;
+  const category = pathname?.split("/")[2] as keyof CategoryStyles;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [projectsData, setProjectsData] = useState<Record<string, any> | null>(null);
   const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
 
-  const categories = ['jeux', 'ydays', 'web'];
+  const categories = ["jeux", "ydays", "web"];
   const isValidCategory = categories.includes(String(category));
 
-  if (!isValidCategory) {
-    return <div>Catégorie invalide.</div>;
-  }
-
   const categoryStyles: CategoryStyles = {
-    ydays: { bg: 'bg-gradient-to-r from-light-green to-green-blue', text: 'text-black' },
-    web: { bg: 'bg-gradient-to-r from-green-blue to-blue-darkBlue', text: 'text-black' },
-    jeux: { bg: 'bg-gradient-to-r from-blue-darkBlue to-dark-blue', text: 'text-white' },
+    ydays: { bg: "bg-gradient-to-r from-light-green to-green-blue", text: "text-black" },
+    web: { bg: "bg-gradient-to-r from-green-blue to-blue-darkBlue", text: "text-black" },
+    jeux: { bg: "bg-gradient-to-r from-blue-darkBlue to-dark-blue", text: "text-white" },
   };
 
-  const projects = projetData.projectPage[category]?.projects || [];
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch("/api/projets");
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des projets");
+        }
+        const data = await response.json();
+        setProjectsData(data.projectPage || {});
+      } catch (error) {
+        console.error("Erreur API:", error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  const projects = useMemo(() => projectsData?.[category]?.projects || [], [projectsData, category]);
 
   const handleShowPopup = (project: Project) => {
     setSelectedProject(project);
@@ -73,28 +82,19 @@ export default function ProjetCategory() {
       setShowScrollToTopButton(window.scrollY > 200);
     };
 
-    window.addEventListener('scroll', handleScroll);
-
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-
-    // Animation pour le premier projet sans ScrollTrigger
-    gsap.fromTo(
-      `.project-0 .fade-left`,
-      { x: -100, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1, stagger: 0.1}
-    );
-
-    // Animations pour les autres projets avec ScrollTrigger
-    projects.forEach((_, index) => {
-      const direction = index % 2 === 0 ? 'fade-left' : 'fade-right';
-      const fromX = direction === 'fade-left' ? -100 : 100;
-
+  
+    projects.forEach((_: Project, index: number) => {
+      const direction = index % 2 === 0 ? "fade-left" : "fade-right";
+      const fromX = direction === "fade-left" ? -100 : 100;
+  
       gsap.fromTo(
         `.project-${index} .${direction}`,
         { x: fromX, opacity: 0 },
@@ -105,31 +105,23 @@ export default function ProjetCategory() {
           stagger: 0.1,
           scrollTrigger: {
             trigger: `.project-${index}`,
-            start: 'top 60%',
-            end: 'top 30%',
+            start: "top 60%",
+            end: "top 30%",
             scrub: true,
           },
         }
       );
     });
-    projects.forEach((_, index) => {
-      gsap.fromTo(
-        `.project-${index} .btn`, // Sélectionne le bouton par classe
-        { opacity: 0, y: 30 }, // Commence avec une opacité 0 et légèrement décalé
-        {
-          opacity: 1,            // Devient complètement visible
-          y: 0,                  // Remonte à sa position d'origine
-          duration: 1,           // Durée de l'animation
-          delay: 0,            // Délai avant de commencer l'animation pour la synchroniser
-          ease: 'power3.out',    // Utilise une easing douce pour un mouvement fluide
-        }
-      );
-    });
   }, [projects]);
+  
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  if (!isValidCategory) {
+    return <div>Catégorie invalide.</div>;
+  }
 
   return (
     <div className={`flex h-full ${categoryStyles[category]?.bg}`}>
@@ -150,37 +142,39 @@ export default function ProjetCategory() {
 
         <div className="flex flex-col items-center justify-center">
           <div className="flex flex-col gap-8 w-full">
-            {projects.map((project: Project, index: number) => (
-              <div
-                key={project.id}
-                className={`project-${index} flex flex-col ${
-                  index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                } items-center text-center mx-auto w-10/12 gap-x-12`}
-              >
-                {/* Image principale du projet */}
-                <div className={`${index % 2 === 0 ? 'fade-left' : 'fade-right'}`}>
-                  <Image
-                    src={project.images.find((img) => img.type === 'main')?.url || '/default-image.jpg'}
-                    alt={`${project.title} Image`}
-                    width={500}
-                    height={345}
-                    className="rounded-md mb-4"
-                  />
-                </div>
+            {projects.length > 0 ? (
+              projects.map((project: Project, index: number) => (
+                <div
+                  key={project.id}
+                  className={`project-${index} flex flex-col ${
+                    index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
+                  } items-center text-center mx-auto w-10/12 gap-x-12`}
+                >
+                  <div className={`${index % 2 === 0 ? "fade-left" : "fade-right"}`}>
+                    <Image
+                      src={project.images.find((img) => img.type === "main")?.url || "/default-image.jpg"}
+                      alt={`${project.title} Image`}
+                      width={500}
+                      height={345}
+                      className="rounded-md mb-4"
+                    />
+                  </div>
 
-                {/* Contenu du projet */}
-                <div className={`flex flex-col text-center mx-auto gap-6 ${index % 2 === 0 ? 'fade-left' : 'fade-right'}`}>
-                  <h3 className={`flex flex-col text-center mx-auto gap-6 ${index % 2 === 0 ? 'fade-left' : 'fade-right'}text-xl font-bold mb-4`}>{project.title}</h3>
-                  <p className={`flex flex-col text-center mx-auto gap-6 ${index % 2 === 0 ? 'fade-left' : 'fade-right'}text-md`}>{project.description}</p>
-                  <button
-                    onClick={() => handleShowPopup(project)}
-                    className={`flex flex-col text-center mx-auto gap-6 ${index % 2 === 0 ? 'fade-left' : 'fade-right'} bg-[rgb(1,37,125,0.7)] mx-auto border-black border w-fit text-white font-bold py-2 px-4 rounded-md mt-2 transition-transform duration-300 transform active:scale-90`}
-                  >
-                    En savoir plus
-                  </button>
+                  <div className={`flex flex-col text-center mx-auto gap-6 ${index % 2 === 0 ? "fade-left" : "fade-right"}`}>
+                    <h3 className="text-xl font-bold mb-4">{project.title}</h3>
+                    <p className="text-md">{project.description}</p>
+                    <button
+                      onClick={() => handleShowPopup(project)}
+                      className="bg-[rgb(1,37,125,0.7)] mx-auto border-black border w-fit text-white font-bold py-2 px-4 rounded-md mt-2 transition-transform duration-300 transform active:scale-90"
+                    >
+                      En savoir plus
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p>Aucun projet trouvé pour cette catégorie.</p>
+            )}
           </div>
         </div>
 
