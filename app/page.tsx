@@ -1,14 +1,34 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Nav from "./components/Navbar";
 import ProjetCV from "./components/cv/ProjetCV";
 import Outil from "./components/OutilsHome";
 import Footer from "./components/Footer";
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
+  
+    // Gérer l'affichage du bouton Retour en haut en fonction de la position de défilement
+    useEffect(() => {
+      const handleScroll = () => {
+        setShowScrollToTopButton(window.scrollY > 200);
+      };
+  
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, []);    
+  
+    // Fonction pour revenir en haut de la page
+    const scrollToTop = () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
 
   return (
     <div className="flex h-screen bg-white">
@@ -49,6 +69,17 @@ export default function Home() {
         {/* Footer */}
         <Footer />
       </div>
+
+      {/* Bouton Retour en haut (uniquement visible sur mobile et tablette) */}
+      {showScrollToTopButton && (
+        <button
+          aria-label="Retour en haut"
+          onClick={scrollToTop}
+          className="fixed bottom-10 right-5 z-50 bg-blue-500 text-white p-3 rounded-full shadow-lg sm:hidden md:hidden"
+        >
+          <FontAwesomeIcon icon={faArrowUp} className="text-xl" />
+        </button>
+      )}
     </div>
   );
 }

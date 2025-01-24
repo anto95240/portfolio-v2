@@ -13,23 +13,15 @@ export default function Projet() {
 
   // Gérer l'affichage du bouton Retour en haut en fonction de la position de défilement
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const handleScroll = () => {
-        if (window.scrollY > 200) {
-          setShowScrollToTopButton(true); // Afficher le bouton après 200px de défilement
-        } else {
-          setShowScrollToTopButton(false); // Masquer le bouton
-        }
-      };
-  
-      window.addEventListener("scroll", handleScroll);
-  
-      return () => {
-        window.removeEventListener("scroll", handleScroll); // Nettoyage de l'événement lors de la destruction du composant
-      };
-    }
-  }, []);
-  
+    const handleScroll = () => {
+      setShowScrollToTopButton(window.scrollY > 200);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);  
 
   // Fonction pour revenir en haut de la page
   const scrollToTop = () => {
@@ -55,7 +47,7 @@ export default function Projet() {
         <button
           aria-label="Retour en haut"
           onClick={scrollToTop}
-          className="fixed bottom-10 right-5 bg-blue-500 text-white p-3 rounded-full shadow-lg sm:hidden md:hidden"
+          className="fixed bottom-10 right-5 z-50 bg-blue-500 text-white p-3 rounded-full shadow-lg sm:hidden md:hidden"
         >
           <FontAwesomeIcon icon={faArrowUp} className="text-xl" />
         </button>

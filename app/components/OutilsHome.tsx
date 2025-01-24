@@ -48,7 +48,7 @@ export default function OutilHome() {
         opacity: 1,
         duration: 1.5,
         ease: "power3.out",
-        stagger: 0.1,
+        stagger: 0.2,
         scrollTrigger: {
           trigger: ".fade-left",
           start: "top 70%",

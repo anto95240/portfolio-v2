@@ -202,7 +202,7 @@ export default function ProjetDetail() {
         <button
           aria-label="Retour en haut"
           onClick={scrollToTop}
-          className="fixed bottom-10 right-10 bg-blue-500 text-white p-3 rounded-full shadow-lg"
+          className="fixed bottom-10 right-10 z-50 bg-blue-500 text-white p-3 rounded-full shadow-lg"
         >
           <FontAwesomeIcon icon={faArrowUp} className="text-xl" />
         </button>
