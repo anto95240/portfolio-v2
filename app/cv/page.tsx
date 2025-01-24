@@ -124,7 +124,7 @@ export default function Cv() {
 
       {/* Menu de navigation à droite */}
       <div className="fixed top-1/4 right-0 z-50 flex flex-col items-center">
-        <div className="bg-menu-cv w-16 h-80 rounded-tl-[50px] rounded-bl-[50px] flex flex-col justify-around items-center p-6 shadow-lg">
+        <div className="bg-menu-cv w-8 md:w-16 h-64 md:h-80 rounded-tl-[50px] rounded-bl-[50px] flex flex-col justify-around items-center p-6 shadow-lg">
           {sections.map((section) => (
             <div
               key={section.id}
@@ -140,7 +140,7 @@ export default function Cv() {
                 {section.label}
               </span>
               <div
-                className={`text-xl text-white flex justify-center items-center rounded-full w-11 h-11 transition-all duration-300 ${
+                className={`text-xl text-white flex justify-center items-center rounded-full w-10 h-10 transition-all duration-300 ${
                   activeSection === section.id ? "border-4 border-menuCV-lightBlue" : "bg-transparent hover:bg-menuCV-lightBlue"
                 }`}
               >

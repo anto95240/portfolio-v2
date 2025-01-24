@@ -99,7 +99,7 @@ export default function ProjetCategory() {
   
     projects.forEach((_: Project, index: number) => {
       const direction = index % 2 === 0 ? "fade-left" : "fade-right";
-      const fromX = direction === "fade-left" ? -100 : 100;
+      const fromX = direction === "fade-left" ? -40 : 40;
   
       gsap.fromTo(
         `.project-${index} .${direction}`,

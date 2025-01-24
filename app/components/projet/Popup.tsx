@@ -42,12 +42,12 @@ export default function PopUp({ project, category, onClose }: PopupProps) {
       <button 
         aria-label="Fermer la popup" 
         onClick={onClose} 
-        className="absolute top-5 left-5 text-white"
+        className="absolute top-3 left-5 text-white"
       >
         <FontAwesomeIcon icon={faReply} />
       </button>
 
-      <h1 id="popup-title" className="text-center text-xl font-bold">{project.title}</h1>
+      <h1 id="popup-title" className="text-center text-xl mt-5  font-bold">{project.title}</h1>
       <hr className="w-10/12 mx-auto" />
 
       <div className="flex flex-col gap-8 flex-grow">
@@ -62,7 +62,7 @@ export default function PopUp({ project, category, onClose }: PopupProps) {
         />
 
         {/* Description du projet */}
-        <p className="pl-10 h-12 text-ellipsis overflow-hidden">{project.description}</p>
+        <p className="text-center px-5 h-12 w-full text-ellipsis overflow-hidden">{project.description}</p>
 
         {/* Technologies utilisées */}
         <div className="flex flex-col gap-3">
