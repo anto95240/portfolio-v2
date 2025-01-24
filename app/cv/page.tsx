@@ -98,7 +98,7 @@ export default function Cv() {
               href="/doc/CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-blue-footer text-white md:text-base py-2 px-20 text-base rounded-full shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform active:scale-90"
+              className="bg-blue-footer text-white md:text-base py-2 px-14 text-base rounded-full shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform active:scale-90"
             >
               Télécharger mon CV
             </a>
