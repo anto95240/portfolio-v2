@@ -4,17 +4,28 @@ import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 
 type CategoryStyles = {
-  jeux: { bg: string; text: string };
-  ydays: { bg: string; text: string };
-  web: { bg: string; text: string };
+  [key: string]: { bg: string; text: string };
 };
 
+interface Project {
+  id: string;
+  title: string;
+}
+
+interface ProjectData {
+  [key: string]: {
+    projects: Project[];
+  };
+}
+
 export default function ProjectChoice() {
-  const { id, category } = useParams<{ id: string; category: keyof CategoryStyles }>();
+  const { category } = useParams<{ category: string }>();
   const router = useRouter();
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [projects, setProjects] = useState<any[]>([]); // State pour les projets
-  const [projectsData, setProjectsData] = useState<any>({}); // State pour stocker les données de tous les projets
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [projectsData, setProjectsData] = useState<ProjectData>({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const categoryStyles: CategoryStyles = {
     ydays: { bg: "bg-[#77D8FF]", text: "text-black" },
@@ -22,36 +33,40 @@ export default function ProjectChoice() {
     jeux: { bg: "bg-[#10DFB9]", text: "text-black" },
   };
 
-  // Fonction pour récupérer les projets depuis l'API
   const fetchProjects = async () => {
     try {
+      setIsLoading(true);
+      setError(null);
       const response = await fetch(`/api/projets`);
       if (!response.ok) {
         throw new Error("Erreur lors de la récupération des projets");
       }
       const data = await response.json();
-  
-      // Assurez-vous de prendre la propriété ProjectPage avant les catégories
-      setProjectsData(data.projectPage || {}); // Enregistrer la structure de ProjectPage
+      setProjectsData(data.projectPage || {});
     } catch (error) {
+      setError("Impossible de récupérer les projets.");
       console.error("Erreur API:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
-  
 
   useEffect(() => {
-    fetchProjects(); // Appel de la fonction pour récupérer les projets à chaque changement de catégorie
+    fetchProjects();
   }, []);
-  
+
   useEffect(() => {
     if (projectsData && projectsData[category]) {
       setProjects(projectsData[category].projects || []);
     }
-  }, [projectsData, category]);  
+  }, [projectsData, category]);
 
-  // Vérification si les projets sont présents et valides
-  if (!Array.isArray(projects)) {
-    return <p className="text-center text-lg font-semibold text-red-600">Chargement des projets...</p>;
+  if (isLoading) {
+    return <p className="text-center text-lg font-semibold text-blue-600">Chargement des projets...</p>;
+  }
+
+  if (error) {
+    return <p className="text-center text-lg font-semibold text-red-600">{error}</p>;
   }
 
   const handleShowPopup = () => {
@@ -74,6 +89,7 @@ export default function ProjectChoice() {
       <button
         onClick={handleShowPopup}
         className="bg-[rgb(1,37,125,0.7)] border-black border text-white py-2 px-4 rounded-full transition-transform transform active:scale-90"
+        aria-label="Explorer les projets"
       >
         Explorer les projets
       </button>
@@ -89,13 +105,11 @@ export default function ProjectChoice() {
                     <div
                       className={`cursor-pointer hover:bg-gray-200 p-2 ms-4 rounded-md transition-transform transform active:scale-95 ${categoryStyles[category]?.text}`}
                       onClick={() => handleProjectSelect(project.id)}
+                      aria-label={`Sélectionner le projet ${project.title}`}
                     >
                       {project.title}
                     </div>
-                    {/* Ajouter un hr après chaque projet sauf le dernier */}
-                    {index < projects.length - 1 && (
-                      <hr className="my-4 border-t-2 border-black" />
-                    )}
+                    {index < projects.length - 1 && <hr className="my-4 border-t-2 border-black" />}
                   </li>
                 ))
               ) : (
@@ -105,6 +119,7 @@ export default function ProjectChoice() {
             <button
               onClick={handleClosePopup}
               className="mt-4 bg-red-500 text-white py-2 px-4 rounded-md transition-transform transform active:scale-90"
+              aria-label="Fermer le popup"
             >
               Fermer
             </button>

@@ -1,14 +1,15 @@
 "use client";
 
-import { useState, useEffect, useMemo, useCallback } from "react"; // Ajoutez ici tous les hooks
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { useState, useEffect, useMemo, useCallback } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import gsap from "gsap";
 import Image from "next/image";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Project = {
   id: string;
@@ -26,61 +27,52 @@ type Project = {
 export default function ProjectCV() {
   const router = useRouter();
   const pathname = usePathname();
-  const [projectsData, setProjectsData] = useState<any>(null); // Nouveau state pour les données de projets
+  const [projectsData, setProjectsData] = useState<{ homePage: Record<string, { projects: Project[] }> } | null>(null);
   const [activeProject, setActiveProject] = useState<string | null>(null);
 
-  const categories = useMemo(() => (projectsData ? Object.keys(projectsData.homePage) : []), [projectsData]);
+  // Chargement des projets depuis l'API
+  useEffect(() => {
+    fetch("/api/projets")
+      .then((res) => res.json())
+      .then(setProjectsData)
+      .catch((error) => console.error("Erreur de chargement:", error));
+  }, []);
 
-  // Construire la liste de tous les projets
-  const allProjects = useMemo(() => {
-    if (!projectsData) return [];
-    return categories.reduce<Project[]>((acc, category) => {
-      const categoryKey = String(category);
-      const categoryProjects = projectsData.homePage[categoryKey]?.projects || [];  
-      return acc.concat(
-        categoryProjects.map((project: Project) => ({
+  const categories = useMemo(() => Object.keys(projectsData?.homePage ?? {}), [projectsData]);
+
+  const allProjects = useMemo(
+    () =>
+      categories.flatMap((category) =>
+        projectsData?.homePage?.[category]?.projects.map((project) => ({
           ...project,
           uniqueId: `${category}-${project.id}`,
-        }))
-      );
-    }, []);
-  }, [categories, projectsData]);  
+        })) || []
+      ),
+    [categories, projectsData]
+  );
 
   const toggleInfo = useCallback((uniqueId: string) => {
     setActiveProject((prevId) => (prevId === uniqueId ? null : uniqueId));
   }, []);
 
-  const handleProjectClick = useCallback(
-    (projectId: string, category: keyof typeof projectsData.homePage) => {
-      router.push(`/projet/${String(category)}/${projectId}`);
-    },
-    [router]
-  );
-  
+  const handleProjectClick = useCallback((projectId: string, category: string) => {
+    router.push(`/projet/${category}/${projectId}`);
+  }, [router]);
+
   const ProjetText = "Mes projets";
   const ProjetStyle = pathname.startsWith("/projet/cv") ? "text-2xl mb-10 text-center" : "mb-5 text-center";
 
-  useEffect(() => {
-    // Récupérer les données des projets depuis l'API interne
-    fetch("/api/projets")
-      .then((response) => response.json())
-      .then((data) => {
-        setProjectsData(data); // Mettez à jour les données de projets
-      });
-  }, []);
-
+  // Animation des projets au scroll
   useEffect(() => {
     if (projectsData) {
-      gsap.registerPlugin(ScrollTrigger);
-  
-      gsap.utils.toArray<HTMLElement>(".fade-down").forEach((elem) => {
+      gsap.utils.toArray<HTMLElement>('.fade-down').forEach((elem) => {
         gsap.fromTo(
           elem,
           { y: 80, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 2,
+          { 
+            y: 0, 
+            opacity: 1, 
+            duration: 2, 
             ease: "power3.out",
             scrollTrigger: {
               trigger: elem,
@@ -92,12 +84,9 @@ export default function ProjectCV() {
         );
       });
     }
-  }, [projectsData]); // Ajoutez une dépendance sur `projectsData` pour s'assurer que l'animation se lance après le chargement des projets
-  
+  }, [projectsData]);
 
-  if (!projectsData) {
-    return <p className="text-center">Chargement des projets...</p>;
-  }
+  if (!projectsData) return <p className="text-center">Chargement des projets...</p>;
 
   return (
     <div className="w-8/12 flex flex-col mx-auto">
@@ -124,9 +113,7 @@ export default function ProjectCV() {
                 />
                 {/* Informations affichées */}
                 <div
-                  className={`absolute inset-0 bg-blue-projet pt-1 gap-4 bg-opacity-100 flex flex-col items-center justify-center text-white transition-opacity duration-300 ${
-                    activeProject === project.uniqueId ? "opacity-100 visible" : "opacity-0 invisible"
-                  } lg:group-hover:opacity-100 lg:group-hover:visible`}
+                  className={`absolute inset-0 bg-blue-projet pt-1 gap-4 bg-opacity-100 flex flex-col items-center justify-center text-white transition-opacity duration-300 ${activeProject === project.uniqueId ? "opacity-100 visible" : "opacity-0 invisible"} lg:group-hover:opacity-100 lg:group-hover:visible`}
                   onClick={(e) => e.stopPropagation()}
                 >
                   <h1 className="text-lg font-title mb-2">{project.title}</h1>

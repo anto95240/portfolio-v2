@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation"; // Utiliser useParams pour récupérer la catégorie
+import { useRouter } from "next/navigation"; 
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReply, faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
@@ -34,7 +34,11 @@ export default function PopUp({ project, category, onClose }: PopupProps) {
   const mainImage = project.images.find((image) => image.type === "main")?.url || "/placeholder.jpg";
 
   return (
-    <div className="fixed top-0 right-0 w-8/12 lg:w-3/12 bottom-0 bg-[#274B6D] text-white overflow-y-auto flex flex-col gap-6 rounded-b-md pt-5 z-50">
+    <div
+      className="fixed top-0 right-0 w-8/12 lg:w-3/12 bottom-0 bg-[#274B6D] text-white overflow-y-auto flex flex-col gap-6 rounded-b-md pt-5 z-50"
+      role="dialog"
+      aria-labelledby="popup-title"
+    >
       <button 
         aria-label="Fermer la popup" 
         onClick={onClose} 
@@ -43,7 +47,7 @@ export default function PopUp({ project, category, onClose }: PopupProps) {
         <FontAwesomeIcon icon={faReply} />
       </button>
 
-      <h1 className="text-center text-xl font-bold">{project.title}</h1>
+      <h1 id="popup-title" className="text-center text-xl font-bold">{project.title}</h1>
       <hr className="w-10/12 mx-auto" />
 
       <div className="flex flex-col gap-8 flex-grow">
@@ -54,10 +58,11 @@ export default function PopUp({ project, category, onClose }: PopupProps) {
           width={500}
           height={300}
           className="h-48 w-10/12 mx-auto object-cover rounded-lg"
+          priority
         />
 
         {/* Description du projet */}
-        <p className="pl-10 h-12">{project.description}</p>
+        <p className="pl-10 h-12 text-ellipsis overflow-hidden">{project.description}</p>
 
         {/* Technologies utilisées */}
         <div className="flex flex-col gap-3">
@@ -97,6 +102,7 @@ export default function PopUp({ project, category, onClose }: PopupProps) {
       <button
         onClick={handleMoreDetails}
         className="bg-green-projet mx-auto w-full flex gap-3 justify-center items-center text-white font-bold py-3 rounded-md mt-auto transition-all duration-300 transform active:scale-95"
+        aria-label="Plus de détails"
       >
         Plus de détails
         <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="mr-2" />

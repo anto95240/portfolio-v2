@@ -46,11 +46,13 @@ export default function Formation() {
 
   // Récupérer les formations au chargement du composant
   useEffect(() => {
-    fetchFormations();
-  }, []);
+    if (formations.length === 0) {
+      fetchFormations();
+    }
+  }, [formations]);
 
   useEffect(() => {
-    if (formations) {
+    if (formations.length > 0) {
       gsap.registerPlugin(ScrollTrigger);
 
       // Animation fade-right avec stagger

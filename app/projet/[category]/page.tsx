@@ -30,13 +30,19 @@ type CategoryStyles = {
   web: { bg: string; text: string };
 };
 
+type ProjectsData = {
+  jeux: { projects: Project[] };
+  ydays: { projects: Project[] };
+  web: { projects: Project[] };
+};
+
 export default function ProjetCategory() {
   const pathname = usePathname();
   const category = pathname?.split("/")[2] as keyof CategoryStyles;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [projectsData, setProjectsData] = useState<Record<string, any> | null>(null);
+  const [projectsData, setProjectsData] = useState<ProjectsData | null>(null);
   const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
 
   const categories = ["jeux", "ydays", "web"];
@@ -146,9 +152,7 @@ export default function ProjetCategory() {
               projects.map((project: Project, index: number) => (
                 <div
                   key={project.id}
-                  className={`project-${index} flex flex-col ${
-                    index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-                  } items-center text-center mx-auto w-10/12 gap-x-12`}
+                  className={`project-${index} flex flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} items-center text-center mx-auto w-10/12 gap-x-12`}
                 >
                   <div className={`${index % 2 === 0 ? "fade-left" : "fade-right"}`}>
                     <Image

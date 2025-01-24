@@ -30,11 +30,18 @@ type CategoryStyles = {
   web: { bg: string; text: string };
 };
 
+type ProjectsData = {
+  jeux: { projects: Project[] };
+  ydays: { projects: Project[] };
+  web: { projects: Project[] };
+};
+
 export default function ProjetDetail() {
   const { id, category } = useParams<{ id: string; category: keyof CategoryStyles }>();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
-  const [projectsData, setProjectsData] = useState<Record<string, any> | null>(null);
+  const [projectsData, setProjectsData] = useState<ProjectsData | null>(null);
+  const [loading, setLoading] = useState(true); // État de chargement
 
   const categoryStyles: CategoryStyles = useMemo(() => ({
     ydays: { bg: "bg-gradient-to-r from-light-green to-green-blue", text: "text-black" },
@@ -44,20 +51,21 @@ export default function ProjetDetail() {
 
   const project = useMemo(() => {
     if (!projectsData || !category) return null;
-    return projectsData[category]?.projects.find((proj: Project) => proj.id === id) || null;
+    return projectsData[category]?.projects.find((proj) => proj.id === id) || null;
   }, [projectsData, category, id]);
 
   useEffect(() => {
     const fetchProjects = async () => {
+      setLoading(true); // Démarrer le chargement
       try {
         const response = await fetch("/api/projets");
-        if (!response.ok) {
-          throw new Error("Erreur lors de la récupération des projets");
-        }
+        if (!response.ok) throw new Error("Erreur lors de la récupération des projets");
         const data = await response.json();
         setProjectsData(data.projectPage || {});
       } catch (error) {
         console.error("Erreur API:", error);
+      } finally {
+        setLoading(false); // Fin du chargement
       }
     };
 
@@ -70,9 +78,7 @@ export default function ProjetDetail() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToTop = () => {
@@ -102,6 +108,14 @@ export default function ProjetDetail() {
     });
   }, [project]);
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <p className="text-xl">Chargement des données...</p>
+      </div>
+    );
+  }
+
   if (!project) {
     return (
       <div className="flex items-center justify-center h-full">
@@ -120,7 +134,7 @@ export default function ProjetDetail() {
         <div className="flex flex-col items-center justify-center">
           <div className="flex flex-col items-center gap-8 w-full max-w-xl">
             <Image
-              src={project.images?.find((img: { type: string; url: string }) => img.type === "main")?.url || ""}
+              src={project.images?.find((img) => img.type === "main")?.url || ""}
               alt={`${project.title} Image`}
               layout="intrinsic"
               width={500}
@@ -128,7 +142,6 @@ export default function ProjetDetail() {
               className="rounded-b-3xl h-auto w-4/5"
               loading="lazy"
             />
-
             <div className="flex flex-col w-full gap-x-12">
               <div className={`mb-8 relative ${isMenuOpen ? "z-10" : "z-50"}`}>
                 <Link href={`/projet/${category}/`}>
@@ -150,11 +163,10 @@ export default function ProjetDetail() {
                   <div className="flex flex-col gap-5 pl-10 md:mx-auto">
                     <p className="text-md text-left md:text-center md:h-32">{project.description}</p>
                     <div className="flex flex-col md:flex-row gap-3">
-                      {project.links?.map((link: LinkType, linkIndex: number) => {
+                      {project.links?.map((link, linkIndex) => {
                         const isObjectLink = typeof link !== "string";
                         const url = isObjectLink ? (link as { url: string }).url : link;
                         const label = isObjectLink ? (link as { type: string }).type === "site" ? "Accéder au site" : "Accéder au code" : "Site web";
-
                         return (
                           <div key={linkIndex} className="flex gap-3">
                             <div className="flex ml-3">
@@ -170,7 +182,7 @@ export default function ProjetDetail() {
                   </div>
                 </div>
                 <div className="flex flex-col gap-9 pl-10 mt-10">
-                  {project.images?.filter((img: { type: string; url: string }) => img.type === "gallery").map((img: { type: string; url: string }, linkIndex: number) => (
+                  {project.images?.filter((img) => img.type === "gallery").map((img, linkIndex) => (
                     <div key={linkIndex} className="flex flex-col gap-3">
                       <div className="flex ml-3">
                         <Image alt={`Image ${linkIndex + 1}`} src={img.url} width={700} height={500} className="rounded-md fade-down" loading="lazy" />
@@ -187,7 +199,8 @@ export default function ProjetDetail() {
       </div>
 
       {showScrollToTopButton && (
-        <button aria-label="Retour en haut"
+        <button
+          aria-label="Retour en haut"
           onClick={scrollToTop}
           className="fixed bottom-10 right-10 bg-blue-500 text-white p-3 rounded-full shadow-lg"
         >

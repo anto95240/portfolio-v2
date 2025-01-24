@@ -1,11 +1,12 @@
-import fs from 'fs';
+// app/api/projet/route.ts
+import { promises as fs } from 'fs';
 import path from 'path';
 
 export async function GET() {
   try {
-    const filePath = path.resolve('app/data/projet.json'); // Chemin vers votre fichier JSON
-    const fileData = fs.readFileSync(filePath, 'utf-8');
-    const jsonData = JSON.parse(fileData); // Parse les données JSON pour vérifier leur validité
+    const filePath = path.resolve('app/data/projet.json');
+    const fileData = await fs.readFile(filePath, 'utf-8'); // Utilisation de fs.promises pour les opérations asynchrones
+    const jsonData = JSON.parse(fileData); // Vérification des données JSON
 
     // Vérification des données
     if (!jsonData || typeof jsonData !== 'object') {
@@ -13,8 +14,7 @@ export async function GET() {
     }
 
     return new Response(JSON.stringify(jsonData), { status: 200 });
-  } catch (error) {
-    console.error("Erreur lors de la lecture du fichier JSON :", error);
+  } catch {
     return new Response('Erreur du serveur', { status: 500 });
   }
 }

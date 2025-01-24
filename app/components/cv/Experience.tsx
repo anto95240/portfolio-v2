@@ -40,6 +40,7 @@ export default function Experience() {
     setActiveId((prevId) => (prevId === id ? null : id));
   }, []);
 
+  // Fonction de rendu pour afficher les détails de l'expérience
   const renderExperienceDetails = (experience: Experience) => {
     return activeId === experience.id ? (
       <div className="bg-white shadow-[-2px_2px_5px_0_rgba(0,0,0,0.25)] rounded-lg p-6 border-black">
@@ -62,11 +63,13 @@ export default function Experience() {
   };
 
   useEffect(() => {
-    fetchExperiences();
-  }, []);
+    if (experiences.length === 0) {
+      fetchExperiences();
+    }
+  }, [experiences]);
 
   useEffect(() => {
-    if (experiences) {
+    if (experiences.length > 0) {
       gsap.registerPlugin(ScrollTrigger);
 
       // Animation fade-left2 avec stagger

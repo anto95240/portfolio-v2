@@ -4,6 +4,7 @@ import { useState, useCallback } from "react";
 import Nav from "../components/Navbar";
 import Footer from "../components/Footer";
 import Image from "next/image";
+import clsx from "clsx"; // Ajout de clsx pour gérer les classes dynamiques
 
 export default function About() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,9 +15,9 @@ export default function About() {
   }, []);
 
   const hobbies = [
-    { name: "Football", bgColor: "bg-blue-300" },
-    { name: "Cinéma", bgColor: "bg-blue-300" },
-    { name: "Lecture", bgColor: "bg-blue-300" }
+    { id: 1, name: "Football", bgColor: "bg-blue-300" },
+    { id: 2, name: "Cinéma", bgColor: "bg-blue-300" },
+    { id: 3, name: "Lecture", bgColor: "bg-blue-300" }
   ];
 
   return (
@@ -48,8 +49,8 @@ export default function About() {
             <div className="grid grid-cols-3 gap-2 mt-5 justify-items-center lg:justify-items-start">
               {hobbies.map((hobby) => (
                 <div
-                  key={hobby.name}
-                  className={`${hobby.bgColor} w-24 h-24 rounded-full flex items-center justify-center text-lg text-black shadow-md`}
+                  key={hobby.id} // Utilisation d'un id unique pour la clé
+                  className={clsx(hobby.bgColor, "w-24 h-24 rounded-full flex items-center justify-center text-lg text-black shadow-md")}
                 >
                   {hobby.name}
                 </div>
