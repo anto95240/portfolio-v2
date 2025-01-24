@@ -43,44 +43,45 @@ export default function Skill() {
   useEffect(() => {
     if (skills) {
       gsap.registerPlugin(ScrollTrigger);
-
-      // Animation fade-left avec stagger
+  
+      // Animation synchronisée des titres et compétences
       gsap.fromTo(
-        ".fade-left",
-        { x: -50, opacity: 0 }, // Début de l'animation
+        ".skills-title, .skills-row > div",
+        { x: -50, opacity: 0 },
         {
-          x: 0, // Arrive à sa position finale
+          x: 0,
           opacity: 1,
-          duration: 2,
+          duration: 1.5,
           ease: "power3.out",
-          stagger: 0.1, // Intervalle entre chaque élément
+          stagger: 0.2,
           scrollTrigger: {
-            trigger: ".fade-left",
-            start: "top 90%", // L'animation commence quand l'élément atteint 90% du haut
-            end: "top 0%", // Terminé quand l'élément atteint 30%
+            trigger: ".skills-container",
+            start: "top 90%",
+            end: "bottom 0%",
             scrub: true,
           },
         }
       );
     }
-  }, [skills]); // Déclenche l'effet uniquement lorsque les compétences sont disponibles
+  }, [skills]);
+   
 
   // Si les compétences ne sont pas encore chargées
   if (!skills) return <p>Chargement des compétences...</p>;
 
   // Fonction pour afficher les compétences par catégorie
   const renderSkills = (skillsList: SkillItem[], category: string) => (
-    <div>
-      <p className="mb-5 fade-left">{category}</p>
-      <div className="flex flex-row gap-4">
+    <div className="skills-container">
+      <p className="mb-5 skills-title">{category}</p>
+      <div className="flex flex-row flex-wrap gap-4 skills-row">
         {skillsList.map((skill) => (
           <div key={skill.id} className="flex flex-col items-center">
             <Image
               src={skill.images}
               alt={skill.title}
-              width={60}
-              height={60}
-              className="w-16 h-16 object-contain fade-left"
+              width={0}
+              height={0}
+              className="w-10 h-10 lg:w-16 lg:h-16 object-contain transition-all duration-300"
             />
           </div>
         ))}
