@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,25 +12,24 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
   const [season, setSeason] = useState<string>("winter");
   const [isClient, setIsClient] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
-  
+
   // Tableau de refs pour les flocons et les feuilles
-  const snowflakesRef = useRef<(HTMLDivElement | null)[]>([]);  
-  const fallingLeavesRef = useRef<(HTMLDivElement | null)[]>([]);  
-  const bloomingPlantsRef = useRef<(HTMLDivElement | null)[]>([]);  
-  const palmTreeRef = useRef<(HTMLDivElement | null)[]>([]); 
+  const snowflakesRef = useRef<(HTMLDivElement | null)[]>([]);
+  const fallingLeavesRef = useRef<(HTMLDivElement | null)[]>([]);
+  const bloomingPlantsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const palmTreeRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const toggleProjectList = () => {
-    console.log("Toggling project list:", isProjectOpen);
-    setIsProjectOpen(!isProjectOpen);
-  };
+  const toggleProjectList = () => setIsProjectOpen(!isProjectOpen);
 
+  // Set isClient to true once the component is mounted
   useEffect(() => {
     setIsClient(true);
   }, []);
 
+  // Logique de changement de saison, uniquement après le rendu côté client
   useEffect(() => {
-    if (isClient) {
+    if (typeof window !== 'undefined') {
       const now = new Date();
       const year = now.getFullYear();
 
@@ -48,129 +49,142 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
 
   // Animation des flocons de neige ou des feuilles tombantes
   useEffect(() => {
-    if (season === "winter" && navRef.current) {
-      const navbarHeight = navRef.current.offsetHeight;
-      const numFlakes = 20; // Nombre de flocons
-  
-      // Crée les flocons de neige avec des images
-      for (let i = 0; i < numFlakes; i++) {
-        const snowflake = document.createElement("img");
-        snowflake.src = "/images/snowflakes.png"; // Chemin vers l'image de flocon
-        snowflake.classList.add("snowflake");
-        snowflake.style.position = "absolute";
-        snowflake.style.top = `${Math.random() * -50}px`; // Positionnement aléatoire au-dessus de la navbar
-        snowflake.style.left = `${Math.random() * 90}%`; // Positionnement horizontal aléatoire
-        snowflake.style.width = "20px"; // Taille du flocon
-        snowflake.style.height = "20px"; // Taille du flocon
-        snowflake.style.opacity = "0.6";
-        snowflakesRef.current.push(snowflake);
-        navRef.current.appendChild(snowflake);
-  
-        // Animation continue : commencer la chute avec un léger délai initial
-        gsap.to(snowflake, {
-          y: navbarHeight, // Position verticale (déplacement vers le bas)
-          duration: Math.random() * 5 + 5, // Durée de chute aléatoire
-          x: `+=${Math.random() * 100 - 50}%`, // Mouvement horizontal aléatoire
-          repeat: -1, // Répétition infinie
-          yoyo: false, // Pas de rebond
-          ease: "power1.inOut", // Easing de l'animation
-          delay: Math.random() * 5, // Délai initial aléatoire entre 0 et 2 secondes
-          onRepeat: () => {
-            // Repositionne immédiatement le flocon en haut de la page après chaque répétition
-            gsap.set(snowflake, { top: `${Math.random() * -50}px` });
-          },
-        });
-      }
-    } else if (season === "fall" && navRef.current) {
-      const navbarHeight = navRef.current.offsetHeight;
-      const numLeaves = 20;
-  
-      // Crée les feuilles tombantes avec des images
-      for (let i = 0; i < numLeaves; i++) {
-        const leaf = document.createElement("img");
-        leaf.src = "/images/falling-leaves.png"; // Chemin vers l'image de feuille
-        leaf.classList.add("leaf");
-        leaf.style.position = "absolute";
-        leaf.style.top = `${Math.random() * -50}px`;
-        leaf.style.left = `${Math.random() * 90}%`;
-        leaf.style.width = "20px"; // Taille de la feuille
-        leaf.style.height = "20px"; // Taille de la feuille
-        leaf.style.opacity = "0.6";
-        fallingLeavesRef.current.push(leaf);
-        navRef.current.appendChild(leaf);
-  
-        // Animation continue : commencer la chute avec un léger délai initial
-        gsap.to(leaf, {
-          y: navbarHeight,
-          duration: Math.random() * 5 + 5,
-          x: `+=${Math.random() * 100 - 50}%`,
-          repeat: -1, // Répétition infinie
-          yoyo: false, // Pas de rebond
-          ease: "power1.inOut",
-          delay: Math.random() * 5, // Délai initial aléatoire entre 0 et 2 secondes
-          onRepeat: () => {
-            // Repositionne immédiatement la feuille en haut de la page après chaque répétition
-            gsap.set(leaf, { top: `${Math.random() * -50}px` });
-          },
-        });
-      }
-    } else if (season === "spring" && navRef.current) {
-      const numFlowers = 15; // Nombre de fleurs
-    
-      for (let i = 0; i < numFlowers; i++) {
-        const flower = document.createElement("img");
-        flower.src = "/images/blooming-plants.png"; // Chemin vers l'image de fleur
-        flower.classList.add("flower");
-        flower.style.position = "absolute";
-        flower.style.bottom = "0px"; // Départ du bas de l'écran
-        flower.style.left = `${Math.random() * 90}%`; // Positionnement horizontal aléatoire
-        flower.style.width = "0px"; // Taille initiale nulle pour l'effet de croissance
-        flower.style.height = "0px"; // Taille initiale nulle pour l'effet de croissance
-        flower.style.opacity = "0.6";
-        bloomingPlantsRef.current.push(flower);
-        navRef.current.appendChild(flower);
-    
-        // Animation : fleurs qui poussent
-        gsap.to(flower, {
-          width: `${Math.random() * 30 + 50}px`, // Taille finale (50 à 80px)
-          height: `${Math.random() * 30 + 50}px`, // Taille finale (50 à 80px)
-          duration: Math.random() * 2 + 1, // Durée de croissance aléatoire (1 à 3 secondes)
-          ease: "elastic.out(1, 0.5)", // Effet de rebond doux
-          delay: Math.random() * 1.5, // Délai aléatoire
-        });
-      }    
-    } else if (season === "summer" && navRef.current) {
-      const numPalmTrees = 15; // Nombre de palmiers
-  
-      // Crée les palmiers animés
-      for (let i = 0; i < numPalmTrees; i++) {
-        const palmTree = document.createElement("img");
-        palmTree.src = "/images/palm-tree.png"; // Chemin vers l'image du palmier
-        palmTree.classList.add("palm-tree");
-        palmTree.style.position = "absolute";
-        palmTree.style.top = `${Math.random() * 100}%`; // Positionnement vertical
-        palmTree.style.left = `${Math.random() * 90}%`; // Positionnement horizontal
-        palmTree.style.width = "40px"; // Taille du palmier
-        palmTree.style.height = "60px"; // Taille du palmier
-        palmTree.style.opacity = "0.6";
-        palmTreeRef.current.push(palmTree);
-        navRef.current.appendChild(palmTree);
-  
-        // Animation : léger balancement des palmiers
-        gsap.to(palmTree, {
-          rotation: Math.random() * 50 - 50, // Rotation aléatoire entre -10 et 10 degrés
-          duration: Math.random() * 4 + 3, // Durée de l'animation
-          repeat: -1, // Répétition infinie
-          yoyo: true, // Le mouvement est aller-retour
-          ease: "power1.inOut",
-        });
+    if (isClient && typeof window !== 'undefined') {
+      const navbarHeight = navRef.current?.offsetHeight || 0;
+
+      // Créer et animer les éléments en fonction de la saison
+      if (season === "winter") {
+        createSnowflakes(navbarHeight);
+      } else if (season === "fall") {
+        createFallingLeaves(navbarHeight);
+      } else if (season === "spring") {
+        createBloomingPlants(navbarHeight);
+      } else if (season === "summer") {
+        createPalmTrees(navbarHeight);
       }
     }
   }, [season, isClient]);
-  
-  if (!isClient) {
-    return null;
-  }
+
+  // Fonction pour créer les flocons de neige
+  const createSnowflakes = (navbarHeight: number) => {
+    const numFlakes = 20; // Nombre de flocons
+
+    for (let i = 0; i < numFlakes; i++) {
+      const snowflake = document.createElement("img");
+      snowflake.src = "/images/snowflakes.png"; // Chemin vers l'image de flocon
+      snowflake.classList.add("snowflake");
+      snowflake.style.position = "absolute";
+      snowflake.style.top = `${Math.random() * -50}px`;
+      snowflake.style.left = `${Math.random() * 90}%`;
+      snowflake.style.width = "20px";
+      snowflake.style.height = "20px";
+      snowflake.style.opacity = "0.6";
+      snowflakesRef.current.push(snowflake);
+      navRef.current?.appendChild(snowflake);
+
+      // Animation continue
+      gsap.to(snowflake, {
+        y: navbarHeight,
+        duration: Math.random() * 5 + 5,
+        x: `+=${Math.random() * 100 - 50}%`,
+        repeat: -1,
+        yoyo: false,
+        ease: "power1.inOut",
+        delay: Math.random() * 5,
+        onRepeat: () => {
+          gsap.set(snowflake, { top: `${Math.random() * -50}px` });
+        },
+      });
+    }
+  };
+
+  // Fonction pour créer les feuilles tombantes
+  const createFallingLeaves = (navbarHeight: number) => {
+    const numLeaves = 20;
+
+    for (let i = 0; i < numLeaves; i++) {
+      const leaf = document.createElement("img");
+      leaf.src = "/images/falling-leaves.png"; // Chemin vers l'image de feuille
+      leaf.classList.add("leaf");
+      leaf.style.position = "absolute";
+      leaf.style.top = `${Math.random() * -50}px`;
+      leaf.style.left = `${Math.random() * 90}%`;
+      leaf.style.width = "20px";
+      leaf.style.height = "20px";
+      leaf.style.opacity = "0.6";
+      fallingLeavesRef.current.push(leaf);
+      navRef.current?.appendChild(leaf);
+
+      gsap.to(leaf, {
+        y: navbarHeight,
+        duration: Math.random() * 5 + 5,
+        x: `+=${Math.random() * 100 - 50}%`,
+        repeat: -1,
+        yoyo: false,
+        ease: "power1.inOut",
+        delay: Math.random() * 5,
+        onRepeat: () => {
+          gsap.set(leaf, { top: `${Math.random() * -50}px` });
+        },
+      });
+    }
+  };
+
+  // Fonction pour créer les plantes en fleurs
+  const createBloomingPlants = (navbarHeight: number) => {
+    const numFlowers = 15;
+
+    for (let i = 0; i < numFlowers; i++) {
+      const flower = document.createElement("img");
+      flower.src = "/images/blooming-plants.png";
+      flower.classList.add("flower");
+      flower.style.position = "absolute";
+      flower.style.bottom = "0px";
+      flower.style.left = `${Math.random() * 90}%`;
+      flower.style.width = "0px";
+      flower.style.height = "0px";
+      flower.style.opacity = "0.6";
+      bloomingPlantsRef.current.push(flower);
+      navRef.current?.appendChild(flower);
+
+      gsap.to(flower, {
+        width: `${Math.random() * 30 + 50}px`,
+        height: `${Math.random() * 30 + 50}px`,
+        duration: Math.random() * 2 + 1,
+        ease: "elastic.out(1, 0.5)",
+        delay: Math.random() * 1.5,
+      });
+    }
+  };
+
+  // Fonction pour créer les palmiers
+  const createPalmTrees = (navbarHeight: number) => {
+    const numPalmTrees = 15;
+
+    for (let i = 0; i < numPalmTrees; i++) {
+      const palmTree = document.createElement("img");
+      palmTree.src = "/images/palm-tree.png";
+      palmTree.classList.add("palm-tree");
+      palmTree.style.position = "absolute";
+      palmTree.style.top = `${Math.random() * 100}%`;
+      palmTree.style.left = `${Math.random() * 90}%`;
+      palmTree.style.width = "40px";
+      palmTree.style.height = "60px";
+      palmTree.style.opacity = "0.6";
+      palmTreeRef.current.push(palmTree);
+      navRef.current?.appendChild(palmTree);
+
+      gsap.to(palmTree, {
+        rotation: Math.random() * 50 - 50,
+        duration: Math.random() * 4 + 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "power1.inOut",
+      });
+    }
+  };
+
+  if (!isClient) return null;
 
   return (
     <div className="relative h-screen">
@@ -187,19 +201,6 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
         className={`fixed z-40 top-0 left-0 h-screen bg-gradient-to-r from-light-blue to-light-green shadow-[0_10px_10px_0_rgba(0,0,0,0.75)] p-5 transition-transform duration-300 flex flex-col items-center
         ${isMenuOpen ? "translate-x-0 lg:pointer-events-none pointer-events-auto" : "-translate-x-full lg:pointer-events-auto pointer-events-none"} lg:translate-x-0 lg:relative lg:w-4/5 w-3/5 sm:w-2/6`}
       >
-        {season === "winter" && (
-          <div ref={(el) => { if (el) snowflakesRef.current.push(el); }} className="absolute top-0 left-0 w-full h-full" />
-        )}
-        {season === "fall" && (
-          <div ref={(el) => { if (el) fallingLeavesRef.current.push(el); }} className="absolute top-0 left-0 w-full h-full" />
-        )}
-        {season === "spring" && (
-          <div ref={(el) => { if (el) bloomingPlantsRef.current.push(el); }} className="absolute top-0 left-0 w-full h-full" />
-        )}
-        {season === "summer" && (
-          <div ref={(el) => { if (el) palmTreeRef.current.push(el); }} className="absolute top-0 left-0 w-full h-full" />
-        )}
-
         <button
           aria-label="Fermer le menu"
           className={`absolute top-5 right-5 text-2xl lg:hidden ${isMenuOpen ? "block" : "hidden"}`}

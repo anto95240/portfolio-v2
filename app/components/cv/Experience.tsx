@@ -69,27 +69,28 @@ export default function Experience() {
   }, [experiences]);
 
   useEffect(() => {
-    if (experiences.length > 0) {
-      gsap.registerPlugin(ScrollTrigger);
+    if (typeof window !== 'undefined') {
+      if (experiences.length > 0) {
+        gsap.registerPlugin(ScrollTrigger);
 
-      // Animation fade-left2 avec stagger
-      gsap.fromTo(
-        ".fade-left2",
-        { x: -50, opacity: 0 }, // Début de l'animation
-        {
-          x: 0, // Arrive à sa position finale
-          opacity: 1,
-          duration: 2,
-          ease: "power3.out",
-          stagger: 0.2, // Intervalle entre chaque élément
-          scrollTrigger: {
-            trigger: ".fade-left2",
-            start: "top 90%", // L'animation commence quand l'élément atteint 90% du haut
-            end: "top 10%", // Terminé quand l'élément atteint 30%
-            scrub: true,
-          },
-        }
-      );
+        gsap.fromTo(
+          ".fade-left2",
+          { x: -50, opacity: 0 }, // Début de l'animation
+          {
+            x: 0, // Arrive à sa position finale
+            opacity: 1,
+            duration: 2,
+            ease: "power3.out",
+            stagger: 0.2, // Intervalle entre chaque élément
+            scrollTrigger: {
+              trigger: ".fade-left2",
+              start: "top 90%", // L'animation commence quand l'élément atteint 90% du haut
+              end: "top 10%", // Terminé quand l'élément atteint 30%
+              scrub: true,
+            },
+          }
+        );
+      }
     }
   }, [experiences]);
 

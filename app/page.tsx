@@ -11,24 +11,35 @@ import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
-  
-    // Gérer l'affichage du bouton Retour en haut en fonction de la position de défilement
-    useEffect(() => {
+  const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  // Détecter si l'environnement est côté client
+  useEffect(() => {
+    setIsClient(true); // S'assurer que ce code ne tourne que côté client
+  }, []);
+
+  // Gestion de l'événement de scroll pour afficher/masquer le bouton "Retour en haut"
+  useEffect(() => {
+    if (isClient) {
       const handleScroll = () => {
         setShowScrollToTopButton(window.scrollY > 200);
       };
-  
+
       window.addEventListener("scroll", handleScroll);
       return () => {
         window.removeEventListener("scroll", handleScroll);
       };
-    }, []);    
-  
-    // Fonction pour revenir en haut de la page
-    const scrollToTop = () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
+    }
+  }, [isClient]);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  if (!isClient) {
+    return null; // Ne pas rendre le composant tant que le client n'est pas monté
+  }
 
   return (
     <div className="flex h-screen bg-white">
@@ -41,31 +52,34 @@ export default function Home() {
       <div className="flex-1 flex flex-col items-center mt-10 mx-auto px-5 lg:pl-56 w-full lg:w-3/4 lg:max-w-9xl">
         <section className="flex flex-col lg:flex-row gap-10 lg:gap-20 items-center">
           <div className="flex flex-col justify-center text-center lg:text-left">
-            <p className="text-center fade-in">
+            <p className="text-center">
               Hello, moi c’est <b>Antoine</b> ! <br /><br />
             </p>
-            <p className="text-center fade-in">
+            <p className="text-center">
               <b>Etudiant</b> en <br /> <b>informatique</b>. <br /><br />
             </p>
-            <p className="text-center fade-in">
+            <p className="text-center">
               Je suis actuellement un cursus de 5 ans en <br /> informatique et me passionne de plus en plus pour <br /> le <b>domaine du web</b> et plus précisément pour le <br /> <b>développement web front-end</b>.
             </p>
           </div>
           <div>
             <Image
-              className="mb-10"
+              className="mb-10 w-56 h-80"
               src="/images/photo.svg"
               alt="Photo d'Antoine"
               width={230}
               height={310}
+              priority
             />
           </div>
         </section>
 
         {/* Outils et projets */}
         <Outil />
-        <ProjetCV />
         
+        {/* Composant ProjetCV : rendu uniquement côté client */}
+        {isClient && <ProjetCV />}
+
         {/* Footer */}
         <Footer />
       </div>

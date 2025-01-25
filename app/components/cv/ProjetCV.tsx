@@ -27,29 +27,64 @@ type Project = {
 export default function ProjectCV() {
   const router = useRouter();
   const pathname = usePathname();
+  const [projetStyle, setProjetStyle] = useState("mb-5 text-center");
   const [projectsData, setProjectsData] = useState<{ homePage: Record<string, { projects: Project[] }> } | null>(null);
   const [activeProject, setActiveProject] = useState<string | null>(null);
+  const [isClient, setIsClient] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  // Assurez-vous que le code s'exécute uniquement côté client
+  useEffect(() => {
+    setIsClient(true); // Code client uniquement
+  }, []);
+
+
+  useEffect(() => {
+    setIsClient(true); // Assure-toi que le code ne tourne que côté client
+    if (pathname.startsWith("/projet/cv")) {
+      setProjetStyle("text-2xl mb-10 text-center");
+    } else {
+      setProjetStyle("mb-5 text-center");
+    }
+  }, [pathname]);
 
   // Chargement des projets depuis l'API
   useEffect(() => {
-    fetch("/api/projets")
-      .then((res) => res.json())
-      .then(setProjectsData)
-      .catch((error) => console.error("Erreur de chargement:", error));
-  }, []);
+    if (isClient) { // Ne charger les données qu'une fois côté client
+      fetch("/api/projets")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Erreur de chargement des projets");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setProjectsData(data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          setError("Une erreur est survenue lors du chargement des projets.");
+          setLoading(false);
+        });
+    }
+  }, [isClient]);
 
-  const categories = useMemo(() => Object.keys(projectsData?.homePage ?? {}), [projectsData]);
+  // Vérifiez si projectsData est null avant de l'utiliser
+  const categories = useMemo(() => {
+    if (!projectsData) return [];
+    return Object.keys(projectsData.homePage ?? {});
+  }, [projectsData]);
 
-  const allProjects = useMemo(
-    () =>
-      categories.flatMap((category) =>
-        projectsData?.homePage?.[category]?.projects.map((project) => ({
-          ...project,
-          uniqueId: `${category}-${project.id}`,
-        })) || []
-      ),
-    [categories, projectsData]
-  );
+  const allProjects = useMemo(() => {
+    if (!projectsData) return [];
+    return categories.flatMap((category) =>
+      projectsData?.homePage?.[category]?.projects.map((project) => ({
+        ...project,
+        uniqueId: `${category}-${project.id}`,
+      })) || []
+    );
+  }, [categories, projectsData]);
 
   const toggleInfo = useCallback((uniqueId: string) => {
     setActiveProject((prevId) => (prevId === uniqueId ? null : uniqueId));
@@ -60,11 +95,11 @@ export default function ProjectCV() {
   }, [router]);
 
   const ProjetText = "Mes projets";
-  const ProjetStyle = pathname.startsWith("/projet/cv") ? "text-2xl mb-10 text-center" : "mb-5 text-center";
+  // const ProjetStyle = pathname.startsWith("/projet/cv") ? "text-2xl mb-10 text-center" : "mb-5 text-center";
 
-  // Animation des projets au scroll
+  // Animation des projets au scroll uniquement côté client
   useEffect(() => {
-    if (projectsData) {
+    if (isClient && typeof window !== 'undefined') {
       gsap.utils.toArray<HTMLElement>('.fade-down').forEach((elem) => {
         gsap.fromTo(
           elem,
@@ -84,14 +119,21 @@ export default function ProjectCV() {
         );
       });
     }
-  }, [projectsData]);
+  }, [isClient, projectsData]);
 
-  if (!projectsData) return <p className="text-center">Chargement des projets...</p>;
+  // Si les données ne sont pas encore chargées, afficher le message de chargement
+  if (!isClient || loading) {
+    return <p>Chargement des projets...</p>;
+  }
+
+  if (!projectsData) {
+    return <p>Le projet n&#39a pas été trouvé.</p>
+  }
 
   return (
     <div className="w-full md:w-10/12 lg:w-8/12 flex flex-col mx-auto">
       <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
-      <h1 className={ProjetStyle}>{ProjetText}</h1>
+      <h1 className={projetStyle}>{ProjetText}</h1>
       <div className="grid grid-cols-1 gap-5 max-w-3xl mx-auto md:grid-cols-2 text-center">
         {allProjects.map((project, index) => {
           const mainImage = project.images.find((image) => image.type === "main")?.url || "/default-image.jpg";

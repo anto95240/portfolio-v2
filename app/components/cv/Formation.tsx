@@ -52,27 +52,28 @@ export default function Formation() {
   }, [formations]);
 
   useEffect(() => {
-    if (formations.length > 0) {
-      gsap.registerPlugin(ScrollTrigger);
+    if (typeof window !== 'undefined') {
+      if (formations.length > 0) {
+        gsap.registerPlugin(ScrollTrigger);
 
-      // Animation fade-right avec stagger
-      gsap.fromTo(
-        ".fade-right",
-        { x: 50, opacity: 0 }, // Début de l'animation
-        {
-          x: 0, // Arrive à sa position finale
-          opacity: 1,
-          duration: 2,
-          ease: "power3.out",
-          stagger: 0.2, // Intervalle entre chaque élément
-          scrollTrigger: {
-            trigger: ".fade-right",
-            start: "top 90%", // L'animation commence quand l'élément atteint 90% du haut
-            end: "top 20%", // Terminé quand l'élément atteint 30%
-            scrub: true,
-          },
-        }
-      );
+        gsap.fromTo(
+          ".fade-right",
+          { x: 50, opacity: 0 }, // Début de l'animation
+          {
+            x: 0, // Arrive à sa position finale
+            opacity: 1,
+            duration: 2,
+            ease: "power3.out",
+            stagger: 0.2, // Intervalle entre chaque élément
+            scrollTrigger: {
+              trigger: ".fade-right",
+              start: "top 90%", // L'animation commence quand l'élément atteint 90% du haut
+              end: "top 20%", // Terminé quand l'élément atteint 30%
+              scrub: true,
+            },
+          }
+        );
+      }
     }
   }, [formations]);
 

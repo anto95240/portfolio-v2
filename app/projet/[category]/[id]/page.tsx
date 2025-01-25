@@ -73,12 +73,14 @@ export default function ProjetDetail() {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollToTopButton(window.scrollY > 200);
-    };
+    if (typeof window !== 'undefined') {
+      const handleScroll = () => {
+        setShowScrollToTopButton(window.scrollY > 200);
+      };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
   }, []);
 
   const scrollToTop = () => {
@@ -86,26 +88,28 @@ export default function ProjetDetail() {
   };
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    if (typeof window !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
 
-    gsap.utils.toArray<HTMLElement>(".fade-down").forEach((elem) => {
-      gsap.fromTo(
-        elem,
-        { y: 80, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.5,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: elem,
-            start: "top 90%",
-            end: "top 10%",
-            scrub: true,
-          },
-        }
-      );
-    });
+      gsap.utils.toArray<HTMLElement>(".fade-down").forEach((elem) => {
+        gsap.fromTo(
+          elem,
+          { y: 80, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1.5,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: elem,
+              start: "top 90%",
+              end: "top 10%",
+              scrub: true,
+            },
+          }
+        );
+      });
+    }
   }, [project]);
 
   if (loading) {
@@ -136,11 +140,10 @@ export default function ProjetDetail() {
             <Image
               src={project.images?.find((img) => img.type === "main")?.url || ""}
               alt={`${project.title} Image`}
-              layout="intrinsic"
               width={500}
               height={345}
               className="rounded-b-3xl h-auto w-4/5"
-              loading="lazy"
+              priority
             />
             <div className="flex flex-col w-full gap-x-12">
               <div className={`mb-8 relative ${isMenuOpen ? "z-10" : "z-50"}`}>
@@ -185,7 +188,14 @@ export default function ProjetDetail() {
                   {project.images?.filter((img) => img.type === "gallery").map((img, linkIndex) => (
                     <div key={linkIndex} className="flex flex-col gap-3">
                       <div className="flex ml-3">
-                        <Image alt={`Image ${linkIndex + 1}`} src={img.url} width={700} height={500} className="rounded-md fade-down" loading="lazy" />
+                        <Image 
+                          alt={`Image ${linkIndex + 1}`} 
+                          src={img.url} 
+                          width={700} 
+                          height={500} 
+                          className="rounded-md fade-down" 
+                          priority
+                        />
                       </div>
                     </div>
                   ))}

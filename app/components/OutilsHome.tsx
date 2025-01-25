@@ -16,6 +16,11 @@ export default function OutilHome() {
   const [tools, setTools] = useState<Tool[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true); // On s'assure que ce code ne tourne que côté client
+  }, []);
 
   useEffect(() => {
     fetch("/api/cv_skill")
@@ -30,41 +35,40 @@ export default function OutilHome() {
         setLoading(false);
       })
       .catch((error) => {
-        console.error(error);
         setError("Une erreur est survenue lors du chargement des outils.");
         setLoading(false);
       });
   }, []);
 
   useEffect(() => {
+    if (!isClient) return;
+
     gsap.registerPlugin(ScrollTrigger);
 
-    // Animation fade-left2 avec stagger
-    gsap.fromTo(
-      ".fade-left",
-      { x: -50, opacity: 0 },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 1.5,
-        ease: "power3.out",
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: ".fade-left",
-          start: "top 70%",
-          end: "top 50%",
-          scrub: true,
-        },
-      }
-    );
-  }, [tools]);
+    const fadeLeftElements = document.querySelectorAll(".fade-left");
+    if (fadeLeftElements.length) {
+      gsap.fromTo(
+        fadeLeftElements,
+        { x: -50, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.out",
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: ".fade-left",
+            start: "top 70%",
+            end: "top 40%",
+            scrub: true,
+          },
+        }
+      );
+    }
+  }, [isClient, tools]);
 
   if (loading) {
     return <p>Chargement des outils...</p>;
-  }
-
-  if (error) {
-    return <p>{error}</p>;
   }
 
   return (
@@ -84,7 +88,7 @@ export default function OutilHome() {
                   alt={`Logo de ${tool.title}`}
                   width={30}
                   height={30}
-                  className="rounded-md fade-left"
+                  className="rounded-md fade-left w-7 h-7"
                   aria-label={`Logo de ${tool.title}`}
                   loading="lazy"
                 />

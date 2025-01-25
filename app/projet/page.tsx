@@ -13,14 +13,16 @@ export default function Projet() {
 
   // Gérer l'affichage du bouton Retour en haut en fonction de la position de défilement
   useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollToTopButton(window.scrollY > 200);
-    };
+    if (typeof window !== 'undefined') {
+      const handleScroll = () => {
+        setShowScrollToTopButton(window.scrollY > 200);
+      };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
   }, []);  
 
   // Fonction pour revenir en haut de la page

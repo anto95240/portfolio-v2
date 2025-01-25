@@ -44,16 +44,18 @@ export default function ThemePage() {
 
   // Vérifie si l'appareil est mobile (small screen)
   useEffect(() => {
-    const checkIfMobile = () => {
-      setIsMobile(window.innerWidth <= 768); // Utilise 768px comme seuil
-    };
+    if (typeof window !== 'undefined') {
+      const checkIfMobile = () => {
+        setIsMobile(window.innerWidth <= 768); // Utilise 768px comme seuil
+      };
 
-    checkIfMobile(); // Initial check
-    window.addEventListener("resize", checkIfMobile); // Met à jour lors du redimensionnement
+      checkIfMobile(); // Initial check
+      window.addEventListener("resize", checkIfMobile); // Met à jour lors du redimensionnement
 
-    return () => {
-      window.removeEventListener("resize", checkIfMobile); // Nettoie l'événement lors du démontage
-    };
+      return () => {
+        window.removeEventListener("resize", checkIfMobile); // Nettoie l'événement lors du démontage
+      };
+    }
   }, []);
 
   const formatDescription = (description: string) => {

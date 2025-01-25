@@ -15,12 +15,18 @@ export default function Cv() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("profil");
   const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   const profilRef = useRef<HTMLDivElement>(null);
   const skillRef = useRef<HTMLDivElement>(null);
   const experienceRef = useRef<HTMLDivElement>(null);
   const formationRef = useRef<HTMLDivElement>(null);
   const projetRef = useRef<HTMLDivElement>(null);
+
+  // Détecter si l'environnement est côté client
+  useEffect(() => {
+    setIsClient(true); // S'assurer que ce code ne tourne que côté client
+  }, []);
 
   const sections = useMemo(
     () => [
@@ -61,13 +67,22 @@ export default function Cv() {
   }, [sections]);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+    if (isClient) {
+
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
+  }, [isClient]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  if (!isClient) {
+    return null; // Ne pas rendre le composant tant que le client n'est pas monté
+  }
 
   return (
     <div className="flex h-screen bg-white">
@@ -86,7 +101,8 @@ export default function Cv() {
               alt="Photo de Antoine Richard"
               width={230}
               height={310}
-              loading="lazy"
+              priority
+              className="w-56 h-80"
             />
           </div>
           <div className="flex flex-col gap-5 items-center">
@@ -108,7 +124,7 @@ export default function Cv() {
         <div ref={skillRef} className="w-full"><Skill /></div>
         <div ref={experienceRef} className="w-full"><Experience /></div>
         <div ref={formationRef} className="w-full"><Formation /></div>
-        <div ref={projetRef} className="w-full"><ProjetCV /></div>
+        <div ref={projetRef} className="w-full">{isClient && <ProjetCV />}</div>
         <Footer />
 
         {showScrollToTopButton && (

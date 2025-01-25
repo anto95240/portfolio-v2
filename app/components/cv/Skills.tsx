@@ -41,27 +41,29 @@ export default function Skill() {
   }, []);
 
   useEffect(() => {
-    if (skills) {
-      gsap.registerPlugin(ScrollTrigger);
-  
-      // Animation synchronisée des titres et compétences
-      gsap.fromTo(
-        ".skills-title, .skills-row > div",
-        { x: -50, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 1.5,
-          ease: "power3.out",
-          stagger: 0.2,
-          scrollTrigger: {
-            trigger: ".skills-container",
-            start: "top 90%",
-            end: "bottom 0%",
-            scrub: true,
-          },
-        }
-      );
+    if (typeof window !== 'undefined') {
+      if (skills) {
+        gsap.registerPlugin(ScrollTrigger);
+    
+        // Animation synchronisée des titres et compétences
+        gsap.fromTo(
+          ".skills-title, .skills-row > div",
+          { x: -50, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 1.5,
+            ease: "power3.out",
+            stagger: 0.2,
+            scrollTrigger: {
+              trigger: ".skills-container",
+              start: "top 90%",
+              end: "bottom 0%",
+              scrub: true,
+            },
+          }
+        );
+      }
     }
   }, [skills]);
    

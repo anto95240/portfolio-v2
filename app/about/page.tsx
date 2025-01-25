@@ -33,11 +33,12 @@ export default function About() {
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10 lg:gap-20 w-full">
           <div>
             <Image
-              className="mb-10"
+              className="mb-10 w-56 h-80"
               src="/images/photo.svg"
               alt="Photo"
               width={230}
               height={310}
+              priority
             />
           </div>
           <div className="flex flex-col">

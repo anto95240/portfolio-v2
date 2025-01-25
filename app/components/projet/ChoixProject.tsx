@@ -113,7 +113,7 @@ export default function ProjectChoice() {
                   </li>
                 ))
               ) : (
-                <p>Aucun projet trouvé pour cette catégorie.</p>
+                <li>Aucun projet trouvé pour cette catégorie.</li>
               )}
             </ul>
             <button

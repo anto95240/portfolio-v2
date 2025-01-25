@@ -84,40 +84,44 @@ export default function ProjetCategory() {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollToTopButton(window.scrollY > 200);
-    };
+    if (typeof window !== 'undefined') {
+      const handleScroll = () => {
+        setShowScrollToTopButton(window.scrollY > 200);
+      };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
   }, []);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-  
-    projects.forEach((_: Project, index: number) => {
-      const direction = index % 2 === 0 ? "fade-left" : "fade-right";
-      const fromX = direction === "fade-left" ? -40 : 40;
-  
-      gsap.fromTo(
-        `.project-${index} .${direction}`,
-        { x: fromX, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: `.project-${index}`,
-            start: "top 60%",
-            end: "top 30%",
-            scrub: true,
-          },
-        }
-      );
-    });
+    if (typeof window !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+    
+      projects.forEach((_: Project, index: number) => {
+        const direction = index % 2 === 0 ? "fade-left" : "fade-right";
+        const fromX = direction === "fade-left" ? -40 : 40;
+    
+        gsap.fromTo(
+          `.project-${index} .${direction}`,
+          { x: fromX, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 1,
+            stagger: 0.1,
+            scrollTrigger: {
+              trigger: `.project-${index}`,
+              start: "top 60%",
+              end: "top 30%",
+              scrub: true,
+            },
+          }
+        );
+      });
+    }
   }, [projects]);
 
   const scrollToTop = () => {
@@ -159,6 +163,7 @@ export default function ProjetCategory() {
                       alt={`${project.title} Image`}
                       width={500}
                       height={345}
+                      priority
                       className="rounded-md mb-4"
                     />
                   </div>
