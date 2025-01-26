@@ -94,7 +94,7 @@ export default function Cv() {
     <div className="flex h-screen bg-white">
       {/* Menu latéral */}
       <div className="w-1/4 fixed z-50 h-full">
-        {isClient && <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />}
+        <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
       {/* Contenu principal */}
@@ -127,11 +127,11 @@ export default function Cv() {
           </div>
         </div>
 
-        <div ref={skillRef} className="w-full">{isClient && <Skill />}</div>
-        <div ref={experienceRef} className="w-full">{isClient && <Experience />}</div>
-        <div ref={formationRef} className="w-full">{isClient && <Formation />}</div>
-        <div ref={projetRef} className="w-full">{isClient && <ProjetCV />}</div>
-        {isClient && <Footer />}
+        <div ref={skillRef} className="w-full"><Skill /></div>
+        <div ref={experienceRef} className="w-full"><Experience /></div>
+        <div ref={formationRef} className="w-full"><Formation /></div>
+        <div ref={projetRef} className="w-full"><ProjetCV /></div>
+        <Footer />
 
         {showScrollToTopButton && (
           <button

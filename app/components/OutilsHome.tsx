@@ -39,8 +39,10 @@ export default function OutilHome() {
         }
         const data = await response.json();
         setTools(data.homepage.skills as Tool[]);
+        setLoading(false);
       } catch (error) {
         console.error("Erreur API:", error);
+        setLoading(false);
       }
     };
 

@@ -48,14 +48,14 @@ export default function Projet() {
     <div className="flex h-screen bg-white">
       {/* Composant Nav */}
       <div className="w-1/4 fixed z-50 h-full">
-        {isClient && <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />}
+        <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
       {/* Contenu principal */}
       <div className="flex-1 flex flex-col items-center mt-5 mx-auto px-5 lg:pl-56 w-full lg:w-3/4 lg:max-w-9xl">
         <h1 className="text-3xl mb-10">Liste de projets</h1>
-        {isClient && <Theme />}
-        {isClient && <Footer />}
+        <Theme />
+        <Footer />
       </div>
 
       {/* Bouton Retour en haut (uniquement visible sur mobile et tablette) */}

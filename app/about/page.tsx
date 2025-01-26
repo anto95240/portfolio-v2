@@ -1,26 +1,13 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import Nav from "../components/Navbar";
 import Footer from "../components/Footer";
 import Image from "next/image";
 import clsx from "clsx"; // Ajout de clsx pour gérer les classes dynamiques
 
-// Hook personnalisé pour gérer l'état 'isClient'
-const useIsClient = () => {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  return isClient;
-};
-
 export default function About() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const isClient = useIsClient();
 
   const hobbies = [
     { id: 1, name: "Football", bgColor: "bg-blue-300" },
@@ -28,13 +15,11 @@ export default function About() {
     { id: 3, name: "Lecture", bgColor: "bg-blue-300" }
   ];
 
-  if (!isClient) return null;
-
   return (
     <div className="flex h-screen bg-white">
       {/* Composant Nav */}
       <div className="w-1/4 fixed z-50 h-full">
-              {isClient && <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />}
+        <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
       {/* Contenu principal */}
@@ -70,7 +55,7 @@ export default function About() {
           </div>
         </div>
 
-        {isClient && <Footer />}
+        <Footer />
       </div>
     </div>
   );

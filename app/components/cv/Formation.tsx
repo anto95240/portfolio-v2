@@ -27,6 +27,7 @@ export default function Formation() {
   const [formations, setFormations] = useState<Formation[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
 
+  const [loading, setLoading] = useState(true);
   const isClient = useIsClient();
 
   // Fonction pour récupérer les formations depuis l'API interne
@@ -38,11 +39,13 @@ export default function Formation() {
       }
       const data = await response.json();
       setFormations(data.cvpage.formation);
+      setLoading(false);
       if (data.cvpage.formation.length > 0) {
         setActiveId(data.cvpage.formation[0].id);
       }
     } catch (error) {
       console.error("Erreur API:", error);
+      setLoading(false);
     }
   };
 
@@ -87,6 +90,10 @@ export default function Formation() {
       );
     }
   }, [formations]);
+
+  if (loading) {
+    return <p>Chargement des formations...</p>;
+  }
 
   if (!formations.length) return <p>Chargement des formations...</p>;
 

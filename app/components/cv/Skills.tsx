@@ -32,6 +32,7 @@ type Skills = {
 export default function Skill() {
   const [skills, setSkills] = useState<Skills | null>(null);
   
+  const [loading, setLoading] = useState(true);
   // Utilisation du hook personnalisé 'useIsClient'
   const isClient = useIsClient();
 
@@ -44,8 +45,10 @@ export default function Skill() {
       }
       const data = await response.json();
       setSkills(data.cvpage.skills); // Met à jour les compétences
+      setLoading(false);
     } catch (error) {
       console.error("Erreur API:", error);
+      setLoading(false);
     }
   };
 
@@ -82,6 +85,9 @@ export default function Skill() {
   // Si les compétences ne sont pas encore chargées
   if (!skills) return <p>Chargement des compétences...</p>;
 
+  if (loading) {
+    return <p>Chargement des compétences...</p>;
+  }
   // Fonction pour afficher les compétences par catégorie
   const renderSkills = (skillsList: SkillItem[], category: string) => (
     <div className="skills-container">

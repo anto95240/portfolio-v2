@@ -56,6 +56,7 @@ export default function ProjetCategory() {
   const [projectsData, setProjectsData] = useState<ProjectsData | null>(null);
   const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
   
+  const [loading, setLoading] = useState(true);
   const isClient = useIsClient();
 
   const categories = ["jeux", "ydays", "web"];
@@ -69,6 +70,8 @@ export default function ProjetCategory() {
 
   useEffect(() => {
     const fetchProjects = async () => {
+      setLoading(true); // Active le loading avant l'appel API
+  
       try {
         const response = await fetch("/api/projets");
         if (!response.ok) {
@@ -78,9 +81,11 @@ export default function ProjetCategory() {
         setProjectsData(data.projectPage || {});
       } catch (error) {
         console.error("Erreur API:", error);
+      } finally {
+        setLoading(false); // Arrêt du loading dans tous les cas
       }
     };
-
+  
     fetchProjects();
   }, []);
 
@@ -143,10 +148,14 @@ export default function ProjetCategory() {
     return <div>Catégorie invalide.</div>;
   }
 
+  if (loading) {
+    return <p>Chargement des projets...</p>;
+  }
+  
   return (
     <div className={`flex h-full ${categoryStyles[category]?.bg}`}>
       <div className="w-1/4 fixed z-50 h-full">
-        {isClient && <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />}
+        <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
       <div className={`flex-1 flex flex-col items-center mt-10 mx-auto px-5 lg:pl-56 ${categoryStyles[category]?.text} w-full lg:w-3/4 lg:max-w-9xl`}>
@@ -201,7 +210,7 @@ export default function ProjetCategory() {
           <Popup project={selectedProject} category={String(category)} onClose={handleClosePopup} />
         )}
 
-        {isClient && <Footer />}
+        <Footer />
       </div>
 
       {showScrollToTopButton && (

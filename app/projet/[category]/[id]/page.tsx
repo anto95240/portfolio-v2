@@ -50,9 +50,9 @@ const useIsClient = () => {
 export default function ProjetDetail() {
   const { id, category } = useParams<{ id: string; category: keyof CategoryStyles }>();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
   const [projectsData, setProjectsData] = useState<ProjectsData | null>(null);
-  const [loading, setLoading] = useState(true); // État de chargement
   
   const isClient = useIsClient();
 
@@ -69,16 +69,15 @@ export default function ProjetDetail() {
 
   useEffect(() => {
     const fetchProjects = async () => {
-      setLoading(true); // Démarrer le chargement
       try {
         const response = await fetch("/api/projets");
         if (!response.ok) throw new Error("Erreur lors de la récupération des projets");
         const data = await response.json();
         setProjectsData(data.projectPage || {});
+        setLoading(false);
       } catch (error) {
         console.error("Erreur API:", error);
-      } finally {
-        setLoading(false); // Fin du chargement
+        setLoading(false);
       }
     };
 
@@ -126,24 +125,22 @@ export default function ProjetDetail() {
     }
   }, [isClient, project]);
 
-  if (loading) {
-    return (
-      <p className="text-xl">Chargement des données...</p>
-    );
-  }
-
   if (!project) {
     return (
       <p className="text-xl">Le projet n&#39a pas été trouvé.</p>
     );
   }
 
+  if (loading) {
+    return <p>Chargement des projets...</p>;
+  }
+  
   if (!isClient) return null;
   
   return (
     <div className={`flex h-full ${categoryStyles[category]?.bg}`}>
       <div className="w-1/4 fixed z-50 h-full">
-        {isClient && <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />}
+        <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
       <div className={`flex-1 flex flex-col items-center mx-auto px-5 lg:pl-56 ${categoryStyles[category]?.text} w-full lg:w-3/4 lg:max-w-9xl`}>
@@ -216,8 +213,8 @@ export default function ProjetDetail() {
             </div>
           </div>
         </div>
-        {isClient && <ProjetChoice />}
-        {isClient && <Footer />}
+        <ProjetChoice />
+        <Footer />
       </div>
 
       {showScrollToTopButton && (

@@ -49,7 +49,7 @@ export default function Home() {
     <div className="flex h-screen bg-white">
       {/* Composant Nav */}
       <div className="w-1/4 fixed z-50 h-full">
-        {isClient && <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />}
+        <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
       {/* Contenu principal */}
@@ -79,10 +79,10 @@ export default function Home() {
         </section>
 
         {/* Outils et projets */}
-        {isClient && <Outil />}
+        <Outil />
         
         {/* Composant ProjetCV : rendu uniquement côté client */}
-        {isClient && <ProjetCV />}
+        <ProjetCV />
 
         <Footer />
 

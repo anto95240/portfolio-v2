@@ -28,10 +28,13 @@ export default function Experience() {
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
 
+  const [loading, setLoading] = useState(true);
   const isClient = useIsClient();
 
   // Fonction pour récupérer les expériences depuis l'API interne
   const fetchExperiences = async () => {
+    setLoading(true); // Assurez-vous de démarrer le chargement avant l'appel API
+
     try {
       const response = await fetch("/api/experience");
       if (!response.ok) {
@@ -39,11 +42,14 @@ export default function Experience() {
       }
       const data = await response.json();
       setExperiences(data.cvpage.experience);
+
       if (data.cvpage.experience.length > 0) {
         setActiveId(data.cvpage.experience[0].id);
       }
     } catch (error) {
       console.error("Erreur API:", error);
+    } finally {
+      setLoading(false); // Arrêt du chargement dans tous les cas
     }
   };
 
@@ -103,6 +109,10 @@ export default function Experience() {
       }
     );
   }, [experiences]);
+
+  if (loading) {
+    return <p>Chargement des expériences...</p>;
+  }
 
   if (!experiences.length) return <p>Chargement des expériences...</p>;
 
