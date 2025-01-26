@@ -36,12 +36,25 @@ type ProjectsData = {
   web: { projects: Project[] };
 };
 
+// Hook personnalisé pour gérer l'état 'isClient'
+const useIsClient = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  return isClient;
+};
+
 export default function ProjetDetail() {
   const { id, category } = useParams<{ id: string; category: keyof CategoryStyles }>();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
   const [projectsData, setProjectsData] = useState<ProjectsData | null>(null);
   const [loading, setLoading] = useState(true); // État de chargement
+  
+  const isClient = useIsClient();
 
   const categoryStyles: CategoryStyles = useMemo(() => ({
     ydays: { bg: "bg-gradient-to-r from-light-green to-green-blue", text: "text-black" },
@@ -73,22 +86,23 @@ export default function ProjetDetail() {
   }, []);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const handleScroll = () => {
-        setShowScrollToTopButton(window.scrollY > 200);
-      };
+    if (isClient) return;
+    
+    const handleScroll = () => {
+      setShowScrollToTopButton(window.scrollY > 200);
+    };
 
-      window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
-    }
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  // Initialiser gsap après le montage côté client
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (isClient && project) {
       gsap.registerPlugin(ScrollTrigger);
 
       gsap.utils.toArray<HTMLElement>(".fade-down").forEach((elem) => {
@@ -110,28 +124,26 @@ export default function ProjetDetail() {
         );
       });
     }
-  }, [project]);
+  }, [isClient, project]);
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-full">
-        <p className="text-xl">Chargement des données...</p>
-      </div>
+      <p className="text-xl">Chargement des données...</p>
     );
   }
 
   if (!project) {
     return (
-      <div className="flex items-center justify-center h-full">
-        <p className="text-xl">Le projet n&#39a pas été trouvé.</p>
-      </div>
+      <p className="text-xl">Le projet n&#39a pas été trouvé.</p>
     );
   }
 
+  if (!isClient) return null;
+  
   return (
     <div className={`flex h-full ${categoryStyles[category]?.bg}`}>
       <div className="w-1/4 fixed z-50 h-full">
-        <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+        {isClient && <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />}
       </div>
 
       <div className={`flex-1 flex flex-col items-center mx-auto px-5 lg:pl-56 ${categoryStyles[category]?.text} w-full lg:w-3/4 lg:max-w-9xl`}>
@@ -186,7 +198,7 @@ export default function ProjetDetail() {
                 </div>
                 <div className="flex flex-col gap-9 pl-10 mt-10">
                   {project.images?.filter((img) => img.type === "gallery").map((img, linkIndex) => (
-                    <div key={linkIndex} className="flex flex-col gap-3">
+                    <div key={linkIndex} className="flex flex-col gap-3 mx-auto">
                       <div className="flex ml-3">
                         <Image 
                           alt={`Image ${linkIndex + 1}`} 
@@ -204,8 +216,8 @@ export default function ProjetDetail() {
             </div>
           </div>
         </div>
-        <ProjetChoice />
-        <Footer />
+        {isClient && <ProjetChoice />}
+        {isClient && <Footer />}
       </div>
 
       {showScrollToTopButton && (

@@ -12,15 +12,23 @@ interface Tool {
   title: string;
 }
 
+// Hook personnalisé pour gérer l'état 'isClient'
+const useIsClient = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  return isClient;
+};
+
 export default function OutilHome() {
   const [tools, setTools] = useState<Tool[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [isClient, setIsClient] = useState(false);
 
-  useEffect(() => {
-    setIsClient(true); // On s'assure que ce code ne tourne que côté client
-  }, []);
+  const isClient = useIsClient();
 
   useEffect(() => {
     fetch("/api/cv_skill")
@@ -41,8 +49,6 @@ export default function OutilHome() {
   }, []);
 
   useEffect(() => {
-    if (!isClient) return;
-
     gsap.registerPlugin(ScrollTrigger);
 
     const fadeLeftElements = document.querySelectorAll(".fade-left");
@@ -67,6 +73,8 @@ export default function OutilHome() {
     }
   }, [isClient, tools]);
 
+  if (!isClient) return null;
+
   if (loading) {
     return <p>Chargement des outils...</p>;
   }
@@ -90,7 +98,6 @@ export default function OutilHome() {
                   height={30}
                   className="rounded-md fade-left w-7 h-7"
                   aria-label={`Logo de ${tool.title}`}
-                  loading="lazy"
                 />
                 <p className="md:text-lg text-base text-white ml-2 font-text fade-left">{tool.title}</p>
               </div>

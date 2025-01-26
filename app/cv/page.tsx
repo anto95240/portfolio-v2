@@ -11,22 +11,27 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faChartSimple, faBriefcase, faGraduationCap, faFileCircleCheck, faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
+// Hook personnalisé pour gérer l'état 'isClient'
+const useIsClient = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  return isClient;
+};
+
 export default function Cv() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("profil");
   const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
-  const [isClient, setIsClient] = useState(false);
 
   const profilRef = useRef<HTMLDivElement>(null);
   const skillRef = useRef<HTMLDivElement>(null);
   const experienceRef = useRef<HTMLDivElement>(null);
   const formationRef = useRef<HTMLDivElement>(null);
   const projetRef = useRef<HTMLDivElement>(null);
-
-  // Détecter si l'environnement est côté client
-  useEffect(() => {
-    setIsClient(true); // S'assurer que ce code ne tourne que côté client
-  }, []);
 
   const sections = useMemo(
     () => [
@@ -38,6 +43,8 @@ export default function Cv() {
     ],
     []
   );
+
+  const isClient = useIsClient();
 
   // Fonction de défilement avec "smooth scroll"
   const scrollToSection = useCallback((ref: React.RefObject<HTMLElement>) => {
@@ -68,7 +75,6 @@ export default function Cv() {
 
   useEffect(() => {
     if (isClient) {
-
       window.addEventListener("scroll", handleScroll);
       return () => {
         window.removeEventListener("scroll", handleScroll);
@@ -88,7 +94,7 @@ export default function Cv() {
     <div className="flex h-screen bg-white">
       {/* Menu latéral */}
       <div className="w-1/4 fixed z-50 h-full">
-        <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+        {isClient && <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />}
       </div>
 
       {/* Contenu principal */}
@@ -121,11 +127,11 @@ export default function Cv() {
           </div>
         </div>
 
-        <div ref={skillRef} className="w-full"><Skill /></div>
-        <div ref={experienceRef} className="w-full"><Experience /></div>
-        <div ref={formationRef} className="w-full"><Formation /></div>
+        <div ref={skillRef} className="w-full">{isClient && <Skill />}</div>
+        <div ref={experienceRef} className="w-full">{isClient && <Experience />}</div>
+        <div ref={formationRef} className="w-full">{isClient && <Formation />}</div>
         <div ref={projetRef} className="w-full">{isClient && <ProjetCV />}</div>
-        <Footer />
+        {isClient && <Footer />}
 
         {showScrollToTopButton && (
           <button

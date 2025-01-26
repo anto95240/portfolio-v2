@@ -7,10 +7,20 @@ import { faHouse, faCircleInfo, faFile, faFileCircleCheck, faChevronDown, faChev
 import Image from "next/image";
 import Link from "next/link";
 
+// Hook personnalisé pour gérer l'état 'isClient'
+const useIsClient = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  return isClient;
+};
+
 export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boolean; setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [isProjectOpen, setIsProjectOpen] = useState(false);
   const [season, setSeason] = useState<string>("winter");
-  const [isClient, setIsClient] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
 
   // Tableau de refs pour les flocons et les feuilles
@@ -22,14 +32,12 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleProjectList = () => setIsProjectOpen(!isProjectOpen);
 
-  // Set isClient to true once the component is mounted
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  // Récupère l'état 'isClient'
+  const isClient = useIsClient();
 
   // Logique de changement de saison, uniquement après le rendu côté client
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (isClient) {
       const now = new Date();
       const year = now.getFullYear();
 
@@ -49,24 +57,26 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
 
   // Animation des flocons de neige ou des feuilles tombantes
   useEffect(() => {
-    if (isClient && typeof window !== 'undefined') {
-      const navbarHeight = navRef.current?.offsetHeight || 0;
+    if (!isClient) return;
 
-      // Créer et animer les éléments en fonction de la saison
-      if (season === "winter") {
-        createSnowflakes(navbarHeight);
-      } else if (season === "fall") {
-        createFallingLeaves(navbarHeight);
-      } else if (season === "spring") {
-        createBloomingPlants(navbarHeight);
-      } else if (season === "summer") {
-        createPalmTrees(navbarHeight);
-      }
+    const navbarHeight = navRef.current?.offsetHeight || 0;
+
+    // Créer et animer les éléments en fonction de la saison
+    if (season === "winter") {
+      createSnowflakes(navbarHeight);
+    } else if (season === "fall") {
+      createFallingLeaves(navbarHeight);
+    } else if (season === "spring") {
+      createBloomingPlants(navbarHeight);
+    } else if (season === "summer") {
+      createPalmTrees(navbarHeight);
     }
   }, [season, isClient]);
 
   // Fonction pour créer les flocons de neige
   const createSnowflakes = (navbarHeight: number) => {
+    if (!isClient) return;
+
     const numFlakes = 20; // Nombre de flocons
 
     for (let i = 0; i < numFlakes; i++) {
@@ -100,6 +110,8 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
 
   // Fonction pour créer les feuilles tombantes
   const createFallingLeaves = (navbarHeight: number) => {
+    if (!isClient) return;
+
     const numLeaves = 20;
 
     for (let i = 0; i < numLeaves; i++) {
@@ -132,6 +144,8 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
 
   // Fonction pour créer les plantes en fleurs
   const createBloomingPlants = (navbarHeight: number) => {
+    if (!isClient) return;
+
     const numFlowers = 15;
 
     for (let i = 0; i < numFlowers; i++) {
@@ -159,6 +173,8 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
 
   // Fonction pour créer les palmiers
   const createPalmTrees = (navbarHeight: number) => {
+    if (!isClient) return;
+
     const numPalmTrees = 15;
 
     for (let i = 0; i < numPalmTrees; i++) {
@@ -254,17 +270,17 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
           </li>
 
           <li className="flex items-center gap-4">
-            <FontAwesomeIcon icon={faFile} className="text-2xl" />
-            <Link href="/cv" className="relative group z-50">
-              CV
+            <FontAwesomeIcon icon={faCircleInfo} className="text-2xl" />
+            <Link href="/about" className="relative group z-50">
+              A propos
               <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
             </Link>
           </li>
 
           <li className="flex items-center gap-4">
-            <FontAwesomeIcon icon={faCircleInfo} className="text-2xl" />
-            <Link href="/about" className="relative group z-50">
-              A propos
+            <FontAwesomeIcon icon={faFile} className="text-2xl" />
+            <Link href="/cv" className="relative group z-50">
+              CV
               <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
             </Link>
           </li>

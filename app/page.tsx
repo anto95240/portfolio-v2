@@ -9,43 +9,30 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
+// Hook personnalisé pour gérer l'état 'isClient'
+const useIsClient = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  return isClient;
+};
+
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
-  const [isClient, setIsClient] = useState(false);
+  
+  const isClient = useIsClient();
 
-  // Détecter si l'environnement est côté client
-  useEffect(() => {
-    setIsClient(true); // S'assurer que ce code ne tourne que côté client
-  }, []);
-
-  // Gestion de l'événement de scroll pour afficher/masquer le bouton "Retour en haut"
-  useEffect(() => {
-    if (isClient) {
-      const handleScroll = () => {
-        setShowScrollToTopButton(window.scrollY > 200);
-      };
-
-      window.addEventListener("scroll", handleScroll);
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
-    }
-  }, [isClient]);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  if (!isClient) {
-    return null; // Ne pas rendre le composant tant que le client n'est pas monté
-  }
+  if (!isClient) return null;
 
   return (
     <div className="flex h-screen bg-white">
       {/* Composant Nav */}
       <div className="w-1/4 fixed z-50 h-full">
-        <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+        {isClient && <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />}
       </div>
 
       {/* Contenu principal */}
@@ -75,25 +62,13 @@ export default function Home() {
         </section>
 
         {/* Outils et projets */}
-        <Outil />
+        {isClient && <Outil />}
         
         {/* Composant ProjetCV : rendu uniquement côté client */}
         {isClient && <ProjetCV />}
 
-        {/* Footer */}
         <Footer />
       </div>
-
-      {/* Bouton Retour en haut (uniquement visible sur mobile et tablette) */}
-      {showScrollToTopButton && (
-        <button
-          aria-label="Retour en haut"
-          onClick={scrollToTop}
-          className="fixed bottom-10 right-5 z-50 bg-blue-500 text-white p-3 rounded-full shadow-lg sm:hidden md:hidden"
-        >
-          <FontAwesomeIcon icon={faArrowUp} className="text-xl" />
-        </button>
-      )}
     </div>
   );
 }

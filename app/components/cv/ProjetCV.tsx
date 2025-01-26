@@ -9,7 +9,13 @@ import gsap from "gsap";
 import Image from "next/image";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+const useIsClient = () => {
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  return isClient;
+};
 
 type Project = {
   id: string;
@@ -24,24 +30,50 @@ type Project = {
   uniqueId?: string;
 };
 
+type ProjectsData = {
+  [key: string]: { projects: Project[] };
+};
+
 export default function ProjectCV() {
   const router = useRouter();
   const pathname = usePathname();
   const [projetStyle, setProjetStyle] = useState("mb-5 text-center");
-  const [projectsData, setProjectsData] = useState<{ homePage: Record<string, { projects: Project[] }> } | null>(null);
   const [activeProject, setActiveProject] = useState<string | null>(null);
-  const [isClient, setIsClient] = useState(false);
+  const [projectsData, setProjectsData] = useState<ProjectsData | null>(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
 
-  // Assurez-vous que le code s'exécute uniquement côté client
+  const isClient = useIsClient();
+
   useEffect(() => {
-    setIsClient(true); // Code client uniquement
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/projets');
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des projets");
+        }
+        const data = await response.json();
+  
+        if (data.homePage) {
+          setProjectsData(data.homePage);
+          setIsDataLoaded(true);
+          setLoading(false);
+        } else {
+          setError("Aucune donnée disponible.");
+          setLoading(false);
+        }
+      } catch (error) {
+        setError("Erreur lors de la récupération des projets");
+        setLoading(false);
+        console.error("Erreur API:", error);
+      }
+    };
+  
+    fetchData();
   }, []);
 
-
   useEffect(() => {
-    setIsClient(true); // Assure-toi que le code ne tourne que côté client
     if (pathname.startsWith("/projet/cv")) {
       setProjetStyle("text-2xl mb-10 text-center");
     } else {
@@ -49,41 +81,22 @@ export default function ProjectCV() {
     }
   }, [pathname]);
 
-  // Chargement des projets depuis l'API
-  useEffect(() => {
-    if (isClient) { // Ne charger les données qu'une fois côté client
-      fetch("/api/projets")
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Erreur de chargement des projets");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setProjectsData(data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          setError("Une erreur est survenue lors du chargement des projets.");
-          setLoading(false);
-        });
-    }
-  }, [isClient]);
-
-  // Vérifiez si projectsData est null avant de l'utiliser
   const categories = useMemo(() => {
-    if (!projectsData) return [];
-    return Object.keys(projectsData.homePage ?? {});
+    const cats = projectsData ? Object.keys(projectsData) : [];
+    return cats;
   }, [projectsData]);
 
   const allProjects = useMemo(() => {
-    if (!projectsData) return [];
-    return categories.flatMap((category) =>
-      projectsData?.homePage?.[category]?.projects.map((project) => ({
-        ...project,
-        uniqueId: `${category}-${project.id}`,
-      })) || []
-    );
+    if (projectsData) {
+      const projects = categories.flatMap((category) =>
+        projectsData[category]?.projects.map((project) => ({
+          ...project,
+          uniqueId: `${category}-${project.id}`,
+        })) || []
+      );
+      return projects;
+    }
+    return [];
   }, [categories, projectsData]);
 
   const toggleInfo = useCallback((uniqueId: string) => {
@@ -94,40 +107,45 @@ export default function ProjectCV() {
     router.push(`/projet/${category}/${projectId}`);
   }, [router]);
 
-  const ProjetText = "Mes projets";
-  // const ProjetStyle = pathname.startsWith("/projet/cv") ? "text-2xl mb-10 text-center" : "mb-5 text-center";
+  const ProjetText = categories.includes(pathname.split('/')[2]) ? pathname.split('/')[2].toUpperCase() : "Mes projets";
 
-  // Animation des projets au scroll uniquement côté client
-  useEffect(() => {
-    if (isClient && typeof window !== 'undefined') {
-      gsap.utils.toArray<HTMLElement>('.fade-down').forEach((elem) => {
-        gsap.fromTo(
-          elem,
-          { y: 80, opacity: 0 },
-          { 
-            y: 0, 
-            opacity: 1, 
-            duration: 2, 
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: elem,
-              start: "top 90%",
-              end: "top 20%",
-              scrub: true,
-            },
-          }
-        );
-      });
-    }
-  }, [isClient, projectsData]);
+  useEffect(() => {    
+    gsap.registerPlugin(ScrollTrigger);
+  
+    gsap.utils.toArray<HTMLElement>(".fade-down").forEach((elem) => {
+      gsap.fromTo(
+        elem,
+        { y: 80, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.5,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: elem,
+            start: "top 90%",
+            end: "top 10%",
+            scrub: true,
+          },
+        }
+      );
+    });
+  }, [isDataLoaded, categories, projectsData]);
 
-  // Si les données ne sont pas encore chargées, afficher le message de chargement
-  if (!isClient || loading) {
+  if (!isClient) {
+    return null;
+  }
+  
+  if (loading) {
     return <p>Chargement des projets...</p>;
   }
-
-  if (!projectsData) {
-    return <p>Le projet n&#39a pas été trouvé.</p>
+  
+  if (error) {
+    return <p>{error}</p>;
+  }
+  
+  if (!projectsData || categories.length === 0) {
+    return <p>Aucune catégorie disponible ou données corrompues.</p>;
   }
 
   return (
@@ -144,7 +162,6 @@ export default function ProjectCV() {
               key={`${project.uniqueId}-${index}`}
               className="relative fade-down z-10 group bg-blue-projet rounded-lg shadow-[5px_5px_5px_0_rgba(0,0,0,0.25)] overflow-hidden"
             >
-              {/* Image principale */}
               <div className="relative z-10" onClick={() => toggleInfo(project.uniqueId as string)}>
                 <Image
                   src={mainImage}
@@ -153,7 +170,6 @@ export default function ProjectCV() {
                   height={250}
                   className="w-full h-56 object-cover rounded-lg lg:group-hover:opacity-0 transition-opacity duration-300"
                 />
-                {/* Informations affichées */}
                 <div
                   className={`absolute inset-0 bg-blue-projet pt-1 gap-4 bg-opacity-100 flex flex-col items-center justify-center text-white transition-opacity duration-300 ${activeProject === project.uniqueId ? "opacity-100 visible" : "opacity-0 invisible"} lg:group-hover:opacity-100 lg:group-hover:visible`}
                   onClick={(e) => e.stopPropagation()}
@@ -171,10 +187,9 @@ export default function ProjectCV() {
                     ))}
                   </div>
 
-                  {/* Bouton pour voir plus de détails */}
                   <button
                     className="mt-4 bg-green-projet w-full h-10 shadow-[0_-4px_4px_0_rgba(0,0,0,0.25)] flex justify-center items-center gap-2 text-black font-title hover:bg-green-600 transition-transform transform active:scale-95"
-                    onClick={() => handleProjectClick(project.id, project.category as keyof typeof projectsData.homePage)}
+                    onClick={() => handleProjectClick(project.id, project.category)}
                   >
                     Plus de détail
                     <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-l" />
@@ -184,7 +199,6 @@ export default function ProjectCV() {
             </div>
           );
         })}
-        {/* Bouton VOIR PLUS */}
         <div className="col-span-full mt-6 flex justify-center items-center">
           <Link
             href="/projet"

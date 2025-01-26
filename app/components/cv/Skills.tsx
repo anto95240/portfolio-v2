@@ -5,6 +5,17 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 
+// Hook personnalisé pour gérer l'état 'isClient'
+const useIsClient = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  return isClient;
+};
+
 type SkillItem = {
   id: string;
   title: string;
@@ -19,7 +30,10 @@ type Skills = {
 };
 
 export default function Skill() {
-  const [skills, setSkills] = useState<Skills | null>(null); // Nouveau state pour les compétences
+  const [skills, setSkills] = useState<Skills | null>(null);
+  
+  // Utilisation du hook personnalisé 'useIsClient'
+  const isClient = useIsClient();
 
   // Fonction pour récupérer les compétences depuis l'API interne
   const fetchSkills = async () => {
@@ -29,7 +43,7 @@ export default function Skill() {
         throw new Error("Erreur lors de la récupération des compétences");
       }
       const data = await response.json();
-      setSkills(data.cvpage.skills); // Mettez à jour les compétences
+      setSkills(data.cvpage.skills); // Met à jour les compétences
     } catch (error) {
       console.error("Erreur API:", error);
     }
@@ -41,32 +55,29 @@ export default function Skill() {
   }, []);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      if (skills) {
-        gsap.registerPlugin(ScrollTrigger);
-    
-        // Animation synchronisée des titres et compétences
-        gsap.fromTo(
-          ".skills-title, .skills-row > div",
-          { x: -50, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 1.5,
-            ease: "power3.out",
-            stagger: 0.2,
-            scrollTrigger: {
-              trigger: ".skills-container",
-              start: "top 90%",
-              end: "bottom 0%",
-              scrub: true,
-            },
-          }
-        );
-      }
+    if (isClient && skills) {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Animation synchronisée des titres et compétences
+      gsap.fromTo(
+        ".skills-title, .skills-row > div",
+        { x: -50, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1.5,
+          ease: "power3.out",
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: ".skills-container",
+            start: "top 90%",
+            end: "bottom 0%",
+            scrub: true,
+          },
+        }
+      );
     }
-  }, [skills]);
-   
+  }, [skills, isClient]);
 
   // Si les compétences ne sont pas encore chargées
   if (!skills) return <p>Chargement des compétences...</p>;
@@ -90,6 +101,10 @@ export default function Skill() {
       </div>
     </div>
   );
+
+  if (!isClient) {
+    return null; // Ne pas rendre le composant tant que le client n'est pas monté
+  }
 
   return (
     <div className="w-8/12 flex flex-col mx-auto">

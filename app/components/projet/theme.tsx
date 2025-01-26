@@ -4,11 +4,25 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
+// Hook personnalisé pour gérer l'état 'isClient'
+const useIsClient = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  return isClient;
+};
+
 export default function ThemePage() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [isMobile, setIsMobile] = useState<boolean>(false); // État pour savoir si l'appareil est mobile
-  const [clickedIndex, setClickedIndex] = useState<number | null>(null); // État pour savoir quel bouton a été cliqué
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [clickedIndex, setClickedIndex] = useState<number | null>(null);
   const router = useRouter();
+
+  // Utilisation du hook personnalisé 'useIsClient'
+  const isClient = useIsClient();
 
   const categories = [
     {
@@ -34,30 +48,33 @@ export default function ThemePage() {
     }
   ];
 
+  // Gère la navigation vers une catégorie
   const handleNavigate = (category: string) => {
     router.push(`/projet/${category}`);
   };
 
+  // Gère l'ouverture et la fermeture des catégories sur mobile
   const handleToggle = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
-  // Vérifie si l'appareil est mobile (small screen)
+  // Vérifie si l'appareil est mobile
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const checkIfMobile = () => {
-        setIsMobile(window.innerWidth <= 768); // Utilise 768px comme seuil
-      };
+    if (isClient) return;
 
-      checkIfMobile(); // Initial check
-      window.addEventListener("resize", checkIfMobile); // Met à jour lors du redimensionnement
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth <= 768); // Seuil de 768px pour considérer un appareil comme mobile
+    };
 
-      return () => {
-        window.removeEventListener("resize", checkIfMobile); // Nettoie l'événement lors du démontage
-      };
-    }
-  }, []);
+    checkIfMobile(); // Vérification initiale
+    window.addEventListener("resize", checkIfMobile); // Mise à jour lors du redimensionnement
 
+    return () => {
+      window.removeEventListener("resize", checkIfMobile); // Nettoyage lors du démontage
+    };
+  }, [isClient]);
+
+  // Formate la description en ajoutant des retours à la ligne
   const formatDescription = (description: string) => {
     return description.split("\n").map((line, index) => (
       <span key={index}>
@@ -67,13 +84,15 @@ export default function ThemePage() {
     ));
   };
 
+  if (!isClient) return null;
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 w-10/12 lg:w-8/12 max-w-l text-center mx-auto text-white justify-center">
       {categories.map((category, index) => (
         <div
           key={category.categorySlug}
           className={`bg-gradient-to-r ${category.gradient} min-h-[550px] shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] lg:min-h-[620px] text-black flex flex-col gap-10 relative group`}
-          onClick={() => (isMobile ? handleToggle(index) : handleNavigate(category.categorySlug))}  // Gère le clic sur mobile
+          onClick={() => (isMobile ? handleToggle(index) : handleNavigate(category.categorySlug))}
           aria-labelledby={`category-${category.categorySlug}`}
         >
           <h1 id={`category-${category.categorySlug}`} className="pt-5">{category.name}</h1>
@@ -84,9 +103,9 @@ export default function ThemePage() {
             <button
               className={`w-2/4 rounded-xl h-9 border border-solid border-black transition-all duration-300 transform active:scale-90 ${clickedIndex === index ? "bg-[#007BFF] text-white" : "bg-[#d9d9d97b] hover:border-white hover:bg-[#007BFF] hover:text-white"}`}
               onClick={(e) => {
-                e.stopPropagation(); // Empêche la propagation du clic si on clique sur le bouton
+                e.stopPropagation();
                 handleNavigate(category.categorySlug);
-                setClickedIndex(index); // Change l'état du bouton pour qu'il devienne bleu
+                setClickedIndex(index);
               }}
               aria-label={`Voir plus de détails sur ${category.name}`}
             >

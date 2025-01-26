@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Link from "next/link";
 import { useState, useEffect, useMemo } from "react";
@@ -36,6 +36,17 @@ type ProjectsData = {
   web: { projects: Project[] };
 };
 
+// Hook personnalisé pour gérer l'état 'isClient'
+const useIsClient = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  return isClient;
+};
+
 export default function ProjetCategory() {
   const pathname = usePathname();
   const category = pathname?.split("/")[2] as keyof CategoryStyles;
@@ -44,6 +55,8 @@ export default function ProjetCategory() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [projectsData, setProjectsData] = useState<ProjectsData | null>(null);
   const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
+  
+  const isClient = useIsClient();
 
   const categories = ["jeux", "ydays", "web"];
   const isValidCategory = categories.includes(String(category));
@@ -84,44 +97,42 @@ export default function ProjetCategory() {
   };
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const handleScroll = () => {
-        setShowScrollToTopButton(window.scrollY > 200);
-      };
+    if (isClient) return;
+    
+    const handleScroll = () => {
+      setShowScrollToTopButton(window.scrollY > 200);
+    };
 
-      window.addEventListener("scroll", handleScroll);
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
-    }
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      gsap.registerPlugin(ScrollTrigger);
-    
-      projects.forEach((_: Project, index: number) => {
-        const direction = index % 2 === 0 ? "fade-left" : "fade-right";
-        const fromX = direction === "fade-left" ? -40 : 40;
-    
-        gsap.fromTo(
-          `.project-${index} .${direction}`,
-          { x: fromX, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 1,
-            stagger: 0.1,
-            scrollTrigger: {
-              trigger: `.project-${index}`,
-              start: "top 60%",
-              end: "top 30%",
-              scrub: true,
-            },
-          }
-        );
-      });
-    }
+    gsap.registerPlugin(ScrollTrigger);
+
+    projects.forEach((_: Project, index: number) => {
+      const direction = index % 2 === 0 ? "fade-left" : "fade-right";
+      const fromX = direction === "fade-left" ? -40 : 40;
+
+      gsap.fromTo(
+        `.project-${index} .${direction}`,
+        { x: fromX, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: `.project-${index}`,
+            start: "top 60%",
+            end: "top 30%",
+            scrub: true,
+          },
+        }
+      );
+    });
   }, [projects]);
 
   const scrollToTop = () => {
@@ -135,7 +146,7 @@ export default function ProjetCategory() {
   return (
     <div className={`flex h-full ${categoryStyles[category]?.bg}`}>
       <div className="w-1/4 fixed z-50 h-full">
-        <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+        {isClient && <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />}
       </div>
 
       <div className={`flex-1 flex flex-col items-center mt-10 mx-auto px-5 lg:pl-56 ${categoryStyles[category]?.text} w-full lg:w-3/4 lg:max-w-9xl`}>
@@ -190,7 +201,7 @@ export default function ProjetCategory() {
           <Popup project={selectedProject} category={String(category)} onClose={handleClosePopup} />
         )}
 
-        <Footer />
+        {isClient && <Footer />}
       </div>
 
       {showScrollToTopButton && (

@@ -4,17 +4,19 @@ import path from 'path';
 
 export async function GET() {
   try {
-    const filePath = path.resolve('app/data/projet.json');
-    const fileData = await fs.readFile(filePath, 'utf-8'); // Utilisation de fs.promises pour les opérations asynchrones
-    const jsonData = JSON.parse(fileData); // Vérification des données JSON
+    const filePath = path.join(process.cwd(), 'app/data/projet.json'); // Utilisation de process.cwd()
+    const fileData = await fs.readFile(filePath, 'utf-8'); // Lecture asynchrone du fichier
+    const jsonData = JSON.parse(fileData); // Parse JSON
 
     // Vérification des données
-    if (!jsonData || typeof jsonData !== 'object') {
-      return new Response('Données invalides', { status: 500 });
+    if (!jsonData || typeof jsonData !== 'object' || !jsonData.homePage) {
+      console.error('Données invalides ou structure manquante', jsonData); // Log des erreurs spécifiques
+      return new Response('Données invalides', { status: 400 }); // Erreur avec un status plus spécifique
     }
 
     return new Response(JSON.stringify(jsonData), { status: 200 });
-  } catch {
+  } catch (error) {
+    console.error('Erreur de lecture du fichier', error); // Log des erreurs spécifiques
     return new Response('Erreur du serveur', { status: 500 });
   }
 }
