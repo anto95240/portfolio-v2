@@ -117,7 +117,7 @@ export default function ProjetDetail() {
             scrollTrigger: {
               trigger: elem,
               start: "top 90%",
-              end: "top 10%",
+              end: "top 15%",
               scrub: true,
             },
           }
@@ -196,9 +196,9 @@ export default function ProjetDetail() {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col gap-9 pl-10 mt-10">
+                <div className="flex flex-col gap-9 mt-10">
                   {project.images?.filter((img) => img.type === "gallery").map((img, linkIndex) => (
-                    <div key={linkIndex} className="flex flex-col gap-3 mx-auto">
+                    <div key={linkIndex} className="flex flex-col gap-3">
                       <div className="flex ml-3">
                         <Image 
                           alt={`Image ${linkIndex + 1}`} 
