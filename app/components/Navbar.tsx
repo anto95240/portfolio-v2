@@ -162,6 +162,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
       navRef.current?.appendChild(flower);
 
       gsap.to(flower, {
+        y: navbarHeight,
         width: `${Math.random() * 30 + 50}px`,
         height: `${Math.random() * 30 + 50}px`,
         duration: Math.random() * 2 + 1,
@@ -191,6 +192,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
       navRef.current?.appendChild(palmTree);
 
       gsap.to(palmTree, {
+        y: navbarHeight,
         rotation: Math.random() * 50 - 50,
         duration: Math.random() * 4 + 3,
         repeat: -1,

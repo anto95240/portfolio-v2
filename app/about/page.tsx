@@ -22,11 +22,6 @@ export default function About() {
 
   const isClient = useIsClient();
 
-  // Utilisation de useCallback pour ne pas recréer la fonction à chaque rendu
-  const toggleMenu = useCallback(() => {
-    setIsMenuOpen(prev => !prev);
-  }, []);
-
   const hobbies = [
     { id: 1, name: "Football", bgColor: "bg-blue-300" },
     { id: 2, name: "Cinéma", bgColor: "bg-blue-300" },

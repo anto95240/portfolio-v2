@@ -26,26 +26,26 @@ const useIsClient = () => {
 export default function OutilHome() {
   const [tools, setTools] = useState<Tool[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const isClient = useIsClient();
 
   useEffect(() => {
-    fetch("/api/cv_skill")
-      .then((response) => {
+    const fetchSkills = async () => {
+      try {
+        const response = await fetch("/api/cv_skill");
         if (!response.ok) {
-          throw new Error("Erreur de chargement des outils");
+          throw new Error("Erreur lors de la récupération des compétences");
         }
-        return response.json();
-      })
-      .then((data) => {
+        const data = await response.json();
         setTools(data.homepage.skills as Tool[]);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError("Une erreur est survenue lors du chargement des outils.");
-        setLoading(false);
-      });
+      } catch (error) {
+        console.error("Erreur API:", error);
+      }
+    };
+
+    // Appel à l'API interne pour récupérer les compétences
+    fetchSkills();
   }, []);
 
   useEffect(() => {
