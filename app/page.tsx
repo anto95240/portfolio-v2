@@ -28,6 +28,23 @@ export default function Home() {
 
   if (!isClient) return null;
 
+  useEffect(() => {
+    if (isClient) return;
+    
+    const handleScroll = () => {
+      setShowScrollToTopButton(window.scrollY > 200);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="flex h-screen bg-white">
       {/* Composant Nav */}
@@ -68,6 +85,17 @@ export default function Home() {
         {isClient && <ProjetCV />}
 
         <Footer />
+
+        {showScrollToTopButton && (
+          <button
+            aria-label="Retour en haut"
+            onClick={scrollToTop}
+            className="fixed bottom-10 right-10 z-50 bg-blue-500 text-white p-3 rounded-full shadow-lg"
+          >
+            <FontAwesomeIcon icon={faArrowUp} className="text-xl" />
+          </button>
+        )}
+
       </div>
     </div>
   );
