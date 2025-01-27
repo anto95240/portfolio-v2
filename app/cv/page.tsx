@@ -74,7 +74,7 @@ export default function Cv() {
   }, [sections]);
 
   useEffect(() => {
-    if (isClient) {
+    if (!isClient) {
       window.addEventListener("scroll", handleScroll);
       return () => {
         window.removeEventListener("scroll", handleScroll);

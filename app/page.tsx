@@ -26,8 +26,6 @@ export default function Home() {
   
   const isClient = useIsClient();
 
-  if (!isClient) return null;
-
   useEffect(() => {
     if (!isClient) return;
     

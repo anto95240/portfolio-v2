@@ -55,11 +55,15 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
     }
   }, [isClient]);  
 
-  // Fonction pour créer les flocons de neige
-  const createSnowflakes = (navbarHeight: number) => {
+  // Animation des flocons de neige ou des feuilles tombantes
+  useEffect(() => {
     if (!isClient) return;
-
-    const numFlakes = 20; // Nombre de flocons
+  
+    const navbarHeight = navRef.current?.offsetHeight || 0;
+  
+    // Créer et animer les éléments en fonction de la saison
+    if (season === "winter" && navRef.current) {
+      const numFlakes = 20; // Nombre de flocons
 
     for (let i = 0; i < numFlakes; i++) {
       const snowflake = document.createElement("img");
@@ -88,13 +92,8 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
         },
       });
     }
-  };
-
-  // Fonction pour créer les feuilles tombantes
-  const createFallingLeaves = (navbarHeight: number) => {
-    if (!isClient) return;
-
-    const numLeaves = 20;
+    } else if (season === "fall" && navRef.current) {
+      const numLeaves = 20;
 
     for (let i = 0; i < numLeaves; i++) {
       const leaf = document.createElement("img");
@@ -122,13 +121,8 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
         },
       });
     }
-  };
-
-  // Fonction pour créer les plantes en fleurs
-  const createBloomingPlants = (navbarHeight: number) => {
-    if (!isClient) return;
-
-    const numFlowers = 15;
+    } else if (season === "spring" && navRef.current) {
+      const numFlowers = 15;
 
     for (let i = 0; i < numFlowers; i++) {
       const flower = document.createElement("img");
@@ -152,13 +146,8 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
         delay: Math.random() * 1.5,
       });
     }
-  };
-
-  // Fonction pour créer les palmiers
-  const createPalmTrees = (navbarHeight: number) => {
-    if (!isClient) return;
-
-    const numPalmTrees = 15;
+    } else if (season === "summer" && navRef.current) {
+      const numPalmTrees = 15;
 
     for (let i = 0; i < numPalmTrees; i++) {
       const palmTree = document.createElement("img");
@@ -182,25 +171,8 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
         ease: "power1.inOut",
       });
     }
-  };
-
-  // Animation des flocons de neige ou des feuilles tombantes
-  useEffect(() => {
-    if (!isClient) return;
-  
-    const navbarHeight = navRef.current?.offsetHeight || 0;
-  
-    // Créer et animer les éléments en fonction de la saison
-    if (season === "winter") {
-      createSnowflakes(navbarHeight);
-    } else if (season === "fall") {
-      createFallingLeaves(navbarHeight);
-    } else if (season === "spring") {
-      createBloomingPlants(navbarHeight);
-    } else if (season === "summer") {
-      createPalmTrees(navbarHeight);
     }
-  }, [season, isClient, createSnowflakes, createFallingLeaves, createBloomingPlants, createPalmTrees]);
+  }, [season, isClient]);
 
   if (!isClient) return null;
 
