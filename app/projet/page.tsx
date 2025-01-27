@@ -23,9 +23,9 @@ export default function Projet() {
   const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
 
   const isClient = useIsClient();
-  // S'assurer que le code s'exécute seulement côté client
+  
   useEffect(() => {
-    if (isClient) return;
+    if (!isClient) return;
     
     const handleScroll = () => {
       setShowScrollToTopButton(window.scrollY > 200);
@@ -35,7 +35,7 @@ export default function Projet() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);  
+  }, [isClient]); 
 
   // Fonction pour revenir en haut de la page
   const scrollToTop = () => {

@@ -108,7 +108,7 @@ export default function Experience() {
         },
       }
     );
-  }, [experiences]);
+  }, [experiences, isClient]);
 
   if (loading) {
     return <p>Chargement des expériences...</p>;

@@ -102,7 +102,7 @@ export default function ProjetCategory() {
   };
 
   useEffect(() => {
-    if (isClient) return;
+    if (!isClient) return;
     
     const handleScroll = () => {
       setShowScrollToTopButton(window.scrollY > 200);
@@ -112,7 +112,7 @@ export default function ProjetCategory() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isClient]);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);

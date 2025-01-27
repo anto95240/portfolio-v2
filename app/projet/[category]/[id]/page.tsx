@@ -85,15 +85,17 @@ export default function ProjetDetail() {
   }, []);
 
   useEffect(() => {
-    if (isClient) return;
+    if (!isClient) return;
     
     const handleScroll = () => {
       setShowScrollToTopButton(window.scrollY > 200);
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isClient]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

@@ -89,7 +89,7 @@ export default function Formation() {
         }
       );
     }
-  }, [formations]);
+  }, [formations, isClient]);
 
   if (loading) {
     return <p>Chargement des formations...</p>;

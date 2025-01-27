@@ -29,7 +29,7 @@ export default function Home() {
   if (!isClient) return null;
 
   useEffect(() => {
-    if (isClient) return;
+    if (!isClient) return;
     
     const handleScroll = () => {
       setShowScrollToTopButton(window.scrollY > 200);
@@ -39,7 +39,7 @@ export default function Home() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isClient]);
   
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

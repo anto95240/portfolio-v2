@@ -53,25 +53,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
       else if (now >= fallEquinox && now < winterSolstice) setSeason("fall");
       else setSeason("winter");
     }
-  }, [isClient]);
-
-  // Animation des flocons de neige ou des feuilles tombantes
-  useEffect(() => {
-    if (!isClient) return;
-
-    const navbarHeight = navRef.current?.offsetHeight || 0;
-
-    // Créer et animer les éléments en fonction de la saison
-    if (season === "winter") {
-      createSnowflakes(navbarHeight);
-    } else if (season === "fall") {
-      createFallingLeaves(navbarHeight);
-    } else if (season === "spring") {
-      createBloomingPlants(navbarHeight);
-    } else if (season === "summer") {
-      createPalmTrees(navbarHeight);
-    }
-  }, [season, isClient]);
+  }, [isClient]);  
 
   // Fonction pour créer les flocons de neige
   const createSnowflakes = (navbarHeight: number) => {
@@ -201,6 +183,24 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
       });
     }
   };
+
+  // Animation des flocons de neige ou des feuilles tombantes
+  useEffect(() => {
+    if (!isClient) return;
+  
+    const navbarHeight = navRef.current?.offsetHeight || 0;
+  
+    // Créer et animer les éléments en fonction de la saison
+    if (season === "winter") {
+      createSnowflakes(navbarHeight);
+    } else if (season === "fall") {
+      createFallingLeaves(navbarHeight);
+    } else if (season === "spring") {
+      createBloomingPlants(navbarHeight);
+    } else if (season === "summer") {
+      createPalmTrees(navbarHeight);
+    }
+  }, [season, isClient, createSnowflakes, createFallingLeaves, createBloomingPlants, createPalmTrees]);
 
   if (!isClient) return null;
 
