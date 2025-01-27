@@ -109,7 +109,9 @@ export default function ProjectCV() {
 
   const ProjetText = categories.includes(pathname.split('/')[2]) ? pathname.split('/')[2].toUpperCase() : "Mes projets";
 
-  useEffect(() => {    
+  useEffect(() => {   
+    if (!isDataLoaded) return;
+
     gsap.registerPlugin(ScrollTrigger);
   
     gsap.utils.toArray<HTMLElement>(".fade-down").forEach((elem) => {
