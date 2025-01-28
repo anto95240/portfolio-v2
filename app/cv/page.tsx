@@ -80,7 +80,7 @@ export default function Cv() {
         window.removeEventListener("scroll", handleScroll);
       };
     }
-  }, [isClient]);
+  }, [isClient, handleScroll]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

@@ -159,7 +159,7 @@ export default function ProjetDetail() {
 
   if (!project) {
     return (
-      <p className="text-xl">Le projet n'a pas été trouvé.</p>
+      <p className="text-xl">Le projet est manquant.</p>
     );
   }
   
