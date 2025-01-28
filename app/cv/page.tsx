@@ -67,14 +67,16 @@ export default function Cv() {
         const sectionCenter = rect.top + rect.height / 2;
 
         if (sectionCenter <= windowCenter && sectionCenter >= 0) {
-          setActiveSection(section.id);
+          if (activeSection !== section.id) {
+            setActiveSection(section.id); // Mettre à jour la section active
+          }
         }
       }
     });
-  }, [sections]);
+  }, [sections, activeSection]);
 
   useEffect(() => {
-    if (!isClient) {
+    if (isClient) {
       window.addEventListener("scroll", handleScroll);
       return () => {
         window.removeEventListener("scroll", handleScroll);
