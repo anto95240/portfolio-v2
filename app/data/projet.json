@@ -315,43 +315,6 @@
               "url": "/images/jeux/arkanoid/gameplay.svg"
             }
           ]
-        },
-        {
-          "id": "4",
-          "category": "jeux",
-          "title": "Tamgotchi",
-          "description": "Un jeu qui permet de faire grandir un tamagotchi, de faire des combats contre d’autres tamagotchis.",
-          "technologies": ["JAVA"],
-          "date": "Novembre 2022 - Décembre 2022",
-          "equipe": ["Antoine RICHARD", "Yvenlee VONIN-KABEL", "Thibaut FIGUEIRA"],
-          "links": [
-            {
-              "type": "github",
-              "url": "https://github.com/anto95240/Tamagotchi"
-            }  
-          ],
-          "images": [
-            {
-              "type": "main",
-              "url": "/images/jeux/tamagotchi/logo_tamagotchi.svg"
-            },
-            {
-              "type": "gallery",
-              "url": "/images/jeux/tamagotchi/tama.svg"
-            },
-            {
-              "type": "gallery",
-              "url": "/images/jeux/tamagotchi/choix.svg"
-            },
-            {
-              "type": "gallery",
-              "url": "/images/jeux/tamagotchi/stat.svg"
-            },
-            {
-              "type": "gallery",
-              "url": "/images/jeux/tamagotchi/combat.svg"
-            }
-          ]      
         }
       ]
     } 
