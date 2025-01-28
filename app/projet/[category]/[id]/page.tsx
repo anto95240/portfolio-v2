@@ -195,7 +195,7 @@ export default function ProjetDetail() {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col gap-9 Mt-10 mx-auto">
+                <div className="flex flex-col gap-9 Mt-10 mx-auto max-w-xl">
                   {project.images?.filter((img) => img.type === "gallery").map((img, linkIndex) => (
                     <div key={linkIndex} className="flex flex-col gap-3">
                       <div className="flex ml-3">
