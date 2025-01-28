@@ -102,10 +102,60 @@ export default function ProjetDetail() {
   };
 
   // Initialiser gsap après le montage côté client
-  useEffect(() => {
-    if (isClient && project) {
-      gsap.registerPlugin(ScrollTrigger);
+  // useEffect(() => {
+  //   if (isClient && project) {
+  //     gsap.registerPlugin(ScrollTrigger);
 
+  //     gsap.utils.toArray<HTMLElement>(".fade-down").forEach((elem) => {
+  //       gsap.fromTo(
+  //         elem,
+  //         { y: 80, opacity: 0 },
+  //         {
+  //           y: 0,
+  //           opacity: 1,
+  //           duration: 1.5,
+  //           ease: "power3.out",
+  //           scrollTrigger: {
+  //             trigger: elem,
+  //             start: "top 90%",
+  //             end: "top 15%",
+  //             scrub: true,
+  //           },
+  //         }
+  //       );
+  //     });
+  //   }
+  // }, [isClient, project]);
+
+  useEffect(() => {
+    if (!isClient || !project) return;
+  
+    // Cast les éléments comme étant des images HTML
+    const images = Array.from(document.querySelectorAll("img.fade-down")) as HTMLImageElement[];
+    const totalImages = images.length;
+    let loadedImages = 0;
+  
+    const checkAllImagesLoaded = () => {
+      if (loadedImages === totalImages) {
+        initializeAnimations();
+      }
+    };
+  
+    images.forEach((img) => {
+      if (img.complete) {
+        loadedImages++;
+        checkAllImagesLoaded();
+      } else {
+        img.addEventListener("load", () => {
+          loadedImages++;
+          checkAllImagesLoaded();
+        });
+      }
+    });
+  
+    function initializeAnimations() {
+      gsap.registerPlugin(ScrollTrigger);
+  
       gsap.utils.toArray<HTMLElement>(".fade-down").forEach((elem) => {
         gsap.fromTo(
           elem,
@@ -195,7 +245,7 @@ export default function ProjetDetail() {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col gap-9 Mt-10 mx-auto max-w-xl">
+                <div className="flex flex-col gap-9 Mt-10 mx-auto">
                   {project.images?.filter((img) => img.type === "gallery").map((img, linkIndex) => (
                     <div key={linkIndex} className="flex flex-col gap-3">
                       <div className="flex ml-3">
