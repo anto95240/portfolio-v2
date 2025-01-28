@@ -144,14 +144,14 @@ export default function ProjetCategory() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  if (!isValidCategory) {
-    return <div>Catégorie invalide.</div>;
-  }
-
   if (loading) {
     return <p>Chargement des projets...</p>;
   }
   
+  if (!isValidCategory) {
+    return <div>Catégorie invalide.</div>;
+  }
+
   return (
     <div className={`flex h-full ${categoryStyles[category]?.bg}`}>
       <div className="w-1/4 fixed z-50 h-full">

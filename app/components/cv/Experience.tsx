@@ -87,7 +87,7 @@ export default function Experience() {
   }, [experiences]);
 
   useEffect(() => {
-    if (isClient) return;
+    if (isClient && experiences.length === 0) return;
 
     gsap.registerPlugin(ScrollTrigger);
 

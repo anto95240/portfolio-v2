@@ -66,7 +66,7 @@ export default function Formation() {
   }, [formations]);
 
   useEffect(() => {
-    if (isClient) return;
+    if (isClient && formations.length === 0) return;
 
     if (formations.length > 0) {
       gsap.registerPlugin(ScrollTrigger);

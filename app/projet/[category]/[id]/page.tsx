@@ -69,20 +69,21 @@ export default function ProjetDetail() {
 
   useEffect(() => {
     const fetchProjects = async () => {
+      setLoading(true);
       try {
         const response = await fetch("/api/projets");
         if (!response.ok) throw new Error("Erreur lors de la récupération des projets");
         const data = await response.json();
         setProjectsData(data.projectPage || {});
-        setLoading(false);
       } catch (error) {
         console.error("Erreur API:", error);
+      } finally {
         setLoading(false);
       }
     };
-
+  
     fetchProjects();
-  }, []);
+  }, []);  
 
   useEffect(() => {
     if (!isClient) return;
@@ -102,31 +103,6 @@ export default function ProjetDetail() {
   };
 
   // Initialiser gsap après le montage côté client
-  // useEffect(() => {
-  //   if (isClient && project) {
-  //     gsap.registerPlugin(ScrollTrigger);
-
-  //     gsap.utils.toArray<HTMLElement>(".fade-down").forEach((elem) => {
-  //       gsap.fromTo(
-  //         elem,
-  //         { y: 80, opacity: 0 },
-  //         {
-  //           y: 0,
-  //           opacity: 1,
-  //           duration: 1.5,
-  //           ease: "power3.out",
-  //           scrollTrigger: {
-  //             trigger: elem,
-  //             start: "top 90%",
-  //             end: "top 15%",
-  //             scrub: true,
-  //           },
-  //         }
-  //       );
-  //     });
-  //   }
-  // }, [isClient, project]);
-
   useEffect(() => {
     if (!isClient || !project) return;
   
@@ -177,14 +153,14 @@ export default function ProjetDetail() {
     }
   }, [isClient, project]);
 
-  if (!project) {
-    return (
-      <p className="text-xl">Le projet n&#39a pas été trouvé.</p>
-    );
-  }
-
   if (loading) {
     return <p>Chargement des projets...</p>;
+  }
+
+  if (!project) {
+    return (
+      <p className="text-xl">Le projet n'a pas été trouvé.</p>
+    );
   }
   
   if (!isClient) return null;
