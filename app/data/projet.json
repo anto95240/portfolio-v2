@@ -337,7 +337,7 @@
             },
             {
               "type": "gallery",
-              "url": "/images/jeux/tamagotchi/tama.svg"
+              "url": "/images/jeux/tamagotchi/aacueil.svg"
             },
             {
               "type": "gallery",
@@ -346,6 +346,10 @@
             {
               "type": "gallery",
               "url": "/images/jeux/tamagotchi/stat.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/jeux/tamagotchi/combat.svg"
             }
           ]      
         }
