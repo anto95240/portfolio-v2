@@ -140,7 +140,7 @@ export default function ProjetDetail() {
   if (!isClient) return null;
   
   return (
-    <div className={`flex h-full ${categoryStyles[category]?.bg}`}>
+    <div className={`flex h-full ${categoryStyles[category]?.bg || "bg-slate-500"}`}>
       <div className="w-1/4 fixed z-50 h-full">
         <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
