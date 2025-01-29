@@ -31,6 +31,7 @@ export default function ThemePage() {
       gradient: "from-light-green to-green-blue",
       imageSrc: "/images/ydays.svg",
       description: "Les YDAYS c'est quoi ?\n\nC'est une spécificité d'Ynov campus ! Toute l'année, les étudiants de différentes filières se réunissent un mercredi pour travailler en projet collaboratif et donner vie à leur idée",
+      className: "text-black",
     },
     {
       name: "WEB",
@@ -38,6 +39,7 @@ export default function ThemePage() {
       gradient: "from-green-blue to-blue-darkBlue",
       imageSrc: "/images/web.svg",
       description: "Il s'agit de site web, d'application web réalisés à l'école ou en stage",
+      className: "text-black",
     },
     {
       name: "JEUX",
@@ -45,6 +47,7 @@ export default function ThemePage() {
       gradient: "from-blue-darkBlue to-dark-blue",
       imageSrc: "/images/jeux.svg",
       description: "Il s'agit des jeux locaux sur le web ou en ligne de commande réalisés à l'école ou en stage ",
+      className: "text-white",
     }
   ];
 
@@ -95,7 +98,7 @@ export default function ThemePage() {
           onClick={() => (isMobile ? handleToggle(index) : handleNavigate(category.categorySlug))}
           aria-labelledby={`category-${category.categorySlug}`}
         >
-          <h1 id={`category-${category.categorySlug}`} className="pt-5">{category.name}</h1>
+          <h1 id={`category-${category.categorySlug}`} className={`${category.className} pt-5`}>{category.name}</h1>
           <div
             className={`absolute inset-0 flex flex-col gap-5 items-center pt-20 bg-black bg-opacity-25 transition-all duration-300 ease-in-out ${activeIndex === index ? "opacity-100 visible" : "opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible"}`}
             aria-live="polite"
