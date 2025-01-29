@@ -47,9 +47,7 @@
           "technologies": ["C++"],
           "date": "Octobre 2022 - Mai 2023",
           "equipe": ["Antoine RICHARD", "Yvenlee VONIN-KABEL", "Miyad YOUSSOUF ALI"],
-          "links": [
-            ""
-          ],
+          "links": [],
           "images": [
             {
               "type": "main",
@@ -98,9 +96,7 @@
           "technologies": ["C#"],
           "date": "Octobre 2024 - Mai 2024",
           "equipe": ["Antoine RICHARD", "Yvenlee VONIN-KABEL", "Alexandre TORRECILLAS", "Lyes OUKSILI"],
-          "links": [
-            ""
-          ],
+          "links": [],
           "images": [
             {
               "type": "main",
