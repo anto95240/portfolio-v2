@@ -8,7 +8,7 @@ import { faFileCircleCheck, faFile, faEnvelope } from "@fortawesome/free-solid-s
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { useState } from "react";
 
-const FooterLink = ({ href, icon, label, children, target, onClick }: { href?: string; icon: IconDefinition; label: string; children: React.ReactNode, target?: string, onClick?: () => void }) => (
+const FooterLink = ({ icon, label, children, onClick }: { icon: IconDefinition; label: string; children: React.ReactNode, onClick?: () => void }) => (
   <button
     onClick={onClick}
     className="bg-blue-footer flex flex-col items-center h-28 p-2 mx-auto justify-center gap-2 rounded-md shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] aspect-square transition-transform transform active:scale-90"
@@ -31,8 +31,8 @@ export default function Footer() {
       <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-16 w-11/12 max-w-l text-center mx-auto text-white justify-center">
-        <FooterLink href="/projet" icon={faFileCircleCheck} label="Mes projets">
-          Mes projets
+        <FooterLink icon={faFileCircleCheck} label="Mes projets">
+          <Link href="/projet">Mes projets</Link>
         </FooterLink>
 
         {/* Bouton Mon CV avec Popup */}
@@ -40,16 +40,16 @@ export default function Footer() {
           Mon CV
         </FooterLink>
 
-        <FooterLink href="mailto:antoine.richard@ynov.com" icon={faEnvelope} label="Mon Email">
-          Mon Email
+        <FooterLink icon={faEnvelope} label="Mon Email">
+          <Link href="mailto:antoine.richard@ynov.com">Mon Email</Link>
         </FooterLink>
 
-        <FooterLink href="https://www.linkedin.com/in/ton-profile/" icon={faLinkedin} label="Mon Linkedin" target="_blank">
-          Mon Linkedin
+        <FooterLink icon={faLinkedin} label="Mon Linkedin">
+          <Link href="https://www.linkedin.com/in/ton-profile/" target="_blank">Mon Linkedin</Link>
         </FooterLink>
 
-        <FooterLink href="https://github.com/anto95240" icon={faGithub} label="Mon Github" target="_blank">
-          Mon Github
+        <FooterLink icon={faGithub} label="Mon Github">
+          <Link href="https://github.com/anto95240" target="_blank">Mon Github</Link>
         </FooterLink>
       </div>
 
@@ -59,12 +59,12 @@ export default function Footer() {
       {showPopup && (
         <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-            <p className="mb-4 text-lg font-semibold">Choisissez une version du CV :</p>
+            <p className="mb-4 text-lg">Choisissez une version du CV :</p>
             <div className="flex gap-4">
               <Link href="/doc/Antoine RICHARD CV-s.pdf" target="_blank" className="bg-blue-500 text-white px-4 py-2 rounded">CV Stage</Link>
               <Link href="/doc/Antoine RICHARD CV.pdf" target="_blank" className="bg-green-500 text-white px-4 py-2 rounded">CV Alternance</Link>
             </div>
-            <button onClick={() => setShowPopup(false)} className="mt-8 bg-red-500 text-white px-10 py-1 rounded">Annuler</button>
+            <button onClick={() => setShowPopup(false)} className="mt-8">Annuler</button>
           </div>
         </div>
       )}

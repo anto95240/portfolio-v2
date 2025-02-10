@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Nav from "../components/Navbar";
 import ProjetCV from "../components/cv/ProjetCV";
@@ -26,6 +27,7 @@ export default function Cv() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("profil");
   const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   const profilRef = useRef<HTMLDivElement>(null);
   const skillRef = useRef<HTMLDivElement>(null);
@@ -118,14 +120,13 @@ export default function Cv() {
             <p>Etudiant</p>
           </div>
           <div className="mt-6 md:mt-0 text-center">
-            <a
-              href="/doc/CV.pdf"
-              target="_blank"
+            <button
+              onClick={() => setShowPopup(true)}
               rel="noopener noreferrer"
               className="bg-blue-footer text-white md:text-base py-2 px-14 text-base rounded-full shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform active:scale-90"
             >
               Télécharger mon CV
-            </a>
+            </button>
           </div>
         </div>
 
@@ -174,6 +175,21 @@ export default function Cv() {
           ))}
         </div>
       </div>
+
+      {/* Popup de sélection du CV */}
+      {showPopup && (
+        <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+            <p className="mb-4 text-lg">Choisissez une version du CV :</p>
+            <div className="flex gap-4">
+              <Link href="/doc/Antoine RICHARD CV-s.pdf" target="_blank" className="bg-blue-500 text-white px-4 py-2 rounded">CV Stage</Link>
+              <Link href="/doc/Antoine RICHARD CV.pdf" target="_blank" className="bg-green-500 text-white px-4 py-2 rounded">CV Alternance</Link>
+            </div>
+            <button onClick={() => setShowPopup(false)} className="mt-8">Annuler</button>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
