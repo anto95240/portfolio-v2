@@ -18,10 +18,31 @@ const useIsClient = () => {
   return isClient;
 };
 
+const getCurrentSeason = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+
+  const springEquinox = new Date(year, 2, 20);
+  const summerSolstice = new Date(year, 5, 21);
+  const fallEquinox = new Date(year, 8, 22);
+  const winterSolstice = new Date(year, 11, 21);
+
+  if (now >= springEquinox && now < summerSolstice) return "spring";
+  if (now >= summerSolstice && now < fallEquinox) return "summer";
+  if (now >= fallEquinox && now < winterSolstice) return "fall";
+  return "winter";
+};
+
 export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boolean; setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [isProjectOpen, setIsProjectOpen] = useState(false);
-  const [season, setSeason] = useState<string>("winter");
+  const [season, setSeason] = useState(getCurrentSeason());
   const navRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    const updateSeason = () => setSeason(getCurrentSeason());
+    const interval = setInterval(updateSeason, 86400000); // Mise à jour quotidienne
+    return () => clearInterval(interval);
+  }, []);
 
   // Tableau de refs pour les flocons et les feuilles
   const snowflakesRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -34,26 +55,6 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
 
   // Récupère l'état 'isClient'
   const isClient = useIsClient();
-
-  // Logique de changement de saison, uniquement après le rendu côté client
-  useEffect(() => {
-    if (isClient) {
-      const now = new Date();
-      const year = now.getFullYear();
-
-      // Dates des équinoxes et solstices pour l'hémisphère nord
-      const springEquinox = new Date(year, 2, 20); // 20 mars
-      const summerSolstice = new Date(year, 5, 21); // 21 juin
-      const fallEquinox = new Date(year, 8, 22); // 22 septembre
-      const winterSolstice = new Date(year, 11, 21); // 21 décembre
-
-      // Logique de changement de saison
-      if (now >= springEquinox && now < summerSolstice) setSeason("spring");
-      else if (now >= summerSolstice && now < fallEquinox) setSeason("summer");
-      else if (now >= fallEquinox && now < winterSolstice) setSeason("fall");
-      else setSeason("winter");
-    }
-  }, [isClient]);  
 
   // Animation des flocons de neige ou des feuilles tombantes
   useEffect(() => {
@@ -122,31 +123,38 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
       });
     }
     } else if (season === "spring" && navRef.current) {
-      const numFlowers = 15;
-
-    for (let i = 0; i < numFlowers; i++) {
-      const flower = document.createElement("img");
-      flower.src = "/images/blooming-plants.png";
-      flower.classList.add("flower");
-      flower.style.position = "absolute";
-      flower.style.bottom = "0px";
-      flower.style.left = `${Math.random() * 90}%`;
-      flower.style.width = "0px";
-      flower.style.height = "0px";
-      flower.style.opacity = "0.6";
-      bloomingPlantsRef.current.push(flower);
-      navRef.current?.appendChild(flower);
-
-      gsap.to(flower, {
-        y: navbarHeight,
-        width: `${Math.random() * 30 + 50}px`,
-        height: `${Math.random() * 30 + 50}px`,
-        duration: Math.random() * 2 + 1,
-        ease: "elastic.out(1, 0.5)",
-        delay: Math.random() * 1.5,
-      });
+      if (bloomingPlantsRef.current.length === 0) { // Vérifier si les fleurs existent déjà
+        const numFlowers = 15;
+    
+        for (let i = 0; i < numFlowers; i++) {
+          setTimeout(() => { // Apparition progressive
+            const flower = document.createElement("img");
+            flower.src = "/images/blooming-plants.png";
+            flower.classList.add("flower");
+            flower.style.position = "absolute";
+            flower.style.bottom = "0px";
+            flower.style.left = `${Math.random() * 90}%`;
+            flower.style.width = "0px"; // Taille initiale nulle
+            flower.style.height = "0px"; // Taille initiale nulle
+            flower.style.opacity = "0";
+            bloomingPlantsRef.current.push(flower);
+            navRef.current?.appendChild(flower);
+    
+            gsap.fromTo(flower, 
+              { width: "0px", height: "0px", opacity: 0 }, // Départ invisible
+              { 
+                width: `${Math.random() * 30 + 50}px`, 
+                height: `${Math.random() * 30 + 50}px`, 
+                opacity: 0.8,
+                duration: Math.random() * 2 + 1,
+                ease: "elastic.out(1, 0.5)"
+              }
+            );
+          }, i * 400); // Délai entre chaque apparition
+        }
+      }
     }
-    } else if (season === "summer" && navRef.current) {
+     else if (season === "summer" && navRef.current) {
       const numPalmTrees = 15;
 
     for (let i = 0; i < numPalmTrees; i++) {
