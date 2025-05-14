@@ -22,10 +22,10 @@ const getCurrentSeason = () => {
   const now = new Date();
   const year = now.getFullYear();
 
-  const springEquinox = new Date(year, 2, 20);
-  const summerSolstice = new Date(year, 5, 21);
-  const fallEquinox = new Date(year, 8, 22);
-  const winterSolstice = new Date(year, 11, 21);
+  const springEquinox = new Date(year, 3, 20);
+  const summerSolstice = new Date(year, 6, 21);
+  const fallEquinox = new Date(year, 9, 22);
+  const winterSolstice = new Date(year, 12, 21);
 
   if (now >= springEquinox && now < summerSolstice) return "spring";
   if (now >= summerSolstice && now < fallEquinox) return "summer";
