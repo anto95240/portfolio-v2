@@ -7,7 +7,6 @@ import { faHouse, faCircleInfo, faFile, faFileCircleCheck, faChevronDown, faChev
 import Image from "next/image";
 import Link from "next/link";
 
-// Hook personnalisé pour gérer l'état 'isClient'
 const useIsClient = () => {
   const [isClient, setIsClient] = useState(false);
 
@@ -22,10 +21,10 @@ const getCurrentSeason = () => {
   const now = new Date();
   const year = now.getFullYear();
 
-  const springEquinox = new Date(year, 3, 20);
-  const summerSolstice = new Date(year, 6, 21);
-  const fallEquinox = new Date(year, 9, 22);
-  const winterSolstice = new Date(year, 12, 21);
+  const springEquinox = new Date(year, 2, 20);
+  const summerSolstice = new Date(year, 5, 21);
+  const fallEquinox = new Date(year, 8, 22);
+  const winterSolstice = new Date(year, 11, 21);
 
   if (now >= springEquinox && now < summerSolstice) return "spring";
   if (now >= summerSolstice && now < fallEquinox) return "summer";
@@ -44,7 +43,6 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
     return () => clearInterval(interval);
   }, []);
 
-  // Tableau de refs pour les flocons et les feuilles
   const snowflakesRef = useRef<(HTMLDivElement | null)[]>([]);
   const fallingLeavesRef = useRef<(HTMLDivElement | null)[]>([]);
   const bloomingPlantsRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -53,10 +51,8 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleProjectList = () => setIsProjectOpen(!isProjectOpen);
 
-  // Récupère l'état 'isClient'
   const isClient = useIsClient();
 
-  // Animation des flocons de neige ou des feuilles tombantes
   useEffect(() => {
     if (!isClient) return;
   
@@ -123,7 +119,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
       });
     }
     } else if (season === "spring" && navRef.current) {
-      if (bloomingPlantsRef.current.length === 0) { // Vérifier si les fleurs existent déjà
+      if (bloomingPlantsRef.current.length === 0) {
         const numFlowers = 15;
     
         for (let i = 0; i < numFlowers; i++) {
@@ -134,52 +130,82 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
             flower.style.position = "absolute";
             flower.style.bottom = "0px";
             flower.style.left = `${Math.random() * 90}%`;
-            flower.style.width = "0px"; // Taille initiale nulle
-            flower.style.height = "0px"; // Taille initiale nulle
+            flower.style.width = "0px";
+            flower.style.height = "0px";
             flower.style.opacity = "0";
+
+            flower.style.zIndex = `${Math.floor(Math.random() * 5)}`;
+            flower.style.filter = `hue-rotate(${Math.random() * 40 - 20}deg) brightness(${Math.random() * 0.4 + 0.8})`;
+
             bloomingPlantsRef.current.push(flower);
             navRef.current?.appendChild(flower);
     
-            gsap.fromTo(flower, 
-              { width: "0px", height: "0px", opacity: 0 }, // Départ invisible
-              { 
-                width: `${Math.random() * 30 + 50}px`, 
-                height: `${Math.random() * 30 + 50}px`, 
+            const targetSize = Math.random() * 30 + 50;
+
+            gsap.fromTo(
+              flower,
+              {
+                scale: 0,
+                opacity: 0,
+                // y: 30,
+                rotation: Math.random() * 60 - 30
+              },
+              {
+                width: `${targetSize}px`,
+                height: `${targetSize}px`,
+                scale: 1,
                 opacity: 0.8,
-                duration: Math.random() * 2 + 1,
+                y: 0,
+                rotation: 0,
+                duration: 1.8,
                 ease: "elastic.out(1, 0.5)"
               }
             );
-          }, i * 400); // Délai entre chaque apparition
+
+            gsap.to(flower, {
+              x: "+=5",
+              duration: 2 + Math.random(),
+              yoyo: true,
+              repeat: -1,
+              ease: "sine.inOut"
+            });
+
+          }, i * 400);
         }
       }
-    }
-     else if (season === "summer" && navRef.current) {
+    } else if (season === "summer" && navRef.current) {
+      navRef.current.style.perspective = "800px";
+
       const numPalmTrees = 15;
+      for (let i = 0; i < numPalmTrees; i++) {
+        const palmTree = document.createElement("img");
+        palmTree.src = "/images/palm-tree.png";
+        palmTree.classList.add("palm-tree");
 
-    for (let i = 0; i < numPalmTrees; i++) {
-      const palmTree = document.createElement("img");
-      palmTree.src = "/images/palm-tree.png";
-      palmTree.classList.add("palm-tree");
-      palmTree.style.position = "absolute";
-      palmTree.style.top = `${Math.random() * 100}%`;
-      palmTree.style.left = `${Math.random() * 90}%`;
-      palmTree.style.width = "40px";
-      palmTree.style.height = "60px";
-      palmTree.style.opacity = "0.6";
-      palmTreeRef.current.push(palmTree);
-      navRef.current?.appendChild(palmTree);
+        palmTree.style.position = "absolute";
+        palmTree.style.top = `${Math.random() * 80}%`;
+        palmTree.style.left = `${Math.random() * 90}%`;
+        palmTree.style.width = "40px";
+        palmTree.style.height = "60px";
+        palmTree.style.opacity = "0.7";
+        palmTree.style.zIndex = "2";
 
-      gsap.to(palmTree, {
-        y: navbarHeight,
-        rotation: Math.random() * 50 - 50,
-        duration: Math.random() * 4 + 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "power1.inOut",
-      });
+        palmTree.style.transformStyle = "preserve-3d";
+        palmTree.style.transformOrigin = "bottom center";
+
+        palmTreeRef.current.push(palmTree);
+        navRef.current.appendChild(palmTree);
+
+        gsap.to(palmTree, {
+          rotateY: Math.random() * 100 - 15,
+          duration: Math.random() * 3 + 2,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        });
+      }
     }
-    }
+
   }, [season, isClient]);
 
   if (!isClient) return null;
