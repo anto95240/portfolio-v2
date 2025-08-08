@@ -37,7 +37,7 @@ export default function ThemePage() {
       name: "WEB",
       categorySlug: "web",
       gradient: "from-green-blue to-blue-darkBlue",
-      imageSrc: "/images/web.svg",
+      imageSrc: "/images/web.webp",
       description: "Il s'agit de site web, d'application web réalisés à l'école ou en stage",
       className: "text-black",
     },
@@ -45,7 +45,7 @@ export default function ThemePage() {
       name: "JEUX",
       categorySlug: "jeux",
       gradient: "from-blue-darkBlue to-dark-blue",
-      imageSrc: "/images/jeux.svg",
+      imageSrc: "/images/jeux.webp",
       description: "Il s'agit des jeux locaux sur le web ou en ligne de commande réalisés à l'école ou en stage ",
       className: "text-white",
     }

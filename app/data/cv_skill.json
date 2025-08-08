@@ -23,11 +23,17 @@
         {
           "id": "4",
           "categories": ["Front-end"],
+          "title": "React",
+          "images": "/images/logo/react.svg"
+        },
+        {
+          "id": "5",
+          "categories": ["Front-end"],
           "title": "Bootstrap",
           "images": "/images/logo/bootstrap.svg"
         },
         {
-          "id": "5",
+          "id": "6",
           "categories": ["Front-end"],
           "title": "JavaScript",
           "images": "/images/logo/js.svg"
@@ -88,8 +94,8 @@
       {
         "id": "1",
         "categories": ["Front-end"],
-        "title": "Vue.JS",
-        "images": "/images/logo/vueJs.svg"
+        "title": "React",
+        "images": "/images/logo/react.svg"
       },
       {
         "id": "2",

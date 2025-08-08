@@ -27,15 +27,15 @@
             },
             {
               "type": "gallery",
-              "url": "/images/ydays/devWeb/accueil_responsive.svg"
+              "url": "/images/ydays/devWeb/accueil_responsive.webp"
             },
             {
               "type": "gallery",
-              "url": "/images/ydays/devWeb/portfolio.svg"
+              "url": "/images/ydays/devWeb/portfolio.webp"
             },
             {
               "type": "gallery",
-              "url": "/images/ydays/devWeb/all_pages.svg"
+              "url": "/images/ydays/devWeb/all_pages.webp"
             }
           ]
         },
@@ -55,7 +55,7 @@
             },
             {
               "type": "gallery",
-              "url": "/images/ydays/electronique/manette.svg"
+              "url": "/images/ydays/electronique/manette.webp"
             }
           ]
         },
@@ -76,15 +76,15 @@
           "images": [
             {
               "type": "main",
-              "url": "/images/ydays/JE/logo_ydays_je.svg"
+              "url": "/images/ydays/JE/logo_ydays_je.webp"
             },
             {
               "type": "gallery",
-              "url": "/images/ydays/JE/accueil.svg"
+              "url": "/images/ydays/JE/accueil.webp"
             },
             {
               "type": "gallery",
-              "url": "/images/ydays/JE/main_page.svg"
+              "url": "/images/ydays/JE/main_page.webp"
             }
           ]
         },
@@ -100,7 +100,7 @@
           "images": [
             {
               "type": "main",
-              "url": "/images/ydays/unity/logo_ydays_unity.svg"
+              "url": "/images/ydays/unity/logo_ydays_unity.webp"
             }
           ]
         }
@@ -129,15 +129,15 @@
           "images": [
             {
               "type": "main",
-              "url": "/images/web/cpu_ci/logo_cpu-ci.svg"
+              "url": "/images/web/cpu_ci/logo_cpu-ci.webp"
             },
             {
               "type": "gallery",
-              "url": "/images/web/cpu_ci/cpu_ci.svg"
+              "url": "/images/web/cpu_ci/cpu_ci.webp"
             },
             {
               "type": "gallery",
-              "url": "/images/web/cpu_ci/all_pages.svg"
+              "url": "/images/web/cpu_ci/all_pages.webp"
             }
           ]
         },
@@ -163,15 +163,15 @@
             },
             {
               "type": "gallery",
-              "url": "/images/web/e_commerce/accueil.svg"
+              "url": "/images/web/e_commerce/accueil.webp"
             },
             {
               "type": "gallery",
-              "url": "/images/web/e_commerce/main_pages.svg"
+              "url": "/images/web/e_commerce/main_pages.webp"
             },
             {
               "type": "gallery",
-              "url": "/images/web/e_commerce/all_pages_admin.svg"
+              "url": "/images/web/e_commerce/all_pages_admin.webp"
             }
           ]
         },
@@ -197,11 +197,11 @@
             },
             {
               "type": "gallery",
-              "url": "/images/web/eduCool/all_pages.svg"
+              "url": "/images/web/eduCool/all_pages.webp"
             },
             {
               "type": "gallery",
-              "url": "/images/web/eduCool/accueil.svg"
+              "url": "/images/web/eduCool/accueil.webp"
             },
             {
               "type": "gallery",
@@ -231,11 +231,11 @@
             },
             {
               "type": "gallery",
-              "url": "/images/web/budgee/accueil.svg"
+              "url": "/images/web/budgee/accueil.webp"
             },
             {
               "type": "gallery",
-              "url": "/images/web/budgee/all_pages.svg"
+              "url": "/images/web/budgee/all_pages.webp"
             }
           ]
         }
@@ -301,11 +301,11 @@
             },
             {
               "type": "gallery",
-              "url": "/images/jeux/hangman_web/accueil.svg"
+              "url": "/images/jeux/hangman_web/accueil.webp"
             },
             {
               "type": "gallery",
-              "url": "/images/jeux/hangman_web/all_pages.svg"
+              "url": "/images/jeux/hangman_web/all_pages.webp"
             }
           ]
         },
@@ -334,11 +334,11 @@
             },
             {
               "type": "gallery",
-              "url": "/images/jeux/arkanoid/arkanoid.svg"
+              "url": "/images/jeux/arkanoid/arkanoid.webp"
             },
             {
               "type": "gallery",
-              "url": "/images/jeux/arkanoid/gameplay.svg"
+              "url": "/images/jeux/arkanoid/gameplay.webp"
             }
           ]
         },
@@ -410,15 +410,15 @@
             },
             {
               "type": "gallery",
-              "url": "/images/ydays/devWeb/accueil_responsive.svg"
+              "url": "/images/ydays/devWeb/accueil_responsive.webp"
             },
             {
               "type": "gallery",
-              "url": "/images/ydays/devWeb/portfolio.svg"
+              "url": "/images/ydays/devWeb/portfolio.webp"
             },
             {
               "type": "gallery",
-              "url": "/images/ydays/devWeb/all_pages.svg"
+              "url": "/images/ydays/devWeb/all_pages.webp"
             }
           ]
         }
@@ -447,15 +447,15 @@
           "images": [
             {
               "type": "main",
-              "url": "/images/web/cpu_ci/logo_cpu-ci.svg"
+              "url": "/images/web/cpu_ci/logo_cpu-ci.webp"
             },
             {
               "type": "gallery",
-              "url": "/images/web/cpu_ci/cpu_ci.svg"
+              "url": "/images/web/cpu_ci/cpu_ci.webp"
             },
             {
               "type": "gallery",
-              "url": "/images/web/cpu_ci/all_pages.svg"
+              "url": "/images/web/cpu_ci/all_pages.webp"
             }
           ]
         },
@@ -481,11 +481,11 @@
             },
             {
               "type": "gallery",
-              "url": "/images/web/eduCool/all_pages.svg"
+              "url": "/images/web/eduCool/all_pages.webp"
             },
             {
               "type": "gallery",
-              "url": "/images/web/eduCool/accueil.svg"
+              "url": "/images/web/eduCool/accueil.webp"
             },
             {
               "type": "gallery",
@@ -522,11 +522,11 @@
             },
             {
               "type": "gallery",
-              "url": "/images/jeux/arkanoid/arkanoid.svg"
+              "url": "/images/jeux/arkanoid/arkanoid.webp"
             },
             {
               "type": "gallery",
-              "url": "/images/jeux/arkanoid/gameplay.svg"
+              "url": "/images/jeux/arkanoid/gameplay.webp"
             }
           ]
         }
