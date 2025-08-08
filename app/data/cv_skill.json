@@ -94,7 +94,7 @@
       {
         "id": "1",
         "categories": ["Front-end"],
-        "title": "react",
+        "title": "React",
         "images": "/images/logo/react.svg"
       },
       {
@@ -130,4 +130,3 @@
     ]
   }
 }
-  
