@@ -6,16 +6,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faCircleInfo, faFile, faFileCircleCheck, faChevronDown, faChevronUp, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import Link from "next/link";
+import ClientOnly from "./ClientOnlyNavbar";
 
-const useIsClient = () => {
-  const [isClient, setIsClient] = useState(false);
+type Season = "spring" | "summer" | "fall" | "winter";
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+// const useIsClient = () => {
+//   const [isClient, setIsClient] = useState(false);
 
-  return isClient;
-};
+//   useEffect(() => {
+//     setIsClient(true);
+//   }, []);
+
+//   return isClient;
+// };
 
 const getCurrentSeason = () => {
   const now = new Date();
@@ -34,71 +37,108 @@ const getCurrentSeason = () => {
 
 export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boolean; setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [isProjectOpen, setIsProjectOpen] = useState(false);
-  const [season, setSeason] = useState(getCurrentSeason());
+  const [season, setSeason] = useState<Season | null>(null);
   const navRef = useRef<HTMLDivElement>(null);
   
-  useEffect(() => {
-    const updateSeason = () => setSeason(getCurrentSeason());
-    const interval = setInterval(updateSeason, 86400000); // Mise à jour quotidienne
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const updateSeason = () => setSeason(getCurrentSeason());
+  //   const interval = setInterval(updateSeason, 86400000); // Mise à jour quotidienne
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const snowflakesRef = useRef<(HTMLDivElement | null)[]>([]);
   const fallingLeavesRef = useRef<(HTMLDivElement | null)[]>([]);
   const bloomingPlantsRef = useRef<(HTMLDivElement | null)[]>([]);
   const palmTreeRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const toggleProjectList = () => setIsProjectOpen(!isProjectOpen);
+  // const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  // const toggleProjectList = () => setIsProjectOpen(!isProjectOpen);
 
-  const isClient = useIsClient();
+  // const isClient = useIsClient();
+
+  const randomSeed = useRef<number[]>([]);
 
   useEffect(() => {
-    if (!isClient) return;
-  
-    const navbarHeight = navRef.current?.offsetHeight || 0;
-  
-    // Créer et animer les éléments en fonction de la saison
-    if (season === "winter" && navRef.current) {
-      const numFlakes = 20; // Nombre de flocons
+    setSeason(getCurrentSeason());
+    const interval = setInterval(() => {
+      setSeason(getCurrentSeason());
+    }, 86400000);
+    return () => clearInterval(interval);
+  }, []);
 
-    for (let i = 0; i < numFlakes; i++) {
-      const snowflake = document.createElement("img");
-      snowflake.src = "/images/snowflakes.png"; // Chemin vers l'image de flocon
-      snowflake.classList.add("snowflake");
-      snowflake.style.position = "absolute";
-      snowflake.style.top = `${Math.random() * -50}px`;
-      snowflake.style.left = `${Math.random() * 90}%`;
-      snowflake.style.width = "20px";
-      snowflake.style.height = "20px";
-      snowflake.style.opacity = "0.6";
-      snowflakesRef.current.push(snowflake);
-      navRef.current?.appendChild(snowflake);
-
-      // Animation continue
-      gsap.to(snowflake, {
-        y: navbarHeight,
-        duration: Math.random() * 5 + 5,
-        x: `+=${Math.random() * 100 - 50}%`,
-        repeat: -1,
-        yoyo: false,
-        ease: "power1.inOut",
-        delay: Math.random() * 5,
-        onRepeat: () => {
-          gsap.set(snowflake, { top: `${Math.random() * -50}px` });
-        },
-      });
+  const generateRandoms = (count: number) => {
+    const arr: number[] = [];
+    for (let i = 0; i < count; i++) {
+      arr.push(Math.random());
     }
-    } else if (season === "fall" && navRef.current) {
+    return arr;
+  };
+
+  useEffect(() => {
+    if (!season || !navRef.current) return;
+  
+    // const navbarHeight = navRef.current?.offsetHeight || 0;
+  
+    const navbarHeight = navRef.current.offsetHeight;
+
+    const clearChildren = () => {
+      snowflakesRef.current.forEach(el => el?.remove());
+      fallingLeavesRef.current.forEach(el => el?.remove());
+      bloomingPlantsRef.current.forEach(el => el?.remove());
+      palmTreeRef.current.forEach(el => el?.remove());
+
+      snowflakesRef.current = [];
+      fallingLeavesRef.current = [];
+      bloomingPlantsRef.current = [];
+      palmTreeRef.current = [];
+    };
+
+    clearChildren();
+
+    // Créer et animer les éléments en fonction de la saison
+    if (season === "winter") {
+      const numFlakes = 20; 
+      const randoms = generateRandoms(numFlakes * 5);
+
+      for (let i = 0; i < numFlakes; i++) {
+        const snowflake = document.createElement("img");
+        snowflake.src = "/images/snowflakes.png"; // Chemin vers l'image de flocon
+        snowflake.classList.add("snowflake");
+        snowflake.style.position = "absolute";
+        snowflake.style.top = `${randoms[i] * -50}px`;
+        snowflake.style.left = `${randoms[i] * 90}%`;
+        snowflake.style.width = "20px";
+        snowflake.style.height = "20px";
+        snowflake.style.opacity = "0.6";
+
+        snowflakesRef.current.push(snowflake);
+        navRef.current?.appendChild(snowflake);
+
+        // Animation continue
+        gsap.to(snowflake, {
+          y: navbarHeight,
+          duration: randoms[i + 40] * 5 + 5,
+          x: `+=${randoms[i + 60] * 100 - 50}%`,
+          repeat: -1,
+          yoyo: false,
+          ease: "power1.inOut",
+          delay: randoms[i + 80] * 5,
+          onRepeat: () => {
+            gsap.set(snowflake, { top: `${randoms[i] * -50}px` });
+          },
+        });
+      }
+    } else if (season === "fall") {
       const numLeaves = 20;
+      const randoms = generateRandoms(numLeaves * 5);
 
     for (let i = 0; i < numLeaves; i++) {
       const leaf = document.createElement("img");
       leaf.src = "/images/falling-leaves.png"; // Chemin vers l'image de feuille
       leaf.classList.add("leaf");
       leaf.style.position = "absolute";
-      leaf.style.top = `${Math.random() * -50}px`;
-      leaf.style.left = `${Math.random() * 90}%`;
+      leaf.style.top = `${randoms[i] * -50}px`;
+      leaf.style.left = `${randoms[i] * 90}%`;
       leaf.style.width = "20px";
       leaf.style.height = "20px";
       leaf.style.opacity = "0.6";
@@ -107,20 +147,21 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
 
       gsap.to(leaf, {
         y: navbarHeight,
-        duration: Math.random() * 5 + 5,
-        x: `+=${Math.random() * 100 - 50}%`,
+        duration: randoms[i + 40] * 5 + 5,
+        x: `+=${randoms[i + 60] * 100 - 50}%`,
         repeat: -1,
         yoyo: false,
         ease: "power1.inOut",
-        delay: Math.random() * 5,
+        delay: randoms[i + 80] * 5,
         onRepeat: () => {
-          gsap.set(leaf, { top: `${Math.random() * -50}px` });
+          gsap.set(leaf, { top: `${randoms[i] * -50}px` });
         },
       });
     }
-    } else if (season === "spring" && navRef.current) {
+    } else if (season === "spring") {
       if (bloomingPlantsRef.current.length === 0) {
         const numFlowers = 15;
+        const randoms = generateRandoms(numFlowers * 5);
     
         for (let i = 0; i < numFlowers; i++) {
           setTimeout(() => { // Apparition progressive
@@ -129,18 +170,18 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
             flower.classList.add("flower");
             flower.style.position = "absolute";
             flower.style.bottom = "0px";
-            flower.style.left = `${Math.random() * 90}%`;
+            flower.style.left = `${randoms[i + 10] * 90}%`;
             flower.style.width = "0px";
             flower.style.height = "0px";
             flower.style.opacity = "0";
 
-            flower.style.zIndex = `${Math.floor(Math.random() * 5)}`;
-            flower.style.filter = `hue-rotate(${Math.random() * 40 - 20}deg) brightness(${Math.random() * 0.4 + 0.8})`;
+            flower.style.zIndex = `${Math.floor(randoms[i + 15] * 5)}`;
+            flower.style.filter = `hue-rotate(${randoms[i] * 40 - 20}deg) brightness(${randoms[i + 5] * 0.4 + 0.8})`;
 
             bloomingPlantsRef.current.push(flower);
             navRef.current?.appendChild(flower);
     
-            const targetSize = Math.random() * 30 + 50;
+            const targetSize = randoms[i + 20] * 30 + 50;
 
             gsap.fromTo(
               flower,
@@ -148,7 +189,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
                 scale: 0,
                 opacity: 0,
                 // y: 30,
-                rotation: Math.random() * 60 - 30
+                rotation: randoms[i + 25] * 60 - 30
               },
               {
                 width: `${targetSize}px`,
@@ -164,7 +205,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
 
             gsap.to(flower, {
               x: "+=5",
-              duration: 2 + Math.random(),
+              duration: 2 + randoms[i + 30],
               yoyo: true,
               repeat: -1,
               ease: "sine.inOut"
@@ -173,18 +214,19 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
           }, i * 400);
         }
       }
-    } else if (season === "summer" && navRef.current) {
-      navRef.current.style.perspective = "800px";
+    } else if (season === "summer") {
+      const numPalms = 15;
+      const randoms = generateRandoms(numPalms * 4);
 
-      const numPalmTrees = 15;
-      for (let i = 0; i < numPalmTrees; i++) {
+      navRef.current.style.perspective = "800px";
+      for (let i = 0; i < numPalms; i++) {
         const palmTree = document.createElement("img");
         palmTree.src = "/images/palm-tree.png";
         palmTree.classList.add("palm-tree");
 
         palmTree.style.position = "absolute";
-        palmTree.style.top = `${Math.random() * 80}%`;
-        palmTree.style.left = `${Math.random() * 90}%`;
+        palmTree.style.top = `${randoms[i] * 80}%`;
+        palmTree.style.left = `${randoms[i + 10] * 90}%`;
         palmTree.style.width = "40px";
         palmTree.style.height = "60px";
         palmTree.style.opacity = "0.7";
@@ -197,8 +239,8 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
         navRef.current.appendChild(palmTree);
 
         gsap.to(palmTree, {
-          rotateY: Math.random() * 100 - 15,
-          duration: Math.random() * 3 + 2,
+          rotateY: randoms[i + 20] * 100 - 15,
+          duration: randoms[i + 30] * 3 + 2,
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut"
@@ -206,9 +248,12 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
       }
     }
 
-  }, [season, isClient]);
+  }, [season]);
+  
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleProjectList = () => setIsProjectOpen(!isProjectOpen);
 
-  if (!isClient) return null;
+  if (!season) return null;
 
   return (
     <div className="relative h-screen">
