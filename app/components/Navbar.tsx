@@ -10,15 +10,15 @@ import ClientOnlyNavbar from "./ClientOnlyNavbar";
 
 type Season = "spring" | "summer" | "fall" | "winter";
 
-// const useIsClient = () => {
-//   const [isClient, setIsClient] = useState(false);
+const useIsClient = () => {
+  const [isClient, setIsClient] = useState(false);
 
-//   useEffect(() => {
-//     setIsClient(true);
-//   }, []);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
-//   return isClient;
-// };
+  return isClient;
+};
 
 const getCurrentSeason = () => {
   const now = new Date();
@@ -39,24 +39,13 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
   const [isProjectOpen, setIsProjectOpen] = useState(false);
   const [season, setSeason] = useState<Season | null>(null);
   const navRef = useRef<HTMLDivElement>(null);
-  
-  // useEffect(() => {
-  //   const updateSeason = () => setSeason(getCurrentSeason());
-  //   const interval = setInterval(updateSeason, 86400000); // Mise à jour quotidienne
-  //   return () => clearInterval(interval);
-  // }, []);
 
   const snowflakesRef = useRef<(HTMLDivElement | null)[]>([]);
   const fallingLeavesRef = useRef<(HTMLDivElement | null)[]>([]);
   const bloomingPlantsRef = useRef<(HTMLDivElement | null)[]>([]);
   const palmTreeRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  // const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  // const toggleProjectList = () => setIsProjectOpen(!isProjectOpen);
-
-  // const isClient = useIsClient();
-
-  const randomSeed = useRef<number[]>([]);
+  const isClient = useIsClient();
 
   useEffect(() => {
     setSeason(getCurrentSeason());
@@ -76,8 +65,6 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
 
   useEffect(() => {
     if (!season || !navRef.current) return;
-  
-    // const navbarHeight = navRef.current?.offsetHeight || 0;
   
     const navbarHeight = navRef.current.offsetHeight;
 
@@ -254,6 +241,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
   const toggleProjectList = () => setIsProjectOpen(!isProjectOpen);
 
   if (!season) return null;
+  if (!isClient) return null;
 
   return (
     <ClientOnlyNavbar>
