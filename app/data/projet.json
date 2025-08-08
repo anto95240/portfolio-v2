@@ -208,6 +208,36 @@
               "url": "/images/web/eduCool/admin.svg"
             }
           ]
+        },
+        {
+          "id": "4",
+          "category": "web",
+          "title": "Budgee",
+          "description": "Application web de gestion de budget personnel",
+          "technologies": ["React", "Node.js"],
+          "date": "Mai 2025 - Juin 2025",
+          "equipe": ["Antoine RICHARD"],
+          "links": [
+            {
+              "type": "github",
+              "url": "https://github.com/anto95240/budgee"
+            }  
+            
+          ],
+          "images": [
+            {
+              "type": "main",
+              "url": "/images/web/budgee/logo_budgee.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/budgee/accueil.svg"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/budgee/all_pages.svg"
+            }
+          ]
         }
       ]
     },
