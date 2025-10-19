@@ -37,6 +37,12 @@
           "categories": ["Front-end"],
           "title": "JavaScript",
           "images": "/images/logo/js.svg"
+        },
+        {
+          "id": "7",
+          "categories": ["Front-end"],
+          "title": "Flutter",
+          "images": "/images/logo/flutter.svg"
         }
       ],
       "backend": [

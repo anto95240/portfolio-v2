@@ -238,6 +238,44 @@
               "url": "/images/web/budgee/all_pages.webp"
             }
           ]
+        },
+        {
+          "id": "5",
+          "category": "web",
+          "title": "ToyVerse",
+          "description": "Une application web moderne pour gérer et organiser votre collection de jouets",
+          "technologies": ["NEXT.JS", "SUPABASE"],
+          "date": "Juillet 2025 - Septembre 2025",
+          "equipe": ["Antoine RICHARD"],
+          "links": [
+            {
+              "type": "github",
+              "url": "https://github.com/anto95240/toy-verse"
+            },
+            {
+              "type": "site",
+              "url": "https://arichard-toyverse.vercel.app/"
+            }
+            
+          ],
+          "images": [
+            {
+              "type": "main",
+              "url": "/images/web/toyVerse/logo_toyVerse.webp"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/toyVerse/accueil.webp"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/toyVerse/all_pages.webp"
+            },
+            {
+              "type": "gallery",
+              "url": "/images/web/toyVerse/toys.webp"
+            }
+          ]
         }
       ]
     },

@@ -15,7 +15,15 @@
         "lieux": "Paris Ynov Campus (Nanterre, 92)",
         "domaine": "Développeur",
         "realisation": "Création d'une plateforme pédagogique",
-        "date": "Juillet 2024 - Aout 2024"
+        "date": "01/07/2024 - 09/08/2024"
+      },
+      {
+        "id": "3",
+        "title": "Stage - Petit Pas",
+        "lieux": "Paris Ynov Campus (Nanterre, 92)",
+        "domaine": "Développeur",
+        "realisation": "Création d'une plateforme pour la petite enfance",
+        "date": "21/07/2025 - 02/10/2025"
       }
     ]
   }
