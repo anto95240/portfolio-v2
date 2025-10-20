@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Lato as GoogleLato, Montserrat_Alternates } from "next/font/google";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css"; // Import des styles nécessaires
@@ -21,9 +21,18 @@ const MontserratAlternates = Montserrat_Alternates({
 export const metadata: Metadata = {
   title: "Antoine Richard",
   description: "Mon portfolio",
+  manifest: "/manifest.json",
   icons: {
     icon: "/images/logo.svg", // Favicon
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: "#4A90E2",
 };
 
 export default function RootLayout({
@@ -32,8 +41,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
-      <body className={`${Lato.className} ${MontserratAlternates.className}`}>{children}</body>
+    <html lang="fr" suppressHydrationWarning>
+      <body className={`${Lato.className} ${MontserratAlternates.className}`}>
+        {children}
+      </body>
     </html>
   );
 }
