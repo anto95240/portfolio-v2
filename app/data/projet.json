@@ -220,8 +220,12 @@
           "links": [
             {
               "type": "github",
-              "url": "https://github.com/anto95240/budgee"
-            }  
+              "url": "https://github.com/anto95240/budgee-front"
+            },
+            {
+              "type": "github",
+              "url": "https://github.com/anto95240/budgee-back"
+            } 
             
           ],
           "images": [
