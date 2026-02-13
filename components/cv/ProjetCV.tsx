@@ -8,33 +8,15 @@ import Link from "next/link";
 import gsap from "gsap";
 import Image from "next/image";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ProjectsData } from "@/types";
 
-// Types recréés localement pour correspondre à votre fichier
-type Project = {
-  id: string;
-  category: string;
-  title: string;
-  description: string;
-  technologies: string[];
-  date: string;
-  equipe: string[];
-  links: { type: string; url: string }[];
-  images: { type: string; url: string }[];
-  uniqueId?: string;
-};
-
-type ProjectsData = {
-  [key: string]: { projects: Project[] };
-};
-
-export default function ProjectCV({ data }: { data: ProjectsData }) {
+// Ajout de 'title' optionnel dans les props
+export default function ProjectCV({ data, title }: { data: ProjectsData; title?: string }) {
   const router = useRouter();
   const pathname = usePathname();
   const [projetStyle, setProjetStyle] = useState("mb-5 text-center");
   const [activeProject, setActiveProject] = useState<string | null>(null);
 
-  // Plus de fetch ici, on utilise la prop 'data' directement
-  
   useEffect(() => {
     if (pathname.startsWith("/projet/cv")) {
       setProjetStyle("text-2xl mb-10 text-center");
@@ -44,7 +26,6 @@ export default function ProjectCV({ data }: { data: ProjectsData }) {
   }, [pathname]);
 
   const categories = useMemo(() => {
-    // On utilise 'data' passée en props
     return data ? Object.keys(data) : [];
   }, [data]);
 
@@ -54,6 +35,7 @@ export default function ProjectCV({ data }: { data: ProjectsData }) {
         data[category]?.projects.map((project) => ({
           ...project,
           uniqueId: `${category}-${project.id}`,
+          categorySlug: category,
         })) || []
       );
       return projects;
@@ -69,35 +51,28 @@ export default function ProjectCV({ data }: { data: ProjectsData }) {
     router.push(`/projet/${category}/${projectId}`);
   }, [router]);
 
-  // Logique du titre conservée
+  // Logique du titre : Si 'title' est passé en props (Home), on l'utilise. 
+  // Sinon, on calcule en fonction de l'URL (Pages projets).
   const pathSegment = pathname.split('/')[2];
-  const ProjetText = pathSegment && categories.includes(pathSegment) ? pathSegment.toUpperCase() : "Mes projets";
+  const calculatedTitle = pathSegment && categories.includes(pathSegment) ? pathSegment.toUpperCase() : "Mes projets";
+  const displayTitle = title || calculatedTitle;
 
   useEffect(() => {   
     if (!data) return;
 
     gsap.registerPlugin(ScrollTrigger);
     
-    // Utilisation de gsap.context pour éviter les bugs de re-render
     const ctx = gsap.context(() => {
-        gsap.utils.toArray<HTMLElement>(".fade-down").forEach((elem) => {
+      gsap.utils.toArray<HTMLElement>(".fade-down").forEach((elem) => {
         gsap.fromTo(
-            elem,
-            { y: 80, opacity: 0 },
-            {
-            y: 0,
-            opacity: 1,
-            duration: 1.5,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: elem,
-                start: "top 90%",
-                end: "top 10%",
-                scrub: true,
-            },
-            }
+          elem,
+          { y: 80, opacity: 0 },
+          {
+            y: 0, opacity: 1, duration: 1.5, ease: "power3.out",
+            scrollTrigger: { trigger: elem, start: "top 90%", end: "top 10%", scrub: true },
+          }
         );
-        });
+      });
     });
     return () => ctx.revert();
   }, [data, categories]);
@@ -107,11 +82,11 @@ export default function ProjectCV({ data }: { data: ProjectsData }) {
   return (
     <div className="w-full md:w-10/12 lg:w-8/12 flex flex-col mx-auto">
       <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
-      <h1 className={projetStyle}>{ProjetText}</h1>
+      <h1 className={projetStyle}>{displayTitle}</h1>
       <div className="grid grid-cols-1 gap-5 max-w-3xl mx-auto md:grid-cols-2 text-center">
         {allProjects.map((project, index) => {
-          const mainImage = project.images.find((image) => image.type === "main")?.url || "/default-image.jpg";
-          const techCount = project.technologies.length;
+          const mainImage = project.images?.find((image) => image.type === "main")?.url || "/default-image.jpg";
+          const techCount = project.technologies?.length || 0;
 
           return (
             <div
@@ -131,11 +106,11 @@ export default function ProjectCV({ data }: { data: ProjectsData }) {
                   onClick={(e) => e.stopPropagation()}
                 >
                   <h1 className="text-lg font-title mb-2">{project.title}</h1>
-                  <p className="text-sm font-text mb-3 h-10">{project.description}</p>
-                  <div className={`grid grid-cols-${techCount} gap-2`}>
-                    {project.technologies.map((tech, index) => (
+                  <p className="text-sm font-text mb-3 h-10 px-2 line-clamp-2">{project.description}</p>
+                  <div className={`grid grid-cols-${Math.min(techCount, 3)} gap-2`}>
+                    {project.technologies?.slice(0, 3).map((tech, i) => (
                       <div
-                        key={index}
+                        key={i}
                         className="bg-white text-black rounded-sm shadow-[4px_4px_10px_0_rgba(0,0,0,0.35)] text-sm flex justify-center items-center font-title p-1"
                       >
                         {tech}
@@ -145,9 +120,9 @@ export default function ProjectCV({ data }: { data: ProjectsData }) {
 
                   <button
                     className="mt-4 bg-green-projet w-full h-10 shadow-[0_-4px_4px_0_rgba(0,0,0,0.25)] flex justify-center items-center gap-2 text-black font-title hover:bg-green-600 transition-transform transform active:scale-95"
-                    onClick={() => handleProjectClick(project.id, project.category)}
+                    onClick={() => handleProjectClick(project.id, project.categorySlug || "")}
                   >
-                    Plus de détail
+                    Plus de détails
                     <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-l" />
                   </button>
                 </div>

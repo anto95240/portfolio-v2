@@ -1,5 +1,6 @@
 import { getProjectById } from "@/lib/data";
-import ProjectDetailClient from "./ProjectDetailClient.jsx";
+// Assurez-vous d'importer le client depuis le dossier courant également
+import ProjectDetailClient from "./ProjectDetailClient"; 
 
 export default async function ProjectDetail(props: { params: Promise<{ category: string; id: string }> }) {
   const params = await props.params;

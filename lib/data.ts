@@ -4,20 +4,36 @@ import skillsJson from "@/app/data/cv_skill.json";
 import experienceJson from "@/app/data/cv_experience.json";
 import formationJson from "@/app/data/cv_formation.json";
 
-// Cast pour éviter les erreurs de typage strict sur le JSON importé
+// On importe les types globaux pour éviter les conflits
+import { Project, Experience, Formation, Tool, ProjectsData, SkillsData } from "@/types";
+
+// Cast des données
 const projetsData = projetsJson as any;
 const skillsData = skillsJson as any;
 const experienceData = experienceJson as any;
 const formationData = formationJson as any;
 
-export const getProjetsHome = () => projetsData.homePage;
-export const getProjetsFull = () => projetsData.projectPage;
+// --- ACCUEIL ---
+export const getProjetsHome = (): ProjectsData => projetsData.homePage;
 
-export const getSkills = () => skillsData.cvpage.skills;
-export const getExperiences = () => experienceData.cvpage.experience;
-export const getFormations = () => formationData.cvpage.formation;
+export const getHomeTools = (): Tool[] => {
+  // Sécurité si homepage n'existe pas dans le JSON
+  return skillsData.homepage?.skills || [];
+};
 
-// Helper pour récupérer les projets d'une catégorie spécifique
-export const getProjectsByCategory = (category: string) => {
+// --- CV ---
+export const getSkills = (): SkillsData => skillsData.cvpage.skills;
+export const getExperiences = (): Experience[] => experienceData.cvpage.experience;
+export const getFormations = (): Formation[] => formationData.cvpage.formation;
+
+// --- PROJETS ---
+export const getProjetsFull = (): ProjectsData => projetsData.projectPage;
+
+export const getProjectsByCategory = (category: string): Project[] => {
   return projetsData.projectPage[category]?.projects || [];
+};
+
+export const getProjectById = (category: string, id: string): Project | undefined => {
+  const categoryData = projetsData.projectPage[category];
+  return categoryData?.projects.find((p: Project) => p.id === id);
 };

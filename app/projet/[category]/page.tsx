@@ -1,7 +1,7 @@
 import { getProjectsByCategory } from "@/lib/data";
-import ProjectCategoryClient from "@/components/projet/ProjectCategoryClient";
+// Correction de l'import : on importe depuis le dossier courant
+import ProjectCategoryClient from "./ProjectCategoryClient"; 
 
-// Cette fonction permet de générer les pages statiques au build (optionnel mais recommandé)
 export function generateStaticParams() {
   return [
     { category: 'web' },
@@ -14,7 +14,6 @@ export default async function CategoryPage(props: { params: Promise<{ category: 
   const params = await props.params;
   const category = params.category;
   
-  // Récupération directe des données (plus de fetch API)
   const projects = getProjectsByCategory(category);
 
   return <ProjectCategoryClient projects={projects} category={category} />;
