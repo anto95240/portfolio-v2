@@ -1,8 +1,8 @@
 // lib/data.ts
-import projetsJson from "@/app/data/projet.json";
-import skillsJson from "@/app/data/cv_skill.json";
-import experienceJson from "@/app/data/cv_experience.json";
-import formationJson from "@/app/data/cv_formation.json";
+import projetsJson from "@/data/projet.json";
+import skillsJson from "@/data/cv_skill.json";
+import experienceJson from "@/data/cv_experience.json";
+import formationJson from "@/data/cv_formation.json";
 
 // On importe les types globaux pour éviter les conflits
 import { Project, Experience, Formation, Tool, ProjectsData, SkillsData } from "@/types";

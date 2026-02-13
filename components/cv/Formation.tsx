@@ -48,7 +48,7 @@ export default function Formation({ data }: { data: FormationType[] }) {
                 </button>
               )}
             </div>
-            <div className="relative z-10 w-4 h-4 bg-white rounded-full border-2 border-black hidden md:block"></div>
+            <div className="fade-right relative z-10 w-5 h-5 bg-white rounded-full border-2 border-black flex items-center justify-center"></div>
             <div className="w-full md:w-1/4 text-sm font-text text-center md:text-left md:pl-4 mb-2 md:mb-0">{form.date}</div>
           </div>
         ))}

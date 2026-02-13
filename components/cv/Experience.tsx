@@ -34,7 +34,7 @@ export default function Experience({ data }: { data: ExperienceType[] }) {
         {data.map((exp) => (
           <div key={exp.id} className="relative flex flex-col md:flex-row items-center mb-10 w-full fade-exp">
             <div className="w-full md:w-1/4 text-sm font-text text-center md:text-right md:pr-4 mb-2 md:mb-0">{exp.date}</div>
-            <div className="relative z-10 w-4 h-4 bg-white rounded-full border-2 border-black hidden md:block"></div>
+            <div className="fade-left2 relative z-10 w-5 h-5 bg-white rounded-full border-2 border-black flex items-center justify-center"></div>
             <div className="flex-1 pl-0 md:pl-10 text-left w-full">
               {activeId === exp.id ? (
                 <div className="bg-white shadow-md rounded-lg p-6 border-l-4 border-blue-500">
