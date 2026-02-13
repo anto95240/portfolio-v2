@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Nav from "../components/Navbar";
-import Footer from "../components/Footer";
+import Nav from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import Image from "next/image";
 import clsx from "clsx"; // Ajout de clsx pour gérer les classes dynamiques
 

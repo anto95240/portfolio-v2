@@ -1,7 +1,8 @@
 import { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // tes options Next.js normales
+  reactStrictMode: true,
+  output: 'standalone',
 };
 
 export default nextConfig;

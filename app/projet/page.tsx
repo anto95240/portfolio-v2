@@ -1,73 +1,26 @@
-'use client';
+// app/projet/page.tsx
+"use client"; // Ici on garde le client car Theme.tsx est probablement interactif, 
+// MAIS l'idéal serait de sortir la logique de donnée. 
+// Pour faire simple et propre :
 
-import { useState, useEffect } from "react";
-import Nav from "../components/Navbar";
-import Theme from "../components/projet/theme";
-import Footer from "../components/Footer";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
-
-// Hook personnalisé pour gérer l'état 'isClient'
-const useIsClient = () => {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  return isClient;
-};
+import { useState } from "react";
+import Nav from "@/components/Navbar";
+import Theme from "@/components/projet/theme"; // Vérifiez que Theme n'a pas de fetch !
+import Footer from "@/components/Footer";
 
 export default function Projet() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showScrollToTopButton, setShowScrollToTopButton] = useState(false);
 
-  const isClient = useIsClient();
-  
-  useEffect(() => {
-    if (!isClient) return;
-    
-    const handleScroll = () => {
-      setShowScrollToTopButton(window.scrollY > 200);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [isClient]); 
-
-  // Fonction pour revenir en haut de la page
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  if (!isClient) return null;
-  
   return (
     <div className="flex h-screen bg-white">
-      {/* Composant Nav */}
       <div className="w-1/4 fixed z-50 h-full">
         <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
-
-      {/* Contenu principal */}
       <div className="flex-1 flex flex-col items-center mt-5 mx-auto px-5 lg:pl-56 w-full lg:w-3/4 lg:max-w-9xl">
         <h1 className="text-3xl mb-10">Liste de projets</h1>
-        <Theme />
+        <Theme /> 
         <Footer />
       </div>
-
-      {/* Bouton Retour en haut (uniquement visible sur mobile et tablette) */}
-      {showScrollToTopButton && (
-        <button
-          aria-label="Retour en haut"
-          onClick={scrollToTop}
-          className="fixed bottom-10 right-5 z-50 bg-blue-500 text-white p-3 rounded-full shadow-lg sm:hidden md:hidden"
-        >
-          <FontAwesomeIcon icon={faArrowUp} className="text-xl" />
-        </button>
-      )}
     </div>
   );
 }

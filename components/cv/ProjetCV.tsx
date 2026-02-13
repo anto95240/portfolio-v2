@@ -9,14 +9,7 @@ import gsap from "gsap";
 import Image from "next/image";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const useIsClient = () => {
-  const [isClient, setIsClient] = useState(false);
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-  return isClient;
-};
-
+// Types recréés localement pour correspondre à votre fichier
 type Project = {
   id: string;
   category: string;
@@ -34,45 +27,14 @@ type ProjectsData = {
   [key: string]: { projects: Project[] };
 };
 
-export default function ProjectCV() {
+export default function ProjectCV({ data }: { data: ProjectsData }) {
   const router = useRouter();
   const pathname = usePathname();
   const [projetStyle, setProjetStyle] = useState("mb-5 text-center");
   const [activeProject, setActiveProject] = useState<string | null>(null);
-  const [projectsData, setProjectsData] = useState<ProjectsData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
 
-  const isClient = useIsClient();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/api/projets');
-        if (!response.ok) {
-          throw new Error("Erreur lors de la récupération des projets");
-        }
-        const data = await response.json();
+  // Plus de fetch ici, on utilise la prop 'data' directement
   
-        if (data.homePage) {
-          setProjectsData(data.homePage);
-          setIsDataLoaded(true);
-          setLoading(false);
-        } else {
-          setError("Aucune donnée disponible.");
-          setLoading(false);
-        }
-      } catch (error) {
-        setError("Erreur lors de la récupération des projets");
-        setLoading(false);
-        console.error("Erreur API:", error);
-      }
-    };
-  
-    fetchData();
-  }, []);
-
   useEffect(() => {
     if (pathname.startsWith("/projet/cv")) {
       setProjetStyle("text-2xl mb-10 text-center");
@@ -82,14 +44,14 @@ export default function ProjectCV() {
   }, [pathname]);
 
   const categories = useMemo(() => {
-    const cats = projectsData ? Object.keys(projectsData) : [];
-    return cats;
-  }, [projectsData]);
+    // On utilise 'data' passée en props
+    return data ? Object.keys(data) : [];
+  }, [data]);
 
   const allProjects = useMemo(() => {
-    if (projectsData) {
+    if (data) {
       const projects = categories.flatMap((category) =>
-        projectsData[category]?.projects.map((project) => ({
+        data[category]?.projects.map((project) => ({
           ...project,
           uniqueId: `${category}-${project.id}`,
         })) || []
@@ -97,7 +59,7 @@ export default function ProjectCV() {
       return projects;
     }
     return [];
-  }, [categories, projectsData]);
+  }, [categories, data]);
 
   const toggleInfo = useCallback((uniqueId: string) => {
     setActiveProject((prevId) => (prevId === uniqueId ? null : uniqueId));
@@ -107,48 +69,40 @@ export default function ProjectCV() {
     router.push(`/projet/${category}/${projectId}`);
   }, [router]);
 
-  const ProjetText = categories.includes(pathname.split('/')[2]) ? pathname.split('/')[2].toUpperCase() : "Mes projets";
+  // Logique du titre conservée
+  const pathSegment = pathname.split('/')[2];
+  const ProjetText = pathSegment && categories.includes(pathSegment) ? pathSegment.toUpperCase() : "Mes projets";
 
   useEffect(() => {   
-    if (!isDataLoaded) return;
+    if (!data) return;
 
     gsap.registerPlugin(ScrollTrigger);
-  
-    gsap.utils.toArray<HTMLElement>(".fade-down").forEach((elem) => {
-      gsap.fromTo(
-        elem,
-        { y: 80, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.5,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: elem,
-            start: "top 90%",
-            end: "top 10%",
-            scrub: true,
-          },
-        }
-      );
+    
+    // Utilisation de gsap.context pour éviter les bugs de re-render
+    const ctx = gsap.context(() => {
+        gsap.utils.toArray<HTMLElement>(".fade-down").forEach((elem) => {
+        gsap.fromTo(
+            elem,
+            { y: 80, opacity: 0 },
+            {
+            y: 0,
+            opacity: 1,
+            duration: 1.5,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: elem,
+                start: "top 90%",
+                end: "top 10%",
+                scrub: true,
+            },
+            }
+        );
+        });
     });
-  }, [isDataLoaded, categories, projectsData]);
+    return () => ctx.revert();
+  }, [data, categories]);
 
-  if (!isClient) {
-    return null;
-  }
-  
-  if (loading) {
-    return <p>Chargement des projets...</p>;
-  }
-  
-  if (error) {
-    return <p>{error}</p>;
-  }
-  
-  if (!projectsData || categories.length === 0) {
-    return <p>Aucune catégorie disponible ou données corrompues.</p>;
-  }
+  if (!data) return null;
 
   return (
     <div className="w-full md:w-10/12 lg:w-8/12 flex flex-col mx-auto">
