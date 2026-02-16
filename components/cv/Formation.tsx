@@ -14,13 +14,18 @@ export default function Formation({ data }: { data: FormationType[] }) {
 
   const renderList = (val: string | string[]) => Array.isArray(val) ? val.join(" / ") : val;
 
-  useEffect(() => {
+useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
       gsap.fromTo(".fade-form",
         { x: 50, opacity: 0 },
         { x: 0, opacity: 1, duration: 1, stagger: 0.2,
-          scrollTrigger: { trigger: ".form-container", start: "top 80%", scrub: true }
+          scrollTrigger: { 
+            trigger: ".form-container", 
+            start: "top 75%", 
+            end: "top 10%",
+            scrub: true 
+          }
         }
       );
     });
@@ -34,7 +39,7 @@ export default function Formation({ data }: { data: FormationType[] }) {
       <div className="relative flex flex-col">
         <div className="absolute left-3/4 top-0 bottom-0 w-[2px] bg-black transform -translate-x-1/2 hidden md:block"></div>
         {data.map((form) => (
-          <div key={form.id} className="relative flex flex-col-reverse md:flex-row items-center mb-10 w-full fade-form">
+          <div key={form.id} className="relative flex flex-col-reverse md:flex-row items-center mb-10 w-full fade-form md:ml-2.5">
             <div className="w-full md:w-3/4 md:pr-10 text-right">
               {activeId === form.id ? (
                 <div className="bg-white shadow-md rounded-lg p-6 border-r-4 border-green-500 text-left md:text-right">
@@ -48,7 +53,7 @@ export default function Formation({ data }: { data: FormationType[] }) {
                 </button>
               )}
             </div>
-            <div className="fade-right relative z-10 w-5 h-5 bg-white rounded-full border-2 border-black flex items-center justify-center md:-ml-2.5"></div>
+            <div className="fade-right relative z-10 w-5 h-5 bg-white rounded-full border-2 border-black flex items-center justify-center"></div>
             <div className="w-full md:w-1/4 text-sm font-text text-center md:text-left md:pl-4 mb-2 md:mb-0">{form.date}</div>
           </div>
         ))}

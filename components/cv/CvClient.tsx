@@ -26,6 +26,8 @@ export default function CvClient({ skills, experiences, formations, projects }: 
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
+  const [isScrolling, setIsScrolling] = useState(false);
+
   const refs = {
     profil: useRef<HTMLElement>(null),
     skill: useRef<HTMLElement>(null),
@@ -43,11 +45,21 @@ export default function CvClient({ skills, experiences, formations, projects }: 
   ], []);
 
   useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-40% 0px -40% 0px", // Zone de détection plus étroite au centre
+      threshold: 0
+    };
+    
     const observer = new IntersectionObserver((entries) => {
+      if (isScrolling) return; // Ne change pas le menu si on est en train de scroller via clic
+
       entries.forEach((entry) => {
-        if (entry.isIntersecting) setActiveSection(entry.target.id);
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
       });
-    }, { threshold: 0.2, rootMargin: "-20% 0px -50% 0px" });
+    }, observerOptions);
 
     Object.values(refs).forEach((ref) => { if (ref.current) observer.observe(ref.current); });
     
@@ -58,10 +70,16 @@ export default function CvClient({ skills, experiences, formations, projects }: 
       observer.disconnect();
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isScrolling]);
 
-  const scrollTo = (ref: React.RefObject<HTMLElement>) => {
-    ref.current?.scrollIntoView({ behavior: "smooth" });
+  const scrollTo = (id: string, ref: React.RefObject<HTMLElement>) => {
+    setIsScrolling(true); // Bloque l'observer
+    setActiveSection(id); // Force l'activation immédiate visuelle
+    
+    ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    
+    // Réactive l'observer après 1 seconde (temps de l'animation scroll)
+    setTimeout(() => setIsScrolling(false), 1000);
   };
 
   return (
@@ -94,7 +112,7 @@ export default function CvClient({ skills, experiences, formations, projects }: 
       <div className="fixed top-1/4 right-0 z-40 hidden md:flex flex-col items-center">
         <div className="bg-menu-cv w-16 h-80 rounded-l-[50px] flex flex-col justify-around items-center p-4 shadow-xl">
           {menuItems.map((item) => (
-            <button key={item.id} onClick={() => scrollTo(item.ref)} className="relative group w-full flex justify-center">
+            <button key={item.id} onClick={() =>scrollTo(item.id, item.ref)} className="relative group w-full flex justify-center">
                <span className="absolute right-full mr-4 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                 {item.label}
               </span>
@@ -107,7 +125,7 @@ export default function CvClient({ skills, experiences, formations, projects }: 
       </div>
 
       {showScrollTop && (
-        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="fixed bottom-10 right-10 z-50 bg-blue-500 text-white p-4 rounded-full shadow-lg">
+        <button aria-label="retour en haut" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="fixed bottom-10 right-10 z-50 bg-blue-500 text-white p-4 rounded-full shadow-lg">
           <FontAwesomeIcon icon={faArrowUp} />
         </button>
       )}

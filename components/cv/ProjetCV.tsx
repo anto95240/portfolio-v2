@@ -98,8 +98,8 @@ export default function ProjectCV({ data, title }: { data: ProjectsData; title?:
                 <Image
                   src={mainImage}
                   alt={`Image de ${project.title}`}
-                  width={250}
-                  height={250}
+                  width={800}
+                  height={600}
                   className="w-full h-56 object-cover rounded-lg lg:group-hover:opacity-0 transition-opacity duration-300"
                 />
                 <div
