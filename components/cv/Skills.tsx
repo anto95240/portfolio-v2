@@ -7,13 +7,17 @@ import Image from "next/image";
 import { SkillsData, SkillItem } from "@/types";
 
 export default function Skill({ data }: { data: SkillsData }) {
-  useEffect(() => {
+useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
       gsap.fromTo(".skills-anim",
-        { x: -50, opacity: 0 },
-        { x: 0, opacity: 1, duration: 1.5, ease: "power3.out", stagger: 0.05,
-          scrollTrigger: { trigger: ".skills-container", start: "top 90%", end: "bottom 20%", scrub: true }
+        { y: 30, opacity: 0 }, // Un petit décalage Y est souvent plus joli
+        { y: 0, opacity: 1, duration: 1, ease: "power3.out", stagger: 0.2,
+          scrollTrigger: { 
+            trigger: ".skills-container", 
+            start: "top 85%", 
+            scrub: true 
+          }
         }
       );
     });

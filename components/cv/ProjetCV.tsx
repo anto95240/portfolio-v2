@@ -10,6 +10,7 @@ import Image from "next/image";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ProjectsData } from "@/types";
 
+
 // Ajout de 'title' optionnel dans les props
 export default function ProjectCV({ data, title }: { data: ProjectsData; title?: string }) {
   const router = useRouter();

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import gsap from "gsap";
@@ -8,26 +8,33 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Tool } from "@/types";
 
 export default function OutilsHome({ tools }: { tools: Tool[] }) {
+  const containerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
+    // Utilisation de containerRef pour scoper la sélection
     const ctx = gsap.context(() => {
-      const elems = document.querySelectorAll(".fade-left-tool");
+      const elems = document.querySelectorAll(".fade-left-tool"); // Ou utiliser une ref callback sur les items
+      
       if(elems.length > 0) {
-        gsap.fromTo(elems,
+        gsap.fromTo(".fade-left-tool",
           { x: -50, opacity: 0 },
           {
-            x: 0, opacity: 1, duration: 1, ease: "power3.out", stagger: 0.1,
-            scrollTrigger: { trigger: ".tools-container", start: "top 70%", end: "top 40%", scrub: true }
+            x: 0, opacity: 1, duration: 0.3, ease: "power3.out", stagger: 0.1,
+            scrollTrigger: { 
+                trigger: containerRef.current, 
+                start: "top 30%", // Déclenche quand le haut du conteneur est à 80% de l'écran
+                toggleActions: "play none none reverse"
+            }
           }
         );
       }
-    });
+    }, containerRef); // Scope
     return () => ctx.revert();
   }, []);
 
   return (
-    <div className="w-full md:w-10/12 lg:w-8/12 flex flex-col tools-container">
+    <div ref={containerRef} className="w-full md:w-10/12 lg:w-8/12 flex flex-col tools-container">
       <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
       <h1 className="mb-5 text-center text-2xl font-bold">Mes outils</h1>
       <div className="bg-green-outil w-full max-w-2xl mx-auto p-3 rounded-xl">
