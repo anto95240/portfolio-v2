@@ -1,5 +1,5 @@
 import { getExperiences, getFormations, getSkills, getProjetsHome } from "@/lib/data";
-import CvClient from "@/components/cv/CvClient";
+import CvClient from "@/app/cv/CvClient";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

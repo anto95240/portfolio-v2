@@ -8,12 +8,12 @@ import {
   faUser, faChartSimple, faBriefcase, 
   faGraduationCap, faFileCircleCheck, faArrowUp 
 } from "@fortawesome/free-solid-svg-icons";
-import Nav from "../Navbar";
-import Footer from "../Footer";
-import Skill from "./Skills";
-import Experience from "./Experience";
-import Formation from "./Formation";
-import ProjetCV from "./ProjetCV";
+import Nav from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import Skill from "@/components/cv/Skills";
+import Experience from "@/components/cv/Experience";
+import Formation from "@/components/cv/Formation";
+import ProjetCV from "@/components/cv/ProjetCV";
 import { Experience as ExpType, Formation as FormType, SkillsData, ProjectsData } from "@/types";
 
 interface CvClientProps {

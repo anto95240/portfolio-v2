@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Nav from "./Navbar";
-import OutilsHome from "./OutilsHome";
-import Footer from "./Footer";
-import ProjetCV from "./cv/ProjetCV";
+import Nav from "../components/Navbar";
+import OutilsHome from "../components/OutilsHome";
+import Footer from "../components/Footer";
+import ProjetCV from "../components/cv/ProjetCV";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
