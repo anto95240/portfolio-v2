@@ -18,9 +18,12 @@ const pwaConfig = withPWA({
   aggressiveFrontEndNavCaching: true,
   reloadOnOnline: true,
   disable: process.env.NODE_ENV === "development",
+  fallbacks: {
+    document: "/~offline", // Force la redirection vers cette page si le réseau échoue
+  },
   workboxOptions: {
     disableDevLogs: true,
-    inlineWorkboxRuntime: false,
+    inlineWorkboxRuntime: false,    
   },
 });
 
