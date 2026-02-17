@@ -23,8 +23,13 @@ export default function Footer() {
   const pathname = usePathname();
   const [showPopup, setShowPopup] = useState(false);
 
-  const footerText = "© 2024 créé par Antoine Richard tous droits réservés.";
-  const footerStyle = pathname.startsWith("/projet/jeux") ? "text-center pt-10 pb-10 text-white" : "text-center pt-10 pb-10";
+  // Mise à jour de l'année automatique
+  const currentYear = new Date().getFullYear();
+  const footerText = `© ${currentYear} créé par Antoine Richard tous droits réservés.`;
+  
+  const isJeux = pathname.startsWith("/projet/jeux");
+  const footerStyle = isJeux ? "text-center pt-10 pb-2 text-white" : "text-center pt-10 pb-2";
+  const versionStyle = isJeux ? "text-center pb-10 text-xs text-white" : "text-center pb-10 text-xs";
 
   return (
     <div className="flex flex-col">
@@ -54,6 +59,11 @@ export default function Footer() {
       </div>
 
       <p className={footerStyle}>{footerText}</p>
+      
+      {/* <--- AJOUT : Affichage de la version */}
+      <p className={versionStyle}>
+        v{process.env.NEXT_PUBLIC_APP_VERSION}
+      </p>
 
       {/* Popup de sélection du CV */}
       {showPopup && (

@@ -12,24 +12,30 @@ export default function OutilsHome({ tools }: { tools: Tool[] }) {
   
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    // Utilisation de containerRef pour scoper la sélection
+    
     const ctx = gsap.context(() => {
-      const elems = document.querySelectorAll(".fade-left-tool"); // Ou utiliser une ref callback sur les items
-      
-      if(elems.length > 0) {
-        gsap.fromTo(".fade-left-tool",
-          { x: -50, opacity: 0 },
-          {
-            x: 0, opacity: 1, duration: 0.3, ease: "power3.out", stagger: 0.1,
-            scrollTrigger: { 
-                trigger: containerRef.current, 
-                start: "top 30%", // Déclenche quand le haut du conteneur est à 80% de l'écran
-                toggleActions: "play none none reverse"
-            }
-          }
-        );
-      }
-    }, containerRef); // Scope
+      // 1. État initial : on cache tous les éléments
+      gsap.set(".fade-left-tool", { x: -50, opacity: 0 });
+
+      // 2. Animation par lots (Batch) : se déclenche quand chaque ligne entre dans la vue
+      ScrollTrigger.batch(".fade-left-tool", {
+        start: "top 85%", // Déclenche quand le haut de l'élément est à 85% du viewport
+        onEnter: (elements) => {
+          gsap.to(elements, {
+            x: 0,
+            opacity: 1,
+            duration: 0.3,
+            stagger: 0.15, // Délai entre chaque élément d'un même lot (ligne)
+            ease: "power3.out",
+            overwrite: true
+          });
+        },
+        // Optionnel : décommentez pour que l'animation se rejoue en remontant
+        // onLeaveBack: (elements) => gsap.set(elements, { x: -50, opacity: 0, overwrite: true }) 
+      });
+
+    }, containerRef);
+    
     return () => ctx.revert();
   }, []);
 
@@ -41,11 +47,11 @@ export default function OutilsHome({ tools }: { tools: Tool[] }) {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-5 w-full">
             {tools.map((tool) => (
-              <div key={tool.id} className="flex items-center bg-blue-outil px-2 py-3 rounded-md shadow-md justify-between">
+              <div key={tool.id} className="fade-left-tool flex items-center bg-blue-outil px-2 py-3 rounded-md shadow-md justify-between opacity-0"> {/* Ajout opacity-0 pour éviter le flash */}
                 <div className="relative w-7 h-7">
-                   <Image src={tool.images} alt={tool.title} fill className="rounded-md object-contain fade-left-tool" />
+                   <Image src={tool.images} alt={tool.title} fill className="rounded-md object-contain" />
                 </div>
-                <p className="md:text-lg text-base text-white ml-2 font-text fade-left-tool">{tool.title}</p>
+                <p className="md:text-lg text-base text-white ml-2 font-text">{tool.title}</p>
               </div>
             ))}
           </div>
