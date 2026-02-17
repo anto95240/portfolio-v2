@@ -48,8 +48,6 @@ export default function ProjectChoice({ allProjectsData }: { allProjectsData: Pr
 
   return (
     <div className="flex flex-col items-center justify-center mb-16">
-      <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
-
       <button
         onClick={handleShowPopup}
         className="bg-[rgb(1,37,125,0.7)] border-black border text-white py-2 px-4 rounded-full transition-transform transform active:scale-90 font-bold shadow-md"

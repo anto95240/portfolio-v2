@@ -62,26 +62,26 @@ export default function ProjectDetailClient({ project, category, allProjects }: 
   const galleryImages = project.images?.filter((img) => img.type === "gallery") || [];
 
   return (
-    <div className={`flex h-full min-h-screen ${currentStyle.bg}`}>
+    <div className={`flex h-full ${currentStyle.bg}`}>
       <div className="w-1/4 fixed z-50 h-full">
         <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
       <div className={`flex-1 flex flex-col items-center mx-auto px-5 lg:pl-56 ${currentStyle.text} w-screen lg:w-3/4 lg:max-w-9xl`}>
-        <div className="flex flex-col items-center justify-center mt-10 w-full">
-          <div className="flex flex-col items-center gap-8 w-full max-w-4xl">
+        <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center gap-8 w-full max-w-xl">
             
             {/* Image Principale via le nouveau composant (Axe 2) */}
             <ProjectImage
               src={mainImage}
               alt={`${project.title} Couverture`}
-              width={800}
-              height={552}
+              width={500}
+              height={345}
               priority
-              className="rounded-b-3xl w-4/5 h-auto shadow-2xl"
+              className="rounded-b-3xl w-4/5 h-auto"
             />
 
-            <div className="flex flex-col w-full gap-x-12 mt-5">
+            <div className="flex flex-col w-full gap-x-12">
               <div className={`mb-8 relative ${isMenuOpen ? "z-10" : "z-20"}`}>
                 <Link href={`/projet/${category}/`}>
                   <button aria-label="Revenir au thème" className="hover:scale-110 transition-transform">
@@ -96,10 +96,10 @@ export default function ProjectDetailClient({ project, category, allProjects }: 
                 
                 <div className="flex flex-col gap-10 md:flex-row">
                   {/* Infos Gauche */}
-                  <div className="flex flex-col gap-5 min-w-[200px]">
-                    <p className="text-md uppercase font-bold opacity-80">{category}</p>
-                    <p className="text-md uppercase font-bold opacity-80">{project.date}</p>
-                    <p className="text-md uppercase font-bold opacity-80">{project.equipe.join(" - ")}</p>
+                  <div className="flex flex-col gap-5 pl-10">
+                    <p className="text-md uppercase">{category}</p>
+                    <p className="text-md uppercase">{project.date}</p>
+                    <p className="text-md uppercase">{project.equipe.join(" - ")}</p>
                     <div className="flex flex-wrap gap-2">
                          {project.technologies.map((t, i) => (
                              <span key={i} className="text-md uppercase bg-white/20 px-2 rounded border border-white/20">{t}</span>
@@ -108,22 +108,22 @@ export default function ProjectDetailClient({ project, category, allProjects }: 
                   </div>
 
                   {/* Description & Liens Droite via nouveau composant (Axe 3) */}
-                  <div className="flex flex-col gap-5 flex-1">
-                    <p className="text-md text-justify leading-relaxed">{project.description}</p>
+                  <div className="flex flex-col gap-5 pl-10 md:mx-auto">
+                    <p className="text-md text-left md:text-center md:h-32">{project.description}</p>
                     
                     <ProjectLinks links={project.links} />
                   </div>
                 </div>
 
                 {/* Galerie Images via nouveau composant (Axe 2) */}
-                <div className="flex flex-col gap-16 mt-16 mx-auto w-full max-w-4xl">
+                <div className="flex flex-col gap-9 Mt-10 mx-auto">
                   {galleryImages.map((img, index) => (
-                    <div key={index} className="w-full relative shadow-2xl rounded-lg overflow-hidden fade-down">
+                    <div key={index} className="flex flex-col gap-3 fade-down">
                       <ProjectImage 
                         src={img.url}
                         alt={`Galerie ${index + 1}`}
-                        width={1200}
-                        height={800}
+                        width={700}
+                        height={500}
                       />
                     </div>
                   ))}
