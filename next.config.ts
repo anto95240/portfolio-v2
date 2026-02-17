@@ -1,11 +1,10 @@
+// next.config.ts
 import withPWA from "@ducanh2912/next-pwa";
 import { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  output: 'standalone',
-  // Désactiver swcMinify résout souvent les problèmes de helpers manquants dans le SW
-  swcMinify: false, 
+  // output: 'standalone', // Laissez commenté
 };
 
 const pwaConfig = withPWA({
@@ -16,8 +15,7 @@ const pwaConfig = withPWA({
   disable: process.env.NODE_ENV === "development",
   workboxOptions: {
     disableDevLogs: true,
-    // Cette option est cruciale pour éviter les références manquantes
-    inlineWorkboxRuntime: true, 
+    inlineWorkboxRuntime: false, // <--- C'est indispensable
   },
 });
 
