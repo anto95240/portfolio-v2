@@ -1,0 +1,175 @@
+{
+  "cvpage": {
+    "skills": {
+      "frontend": [
+        {
+          "id": "1",
+          "categories": ["Front-end"],
+          "title": "React",
+          "images": "/images/logo/react.svg",
+          "usage": "Maîtrise / Projets avancés"
+        },
+        {
+          "id": "2",
+          "categories": ["Front-end"],
+          "title": "JavaScript",
+          "images": "/images/logo/js.svg",
+          "usage": "Avancé / Logique métier"
+        },
+        {
+          "id": "3",
+          "categories": ["Front-end"],
+          "title": "HTML / CSS",
+          "images": "/images/logo/html-css.svg",
+          "usage": "Maîtrise / Usage quotidien"
+        },
+        {
+          "id": "4",
+          "categories": ["Front-end"],
+          "title": "Tailwind CSS",
+          "images": "/images/logo/tailwind.svg",
+          "usage": "Maîtrise / Mise en page moderne"
+        },
+        {
+          "id": "5",
+          "categories": ["Front-end"],
+          "title": "Bootstrap",
+          "images": "/images/logo/bootstrap.svg",
+          "usage": "Usage régulier / Intégration rapide"
+        }
+      ],
+      "backend": [
+        {
+          "id": "1",
+          "categories": ["Back-end"],
+          "title": "Node.JS / Express",
+          "images": "/images/logo/nodejs.svg",
+          "usage": "Usage régulier / Développement d'API"
+        }
+      ],
+      "database": [
+        {
+          "id": "1",
+          "categories": ["Base de donnée"],
+          "title": "MySQL",
+          "images": "/images/logo/mysql.svg",
+          "usage": "Usage régulier / SQL"
+        },
+        {
+          "id": "2",
+          "categories": ["Base de donnée"],
+          "title": "MongoDB",
+          "images": "/images/logo/mongodb.svg",
+          "usage": "Pratique sur projets NoSQL"
+        }
+      ],
+      "outils": [
+        {
+          "id": "1",
+          "categories": ["Outils"],
+          "title": "VSCode",
+          "images": "/images/logo/vscode.svg",
+          "usage": "Environnement de développement principal"
+        },
+        {
+          "id": "2",
+          "categories": ["Outils"],
+          "title": "Figma",
+          "images": "/images/logo/figma.svg",
+          "usage": "Usage régulier / Maquettage UI-UX"
+        },
+        {
+          "id": "3",
+          "categories": ["Outils"],
+          "title": "Git",
+          "images": "/images/logo/git.svg",
+          "usage": "Gestion de version / Travail collaboratif"
+        }
+      ],
+      "autres_langages": [
+        {
+          "id": "1",
+          "categories": ["Autres"],
+          "title": "Python",
+          "images": "/images/logo/python.svg",
+          "usage": "Pratique académique (Lycée & École d'ingénieurs)"
+        },
+        {
+          "id": "2",
+          "categories": ["Autres"],
+          "title": "PHP",
+          "images": "/images/logo/php.svg",
+          "usage": "Utilisé sur un projet spécifique"
+        },
+        {
+          "id": "3",
+          "categories": ["Autres"],
+          "title": "Vue.JS",
+          "images": "/images/logo/vueJs.svg",
+          "usage": "Réalisation d'un projet"
+        },
+        {
+          "id": "4",
+          "categories": ["Autres"],
+          "title": "Golang",
+          "images": "/images/logo/golang.svg",
+          "usage": "Bases acquises en école"
+        },
+        {
+          "id": "5",
+          "categories": ["Autres"],
+          "title": "C#",
+          "images": "/images/logo/csharp.svg",
+          "usage": "Projets d'école / Notions"
+        },
+        {
+          "id": "6",
+          "categories": ["Autres"],
+          "title": "Angular",
+          "images": "/images/logo/angular.svg",
+          "usage": "Initiation sur un projet"
+        }
+      ]
+    }
+  },
+  "homepage": {
+    "skills": [
+      {
+        "id": "1",
+        "title": "React",
+        "images": "/images/logo/react.svg",
+        "usage": "Maîtrise"
+      },
+      {
+        "id": "2",
+        "title": "Node.JS",
+        "images": "/images/logo/nodejs.svg",
+        "usage": "Usage régulier"
+      },
+      {
+        "id": "3",
+        "title": "MySQL",
+        "images": "/images/logo/mysql.svg",
+        "usage": "Usage régulier"
+      },
+      {
+        "id": "4",
+        "title": "Tailwind CSS",
+        "images": "/images/logo/tailwind.svg",
+        "usage": "Maîtrise"
+      },
+      {
+        "id": "5",
+        "title": "Figma",
+        "images": "/images/logo/figma.svg",
+        "usage": "Conception"
+      },
+      {
+        "id": "6",
+        "title": "Git",
+        "images": "/images/logo/git.svg",
+        "usage": "Collaboratif"
+      }
+    ]
+  }
+}

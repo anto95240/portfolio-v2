@@ -1,30 +1,28 @@
 import type { Metadata, Viewport } from "next";
-import { Lato as GoogleLato, Montserrat_Alternates } from "next/font/google";
+import { Lato, Montserrat_Alternates } from "next/font/google";
 import { config } from "@fortawesome/fontawesome-svg-core";
-import "@fortawesome/fontawesome-svg-core/styles.css"; // Import des styles nécessaires
-config.autoAddCss = false; // Désactiver l'ajout automatique des styles
-
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import "./globals.css";
 
-const Lato = GoogleLato({
+config.autoAddCss = false;
+
+const lato = Lato({
   subsets: ["latin"],
   variable: "--font-text",
   weight: ["400"],
-})
+});
 
-const MontserratAlternates = Montserrat_Alternates({
+const montserrat = Montserrat_Alternates({
   subsets: ["latin"],
   variable: "--font-title",
   weight: ["400"],
-})
+});
 
 export const metadata: Metadata = {
-  title: "Antoine Richard",
-  description: "Mon portfolio",
+  title: "Antoine Richard | Portfolio",
+  description: "Développeur Fullstack - Mon portfolio professionnel",
   manifest: "/manifest.json",
-  icons: {
-    icon: "/images/logo.svg", // Favicon
-  },
+  icons: { icon: "/images/logo.svg" },
 };
 
 export const viewport: Viewport = {
@@ -35,14 +33,10 @@ export const viewport: Viewport = {
   themeColor: "#4A90E2",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr" suppressHydrationWarning>
-      <body className={`${Lato.className} ${MontserratAlternates.className}`}>
+      <body className={`${lato.variable} ${montserrat.variable} font-sans`}>
         {children}
       </body>
     </html>
