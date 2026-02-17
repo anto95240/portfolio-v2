@@ -1,5 +1,5 @@
 import { getProjetsHome, getHomeTools } from "@/lib/data";
-import HomeClient from "@/components/HomeClient";
+import HomeClient from "@/app/HomeClient";
 
 export default function HomePage() {
   const projects = getProjetsHome();

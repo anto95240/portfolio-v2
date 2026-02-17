@@ -4,7 +4,7 @@ import { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  // output: 'standalone', // Laissez commenté
+  // output: 'standalone',
 };
 
 const pwaConfig = withPWA({
@@ -15,7 +15,7 @@ const pwaConfig = withPWA({
   disable: process.env.NODE_ENV === "development",
   workboxOptions: {
     disableDevLogs: true,
-    inlineWorkboxRuntime: false, // <--- C'est indispensable
+    inlineWorkboxRuntime: false,
   },
 });
 

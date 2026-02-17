@@ -49,7 +49,7 @@ export default function OutilsHome({ tools }: { tools: Tool[] }) {
               </div>
             ))}
           </div>
-          <div className="mt-6 md:mt-0 md:ml-6 text-center shrink-0">
+          <div className="mt-6 md:mt-0 md:ml-6 mb-3 md:mb-0 text-center shrink-0">
             <Link href="/cv" className="bg-gradient-to-r from-light-blue via-light-green to-light-blue text-black md:text-lg py-3 px-4 text-base rounded-md shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform active:scale-90">
                 VOIR PLUS
             </Link>
