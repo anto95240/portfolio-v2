@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2022",  // <--- C'EST ICI QU'IL FAUT CHANGER (c'était ES2017)
+    "target": "ES2022",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
