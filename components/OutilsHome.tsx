@@ -21,13 +21,13 @@ export default function OutilsHome({ tools }: { tools: Tool[] }) {
         {
           x: 0, // Arrive à sa position finale
           opacity: 1,
-          duration: 1.5,
+          duration: 1.8,
           ease: 'power3.out',
-          stagger: 0.1, // Intervalle entre chaque élément
+          stagger: 0.2, // Intervalle entre chaque élément
           scrollTrigger: {
             trigger: '.fade-left-tool',
-            start: 'top 70%', // L'animation commence quand l'élément atteint 90% du haut
-            end: 'top 50%', // Terminé quand l'élément atteint 30%
+            start: 'top 60%', // L'animation commence quand l'élément atteint 90% du haut
+            end: 'top 40%', // Terminé quand l'élément atteint 30%
             scrub: true,
           },
         }
