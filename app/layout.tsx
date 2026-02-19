@@ -3,6 +3,7 @@ import { Lato, Montserrat_Alternates } from "next/font/google";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "./globals.css";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 
 config.autoAddCss = false;
 
@@ -19,10 +20,28 @@ const montserrat = Montserrat_Alternates({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.antoine-richard.fr"), 
+  
   title: "Antoine Richard | Portfolio",
-  description: "Développeur Fullstack - Mon portfolio professionnel",
-  manifest: "/manifest.json",
-  icons: { icon: "/images/logo.svg" },
+  description: "Étudiant en informatique passionné par le développement web front-end. Découvrez mes projets, mon parcours et mes compétences.",
+  keywords: ["Antoine Richard", "Portfolio", "Développeur Web", "Front-end", "React", "Next.js", "Ynov"],
+  authors: [{ name: "Antoine Richard" }],
+  openGraph: {
+    title: "Antoine Richard | Développeur Front-End",
+    description: "Découvrez mes projets web, mes jeux et mon parcours.",
+    url: "https://www.antoine-richard.fr/",
+    siteName: "Portfolio Antoine Richard",
+    images: [
+      {
+        url: "/images/photo.svg",
+        width: 800,
+        height: 600,
+        alt: "Photo de profil Antoine Richard",
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
 };
 
 export const viewport: Viewport = {
@@ -38,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="fr" suppressHydrationWarning>
       <body className={`${lato.variable} ${montserrat.variable} font-sans`}>
         {children}
+        <ScrollToTop />
       </body>
     </html>
   );

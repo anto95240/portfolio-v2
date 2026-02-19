@@ -8,12 +8,10 @@ export default function ProjectLinks({ links }: { links: (string | LinkType)[] }
   return (
     <div className="flex flex-col md:flex-row gap-4 mt-4">
       {links.map((link, index) => {
-        // Logique de normalisation
         const isObjectLink = typeof link !== "string";
         const url = isObjectLink ? (link as LinkType).url : (link as string);
         const type = isObjectLink ? (link as LinkType).type : "site";
         
-        // Détermination du label
         let label = "Site web";
         if (type === "site") label = "Accéder au site";
         if (type === "github" || type === "code") label = "Accéder au code";

@@ -56,10 +56,10 @@ export interface Project {
   technologies: string[];
   date: string;
   equipe: string[];
-  links: (LinkType | string)[]; // Accepte les deux formats présents dans vos JSON
+  links: (LinkType | string)[]; 
   images: ProjectImage[];
-  uniqueId?: string; // Généré dynamiquement pour l'affichage
-  categorySlug?: string; // Généré dynamiquement
+  uniqueId?: string;
+  categorySlug?: string;
 }
 
 export interface ProjectsData {

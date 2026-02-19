@@ -5,13 +5,10 @@ import { usePathname, useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import gsap from "gsap";
 import Image from "next/image";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ProjectsData } from "@/types";
+import { useScrollReveal } from "@/hooks/animations/useScrollReveal";
 
-
-// Ajout de 'title' optionnel dans les props
 export default function ProjectCV({ data, title }: { data: ProjectsData; title?: string }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -52,31 +49,17 @@ export default function ProjectCV({ data, title }: { data: ProjectsData; title?:
     router.push(`/projet/${category}/${projectId}`);
   }, [router]);
 
-  // Logique du titre : Si 'title' est passé en props (Home), on l'utilise. 
-  // Sinon, on calcule en fonction de l'URL (Pages projets).
   const pathSegment = pathname.split('/')[2];
   const calculatedTitle = pathSegment && categories.includes(pathSegment) ? pathSegment.toUpperCase() : "Mes projets";
   const displayTitle = title || calculatedTitle;
 
-  useEffect(() => {   
-    if (!data) return;
-
-    gsap.registerPlugin(ScrollTrigger);
-    
-    const ctx = gsap.context(() => {
-      gsap.utils.toArray<HTMLElement>(".fade-down").forEach((elem) => {
-        gsap.fromTo(
-          elem,
-          { y: 80, opacity: 0 },
-          {
-            y: 0, opacity: 1, duration: 1.5, ease: "power3.out",
-            scrollTrigger: { trigger: elem, start: "top 90%", end: "top 10%", scrub: true },
-          }
-        );
-      });
-    });
-    return () => ctx.revert();
-  }, [data, categories]);
+  useScrollReveal(".fade-down", {
+    axis: "y",
+    offset: 80,
+    duration: 1.5,
+    start: "top 90%",
+    end: "top 10%",
+  });
 
   if (!data) return null;
 
@@ -120,6 +103,7 @@ export default function ProjectCV({ data, title }: { data: ProjectsData; title?:
                   </div>
 
                   <button
+                    type="button"
                     className="mt-4 bg-green-projet w-full h-10 shadow-[0_-4px_4px_0_rgba(0,0,0,0.25)] flex justify-center items-center gap-2 text-black font-title hover:bg-green-600 transition-transform transform active:scale-95"
                     onClick={() => handleProjectClick(project.id, project.categorySlug || "")}
                   >

@@ -24,11 +24,9 @@ export default function ProjectImage({
       <Image
         src={src}
         alt={alt}
-        // Si fill est true, on n'utilise pas width/height
         fill={fill}
         width={!fill ? width : undefined}
         height={!fill ? height : undefined}
-        // Optimisations globales forcées
         quality={95}
         priority={priority}
         className="object-cover"

@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useState, useCallback } from "react";
 import { Experience as ExperienceType } from "@/types";
+import { useScrollReveal } from "@/hooks/animations/useScrollReveal";
 
 export default function Experience({ data }: { data: ExperienceType[] }) {
   const [activeId, setActiveId] = useState<string | null>(data[0]?.id || null);
@@ -12,23 +11,14 @@ export default function Experience({ data }: { data: ExperienceType[] }) {
     setActiveId((prev) => (prev === id ? null : id));
   }, []);
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    const ctx = gsap.context(() => {
-      gsap.fromTo(".fade-exp", 
-        { x: -30, opacity: 0 },
-        { x: 0, opacity: 1, duration: 1, stagger: 0.2,
-          scrollTrigger: { 
-            trigger: ".exp-container", 
-            start: "top 75%", 
-            end: "top 10%",
-            scrub: true,
-          }
-        }
-      );
-    });
-    return () => ctx.revert();
-  }, []);
+  useScrollReveal(".fade-exp", {
+    axis: "x",
+    offset: -30,
+    triggerElement: ".exp-container",
+    start: "top 75%",
+    end: "top 10%",
+    stagger: 0.2,
+  });
 
   return (
     <div className="w-10/12 lg:w-8/12 mx-auto exp-container">
