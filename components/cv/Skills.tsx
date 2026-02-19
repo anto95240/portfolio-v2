@@ -1,57 +1,19 @@
 "use client";
 
-import { useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
-import { SkillsData, SkillItem } from "@/types";
+import { SkillsData } from "@/types";
+import renderCategory from "./SkillCategory";
+import { useScrollReveal } from "@/hooks/animations/useScrollReveal";
 
 export default function Skill({ data }: { data: SkillsData }) {
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    
-    const ctx = gsap.context(() => {
-      // On cible chaque élément .skills-anim individuellement
-      const items = gsap.utils.toArray<HTMLElement>(".skills-anim");
-
-      items.forEach((item) => {
-        gsap.fromTo(item,
-          { y: 30, opacity: 0 },
-          {
-            y: 0, opacity: 1, duration: 0.5, ease: "power2.out",
-            scrollTrigger: {
-              trigger: item,   // Chaque item est son propre déclencheur
-              start: "top 90%", // Commence quand l'item entre en bas de l'écran
-              end: "top 70%",   // Finit quand il est un peu plus haut
-              scrub: 1,         // Animation liée au scroll (continu)
-            }
-          }
-        );
-      });
-    });
-    return () => ctx.revert();
-  }, []);
-
-  const renderCategory = (list: SkillItem[], title: string) => {
-    if (!list?.length) return null;
-    return (
-      <div className="skills-container mb-10">
-        <p className="mb-5 font-bold text-lg border-b border-gray-200 pb-2">{title}</p>
-        <div className="flex flex-row flex-wrap gap-6 justify-center md:justify-start">
-          {list.map((skill) => (
-            <div key={skill.id} className="flex flex-col items-center group w-24 lg:w-32 skills-anim">
-              <div className="relative w-12 h-12 lg:w-16 lg:h-16 mb-2">
-                <Image src={skill.images} alt={skill.title} fill className="object-contain transition-transform duration-300 group-hover:scale-110" />
-              </div>
-              <p className="text-sm font-medium text-center">{skill.title}</p>
-              <p className="text-[10px] text-gray-500 text-center italic mt-1">{skill.usage}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  };
+  useScrollReveal(".skills-anim", {
+    axis: "y",
+    offset: 30,
+    duration: 0.5,
+    start: "top 90%",
+    end: "top 70%",
+    scrub: 1, // On passe 1 car dans votre code original vous aviez `scrub: 1`
+  }); 
 
   return (
     <div className="w-11/12 lg:w-8/12 flex flex-col mx-auto pb-20">

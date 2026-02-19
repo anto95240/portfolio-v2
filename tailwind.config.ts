@@ -5,6 +5,7 @@ export default {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./lib/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     fontFamily:{
@@ -28,6 +29,8 @@ export default {
         'blue-popup': '#274B6D',
         'menu-cv': '#13339A',
         'menuCV-lightBlue': '#1596C1',
+        'category-blue': '#77D8FF',
+        'category-green': '#10DFB9',
       },
     },
   },

@@ -1,34 +1,25 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse, faCircleInfo, faFile, faFileCircleCheck, faChevronDown, faChevronUp, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faChevronUp, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import Link from "next/link";
-
-const useIsClient = () => {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  return isClient;
-};
+import { useIsClient } from "@/hooks/useIsClient";
+import { NAV_LINKS } from "@/lib/constants";
+import { useToggle } from "@/hooks/utils/useToggle";
 
 export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boolean; setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>> }) {
-  const [isProjectOpen, setIsProjectOpen] = useState(false);
-
-  const isClient = useIsClient();
+  const [isProjectOpen, toggleProjectList] = useToggle(false);  const isClient = useIsClient();
   
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const toggleProjectList = () => setIsProjectOpen(!isProjectOpen);
 
   if (!isClient) return null;
 
   return (
     <div className="relative h-screen">
       <button
+        type="button"
         aria-label="Ouvrir le menu"
         className={`absolute top-5 left-5 text-2xl z-50 lg:hidden ${isMenuOpen ? "hidden" : "block"}`}
         onClick={toggleMenu}
@@ -41,6 +32,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
         ${isMenuOpen ? "translate-x-0 lg:pointer-events-none pointer-events-auto" : "-translate-x-full lg:pointer-events-auto pointer-events-none"} lg:translate-x-0 lg:relative lg:w-4/5 w-3/5 sm:w-2/6`}
       >
         <button
+          type="button"
           aria-label="Fermer le menu"
           className={`absolute top-5 right-5 text-2xl lg:hidden ${isMenuOpen ? "block" : "hidden"}`}
           onClick={toggleMenu}
@@ -51,62 +43,41 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
         <Image className="mb-10" src="/images/logo.svg" alt="Logo" width={75} height={62} />
 
         <ol className="flex flex-col gap-8">
-          <li className="flex items-center gap-4">
-            <FontAwesomeIcon icon={faHouse} className="text-2xl" />
-            <Link href="/" className="relative group z-50">
-              Accueil
-              <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-          </li>
-
-          <li>
-            <div className="flex items-center gap-4 cursor-pointer">
-              <FontAwesomeIcon icon={faFileCircleCheck} className="text-2xl" />
-              <Link href="/projet" className="relative group z-50">
-                Projets
-                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-              <FontAwesomeIcon icon={isProjectOpen ? faChevronUp : faChevronDown} className="text-xl z-50" onClick={toggleProjectList} />
-            </div>
-            {isProjectOpen && (
-              <ol className="flex flex-col gap-2 ml-8 mt-3">
-                <li>
-                  <Link href="/projet/ydays" className="group relative z-50">
-                    Ydays
+          {NAV_LINKS.map((link) => (
+            <li key={link.label}>
+              <div className="flex items-center gap-4">
+                <FontAwesomeIcon icon={link.icon} className="text-2xl" />
+                <div className="flex items-center gap-2">
+                   <Link href={link.href} className="relative group z-50">
+                    {link.label}
                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
                   </Link>
-                </li>
-                <li>
-                  <Link href="/projet/web" className="group relative z-50">
-                    Web
-                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/projet/jeux" className="group relative z-50">
-                    Jeux
-                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
-                  </Link>
-                </li>
-              </ol>
-            )}
-          </li>
+                  {/* Gestion spécifique pour le dropdown Projets */}
+                  {link.hasDropdown && (
+                    <FontAwesomeIcon 
+                        icon={isProjectOpen ? faChevronUp : faChevronDown} 
+                        className="text-xl z-50 cursor-pointer" 
+                        onClick={toggleProjectList} 
+                    />
+                  )}
+                </div>
+              </div>
 
-          <li className="flex items-center gap-4">
-            <FontAwesomeIcon icon={faCircleInfo} className="text-2xl" />
-            <Link href="/about" className="relative group z-50">
-              A propos
-              <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-          </li>
-
-          <li className="flex items-center gap-4">
-            <FontAwesomeIcon icon={faFile} className="text-2xl" />
-            <Link href="/cv" className="relative group z-50">
-              CV
-              <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-          </li>
+              {/* Sous-menu Projets */}
+              {link.hasDropdown && isProjectOpen && (
+                <ol className="flex flex-col gap-2 ml-12 mt-3">
+                  {link.subLinks?.map((sub) => (
+                    <li key={sub.label}>
+                      <Link href={sub.href} className="group relative z-50 text-sm font-medium">
+                        {sub.label}
+                        <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
+                      </Link>
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </li>
+          ))}
         </ol>
       </nav>
     </div>

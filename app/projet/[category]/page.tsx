@@ -1,13 +1,11 @@
 import { getProjectsByCategory } from "@/lib/data";
-// Correction de l'import : on importe depuis le dossier courant
 import ProjectCategoryClient from "./ProjectCategoryClient"; 
+import { CATEGORY_SLUGS } from "@/lib/constants";
 
 export function generateStaticParams() {
-  return [
-    { category: 'web' },
-    { category: 'jeux' },
-    { category: 'ydays' },
-  ];
+  return CATEGORY_SLUGS.map((slug) => ({
+    category: slug,
+  }));
 }
 
 export default async function CategoryPage(props: { params: Promise<{ category: string }> }) {

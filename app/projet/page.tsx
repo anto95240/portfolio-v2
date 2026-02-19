@@ -1,11 +1,8 @@
-// app/projet/page.tsx
-"use client"; // Ici on garde le client car Theme.tsx est probablement interactif, 
-// MAIS l'idéal serait de sortir la logique de donnée. 
-// Pour faire simple et propre :
+"use client"; 
 
 import { useState } from "react";
 import Nav from "@/components/Navbar";
-import Theme from "@/components/projet/theme"; // Vérifiez que Theme n'a pas de fetch !
+import Theme from "@/components/projet/theme";
 import Footer from "@/components/Footer";
 
 export default function Projet() {

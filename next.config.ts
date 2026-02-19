@@ -1,10 +1,13 @@
 import { NextConfig } from "next";
-const packageJson = require("./package.json");
+import packageJson from "./package.json";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   env: {
     NEXT_PUBLIC_APP_VERSION: packageJson.version,
+  },
+  images: {
+    qualities: [25, 50, 75, 90, 95, 100],
   },
 };
 

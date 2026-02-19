@@ -1,39 +1,23 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Tool } from "@/types";
+import { useScrollReveal } from "@/hooks/animations/useScrollReveal";
 
 export default function OutilsHome({ tools }: { tools: Tool[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
   
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      gsap.registerPlugin(ScrollTrigger);
-
-      // Animation fade-left2 avec stagger
-      gsap.fromTo(
-        '.fade-left-tool',
-        { x: -50, opacity: 0 }, // Début de l'animation
-        {
-          x: 0, // Arrive à sa position finale
-          opacity: 1,
-          duration: 1.8,
-          ease: 'power3.out',
-          stagger: 0.2, // Intervalle entre chaque élément
-          scrollTrigger: {
-            trigger: '.fade-left-tool',
-            start: 'top 60%', // L'animation commence quand l'élément atteint 90% du haut
-            end: 'top 40%', // Terminé quand l'élément atteint 30%
-            scrub: true,
-          },
-        }
-      );
-    }
-  }, []);
+  useScrollReveal(".fade-left-tool", {
+    axis: "x",
+    offset: -50,
+    duration: 1.8,
+    stagger: 0.2,
+    triggerElement: ".fade-left-tool",
+    start: "top 60%",
+    end: "top 40%",
+  });
 
   return (
     <div ref={containerRef} className="w-full md:w-10/12 lg:w-8/12 flex flex-col tools-container">
