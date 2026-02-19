@@ -1,7 +1,7 @@
 "use client";
 
 import ProjectImage from "@/components/ui/ProjectImage";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useIsClient } from "@/hooks/useIsClient";
 import { CATEGORIES_DATA } from "@/lib/constants";
