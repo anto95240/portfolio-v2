@@ -26,6 +26,8 @@ export const metadata: Metadata = {
   description: "Étudiant en informatique passionné par le développement web front-end. Découvrez mes projets, mon parcours et mes compétences.",
   keywords: ["Antoine Richard", "Portfolio", "Développeur Web", "Front-end", "React", "Next.js", "Ynov"],
   authors: [{ name: "Antoine Richard" }],
+  manifest: "/manifest.json",
+  icons: { icon: "/images/logo.svg" },
   openGraph: {
     title: "Antoine Richard | Développeur Front-End",
     description: "Découvrez mes projets web, mes jeux et mon parcours.",
