@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/anto95240/portfolio-v2/compare/v2.3.0...v2.3.1) (2026-02-20)
+
+
+### Bug Fixes
+
+* erreur de deployement + add icons, maniefest ([1df1b4b](https://github.com/anto95240/portfolio-v2/commit/1df1b4b5614e65e9e9fa95c77a058b8ab81175a1))
+
 # [2.3.0](https://github.com/anto95240/portfolio-v2/compare/v2.2.3...v2.3.0) (2026-02-19)
 
 
