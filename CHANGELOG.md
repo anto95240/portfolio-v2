@@ -1,3 +1,10 @@
+## [2.3.2](https://github.com/anto95240/portfolio-v2/compare/v2.3.1...v2.3.2) (2026-02-20)
+
+
+### Bug Fixes
+
+* releaserc ([0641e7a](https://github.com/anto95240/portfolio-v2/commit/0641e7a122fb7ed2f50288c52e296f2b375968db))
+
 ## [2.3.1](https://github.com/anto95240/portfolio-v2/compare/v2.3.0...v2.3.1) (2026-02-20)
 
 
