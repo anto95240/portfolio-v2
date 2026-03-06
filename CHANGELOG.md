@@ -1,3 +1,11 @@
+## [2.3.3](https://github.com/anto95240/portfolio-v2/compare/v2.3.2...v2.3.3) (2026-03-06)
+
+
+### Bug Fixes
+
+* erreur github action ([2a2fece](https://github.com/anto95240/portfolio-v2/commit/2a2fece050a53c4a88adeacf680933b799034f8d))
+* vulnerability package ([15d463d](https://github.com/anto95240/portfolio-v2/commit/15d463d677fd0eb3432be8ca3f8d87ee2050f434))
+
 ## [2.3.2](https://github.com/anto95240/portfolio-v2/compare/v2.3.1...v2.3.2) (2026-02-20)
 
 
