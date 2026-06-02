@@ -1,3 +1,10 @@
+## [2.3.4](https://github.com/anto95240/portfolio-v2/compare/v2.3.3...v2.3.4) (2026-06-02)
+
+
+### Bug Fixes
+
+* suppression page site web toyVerse ([9496748](https://github.com/anto95240/portfolio-v2/commit/9496748fa239a733e8f5adcb8b1bd04b46a63085))
+
 ## [2.3.3](https://github.com/anto95240/portfolio-v2/compare/v2.3.2...v2.3.3) (2026-03-06)
 
 
