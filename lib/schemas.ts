@@ -2,16 +2,18 @@ import { z } from "zod";
 
 // --- Skills & Tools ---
 export const ToolSchema = z.object({
-  id: z.number(),
+  id: z.union([z.string(), z.number()]),
   images: z.string(),
   title: z.string(),
+  usage: z.string().optional(),
 });
 
 export const SkillItemSchema = z.object({
-  id: z.string(),
+  id: z.union([z.string(), z.number()]),
   title: z.string(),
   images: z.string(),
   usage: z.string(),
+  categories: z.array(z.string()).optional(),
 });
 
 export const SkillsDataSchema = z.object({
