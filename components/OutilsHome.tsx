@@ -29,7 +29,7 @@ export default function OutilsHome({ tools }: { tools: Tool[] }) {
             {tools.map((tool) => (
               <div key={tool.id} className="flex items-center bg-blue-outil px-2 py-3 rounded-md shadow-md justify-between">
                 <div className="relative w-7 h-7">
-                   <Image src={tool.images} alt={tool.title} fill className="fade-left-tool rounded-md object-contain" />
+                   <Image src={tool.images} alt={tool.title} fill sizes="(max-width: 768px) 28px, 28px" className="fade-left-tool rounded-md object-contain" />
                 </div>
                 <p className="fade-left-tool md:text-lg text-base text-white ml-2 font-text">{tool.title}</p>
               </div>

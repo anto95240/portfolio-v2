@@ -83,6 +83,9 @@ export default function ProjectCV({ data, title }: { data: ProjectsData; title?:
                   alt={`Image de ${project.title}`}
                   width={800}
                   height={600}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/erVfwAJ2wPNi6o8fAAAAABJRU5ErkJggg=="
                   className="w-full h-56 object-cover rounded-lg lg:group-hover:opacity-0 transition-opacity duration-300"
                 />
                 <div

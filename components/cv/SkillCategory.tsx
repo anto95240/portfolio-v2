@@ -20,6 +20,7 @@ export default function renderCategory (list: SkillItem[], title: string) {
                 src={skill.images}
                 alt={skill.title}
                 fill
+                sizes="(max-width: 768px) 48px, 64px"
                 className="object-contain transition-transform duration-300 group-hover:scale-110"
               />
             </div>

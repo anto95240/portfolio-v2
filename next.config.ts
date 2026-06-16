@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_APP_VERSION: packageJson.version,
   },
   images: {
+    formats: ['image/avif', 'image/webp'],
     qualities: [25, 50, 75, 90, 95, 100],
   },
 };
