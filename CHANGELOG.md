@@ -1,3 +1,12 @@
+## [2.3.5](https://github.com/anto95240/portfolio-v2/compare/v2.3.4...v2.3.5) (2026-06-16)
+
+
+### Performance Improvements
+
+* **images:** implémentation des optimisations d'images Next.js ([b2c6f17](https://github.com/anto95240/portfolio-v2/commit/b2c6f1764ffd32d1c079d94ec01fd09486185814))
+* implémentation du code splitting et ajout de l'analyseur de bundle ([8a4df7c](https://github.com/anto95240/portfolio-v2/commit/8a4df7c8e2c7a1e0ad1d13a3d00add9310fa6743))
+* optimisation globale (bundle, css, cache et ssg) ([9e82e78](https://github.com/anto95240/portfolio-v2/commit/9e82e788d421653628de59b2142c9e35e6dbb196))
+
 ## [2.3.4](https://github.com/anto95240/portfolio-v2/compare/v2.3.3...v2.3.4) (2026-06-02)
 
 
