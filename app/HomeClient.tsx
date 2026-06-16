@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import Nav from "../components/Navbar";
-import OutilsHome from "../components/OutilsHome";
 import Footer from "../components/Footer";
-import ProjetCV from "../components/cv/ProjetCV";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { ProjectsData, Tool } from "@/types";
+
+const OutilsHome = dynamic(() => import("../components/OutilsHome"), { ssr: false, loading: () => <div className="min-h-[200px] flex items-center justify-center">Chargement...</div> });
+const ProjetCV = dynamic(() => import("../components/cv/ProjetCV"), { ssr: false, loading: () => <div className="min-h-[400px] flex items-center justify-center">Chargement...</div> });
 
 interface HomeClientProps {
   projects: ProjectsData;
