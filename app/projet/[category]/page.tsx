@@ -2,6 +2,8 @@ import { getProjectsByCategory } from "@/lib/data";
 import ProjectCategoryClient from "./ProjectCategoryClient"; 
 import { CATEGORY_SLUGS } from "@/lib/constants";
 
+export const revalidate = 3600; // 1 heure
+
 export function generateStaticParams() {
   return CATEGORY_SLUGS.map((slug) => ({
     category: slug,
