@@ -1,10 +1,8 @@
 "use client";
 
-import { useEffect, useRef, RefObject } from "react";
+import { RefObject, useEffect, useRef } from "react";
 
-export const useClickOutside = <T extends HTMLElement>(
-  handler: () => void
-): RefObject<T> => {
+export const useClickOutside = <T extends HTMLElement>(handler: () => void): RefObject<T> => {
   const ref = useRef<T>(null);
 
   useEffect(() => {

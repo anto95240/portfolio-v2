@@ -1,10 +1,9 @@
 // lib/data.ts
-import projetsJson from "@/data/projet.json";
-import skillsJson from "@/data/cv_skill.json";
 import experienceJson from "@/data/cv_experience.json";
 import formationJson from "@/data/cv_formation.json";
-
-import { Project, Experience, Formation, Tool, ProjectsData, SkillsData } from "@/types";
+import skillsJson from "@/data/cv_skill.json";
+import projetsJson from "@/data/projet.json";
+import { Experience, Formation, Project, ProjectsData, SkillsData, Tool } from "@/types";
 
 // Définition des structures JSON pour éviter le 'any'
 interface ProjetsJsonStructure {

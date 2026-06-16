@@ -1,16 +1,13 @@
 "use client";
 
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope, faFile, faFileCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import {
-  faFileCircleCheck,
-  faFile,
-  faEnvelope,
-} from "@fortawesome/free-solid-svg-icons";
-import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { useState } from "react";
+
 import CvModal from "@/components/ui/CvModal";
 
 const FooterLink = ({
@@ -42,9 +39,7 @@ export default function Footer() {
   const footerText = `© 2024 créé par Antoine Richard tous droits réservés.`;
 
   const isJeux = pathname.startsWith("/projet/jeux");
-  const footerStyle = isJeux
-    ? "text-center pt-10 pb-2 text-white"
-    : "text-center pt-10 pb-2";
+  const footerStyle = isJeux ? "text-center pt-10 pb-2 text-white" : "text-center pt-10 pb-2";
   const versionStyle = isJeux
     ? "text-center pb-10 text-xs text-white"
     : "text-center pb-10 text-xs";
@@ -58,11 +53,7 @@ export default function Footer() {
           <Link href="/projet">Mes projets</Link>
         </FooterLink>
 
-        <FooterLink
-          icon={faFile}
-          label="Mon CV"
-          onClick={() => setShowPopup(true)}
-        >
+        <FooterLink icon={faFile} label="Mon CV" onClick={() => setShowPopup(true)}>
           Mon CV
         </FooterLink>
 

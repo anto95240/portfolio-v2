@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect } from "react";
 
 type RevealOptions = {
   axis?: "x" | "y";
@@ -15,10 +15,7 @@ type RevealOptions = {
   triggerElement?: string; // Si on veut déclencher l'animation basée sur le parent
 };
 
-export const useScrollReveal = (
-  selector: string,
-  options: RevealOptions = {}
-) => {
+export const useScrollReveal = (selector: string, options: RevealOptions = {}) => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 

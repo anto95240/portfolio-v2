@@ -1,10 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation"; 
-import ProjectImage from "@/components/ui/ProjectImage";
+import { faArrowUpRightFromSquare, faReply } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faReply, faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
-import { Project } from "@/types"; 
+import { useRouter } from "next/navigation";
+
+import ProjectImage from "@/components/ui/ProjectImage";
+import { Project } from "@/types";
 
 interface PopupProps {
   project: Project;
@@ -19,7 +20,8 @@ export default function PopUp({ project, category, onClose }: PopupProps) {
     router.push(`/projet/${category}/${project.id}`);
   };
 
-  const mainImage = project.images.find((image) => image.type === "main")?.url || "/placeholder.jpg";
+  const mainImage =
+    project.images.find((image) => image.type === "main")?.url || "/placeholder.jpg";
 
   return (
     <div
@@ -27,16 +29,18 @@ export default function PopUp({ project, category, onClose }: PopupProps) {
       role="dialog"
       aria-labelledby="popup-title"
     >
-      <button 
-        type="button" 
-        aria-label="Fermer la popup" 
-        onClick={onClose} 
+      <button
+        type="button"
+        aria-label="Fermer la popup"
+        onClick={onClose}
         className="absolute top-3 left-5 text-white"
       >
         <FontAwesomeIcon icon={faReply} />
       </button>
 
-      <h1 id="popup-title" className="text-center text-xl mt-5 font-bold">{project.title}</h1>
+      <h1 id="popup-title" className="text-center text-xl mt-5 font-bold">
+        {project.title}
+      </h1>
       <hr className="w-10/12 mx-auto" />
 
       <div className="flex flex-col gap-8 flex-grow">
@@ -49,13 +53,18 @@ export default function PopUp({ project, category, onClose }: PopupProps) {
           priority
         />
 
-        <p className="text-center px-5 h-12 w-full text-ellipsis overflow-hidden">{project.description}</p>
+        <p className="text-center px-5 h-12 w-full text-ellipsis overflow-hidden">
+          {project.description}
+        </p>
 
         <div className="flex flex-col gap-3">
           <p className="pl-10">Technologies</p>
           <div className="flex flex-wrap gap-3 justify-center">
             {project.technologies.map((tech, techIndex) => (
-              <span key={techIndex} className="bg-[#D9D9D9] text-black px-2 py-1 rounded-md shadow-md">
+              <span
+                key={techIndex}
+                className="bg-[#D9D9D9] text-black px-2 py-1 rounded-md shadow-md"
+              >
                 {tech}
               </span>
             ))}
@@ -66,7 +75,11 @@ export default function PopUp({ project, category, onClose }: PopupProps) {
           {project.links.map((link, linkIndex) => {
             const isObjectLink = typeof link !== "string";
             const url = isObjectLink ? link.url : link;
-            const label = isObjectLink ? (link.type === "site" ? "Site web" : "GitHub") : "Site web";
+            const label = isObjectLink
+              ? link.type === "site"
+                ? "Site web"
+                : "GitHub"
+              : "Site web";
 
             return (
               <div key={linkIndex} className="flex flex-col gap-3">

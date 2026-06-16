@@ -1,13 +1,14 @@
 "use client";
 
-import { useState, useEffect, useMemo, useCallback } from "react";
-import { usePathname, useRouter } from "next/navigation";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import { ProjectsData } from "@/types";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useEffect, useMemo, useState } from "react";
+
 import { useScrollReveal } from "@/hooks/animations/useScrollReveal";
+import { ProjectsData } from "@/types";
 
 export default function ProjectCV({ data, title }: { data: ProjectsData; title?: string }) {
   const router = useRouter();
@@ -29,12 +30,13 @@ export default function ProjectCV({ data, title }: { data: ProjectsData; title?:
 
   const allProjects = useMemo(() => {
     if (data) {
-      const projects = categories.flatMap((category) =>
-        data[category]?.projects.map((project) => ({
-          ...project,
-          uniqueId: `${category}-${project.id}`,
-          categorySlug: category,
-        })) || []
+      const projects = categories.flatMap(
+        (category) =>
+          data[category]?.projects.map((project) => ({
+            ...project,
+            uniqueId: `${category}-${project.id}`,
+            categorySlug: category,
+          })) || []
       );
       return projects;
     }
@@ -45,12 +47,16 @@ export default function ProjectCV({ data, title }: { data: ProjectsData; title?:
     setActiveProject((prevId) => (prevId === uniqueId ? null : uniqueId));
   }, []);
 
-  const handleProjectClick = useCallback((projectId: string, category: string) => {
-    router.push(`/projet/${category}/${projectId}`);
-  }, [router]);
+  const handleProjectClick = useCallback(
+    (projectId: string, category: string) => {
+      router.push(`/projet/${category}/${projectId}`);
+    },
+    [router]
+  );
 
-  const pathSegment = pathname.split('/')[2];
-  const calculatedTitle = pathSegment && categories.includes(pathSegment) ? pathSegment.toUpperCase() : "Mes projets";
+  const pathSegment = pathname.split("/")[2];
+  const calculatedTitle =
+    pathSegment && categories.includes(pathSegment) ? pathSegment.toUpperCase() : "Mes projets";
   const displayTitle = title || calculatedTitle;
 
   useScrollReveal(".fade-down", {
@@ -69,7 +75,8 @@ export default function ProjectCV({ data, title }: { data: ProjectsData; title?:
       <h1 className={projetStyle}>{displayTitle}</h1>
       <div className="grid grid-cols-1 gap-5 max-w-3xl mx-auto md:grid-cols-2 text-center">
         {allProjects.map((project, index) => {
-          const mainImage = project.images?.find((image) => image.type === "main")?.url || "/default-image.jpg";
+          const mainImage =
+            project.images?.find((image) => image.type === "main")?.url || "/default-image.jpg";
           const techCount = project.technologies?.length || 0;
 
           return (
@@ -93,7 +100,9 @@ export default function ProjectCV({ data, title }: { data: ProjectsData; title?:
                   onClick={(e) => e.stopPropagation()}
                 >
                   <h1 className="text-lg font-title mb-2">{project.title}</h1>
-                  <p className="text-sm font-text mb-3 h-10 px-2 line-clamp-2">{project.description}</p>
+                  <p className="text-sm font-text mb-3 h-10 px-2 line-clamp-2">
+                    {project.description}
+                  </p>
                   <div className={`grid grid-cols-${Math.min(techCount, 3)} gap-2`}>
                     {project.technologies?.slice(0, 3).map((tech, i) => (
                       <div

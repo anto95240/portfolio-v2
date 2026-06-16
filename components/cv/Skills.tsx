@@ -1,11 +1,11 @@
 "use client";
 
-import { SkillsData } from "@/types";
-import renderCategory from "./SkillCategory";
 import { useScrollReveal } from "@/hooks/animations/useScrollReveal";
+import { SkillsData } from "@/types";
+
+import renderCategory from "./SkillCategory";
 
 export default function Skill({ data }: { data: SkillsData }) {
-
   useScrollReveal(".skills-anim", {
     axis: "y",
     offset: 30,
@@ -13,7 +13,7 @@ export default function Skill({ data }: { data: SkillsData }) {
     start: "top 90%",
     end: "top 70%",
     scrub: 1, // On passe 1 car dans votre code original vous aviez `scrub: 1`
-  }); 
+  });
 
   return (
     <div className="w-11/12 lg:w-8/12 flex flex-col mx-auto pb-20">

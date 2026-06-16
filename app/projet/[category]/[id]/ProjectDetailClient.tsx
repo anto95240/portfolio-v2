@@ -1,20 +1,18 @@
 "use client";
 
-import Link from "next/link";
-import { useState, useEffect } from "react";
+import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-import Nav from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
+import Nav from "@/components/Navbar";
 import ProjetChoice from "@/components/projet/ChoixProject";
 import ProjectLinks from "@/components/projet/ProjectLinks";
 import ProjectImage from "@/components/ui/ProjectImage";
 import { CATEGORY_STYLES, DEFAULT_STYLE } from "@/lib/constants";
-
 import { Project, ProjectsData } from "@/types";
 
 interface ProjectDetailClientProps {
@@ -50,20 +48,17 @@ export default function ProjectDetailClient({
               end: "top 15%",
               scrub: true,
             },
-          },
+          }
         );
       });
     });
     return () => ctx.revert();
   }, []);
 
-  if (!project)
-    return <p className="text-xl text-center mt-20">Le projet est manquant.</p>;
+  if (!project) return <p className="text-xl text-center mt-20">Le projet est manquant.</p>;
 
-  const mainImage =
-    project.images?.find((img) => img.type === "main")?.url || "/default.jpg";
-  const galleryImages =
-    project.images?.filter((img) => img.type === "gallery") || [];
+  const mainImage = project.images?.find((img) => img.type === "main")?.url || "/default.jpg";
+  const galleryImages = project.images?.filter((img) => img.type === "gallery") || [];
 
   return (
     <div className={`flex h-full ${currentStyle.bg}`}>
@@ -93,27 +88,20 @@ export default function ProjectDetailClient({
                     type="button"
                     className="hover:scale-110 transition-transform"
                   >
-                    <FontAwesomeIcon
-                      icon={faArrowLeftLong}
-                      className="mr-2 text-4xl"
-                    />
+                    <FontAwesomeIcon icon={faArrowLeftLong} className="mr-2 text-4xl" />
                   </button>
                 </Link>
               </div>
 
               <div className="flex flex-col text-left gap-6">
-                <h3 className="text-xl font-bold mb-4 uppercase">
-                  {project.title}
-                </h3>
+                <h3 className="text-xl font-bold mb-4 uppercase">{project.title}</h3>
                 <hr className="bg-black w-full h-[2px] border-none rounded" />
 
                 <div className="flex flex-col gap-10 md:flex-row">
                   <div className="flex flex-col gap-5 pl-10">
                     <p className="text-md uppercase">{category}</p>
                     <p className="text-md uppercase">{project.date}</p>
-                    <p className="text-md uppercase">
-                      {project.equipe.join(" - ")}
-                    </p>
+                    <p className="text-md uppercase">{project.equipe.join(" - ")}</p>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((t, i) => (
                         <span
