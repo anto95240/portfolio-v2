@@ -6,6 +6,7 @@ import type { Metadata, Viewport } from "next";
 import { Lato, Montserrat_Alternates } from "next/font/google";
 
 import ScrollToTop from "@/components/ui/ScrollToTop";
+import { WebVitals } from "@/components/WebVitals";
 
 config.autoAddCss = false;
 
@@ -85,6 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr" suppressHydrationWarning>
       <body className={`${lato.variable} ${montserrat.variable} font-sans`}>
+        <WebVitals />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
