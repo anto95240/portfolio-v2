@@ -1,28 +1,24 @@
 "use client";
 
-import { useState, useRef, useMemo, useEffect } from "react";
-import ProjectImage from "@/components/ui/ProjectImage"; 
-import CvModal from "@/components/ui/CvModal"; 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faUser,
-  faChartSimple,
   faBriefcase,
-  faGraduationCap,
+  faChartSimple,
   faFileCircleCheck,
-} from "@fortawesome/free-solid-svg-icons"; 
-import Nav from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import Skill from "@/components/cv/Skills";
+  faGraduationCap,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useMemo, useRef, useState } from "react";
+
 import Experience from "@/components/cv/Experience";
 import Formation from "@/components/cv/Formation";
 import ProjetCV from "@/components/cv/ProjetCV";
-import {
-  Experience as ExpType,
-  Formation as FormType,
-  SkillsData,
-  ProjectsData,
-} from "@/types";
+import Skill from "@/components/cv/Skills";
+import Footer from "@/components/Footer";
+import Nav from "@/components/Navbar";
+import CvModal from "@/components/ui/CvModal";
+import ProjectImage from "@/components/ui/ProjectImage";
+import { Experience as ExpType, Formation as FormType, ProjectsData, SkillsData } from "@/types";
 
 interface CvClientProps {
   skills: SkillsData;
@@ -31,12 +27,7 @@ interface CvClientProps {
   projects: ProjectsData;
 }
 
-export default function CvClient({
-  skills,
-  experiences,
-  formations,
-  projects,
-}: CvClientProps) {
+export default function CvClient({ skills, experiences, formations, projects }: CvClientProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("profil");
   const [showPopup, setShowPopup] = useState(false);
@@ -96,11 +87,16 @@ export default function CvClient({
         <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
-      <main className={`flex-1 flex flex-col items-center mt-5 px-5 w-full transition-all duration-300 ${isMenuOpen ? "lg:pl-56 translate-x-1/4 lg:translate-x-0" : "lg:pl-56"}`}>
-        
-        <section id="profil" ref={profilRef} className="w-full flex flex-col items-center mb-16 pt-10 scroll-mt-20">
+      <main
+        className={`flex-1 flex flex-col items-center mt-5 px-5 w-full transition-all duration-300 ${isMenuOpen ? "lg:pl-56 translate-x-1/4 lg:translate-x-0" : "lg:pl-56"}`}
+      >
+        <section
+          id="profil"
+          ref={profilRef}
+          className="w-full flex flex-col items-center mb-16 pt-10 scroll-mt-20"
+        >
           <h1 className="text-3xl font-bold mb-10">CV</h1>
-          
+
           <ProjectImage
             src="/images/photo.svg"
             alt="Antoine Richard"
@@ -109,12 +105,12 @@ export default function CvClient({
             className="w-56 h-auto rounded-lg shadow-lg mb-6"
             priority
           />
-          
+
           <div className="text-center mb-6">
             <h2 className="text-xl font-bold uppercase">Antoine Richard</h2>
             <p className="text-gray-600">Étudiant</p>
           </div>
-          
+
           <button
             type="button"
             onClick={() => setShowPopup(true)}
@@ -127,15 +123,15 @@ export default function CvClient({
         <section id="skill" ref={skillRef} className="w-full scroll-mt-20">
           <Skill data={skills} />
         </section>
-        
+
         <section id="experience" ref={experienceRef} className="w-full scroll-mt-20">
           <Experience data={experiences} />
         </section>
-        
+
         <section id="formation" ref={formationRef} className="w-full scroll-mt-20">
           <Formation data={formations} />
         </section>
-        
+
         <section id="projet" ref={projetRef} className="w-full scroll-mt-20">
           <ProjetCV data={projects} />
         </section>
@@ -147,8 +143,8 @@ export default function CvClient({
       <div className="fixed top-1/2 -translate-y-1/2 right-6 z-40 hidden lg:flex flex-col items-center gap-6">
         <div className="bg-menu-cv backdrop-blur-md border border-white/20 py-6 px-3 rounded-full flex flex-col justify-around items-center gap-5 shadow-[0_8px_32px_0_rgba(31,38,135,0.2)]">
           {menuItems.map((item) => {
-             const isActive = activeSection === item.id;
-             return (
+            const isActive = activeSection === item.id;
+            return (
               <button
                 key={item.id}
                 type="button"
@@ -156,17 +152,22 @@ export default function CvClient({
                 className="relative group flex items-center justify-center"
                 aria-label={`Aller à la section ${item.label}`}
               >
-                <span className={`absolute right-full mr-4 px-3 py-1.5 rounded-lg text-sm font-bold text-white whitespace-nowrap transition-all duration-300 origin-right
-                  ${isActive ? "bg-light-blue opacity-100 scale-100 shadow-md" : "bg-blue-footer/80 opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100"}`}>
+                <span
+                  className={`absolute right-full mr-4 px-3 py-1.5 rounded-lg text-sm font-bold text-white whitespace-nowrap transition-all duration-300 origin-right
+                  ${isActive ? "bg-light-blue opacity-100 scale-100 shadow-md" : "bg-blue-footer/80 opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100"}`}
+                >
                   {item.label}
-                  <span className={`absolute top-1/2 -translate-y-1/2 -right-[5px] border-y-4 border-y-transparent border-l-[6px] ${isActive ? "border-l-light-blue" : "border-l-blue-footer/80"}`}></span>
+                  <span
+                    className={`absolute top-1/2 -translate-y-1/2 -right-[5px] border-y-4 border-y-transparent border-l-[6px] ${isActive ? "border-l-light-blue" : "border-l-blue-footer/80"}`}
+                  ></span>
                 </span>
-                
+
                 <div
                   className={`w-12 h-12 flex items-center justify-center rounded-full transition-all duration-500 ease-out
-                    ${isActive 
-                      ? "bg-gradient-to-br from-light-blue to-dark-blue text-white scale-110 shadow-[0_0_20px_rgba(99,157,240,0.5)]" 
-                      : "bg-white/10 text-white/70 hover:bg-white/30 hover:text-white hover:scale-105"
+                    ${
+                      isActive
+                        ? "bg-gradient-to-br from-light-blue to-dark-blue text-white scale-110 shadow-[0_0_20px_rgba(99,157,240,0.5)]"
+                        : "bg-white/10 text-white/70 hover:bg-white/30 hover:text-white hover:scale-105"
                     }`}
                 >
                   <FontAwesomeIcon
@@ -175,13 +176,12 @@ export default function CvClient({
                   />
                 </div>
               </button>
-             ); 
-          })} 
+            );
+          })}
         </div>
       </div>
 
       {showPopup && <CvModal onClose={() => setShowPopup(false)} />}
-      
     </div>
   );
 }

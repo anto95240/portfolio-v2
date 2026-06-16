@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import { Experience as ExperienceType } from "@/types";
+import { useCallback, useState } from "react";
+
 import { useScrollReveal } from "@/hooks/animations/useScrollReveal";
+import { Experience as ExperienceType } from "@/types";
 
 export default function Experience({ data }: { data: ExperienceType[] }) {
   const [activeId, setActiveId] = useState<string | null>(data[0]?.id || null);
@@ -27,19 +28,29 @@ export default function Experience({ data }: { data: ExperienceType[] }) {
       <div className="relative flex flex-col">
         <div className="absolute left-1/4 top-0 bottom-0 w-[2px] bg-black transform -translate-x-1/2 hidden md:block"></div>
         {data.map((exp) => (
-          <div key={exp.id} className="relative flex flex-col md:flex-row items-center mb-10 w-full fade-exp  md:-ml-2.5">
-            <div className="w-full md:w-1/4 text-sm font-text text-center md:text-right md:pr-4 mb-2 md:mb-0">{exp.date}</div>
+          <div
+            key={exp.id}
+            className="relative flex flex-col md:flex-row items-center mb-10 w-full fade-exp  md:-ml-2.5"
+          >
+            <div className="w-full md:w-1/4 text-sm font-text text-center md:text-right md:pr-4 mb-2 md:mb-0">
+              {exp.date}
+            </div>
             <div className="fade-left2 relative z-10 w-5 h-5 bg-white rounded-full border-2 border-black flex items-center justify-center"></div>
             <div className="flex-1 pl-0 md:pl-10 text-left w-full">
               {activeId === exp.id ? (
                 <div className="bg-white shadow-md rounded-lg p-6 border-l-4 border-blue-500">
                   <h2 className="font-bold mb-2 text-lg">{exp.title}</h2>
-                  <p className="text-sm"><strong>Lieu:</strong> {exp.lieux}</p>
+                  <p className="text-sm">
+                    <strong>Lieu:</strong> {exp.lieux}
+                  </p>
                   <p className="text-sm italic">{exp.domaine}</p>
                   <p className="text-sm mt-2">{exp.realisation}</p>
                 </div>
               ) : (
-                <button onClick={() => toggleInfo(exp.id)} className="text-lg font-medium hover:text-blue-600 transition-colors">
+                <button
+                  onClick={() => toggleInfo(exp.id)}
+                  className="text-lg font-medium hover:text-blue-600 transition-colors"
+                >
                   {exp.title}
                 </button>
               )}

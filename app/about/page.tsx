@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import Nav from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import Image from "next/image";
 import clsx from "clsx";
+import Image from "next/image";
+import { useState } from "react";
+
+import Footer from "@/components/Footer";
+import Nav from "@/components/Navbar";
 import { HOBBIES_DATA } from "@/lib/constants";
 
 export default function About() {
@@ -32,14 +33,19 @@ export default function About() {
           <div className="flex flex-col">
             <div className="flex flex-col justify-center text-center mx-auto lg:text-left max-w-lg">
               <p className="text-base leading-relaxed">
-                Hello, moi c’est <b>Antoine</b> ! <b>Etudiant</b> en <b>informatique</b>. Je suis actuellement un cursus de 5 ans en informatique et me passionne de plus en plus pour le <b>domaine du web</b>.
+                Hello, moi c’est <b>Antoine</b> ! <b>Etudiant</b> en <b>informatique</b>. Je suis
+                actuellement un cursus de 5 ans en informatique et me passionne de plus en plus pour
+                le <b>domaine du web</b>.
               </p>
             </div>
             <div className="grid grid-cols-3 gap-2 mt-5 justify-items-center lg:justify-items-start">
               {HOBBIES_DATA.map((hobby) => (
                 <div
                   key={hobby.id}
-                  className={clsx(hobby.bgColor, "w-24 h-24 rounded-full flex items-center justify-center text-lg text-black shadow-md")}
+                  className={clsx(
+                    hobby.bgColor,
+                    "w-24 h-24 rounded-full flex items-center justify-center text-lg text-black shadow-md"
+                  )}
                 >
                   {hobby.name}
                 </div>

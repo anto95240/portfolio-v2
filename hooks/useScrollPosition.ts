@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const useScrollPosition = (): number => {
   const [scrollPosition, setScrollPosition] = useState<number>(0);

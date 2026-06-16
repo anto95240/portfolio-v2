@@ -1,8 +1,10 @@
-import type { Metadata, Viewport } from "next";
-import { Lato, Montserrat_Alternates } from "next/font/google";
-import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "./globals.css";
+
+import { config } from "@fortawesome/fontawesome-svg-core";
+import type { Metadata, Viewport } from "next";
+import { Lato, Montserrat_Alternates } from "next/font/google";
+
 import ScrollToTop from "@/components/ui/ScrollToTop";
 
 config.autoAddCss = false;
@@ -20,11 +22,20 @@ const montserrat = Montserrat_Alternates({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.antoine-richard.fr"), 
-  
+  metadataBase: new URL("https://www.antoine-richard.fr"),
+
   title: "Antoine Richard | Portfolio",
-  description: "Étudiant en informatique passionné par le développement web front-end. Découvrez mes projets, mon parcours et mes compétences.",
-  keywords: ["Antoine Richard", "Portfolio", "Développeur Web", "Front-end", "React", "Next.js", "Ynov"],
+  description:
+    "Étudiant en informatique passionné par le développement web front-end. Découvrez mes projets, mon parcours et mes compétences.",
+  keywords: [
+    "Antoine Richard",
+    "Portfolio",
+    "Développeur Web",
+    "Front-end",
+    "React",
+    "Next.js",
+    "Ynov",
+  ],
   authors: [{ name: "Antoine Richard" }],
   manifest: "/manifest.json",
   icons: { icon: "/images/logo.svg" },

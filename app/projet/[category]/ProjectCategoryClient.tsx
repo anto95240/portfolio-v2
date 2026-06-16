@@ -1,17 +1,16 @@
 "use client";
 
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-import Nav from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Nav from "@/components/Navbar";
 import Popup from "@/components/projet/Popup";
 import ProjectImage from "@/components/ui/ProjectImage";
-
 import { CATEGORY_STYLES, DEFAULT_STYLE } from "@/lib/constants";
 import { Project } from "@/types";
 
@@ -20,10 +19,7 @@ interface ProjectCategoryClientProps {
   category: string;
 }
 
-export default function ProjectCategoryClient({
-  projects,
-  category,
-}: ProjectCategoryClientProps) {
+export default function ProjectCategoryClient({ projects, category }: ProjectCategoryClientProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -62,7 +58,7 @@ export default function ProjectCategoryClient({
               end: "top 30%",
               scrub: true,
             },
-          },
+          }
         );
       });
     });
@@ -83,18 +79,10 @@ export default function ProjectCategoryClient({
       >
         <h1 className="text-3xl mb-20 uppercase font-bold">{category}</h1>
 
-        <div
-          className={`absolute right-5 lg:left-[26%] ${isMenuOpen ? "z-10" : "z-50"}`}
-        >
-          <button 
-            type="button"
-            aria-label="Revenir au thème"
-          >
+        <div className={`absolute right-5 lg:left-[26%] ${isMenuOpen ? "z-10" : "z-50"}`}>
+          <button type="button" aria-label="Revenir au thème">
             <Link href="/projet">
-              <FontAwesomeIcon
-                icon={faArrowLeftLong}
-                className="mr-2 mt-5 text-4xl"
-              />
+              <FontAwesomeIcon icon={faArrowLeftLong} className="mr-2 mt-5 text-4xl" />
             </Link>
           </button>
         </div>
@@ -104,8 +92,7 @@ export default function ProjectCategoryClient({
             {projects.length > 0 ? (
               projects.map((project, index) => {
                 const mainImage =
-                  project.images.find((img) => img.type === "main")?.url ||
-                  "/default-image.jpg";
+                  project.images.find((img) => img.type === "main")?.url || "/default-image.jpg";
 
                 return (
                   <div
@@ -128,9 +115,7 @@ export default function ProjectCategoryClient({
                     <div
                       className={`flex flex-col text-center mx-auto gap-6 w-full lg:w-1/2 ${index % 2 === 0 ? "fade-left" : "fade-right"}`}
                     >
-                      <h3 className="text-xl font-bold mb-4">
-                        {project.title}
-                      </h3>
+                      <h3 className="text-xl font-bold mb-4">{project.title}</h3>
                       <p className="text-md">{project.description}</p>
                       <button
                         type="button"
@@ -150,11 +135,7 @@ export default function ProjectCategoryClient({
         </div>
 
         {showPopup && selectedProject && (
-          <Popup
-            project={selectedProject}
-            category={category}
-            onClose={handleClosePopup}
-          />
+          <Popup project={selectedProject} category={category} onClose={handleClosePopup} />
         )}
 
         <Footer />

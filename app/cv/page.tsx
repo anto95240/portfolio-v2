@@ -1,6 +1,7 @@
-import { getExperiences, getFormations, getSkills, getProjetsHome } from "@/lib/data";
-import CvClient from "@/app/cv/CvClient";
 import { Metadata } from "next";
+
+import CvClient from "@/app/cv/CvClient";
+import { getExperiences, getFormations, getProjetsHome, getSkills } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Mon CV | Antoine Richard",
@@ -13,5 +14,12 @@ export default function CvPage() {
   const formations = getFormations();
   const projects = getProjetsHome();
 
-  return <CvClient skills={skills} experiences={experiences} formations={formations} projects={projects} />;
+  return (
+    <CvClient
+      skills={skills}
+      experiences={experiences}
+      formations={formations}
+      projects={projects}
+    />
+  );
 }

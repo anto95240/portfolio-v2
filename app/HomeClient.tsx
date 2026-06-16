@@ -1,12 +1,26 @@
 "use client";
 
-import { useState } from "react";
-import Nav from "../components/Navbar";
-import OutilsHome from "../components/OutilsHome";
-import Footer from "../components/Footer";
-import ProjetCV from "../components/cv/ProjetCV";
+import dynamic from "next/dynamic";
 import Image from "next/image";
+import { useState } from "react";
+
 import { ProjectsData, Tool } from "@/types";
+
+import Footer from "../components/Footer";
+import Nav from "../components/Navbar";
+
+const OutilsHome = dynamic(() => import("../components/OutilsHome"), {
+  ssr: false,
+  loading: () => (
+    <div className="min-h-[200px] flex items-center justify-center">Chargement...</div>
+  ),
+});
+const ProjetCV = dynamic(() => import("../components/cv/ProjetCV"), {
+  ssr: false,
+  loading: () => (
+    <div className="min-h-[400px] flex items-center justify-center">Chargement...</div>
+  ),
+});
 
 interface HomeClientProps {
   projects: ProjectsData;
@@ -36,9 +50,8 @@ export default function HomeClient({ projects, tools }: HomeClientProps) {
               <br />
             </p>
             <p className="text-center">
-              Je suis actuellement un cursus de 5 ans en <br /> informatique et
-              me passionne de plus en plus pour <br /> le <b>domaine du web</b>{" "}
-              et plus précisément pour le <br />{" "}
+              Je suis actuellement un cursus de 5 ans en <br /> informatique et me passionne de plus
+              en plus pour <br /> le <b>domaine du web</b> et plus précisément pour le <br />{" "}
               <b>développement web front-end</b>.
             </p>
           </div>

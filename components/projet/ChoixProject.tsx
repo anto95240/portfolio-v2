@@ -1,24 +1,25 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useParams, useRouter } from "next/navigation";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { ProjectsData, Project } from "@/types";
-import { PROJECT_CATEGORY_STYLES } from "@/lib/constants";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { useEscapeKey } from "@/hooks/useEscapeKey";
+import { PROJECT_CATEGORY_STYLES } from "@/lib/constants";
+import { Project, ProjectsData } from "@/types";
 
 export default function ProjectChoice({ allProjectsData }: { allProjectsData: ProjectsData }) {
   const params = useParams();
   const category = params?.category as string;
   const router = useRouter();
-  
+
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const popupRef = useClickOutside<HTMLDivElement>(() => setIsPopupVisible(false)); 
+  const popupRef = useClickOutside<HTMLDivElement>(() => setIsPopupVisible(false));
 
   useEscapeKey(() => setIsPopupVisible(false));
-  
+
   const [currentCategoryProjects, setCurrentCategoryProjects] = useState<Project[]>([]);
 
   useEffect(() => {
@@ -50,10 +51,12 @@ export default function ProjectChoice({ allProjectsData }: { allProjectsData: Pr
 
       {isPopupVisible && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 transition-opacity duration-300 opacity-100">
-          <div ref={popupRef} className={`relative p-8 rounded-2xl w-80 md:w-96 ${currentStyle.bg} shadow-2xl transition-all duration-300 transform scale-100 border border-white/30`}>
-            
+          <div
+            ref={popupRef}
+            className={`relative p-8 rounded-2xl w-80 md:w-96 ${currentStyle.bg} shadow-2xl transition-all duration-300 transform scale-100 border border-white/30`}
+          >
             {/* Bouton croix en haut à droite pour fermer */}
-            <button 
+            <button
               onClick={() => setIsPopupVisible(false)}
               className={`absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-black/10 hover:bg-black/20 transition-colors ${currentStyle.text}`}
               aria-label="Fermer"
@@ -61,10 +64,12 @@ export default function ProjectChoice({ allProjectsData }: { allProjectsData: Pr
               <FontAwesomeIcon icon={faTimes} />
             </button>
 
-            <h3 className={`text-2xl font-black mb-6 text-center border-b border-black/10 pb-4 ${currentStyle.text}`}>
+            <h3
+              className={`text-2xl font-black mb-6 text-center border-b border-black/10 pb-4 ${currentStyle.text}`}
+            >
               Choisir un projet
             </h3>
-            
+
             <ul className="space-y-3 max-h-[50vh] overflow-y-auto pr-2 custom-scrollbar">
               {currentCategoryProjects.length > 0 ? (
                 currentCategoryProjects.map((project) => (
@@ -76,12 +81,17 @@ export default function ProjectChoice({ allProjectsData }: { allProjectsData: Pr
                       aria-label={`Sélectionner le projet ${project.title}`}
                     >
                       <span className="text-lg">{project.title}</span>
-                      <FontAwesomeIcon icon={faChevronRight} className="opacity-0 -translate-x-2 transition-all duration-300 group-hover/item:opacity-100 group-hover/item:translate-x-0" />
+                      <FontAwesomeIcon
+                        icon={faChevronRight}
+                        className="opacity-0 -translate-x-2 transition-all duration-300 group-hover/item:opacity-100 group-hover/item:translate-x-0"
+                      />
                     </button>
                   </li>
                 ))
               ) : (
-                <li className="text-center py-6 font-medium bg-black/5 rounded-xl">Aucun projet trouvé.</li>
+                <li className="text-center py-6 font-medium bg-black/5 rounded-xl">
+                  Aucun projet trouvé.
+                </li>
               )}
             </ul>
           </div>

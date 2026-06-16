@@ -1,11 +1,12 @@
 "use client";
 
-import ProjectImage from "@/components/ui/ProjectImage";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+import ProjectImage from "@/components/ui/ProjectImage";
 import { useIsClient } from "@/hooks/useIsClient";
-import { CATEGORIES_DATA } from "@/lib/constants";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { CATEGORIES_DATA } from "@/lib/constants";
 
 export default function ThemePage() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -24,7 +25,10 @@ export default function ThemePage() {
 
   const formatDescription = (description: string) => {
     return description.split("\n").map((line, index) => (
-      <span key={index}>{line}<br /></span>
+      <span key={index}>
+        {line}
+        <br />
+      </span>
     ));
   };
 
@@ -32,7 +36,7 @@ export default function ThemePage() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 w-10/12 lg:w-8/12 max-w-l text-center mx-auto text-white justify-center">
-      {CATEGORIES_DATA.map((category, index) =>(
+      {CATEGORIES_DATA.map((category, index) => (
         <div
           key={category.categorySlug}
           className={`bg-gradient-to-r ${category.gradient} min-h-[550px] shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] lg:min-h-[620px] text-black flex flex-col gap-10 relative group`}
@@ -57,7 +61,7 @@ export default function ThemePage() {
               {formatDescription(category.description)}
             </p>
           </div>
-          
+
           {/* 3. Utilisation ProjectImage */}
           <ProjectImage
             src={category.imageSrc}

@@ -1,14 +1,15 @@
 "use client";
 
-import { useRef } from "react";
-import Link from "next/link";
 import Image from "next/image";
-import { Tool } from "@/types";
+import Link from "next/link";
+import { useRef } from "react";
+
 import { useScrollReveal } from "@/hooks/animations/useScrollReveal";
+import { Tool } from "@/types";
 
 export default function OutilsHome({ tools }: { tools: Tool[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   useScrollReveal(".fade-left-tool", {
     axis: "x",
     offset: -50,
@@ -27,17 +28,31 @@ export default function OutilsHome({ tools }: { tools: Tool[] }) {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-5 w-full">
             {tools.map((tool) => (
-              <div key={tool.id} className="flex items-center bg-blue-outil px-2 py-3 rounded-md shadow-md justify-between">
+              <div
+                key={tool.id}
+                className="flex items-center bg-blue-outil px-2 py-3 rounded-md shadow-md justify-between"
+              >
                 <div className="relative w-7 h-7">
-                   <Image src={tool.images} alt={tool.title} fill className="fade-left-tool rounded-md object-contain" />
+                  <Image
+                    src={tool.images}
+                    alt={tool.title}
+                    fill
+                    sizes="(max-width: 768px) 28px, 28px"
+                    className="fade-left-tool rounded-md object-contain"
+                  />
                 </div>
-                <p className="fade-left-tool md:text-lg text-base text-white ml-2 font-text">{tool.title}</p>
+                <p className="fade-left-tool md:text-lg text-base text-white ml-2 font-text">
+                  {tool.title}
+                </p>
               </div>
             ))}
           </div>
           <div className="mt-6 md:mt-0 md:ml-6 mb-3 md:mb-0 text-center shrink-0">
-            <Link href="/cv" className="bg-gradient-to-r from-light-blue via-light-green to-light-blue text-black md:text-lg py-3 px-4 text-base rounded-md shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform active:scale-90">
-                VOIR PLUS
+            <Link
+              href="/cv"
+              className="bg-gradient-to-r from-light-blue via-light-green to-light-blue text-black md:text-lg py-3 px-4 text-base rounded-md shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] transition-transform transform active:scale-90"
+            >
+              VOIR PLUS
             </Link>
           </div>
         </div>

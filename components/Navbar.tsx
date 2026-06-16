@@ -1,16 +1,24 @@
 "use client";
 
+import { faBars, faChevronDown, faChevronUp, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faChevronUp, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import Link from "next/link";
-import { useIsClient } from "@/hooks/useIsClient";
-import { NAV_LINKS } from "@/lib/constants";
-import { useToggle } from "@/hooks/utils/useToggle";
 
-export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boolean; setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>> }) {
-  const [isProjectOpen, toggleProjectList] = useToggle(false);  const isClient = useIsClient();
-  
+import { useIsClient } from "@/hooks/useIsClient";
+import { useToggle } from "@/hooks/utils/useToggle";
+import { NAV_LINKS } from "@/lib/constants";
+
+export default function Navbar({
+  isMenuOpen,
+  setIsMenuOpen,
+}: {
+  isMenuOpen: boolean;
+  setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const [isProjectOpen, toggleProjectList] = useToggle(false);
+  const isClient = useIsClient();
+
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   if (!isClient) return null;
@@ -47,16 +55,16 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
               <div className="flex items-center gap-4">
                 <FontAwesomeIcon icon={link.icon} className="text-2xl" />
                 <div className="flex items-center gap-2">
-                   <Link href={link.href} className="relative group z-50">
+                  <Link href={link.href} className="relative group z-50">
                     {link.label}
                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
                   </Link>
                   {/* Gestion spécifique pour le dropdown Projets */}
                   {link.hasDropdown && (
-                    <FontAwesomeIcon 
-                        icon={isProjectOpen ? faChevronUp : faChevronDown} 
-                        className="text-xl z-50 cursor-pointer" 
-                        onClick={toggleProjectList} 
+                    <FontAwesomeIcon
+                      icon={isProjectOpen ? faChevronUp : faChevronDown}
+                      className="text-xl z-50 cursor-pointer"
+                      onClick={toggleProjectList}
                     />
                   )}
                 </div>
