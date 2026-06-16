@@ -2,6 +2,7 @@
 
 import { faDownload, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { track } from "@vercel/analytics";
 import Link from "next/link";
 
 import { useClickOutside } from "@/hooks/useClickOutside";
@@ -46,7 +47,10 @@ export default function CvModal({ onClose }: CvModalProps) {
             href="/doc/Antoine RICHARD CV-s.pdf"
             target="_blank"
             className={`${btnStyle} bg-gradient-to-tr from-blue-600 to-light-blue`}
-            onClick={onClose}
+            onClick={() => {
+              track("Download_CV", { version: "Stage" });
+              onClose();
+            }}
           >
             <FontAwesomeIcon icon={faDownload} />
             CV Stage
@@ -55,7 +59,10 @@ export default function CvModal({ onClose }: CvModalProps) {
             href="/doc/Antoine RICHARD CV.pdf"
             target="_blank"
             className={`${btnStyle} bg-gradient-to-tr from-emerald-600 to-light-green`}
-            onClick={onClose}
+            onClick={() => {
+              track("Download_CV", { version: "Alternance" });
+              onClose();
+            }}
           >
             <FontAwesomeIcon icon={faDownload} />
             CV Alternance

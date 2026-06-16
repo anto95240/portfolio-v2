@@ -2,6 +2,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import "./globals.css";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata, Viewport } from "next";
 import { Lato, Montserrat_Alternates } from "next/font/google";
 
@@ -93,6 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         {children}
         <ScrollToTop />
+        <Analytics />
       </body>
     </html>
   );
