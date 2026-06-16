@@ -1,3 +1,11 @@
+# [2.6.0](https://github.com/anto95240/portfolio-v2/compare/v2.5.1...v2.6.0) (2026-06-16)
+
+
+### Features
+
+* **analytics:** ajout de Vercel Analytics pour le suivi du trafic ([e626d2f](https://github.com/anto95240/portfolio-v2/commit/e626d2fc0a08dffdafab239b0ee4be2e58c4200d))
+* **analytics:** ajout du tracking d'événements personnalisés (CV, Email, Liens) ([aa135b0](https://github.com/anto95240/portfolio-v2/commit/aa135b05ad84eb52e21e36d5848f0c51f2266903))
+
 ## [2.5.1](https://github.com/anto95240/portfolio-v2/compare/v2.5.0...v2.5.1) (2026-06-16)
 
 
