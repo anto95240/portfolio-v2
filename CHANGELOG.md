@@ -1,3 +1,18 @@
+# [2.4.0](https://github.com/anto95240/portfolio-v2/compare/v2.3.5...v2.4.0) (2026-06-16)
+
+
+### Bug Fixes
+
+* **ui:** correction du z-index de la navbar bloquant les clics et ajustement du bouton retour ([58fdab1](https://github.com/anto95240/portfolio-v2/commit/58fdab107dde9c99d66dd9b2e02fa55866f9d3f4))
+
+
+### Features
+
+* **seo:** ajout de la génération dynamique d'images OG via next/og ([55ca232](https://github.com/anto95240/portfolio-v2/commit/55ca23240291b89589de9ddad09f37c814fb40d9))
+* **seo:** ajout des données structurées JSON-LD et des métadonnées dynamiques OG/Twitter ([6bb7aa9](https://github.com/anto95240/portfolio-v2/commit/6bb7aa957b40b14f4e7b9be29b88a7a0474ee64a))
+* **seo:** ajout du monitoring des Core Web Vitals en console ([e6a65d1](https://github.com/anto95240/portfolio-v2/commit/e6a65d164d1b6d8ce6bb40eeba8359feb4b5270c))
+* **seo:** ajout génération dynamique de sitemap.xml et robots.txt ([abcc8fc](https://github.com/anto95240/portfolio-v2/commit/abcc8fcae74a0a288d881f3b87db58ef08ef5b6c))
+
 ## [2.3.5](https://github.com/anto95240/portfolio-v2/compare/v2.3.4...v2.3.5) (2026-06-16)
 
 
