@@ -28,7 +28,7 @@ export default function Navbar({
       <button
         type="button"
         aria-label="Ouvrir le menu"
-        className={`absolute top-5 left-5 text-2xl z-50 lg:hidden ${isMenuOpen ? "hidden" : "block"}`}
+        className={`absolute top-5 left-5 text-2xl z-50 lg:hidden pointer-events-auto ${isMenuOpen ? "hidden" : "block"}`}
         onClick={toggleMenu}
       >
         <FontAwesomeIcon icon={faBars} />

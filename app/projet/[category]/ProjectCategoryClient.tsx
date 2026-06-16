@@ -70,7 +70,7 @@ export default function ProjectCategoryClient({ projects, category }: ProjectCat
 
   return (
     <div className={`flex min-h-screen ${currentStyle.bg}`}>
-      <div className="w-1/4 fixed z-50 h-full">
+      <div className="fixed z-50 h-full pointer-events-none lg:w-1/4">
         <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
@@ -79,12 +79,16 @@ export default function ProjectCategoryClient({ projects, category }: ProjectCat
       >
         <h1 className="text-3xl mb-20 uppercase font-bold">{category}</h1>
 
-        <div className={`absolute right-5 lg:left-[26%] ${isMenuOpen ? "z-10" : "z-50"}`}>
-          <button type="button" aria-label="Revenir au thème">
-            <Link href="/projet">
-              <FontAwesomeIcon icon={faArrowLeftLong} className="mr-2 mt-5 text-4xl" />
-            </Link>
-          </button>
+        <div
+          className={`absolute left-5 top-24 lg:top-10 lg:left-[26%] ${isMenuOpen ? "z-10" : "z-50"}`}
+        >
+          <Link
+            href="/projet"
+            aria-label="Revenir au thème"
+            className="inline-block p-2 hover:scale-110 transition-transform"
+          >
+            <FontAwesomeIcon icon={faArrowLeftLong} className="text-4xl" />
+          </Link>
         </div>
 
         <div className="flex flex-col items-center justify-center w-full">

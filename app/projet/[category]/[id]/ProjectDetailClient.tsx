@@ -62,7 +62,7 @@ export default function ProjectDetailClient({
 
   return (
     <div className={`flex h-full ${currentStyle.bg}`}>
-      <div className="w-1/4 fixed z-50 h-full">
+      <div className="fixed z-50 h-full pointer-events-none lg:w-1/4">
         <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
@@ -81,15 +81,13 @@ export default function ProjectDetailClient({
             />
 
             <div className="flex flex-col w-full gap-x-12">
-              <div className={`mb-8 relative ${isMenuOpen ? "z-10" : "z-20"}`}>
-                <Link href={`/projet/${category}/`}>
-                  <button
-                    aria-label="Revenir au thème"
-                    type="button"
-                    className="hover:scale-110 transition-transform"
-                  >
-                    <FontAwesomeIcon icon={faArrowLeftLong} className="mr-2 text-4xl" />
-                  </button>
+              <div className={`mb-8 relative ${isMenuOpen ? "z-10" : "z-20"} flex`}>
+                <Link
+                  href={`/projet/${category}/`}
+                  aria-label="Revenir au thème"
+                  className="inline-block p-2 -ml-2 hover:scale-110 transition-transform"
+                >
+                  <FontAwesomeIcon icon={faArrowLeftLong} className="text-4xl" />
                 </Link>
               </div>
 
