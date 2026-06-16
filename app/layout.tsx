@@ -6,6 +6,7 @@ import type { Metadata, Viewport } from "next";
 import { Lato, Montserrat_Alternates } from "next/font/google";
 
 import ScrollToTop from "@/components/ui/ScrollToTop";
+import { WebVitals } from "@/components/WebVitals";
 
 config.autoAddCss = false;
 
@@ -55,6 +56,12 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Antoine Richard | Développeur Front-End",
+    description: "Découvrez mes projets web, mes jeux et mon parcours.",
+    images: ["/images/photo.svg"],
+  },
 };
 
 export const viewport: Viewport = {
@@ -66,9 +73,24 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Antoine Richard",
+    jobTitle: "Développeur Web",
+    url: "https://www.antoine-richard.fr",
+    sameAs: ["https://github.com/anto95240"],
+    image: "https://www.antoine-richard.fr/images/photo.svg",
+  };
+
   return (
     <html lang="fr" suppressHydrationWarning>
       <body className={`${lato.variable} ${montserrat.variable} font-sans`}>
+        <WebVitals />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         {children}
         <ScrollToTop />
       </body>
