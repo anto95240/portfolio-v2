@@ -1,3 +1,11 @@
+# [2.5.0](https://github.com/anto95240/portfolio-v2/compare/v2.4.0...v2.5.0) (2026-06-16)
+
+
+### Features
+
+* **security:** ajout de la validation stricte des données JSON avec Zod ([14fe68e](https://github.com/anto95240/portfolio-v2/commit/14fe68ef809e6d0bc35b7a6031954402d038b40a))
+* **security:** ajout des security headers et configuration HSTS ([781d17e](https://github.com/anto95240/portfolio-v2/commit/781d17e8bdf489c374574cb5640637fa6141985b))
+
 # [2.4.0](https://github.com/anto95240/portfolio-v2/compare/v2.3.5...v2.4.0) (2026-06-16)
 
 
