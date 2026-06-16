@@ -1,8 +1,43 @@
+import { Metadata, ResolvingMetadata } from "next";
+
 import { getProjectById, getProjetsFull } from "@/lib/data";
 
 import ProjectDetailClient from "./ProjectDetailClient";
 
 export const revalidate = 3600; // 1 heure
+
+export async function generateMetadata(
+  props: { params: Promise<{ category: string; id: string }> },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const params = await props.params;
+  const project = getProjectById(params.category, params.id);
+
+  if (!project) {
+    return {
+      title: "Projet non trouvé",
+    };
+  }
+
+  const imageUrl =
+    project.images?.find((img) => img.type === "main")?.url || project.images?.[0]?.url;
+
+  return {
+    title: `${project.title} | Antoine Richard`,
+    description: project.description,
+    openGraph: {
+      title: project.title,
+      description: project.description,
+      images: imageUrl ? [{ url: imageUrl }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.description,
+      images: imageUrl ? [imageUrl] : [],
+    },
+  };
+}
 
 export function generateStaticParams() {
   const allProjects = getProjetsFull();
