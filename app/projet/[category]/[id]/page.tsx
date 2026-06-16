@@ -19,8 +19,13 @@ export async function generateMetadata(
     };
   }
 
-  const imageUrl =
-    project.images?.find((img) => img.type === "main")?.url || project.images?.[0]?.url;
+  const ogUrl = new URL("https://www.antoine-richard.fr/api/og");
+  ogUrl.searchParams.set("title", project.title);
+  ogUrl.searchParams.set("category", project.category);
+  if (project.description) {
+    ogUrl.searchParams.set("description", project.description);
+  }
+  const imageUrl = ogUrl.toString();
 
   return {
     title: `${project.title} | Antoine Richard`,
