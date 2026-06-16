@@ -1,3 +1,10 @@
+## [2.5.1](https://github.com/anto95240/portfolio-v2/compare/v2.5.0...v2.5.1) (2026-06-16)
+
+
+### Bug Fixes
+
+* **types:** ajustement des interfaces TS pour correspondre au JSON et au schéma Zod ([ccd0121](https://github.com/anto95240/portfolio-v2/commit/ccd0121538c672aca79c05b05b342cd66d9872b4))
+
 # [2.5.0](https://github.com/anto95240/portfolio-v2/compare/v2.4.0...v2.5.0) (2026-06-16)
 
 
