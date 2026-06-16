@@ -4,6 +4,7 @@ import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faFile, faFileCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { track } from "@vercel/analytics";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -57,17 +58,29 @@ export default function Footer() {
           Mon CV
         </FooterLink>
 
-        <FooterLink icon={faEnvelope} label="Mon Email">
+        <FooterLink
+          icon={faEnvelope}
+          label="Mon Email"
+          onClick={() => track("Contact", { method: "Email" })}
+        >
           <Link href="mailto:antoine.richard@ynov.com">Mon Email</Link>
         </FooterLink>
 
-        <FooterLink icon={faLinkedin} label="Mon Linkedin">
+        <FooterLink
+          icon={faLinkedin}
+          label="Mon Linkedin"
+          onClick={() => track("External_Link", { destination: "LinkedIn" })}
+        >
           <Link href="https://www.linkedin.com/in/ton-profile/" target="_blank">
             Mon Linkedin
           </Link>
         </FooterLink>
 
-        <FooterLink icon={faGithub} label="Mon Github">
+        <FooterLink
+          icon={faGithub}
+          label="Mon Github"
+          onClick={() => track("External_Link", { destination: "GitHub" })}
+        >
           <Link href="https://github.com/anto95240" target="_blank">
             Mon Github
           </Link>
