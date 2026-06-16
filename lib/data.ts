@@ -5,30 +5,18 @@ import skillsJson from "@/data/cv_skill.json";
 import projetsJson from "@/data/projet.json";
 import { Experience, Formation, Project, ProjectsData, SkillsData, Tool } from "@/types";
 
-// Définition des structures JSON pour éviter le 'any'
-interface ProjetsJsonStructure {
-  homePage: ProjectsData;
-  projectPage: ProjectsData;
-}
+import {
+  ExperienceJsonStructureSchema,
+  FormationJsonStructureSchema,
+  ProjetsJsonStructureSchema,
+  SkillsJsonStructureSchema,
+} from "./schemas";
 
-interface SkillsJsonStructure {
-  homepage: { skills: Tool[] };
-  cvpage: { skills: SkillsData };
-}
-
-interface ExperienceJsonStructure {
-  cvpage: { experience: Experience[] };
-}
-
-interface FormationJsonStructure {
-  cvpage: { formation: Formation[] };
-}
-
-// Cast propre des données
-const projetsData = projetsJson as unknown as ProjetsJsonStructure;
-const skillsData = skillsJson as unknown as SkillsJsonStructure;
-const experienceData = experienceJson as unknown as ExperienceJsonStructure;
-const formationData = formationJson as unknown as FormationJsonStructure;
+// Validation Zod des données
+const projetsData = ProjetsJsonStructureSchema.parse(projetsJson);
+const skillsData = SkillsJsonStructureSchema.parse(skillsJson);
+const experienceData = ExperienceJsonStructureSchema.parse(experienceJson);
+const formationData = FormationJsonStructureSchema.parse(formationJson);
 
 // --- ACCUEIL ---
 export const getProjetsHome = (): ProjectsData => projetsData.homePage;
