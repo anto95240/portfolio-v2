@@ -1,16 +1,18 @@
 // types/index.ts
 
 export interface Tool {
-  id: number;
+  id: string | number;
   images: string;
   title: string;
+  usage?: string;
 }
 
 export interface SkillItem {
-  id: string;
+  id: string | number;
   title: string;
   images: string;
   usage: string;
+  categories?: string[];
 }
 
 export interface SkillsData {
@@ -56,7 +58,7 @@ export interface Project {
   technologies: string[];
   date: string;
   equipe: string[];
-  links: (LinkType | string)[]; 
+  links: (LinkType | string)[];
   images: ProjectImage[];
   uniqueId?: string;
   categorySlug?: string;
