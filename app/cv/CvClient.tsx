@@ -88,7 +88,9 @@ export default function CvClient({ skills, experiences, formations, projects }: 
       </div>
 
       <main
-        className={`flex-1 flex flex-col items-center mt-5 px-5 w-full transition-all duration-300 ${isMenuOpen ? "lg:pl-56 translate-x-1/4 lg:translate-x-0" : "lg:pl-56"}`}
+        id="main-content"
+        tabIndex={-1}
+        className={`flex-1 flex flex-col items-center mt-5 px-5 w-full transition-all duration-300 focus:outline-none ${isMenuOpen ? "lg:pl-56 translate-x-1/4 lg:translate-x-0" : "lg:pl-56"}`}
       >
         <section
           id="profil"

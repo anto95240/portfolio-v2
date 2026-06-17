@@ -37,7 +37,9 @@ export default function HomeClient({ projects, tools }: HomeClientProps) {
       </div>
 
       <main
-        className={`flex-1 flex flex-col items-center mt-10 px-5 w-full transition-transform duration-300 ${isMenuOpen ? "lg:pl-56 translate-x-1/4 lg:translate-x-0" : "lg:pl-56"}`}
+        id="main-content"
+        tabIndex={-1}
+        className={`flex-1 flex flex-col items-center mt-10 px-5 w-full transition-transform duration-300 focus:outline-none ${isMenuOpen ? "lg:pl-56 translate-x-1/4 lg:translate-x-0" : "lg:pl-56"}`}
       >
         <section className="flex flex-col lg:flex-row gap-10 lg:gap-20 items-center max-w-5xl">
           <div className="flex flex-col justify-center text-center lg:text-left">

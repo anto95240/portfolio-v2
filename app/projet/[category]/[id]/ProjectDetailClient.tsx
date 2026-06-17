@@ -68,7 +68,9 @@ export default function ProjectDetailClient({
       </div>
 
       <main
-        className={`flex-1 flex flex-col items-center mx-auto px-5 lg:pl-56 ${currentStyle.text} w-screen lg:w-3/4 lg:max-w-9xl`}
+        id="main-content"
+        tabIndex={-1}
+        className={`flex-1 flex flex-col items-center mx-auto px-5 lg:pl-56 ${currentStyle.text} w-screen lg:w-3/4 lg:max-w-9xl focus:outline-none`}
       >
         <div className="flex flex-col items-center justify-center">
           <div className="flex flex-col items-center gap-8 w-full max-w-xl">

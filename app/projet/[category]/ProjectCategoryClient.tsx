@@ -77,7 +77,9 @@ export default function ProjectCategoryClient({ projects, category }: ProjectCat
       </div>
 
       <main
-        className={`flex-1 flex flex-col items-center mt-10 mx-auto px-5 lg:ml-[25%] ${currentStyle.text} w-full lg:w-3/4`}
+        id="main-content"
+        tabIndex={-1}
+        className={`flex-1 flex flex-col items-center mt-10 mx-auto px-5 lg:ml-[25%] ${currentStyle.text} w-full lg:w-3/4 focus:outline-none`}
       >
         <h1 className="text-3xl mb-20 uppercase font-bold">{category}</h1>
 
