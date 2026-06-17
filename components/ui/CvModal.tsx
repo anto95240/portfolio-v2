@@ -21,8 +21,12 @@ export default function CvModal({ onClose }: CvModalProps) {
     "flex items-center justify-center gap-3 px-6 py-3 rounded-xl shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl active:scale-95 font-bold text-white";
 
   return (
-    // Fond sombre avec un flou plus intense (backdrop-blur-md)
-    <div className="fixed z-[100] inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center p-4 transition-opacity duration-300">
+    <div
+      className="fixed z-[100] inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center p-4 transition-opacity duration-300"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cv-modal-title"
+    >
       {/* Conteneur "Glassmorphism" */}
       <div
         ref={modalRef}
@@ -38,9 +42,12 @@ export default function CvModal({ onClose }: CvModalProps) {
           <FontAwesomeIcon icon={faTimes} />
         </button>
 
-        <h3 className="text-2xl font-black mb-8 text-center text-transparent bg-clip-text bg-blue-footer">
+        <h2
+          id="cv-modal-title"
+          className="text-2xl font-black mb-8 text-center text-transparent bg-clip-text bg-blue-footer"
+        >
           Choisir une version
-        </h3>
+        </h2>
 
         <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
           <Link

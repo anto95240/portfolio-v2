@@ -50,7 +50,12 @@ export default function ProjectChoice({ allProjectsData }: { allProjectsData: Pr
       </button>
 
       {isPopupVisible && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 transition-opacity duration-300 opacity-100">
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 transition-opacity duration-300 opacity-100"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="choix-projet-title"
+        >
           <div
             ref={popupRef}
             className={`relative p-8 rounded-2xl w-80 md:w-96 ${currentStyle.bg} shadow-2xl transition-all duration-300 transform scale-100 border border-white/30`}
@@ -64,11 +69,12 @@ export default function ProjectChoice({ allProjectsData }: { allProjectsData: Pr
               <FontAwesomeIcon icon={faTimes} />
             </button>
 
-            <h3
+            <h2
+              id="choix-projet-title"
               className={`text-2xl font-black mb-6 text-center border-b border-black/10 pb-4 ${currentStyle.text}`}
             >
               Choisir un projet
-            </h3>
+            </h2>
 
             <ul className="space-y-3 max-h-[50vh] overflow-y-auto pr-2 custom-scrollbar">
               {currentCategoryProjects.length > 0 ? (

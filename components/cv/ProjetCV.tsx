@@ -17,10 +17,10 @@ export default function ProjectCV({ data, title }: { data: ProjectsData; title?:
   const [activeProject, setActiveProject] = useState<string | null>(null);
 
   useEffect(() => {
-    if (pathname.startsWith("/projet/cv")) {
-      setProjetStyle("text-2xl mb-10 text-center");
+    if (pathname.startsWith("/cv")) {
+      setProjetStyle("text-2xl mb-10 text-center font-title uppercase");
     } else {
-      setProjetStyle("mb-5 text-center");
+      setProjetStyle("mb-5 text-center text-2xl");
     }
   }, [pathname]);
 
@@ -72,7 +72,7 @@ export default function ProjectCV({ data, title }: { data: ProjectsData; title?:
   return (
     <div className="w-full md:w-10/12 lg:w-8/12 flex flex-col mx-auto">
       <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
-      <h1 className={projetStyle}>{displayTitle}</h1>
+      <h2 className={projetStyle}>{displayTitle}</h2>
       <div className="grid grid-cols-1 gap-5 max-w-3xl mx-auto md:grid-cols-2 text-center">
         {allProjects.map((project, index) => {
           const mainImage =
@@ -99,7 +99,7 @@ export default function ProjectCV({ data, title }: { data: ProjectsData; title?:
                   className={`absolute inset-0 bg-blue-projet pt-1 gap-4 bg-opacity-100 flex flex-col items-center justify-center text-white transition-opacity duration-300 ${activeProject === project.uniqueId ? "opacity-100 visible" : "opacity-0 invisible"} lg:group-hover:opacity-100 lg:group-hover:visible`}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <h1 className="text-lg font-title mb-2">{project.title}</h1>
+                  <h3 className="text-lg font-title mb-2">{project.title}</h3>
                   <p className="text-sm font-text mb-3 h-10 px-2 line-clamp-2">
                     {project.description}
                   </p>

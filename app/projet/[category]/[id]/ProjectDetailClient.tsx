@@ -67,8 +67,10 @@ export default function ProjectDetailClient({
         <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
-      <div
-        className={`flex-1 flex flex-col items-center mx-auto px-5 lg:pl-56 ${currentStyle.text} w-screen lg:w-3/4 lg:max-w-9xl`}
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className={`flex-1 flex flex-col items-center mx-auto px-5 lg:pl-56 ${currentStyle.text} w-screen lg:w-3/4 lg:max-w-9xl focus:outline-none`}
       >
         <div className="flex flex-col items-center justify-center">
           <div className="flex flex-col items-center gap-8 w-full max-w-xl">
@@ -93,7 +95,7 @@ export default function ProjectDetailClient({
               </div>
 
               <div className="flex flex-col text-left gap-6">
-                <h3 className="text-xl font-bold mb-4 uppercase">{project.title}</h3>
+                <h1 className="text-xl font-bold mb-4 uppercase">{project.title}</h1>
                 <hr className="bg-black w-full h-[2px] border-none rounded" />
 
                 <div className="flex flex-col gap-10 md:flex-row">
@@ -144,7 +146,7 @@ export default function ProjectDetailClient({
         </div>
 
         <Footer />
-      </div>
+      </main>
     </div>
   );
 }

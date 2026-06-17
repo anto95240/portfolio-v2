@@ -17,7 +17,11 @@ export default function About() {
         <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
-      <div className="flex-1 flex flex-col items-center mt-5 mx-auto px-5 lg:pl-56 w-full lg:w-3/4 lg:max-w-5xl">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 flex flex-col items-center mt-5 mx-auto px-5 lg:pl-56 w-full lg:w-3/4 lg:max-w-5xl focus:outline-none"
+      >
         <h1 className="text-3xl mb-10">ABOUT</h1>
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10 lg:gap-20 w-full">
           <div>
@@ -54,7 +58,7 @@ export default function About() {
           </div>
         </div>
         <Footer />
-      </div>
+      </main>
     </div>
   );
 }

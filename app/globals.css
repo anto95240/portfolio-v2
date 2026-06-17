@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  /* Amélioration de l'accessibilité : focus visible uniquement au clavier */
+  *:focus-visible {
+    @apply outline-none ring-4 ring-light-blue rounded-md transition-shadow duration-200;
+  }
+
+  /* Retirer l'outline par défaut si cliqué à la souris */
+  *:focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
 :root {
   --font-text: "Lato", sans-serif;
   --font-title: "Montserrat Alternates", sans-serif;
@@ -11,7 +23,9 @@ p {
   font-family: var(--font-text);
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: var(--font-title);
 }
 

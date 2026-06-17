@@ -26,7 +26,7 @@ export default function Formation({ data }: { data: FormationType[] }) {
   return (
     <div className="w-10/12 lg:w-8/12 mx-auto form-container">
       <hr className="bg-black w-full my-10 h-[2px] border-none" />
-      <h1 className="text-2xl mb-10 text-center font-title uppercase">Formation</h1>
+      <h2 className="text-2xl mb-10 text-center font-title uppercase">Formation</h2>
       <div className="relative flex flex-col">
         <div className="absolute left-3/4 top-0 bottom-0 w-[2px] bg-black transform -translate-x-1/2 hidden md:block"></div>
         {data.map((form) => (
@@ -37,7 +37,7 @@ export default function Formation({ data }: { data: FormationType[] }) {
             <div className="w-full md:w-3/4 md:pr-10 text-right">
               {activeId === form.id ? (
                 <div className="bg-white shadow-md rounded-lg p-6 border-r-4 border-green-500 text-left md:text-right">
-                  <h2 className="font-bold mb-2 text-lg">{form.title}</h2>
+                  <h3 className="font-bold mb-2 text-lg">{form.title}</h3>
                   <p className="text-sm">
                     <strong>Lieu:</strong> {renderList(form.lieux)}
                   </p>

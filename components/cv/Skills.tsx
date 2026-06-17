@@ -18,7 +18,7 @@ export default function Skill({ data }: { data: SkillsData }) {
   return (
     <div className="w-11/12 lg:w-8/12 flex flex-col mx-auto pb-20">
       <hr className="bg-black w-full my-10 h-[2px] border-none rounded" />
-      <h1 className="text-2xl mb-10 text-center font-title uppercase">Compétences</h1>
+      <h2 className="text-2xl mb-10 text-center font-title uppercase">Compétences</h2>
       <div className="flex flex-col gap-4">
         {renderCategory(data.frontend, "Développement Front-end")}
         {renderCategory(data.backend, "Développement Back-end")}

@@ -42,7 +42,7 @@ export default function ThemePage() {
           className={`bg-gradient-to-r ${category.gradient} min-h-[550px] shadow-[4px_4px_10px_0_rgba(0,0,0,0.5)] lg:min-h-[620px] text-black flex flex-col gap-10 relative group`}
           onClick={() => (isMobile ? handleToggle(index) : handleNavigate(category.categorySlug))}
         >
-          <h1 className={`${category.className} pt-5`}>{category.name}</h1>
+          <h2 className={`${category.className} pt-5`}>{category.name}</h2>
           <div
             className={`absolute inset-0 flex flex-col gap-5 items-center pt-20 bg-black bg-opacity-25 transition-all duration-300 ease-in-out ${activeIndex === index ? "opacity-100 visible" : "opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible"}`}
           >

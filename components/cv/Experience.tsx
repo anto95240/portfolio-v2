@@ -24,7 +24,7 @@ export default function Experience({ data }: { data: ExperienceType[] }) {
   return (
     <div className="w-10/12 lg:w-8/12 mx-auto exp-container">
       <hr className="bg-black w-full my-10 h-[2px] border-none" />
-      <h1 className="text-2xl mb-10 text-center font-title uppercase">Expérience</h1>
+      <h2 className="text-2xl mb-10 text-center font-title uppercase">Expérience</h2>
       <div className="relative flex flex-col">
         <div className="absolute left-1/4 top-0 bottom-0 w-[2px] bg-black transform -translate-x-1/2 hidden md:block"></div>
         {data.map((exp) => (
@@ -39,7 +39,7 @@ export default function Experience({ data }: { data: ExperienceType[] }) {
             <div className="flex-1 pl-0 md:pl-10 text-left w-full">
               {activeId === exp.id ? (
                 <div className="bg-white shadow-md rounded-lg p-6 border-l-4 border-blue-500">
-                  <h2 className="font-bold mb-2 text-lg">{exp.title}</h2>
+                  <h3 className="font-bold mb-2 text-lg">{exp.title}</h3>
                   <p className="text-sm">
                     <strong>Lieu:</strong> {exp.lieux}
                   </p>
