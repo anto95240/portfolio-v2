@@ -61,18 +61,30 @@ export default function Navbar({
                   </Link>
                   {/* Gestion spécifique pour le dropdown Projets */}
                   {link.hasDropdown && (
-                    <FontAwesomeIcon
-                      icon={isProjectOpen ? faChevronUp : faChevronDown}
-                      className="text-xl z-50 cursor-pointer"
+                    <button
+                      type="button"
+                      aria-expanded={isProjectOpen}
+                      aria-controls={`submenu-${link.label}`}
+                      aria-label={
+                        isProjectOpen
+                          ? `Fermer le sous-menu ${link.label}`
+                          : `Ouvrir le sous-menu ${link.label}`
+                      }
                       onClick={toggleProjectList}
-                    />
+                      className="ml-2 z-50 flex items-center justify-center hover:opacity-80 transition-opacity"
+                    >
+                      <FontAwesomeIcon
+                        icon={isProjectOpen ? faChevronUp : faChevronDown}
+                        className="text-xl"
+                      />
+                    </button>
                   )}
                 </div>
               </div>
 
               {/* Sous-menu Projets */}
               {link.hasDropdown && isProjectOpen && (
-                <ol className="flex flex-col gap-2 ml-12 mt-3">
+                <ol id={`submenu-${link.label}`} className="flex flex-col gap-2 ml-12 mt-3">
                   {link.subLinks?.map((sub) => (
                     <li key={sub.label}>
                       <Link href={sub.href} className="group relative z-50 text-sm font-medium">
