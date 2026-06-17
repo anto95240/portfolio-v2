@@ -8,7 +8,7 @@ export const revalidate = 3600; // 1 heure
 
 export async function generateMetadata(
   props: { params: Promise<{ category: string; id: string }> },
-  parent: ResolvingMetadata
+  _parent: ResolvingMetadata
 ): Promise<Metadata> {
   const params = await props.params;
   const project = getProjectById(params.category, params.id);

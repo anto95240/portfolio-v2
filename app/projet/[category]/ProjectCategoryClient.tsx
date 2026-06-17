@@ -39,7 +39,9 @@ export default function ProjectCategoryClient({ projects, category }: ProjectCat
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
       projects.forEach((_: Project, index: number) => {
         const direction = index % 2 === 0 ? "fade-left" : "fade-right";
         const fromX = direction === "fade-left" ? -40 : 40;
@@ -62,7 +64,7 @@ export default function ProjectCategoryClient({ projects, category }: ProjectCat
         );
       });
     });
-    return () => ctx.revert();
+    return () => mm.revert();
   }, [projects]);
 
   const isValidCategory = ["jeux", "ydays", "web"].includes(category);

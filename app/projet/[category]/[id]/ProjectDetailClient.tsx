@@ -32,7 +32,8 @@ export default function ProjectDetailClient({
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
       gsap.utils.toArray<HTMLElement>(".fade-down").forEach((elem) => {
         gsap.fromTo(
           elem,
@@ -52,7 +53,7 @@ export default function ProjectDetailClient({
         );
       });
     });
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   if (!project) return <p className="text-xl text-center mt-20">Le projet est manquant.</p>;
