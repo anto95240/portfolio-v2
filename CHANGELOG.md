@@ -1,3 +1,12 @@
+# [2.8.0](https://github.com/anto95240/portfolio-v2/compare/v2.7.0...v2.8.0) (2026-06-17)
+
+
+### Features
+
+* **a11y:** add missing ARIA labels and dialog roles ([e379c15](https://github.com/anto95240/portfolio-v2/commit/e379c15b1584168fc6a5f42ce913da0e957e370e))
+* **a11y:** add skip-to-content link and global focus-visible styles ([f899342](https://github.com/anto95240/portfolio-v2/commit/f89934214c4534d06e5531fdca197faa1f56bb33))
+* **a11y:** add skip-to-content link for keyboard navigation ([7de6e34](https://github.com/anto95240/portfolio-v2/commit/7de6e34dd2c71a59dc30f1d25d2b01be746f2cb0))
+
 # [2.7.0](https://github.com/anto95240/portfolio-v2/compare/v2.6.0...v2.7.0) (2026-06-17)
 
 
