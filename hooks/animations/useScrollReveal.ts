@@ -30,7 +30,9 @@ export const useScrollReveal = (selector: string, options: RevealOptions = {}) =
       triggerElement,
     } = options;
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
       // Si un trigger parent est défini (ex: pour stagger toute une liste en même temps)
       if (triggerElement) {
         gsap.fromTo(
@@ -83,6 +85,6 @@ export const useScrollReveal = (selector: string, options: RevealOptions = {}) =
       }
     });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, [selector, options]);
 };
