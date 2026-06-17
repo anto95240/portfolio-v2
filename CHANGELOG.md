@@ -1,3 +1,16 @@
+# [2.7.0](https://github.com/anto95240/portfolio-v2/compare/v2.6.0...v2.7.0) (2026-06-17)
+
+
+### Bug Fixes
+
+* **lint:** suppression du warning ESLint sur la variable inutilisée dans generateMetadata ([22402c2](https://github.com/anto95240/portfolio-v2/commit/22402c2129d86429f6fc5480ef2951b09fc45d16))
+
+
+### Features
+
+* **a11y:** add prefers-reduced-motion support to GSAP animations ([39739cd](https://github.com/anto95240/portfolio-v2/commit/39739cd23db9bb5029ea45c82517e99cdfcf196c))
+* **ui:** add delayed skeleton loader for project images ([5bc0bc9](https://github.com/anto95240/portfolio-v2/commit/5bc0bc92128edc4ea7f4f5e965628453c577208d))
+
 # [2.6.0](https://github.com/anto95240/portfolio-v2/compare/v2.5.1...v2.6.0) (2026-06-16)
 
 
