@@ -42,12 +42,12 @@ export default function CvModal({ onClose }: CvModalProps) {
           <FontAwesomeIcon icon={faTimes} />
         </button>
 
-        <h3
+        <h2
           id="cv-modal-title"
           className="text-2xl font-black mb-8 text-center text-transparent bg-clip-text bg-blue-footer"
         >
           Choisir une version
-        </h3>
+        </h2>
 
         <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
           <Link

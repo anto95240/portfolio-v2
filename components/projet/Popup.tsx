@@ -38,9 +38,9 @@ export default function PopUp({ project, category, onClose }: PopupProps) {
         <FontAwesomeIcon icon={faReply} />
       </button>
 
-      <h1 id="popup-title" className="text-center text-xl mt-5 font-bold">
+      <h2 id="popup-title" className="text-center text-xl mt-5 font-bold">
         {project.title}
-      </h1>
+      </h2>
       <hr className="w-10/12 mx-auto" />
 
       <div className="flex flex-col gap-8 flex-grow">

@@ -3,10 +3,8 @@
 import { useReportWebVitals } from "next/web-vitals";
 
 export function WebVitals() {
-  useReportWebVitals((metric) => {
-    // Vous pouvez envoyer ces métriques à un outil d'analytics ici
-    // eslint-disable-next-line no-console
-    console.log(metric);
+  useReportWebVitals(() => {
+    // Analytics can be added here
   });
 
   return null;

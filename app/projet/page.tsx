@@ -14,11 +14,11 @@ export default function Projet() {
       <div className="w-1/4 fixed z-50 h-full">
         <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
-      <div className="flex-1 flex flex-col items-center mt-5 mx-auto px-5 lg:pl-56 w-full lg:w-3/4 lg:max-w-9xl">
+      <main className="flex-1 flex flex-col items-center mt-5 mx-auto px-5 lg:pl-56 w-full lg:w-3/4 lg:max-w-9xl">
         <h1 className="text-3xl mb-10">Liste de projets</h1>
         <Theme />
         <Footer />
-      </div>
+      </main>
     </div>
   );
 }

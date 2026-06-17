@@ -76,7 +76,7 @@ export default function ProjectCategoryClient({ projects, category }: ProjectCat
         <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
-      <div
+      <main
         className={`flex-1 flex flex-col items-center mt-10 mx-auto px-5 lg:ml-[25%] ${currentStyle.text} w-full lg:w-3/4`}
       >
         <h1 className="text-3xl mb-20 uppercase font-bold">{category}</h1>
@@ -121,7 +121,7 @@ export default function ProjectCategoryClient({ projects, category }: ProjectCat
                     <div
                       className={`flex flex-col text-center mx-auto gap-6 w-full lg:w-1/2 ${index % 2 === 0 ? "fade-left" : "fade-right"}`}
                     >
-                      <h3 className="text-xl font-bold mb-4">{project.title}</h3>
+                      <h2 className="text-xl font-bold mb-4">{project.title}</h2>
                       <p className="text-md">{project.description}</p>
                       <button
                         type="button"
@@ -145,7 +145,7 @@ export default function ProjectCategoryClient({ projects, category }: ProjectCat
         )}
 
         <Footer />
-      </div>
+      </main>
     </div>
   );
 }
